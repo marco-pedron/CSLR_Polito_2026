@@ -1,0 +1,389 @@
+% =====================================================================
+\lezione{09/11/2026}{Hard law e soft law; Cybersecurity Act (CSA)}
+  {Prof.~Giuseppe Vaciago}
+  {le quattro regole dell'esame; hard law vs soft law; caso del Google Form per la cena di Natale;
+   persona autorizzata vs responsabile del trattamento; Cybersecurity Act: ENISA, quadro europeo di
+   certificazione, schemi, livelli di affidabilità, EUCC; certificazione continua; security by design;
+   rischio della supply chain; CSA~2}
+\label{lez:2026-11-09}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata. Le slide sul Cybersecurity Act non sono
+ancora nella cartella \emph{material}: date, articoli e nomi di organismi sono ricostruiti dal parlato
+e, dove serve, segnalati nei riquadri \emph{verifica}. Non ci sono state presentazioni dei gruppi:
+nessuno si è proposto e sono state rinviate.
+\end{nota}
+
+\section{Sintesi}
+Il docente apre ripetendo le ``regole del gioco'' per l'esame e introduce la distinzione, per lui
+fondamentale, tra \textbf{hard law} e \textbf{soft law}, con un caso pratico (dati sanitari raccolti
+con un Google Form personale). Poi presenta il \textbf{Cybersecurity Act}: il regolamento che rafforza
+\textbf{ENISA} e crea il \textbf{quadro europeo di certificazione} della cybersicurezza per prodotti,
+servizi e processi ICT. È la soft law europea che aiuta a dimostrare il rispetto della hard law, in
+particolare del CRA. Chiudono la lezione la certificazione come processo continuo, la security by
+design e la dipendenza dai fornitori. Il caso di studio sul CSA è rinviato alla lezione successiva.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Presentazioni del laboratorio}: può presentare chi ha preso più di 25 nella
+    valutazione del lab (valutazione fatta da Gianluca); non è obbligatorio, ma chi viene invitato e non
+    vuole presentare deve avvisare prima. Il docente le consiglia come esercizio per il lavoro (presentare
+    a un pubblico o in una call). Oggi nessuno era pronto; non c'è valutazione sulla presentazione.
+  \item Il lunedì successivo si valuterà se proseguire con i laboratori (il docente percepisce interesse
+    per i punti del lab, ma difficoltà con le presentazioni).
+  \item \textbf{Venerdì 13/11}: lezione frontale su \textbf{NIS2}, \textbf{online} (Gianluca non sarà in
+    Italia). Era prevista il 19/10 e va recuperata per arrivare a dicembre senza ritardi.
+  \item \textbf{Venerdì 20/11}: nuovo laboratorio.
+  \item Prossima lezione: caso di studio sul CSA (punti di vista di un ospedale, di un fornitore e di
+    un valutatore tecnico). Le slide si possono già guardare.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Le regole del gioco per l'esame}
+Il corso ha visto GDPR, risk assessment ISO/IEC~27001 e CRA; oggi il CSA, poi restano NIS2, DORA e
+AI Act. La confusione a fine corso è normale, perché non siamo abituati a lavorare sulle norme. Le
+regole:
+\begin{enumerate}
+  \item conoscere \textbf{definizioni e ambito} di ogni norma;
+  \item conoscere le \textbf{tempistiche di notifica} degli incidenti: a fine corso il docente pubblicherà
+    sulla piattaforma una tabella con tutte le scadenze (vedi Capitolo~\ref{cap:scadenze});
+  \item tutte queste norme seguono un \textbf{approccio basato sul rischio}: niente errori su rischio
+    inerente e misure di mitigazione (lab di risk assessment con Gianluca);
+  \item distinguere \textbf{hard law} e \textbf{soft law}.
+\end{enumerate}
+Saper gestire un incidente con una metodologia di severity assessment (quella ENISA è la più nota)
+non serve solo all'esame: nel contesto attuale, che il docente descrive vicino a una ``guerra
+ibrida'', gestire le notifiche è decisivo anche sul piano della compliance.
+
+\begin{esame}
+\begin{itemize}
+  \item Ambito della norma e timeline di notifica sono il cuore dell'esame.
+  \item La differenza hard law / soft law ``non è una domanda d'esame'', ma serve in pratica per
+    rispondere alle domande.
+\end{itemize}
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Hard law e soft law}
+\paragraph{Hard law.} Norma vincolante con conseguenze \textbf{predeterminate}. Esempio: il limite di
+velocità in autostrada è fissato dal codice della strada; chi gestisce l'autostrada (ANAS, Autostrade
+per l'Italia) non può cambiarlo. Se vado a 160 la sanzione è definita dalla legge (eventualmente con
+differenze tra livelli nazionale e regionale): non può essere decisa ``a simpatia''. Anche nella
+hard law c'è un margine di discrezionalità (nel penale, una pena da 5 a 10 anni), ma è delimitato.
+
+\paragraph{Soft law.} Regole interne, policy, linee guida, standard. Il gestore dell'autostrada può
+decidere nuova segnaletica e nuovi sistemi di sicurezza: è una regola interna. In cybersecurity:
+\begin{itemize}
+  \item la policy aziendale sull'\textbf{autenticazione a più fattori}: nessuna legge la impone (l'art.~32
+    GDPR e il principio di \emph{accountability} chiedono misure adeguate, non l'MFA);
+  \item le \textbf{linee guida ENISA} (approccio, indicazioni, policy).
+\end{itemize}
+La violazione di una soft law può avere conseguenze, ma \textbf{non previste dalla legge}: l'autorità
+o l'azienda hanno un ampio margine di discrezionalità nel decidere la sanzione.
+
+\paragraph{Più hard law o più soft law in futuro?} Gli studenti rispondono ``più hard law'' (l'Europa
+ne produce molta). Il docente concorda solo in parte: la hard law fissa i principi fondamentali, ma
+\textbf{la sostanza della cybersecurity è la soft law}, che ogni organizzazione deve creare; anche
+CRA e GDPR non si applicano senza soft law. Una legge richiede uno--tre anni (in Italia anche cinque),
+troppo per una realtà che cambia di continuo, soprattutto con l'AI: secondo lui la hard law diventerà
+una sorta di \emph{kill switch} (pochi principi invalicabili, la cui violazione impone di ``spegnere''),
+il resto sarà soft law.
+\begin{nota}[Le policy in azienda]
+Un'organizzazione ha policy che vengono da GDPR, NIS2, DORA, AI Act\ldots: non si può gestire solo la
+``propria'' (es.\ solo DORA perché si è ICT risk manager). Serve governare l'interconnessione tra le
+policy. Battuta del docente: lasciare le policy di sicurezza solo all'ufficio legale o all'HR è il modo
+migliore per renderle inapplicabili.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Caso: il Google Form per la cena di Natale}
+\paragraph{Scenario.} Una grande azienda organizza la cena di Natale ufficiale. Un dipendente crea con il
+\textbf{proprio account Google personale} un Google Form per raccogliere partecipanti, intolleranze e
+allergie. La policy aziendale impone gli strumenti Microsoft~365 (Microsoft Forms) anche per i sondaggi.
+
+\paragraph{Prima domanda: è un data breach?}
+\begin{itemize}
+  \item Con soli dati comuni (nome, cognome) sarebbe un problema GDPR piccolo: è solo l'elenco dei
+    dipendenti.
+  \item Le \textbf{intolleranze} sono però \textbf{dati relativi alla salute}, raccolti su un account
+    privato fuori dal controllo del titolare.
+  \item La risposta della classe (``in buona fede non succede niente'') è ragionevole, ma all'esame è
+    rischiosa: va fatto il ragionamento di \textbf{severity assessment}. Con dati sanitari il punteggio
+    di base del contesto (DPC) parte più alto; c'è una perdita di riservatezza; l'intento non è malevolo.
+    Paradosso: questo elenco può avere una severità più alta di una lista di due milioni di nomi.
+  \item Conclusione del docente: deve prevalere il ragionamento razionale, e non si notifica al Garante
+    solo perché un dipendente ha violato una policy; ma il rischio va comunque valutato
+    (\emph{risk-based approach}).
+\end{itemize}
+
+\paragraph{Seconda domanda: quali conseguenze per il dipendente?}
+La violazione è di una \textbf{policy} (soft law), quindi le conseguenze sono
+\textbf{giuslavoristiche}. In Italia i provvedimenti disciplinari sono di fatto cinque (non da sapere
+per l'esame): richiamo verbale, richiamo scritto, sospensione, licenziamento con o senza giusta causa.
+Licenziare qui è eccessivo, ma una conseguenza va data: un richiamo registrato, con conseguenze più
+gravi in caso di recidiva. Il collegamento con la hard law c'è, ma nessuna legge impone Google Forms o
+Microsoft Forms: nella soft law il margine è ampio e va usato in modo razionale. Se il dipendente
+contesta il provvedimento, decide un giudice del lavoro.
+
+\paragraph{Chi paga le sanzioni GDPR.}
+Il GDPR sanziona il \textbf{titolare} (la persona giuridica), non il dipendente. L'azienda può agire sul
+dipendente solo sul piano del diritto del lavoro: anche dopo una sanzione di 2 milioni di euro, di norma
+non può chiedergli di rimborsarla, ma può licenziarlo. Per i dirigenti (\emph{leadership team}) la
+responsabilità personale è più concreta: per questo a quel livello serve una polizza \textbf{D\&O}
+(\emph{Directors and Officers}).
+
+\subsection{Dipendente = persona autorizzata, non responsabile del trattamento}
+Domanda di uno studente: chi è il \emph{data processor} nel caso? Il docente corregge la confusione:
+\begin{itemize}
+  \item il \textbf{titolare} (\emph{data controller}) è l'azienda;
+  \item il \textbf{dipendente} è una \textbf{persona autorizzata} al trattamento (art.~29 GDPR): agisce
+    sotto l'autorità del titolare, dentro la sua organizzazione;
+  \item un consulente esterno (es.\ una Big Four come KPMG, Deloitte, PwC) che svolge la \textbf{stessa}
+    attività di un dipendente è invece \textbf{responsabile del trattamento} (\emph{data processor},
+    art.~28), perché è un soggetto esterno.
+\end{itemize}
+\begin{esame}
+Non confondere \textbf{responsabile del trattamento} (soggetto esterno che tratta per conto del titolare)
+e \textbf{persona autorizzata} (dipendente del titolare). In caso di dubbi, rivedere le slide sul GDPR.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Cybersecurity Act: perché un quadro europeo}
+Il CSA è l'introduzione della \textbf{soft law dell'Unione europea} in materia di cybersicurezza. Ha
+\textbf{due pilastri}:
+\begin{enumerate}
+  \item i \textbf{poteri e il mandato di ENISA};
+  \item il \textbf{quadro europeo di certificazione} (schemi di certificazione).
+\end{enumerate}
+``Ricordate: \emph{scheme} ed ENISA.'' Il docente ammette che finora il successo del CSA è limitato, ma
+si aspetta che cresca.
+
+\paragraph{Il problema.} Standard e certificazioni erano nazionali. Una multinazionale deve rispettare
+regole diverse in ogni paese (l'esempio di Google Street View in 140 paesi). Per la cybersicurezza i
+problemi sono quattro:
+\begin{itemize}
+  \item \textbf{interdipendenza}: un fornitore può colpire molti clienti, anche in paesi diversi;
+  \item \textbf{asimmetria informativa}: il venditore conosce il prodotto meglio dell'acquirente;
+  \item \textbf{frammentazione}: schemi nazionali diversi;
+  \item \textbf{fiducia verificabile} (\emph{verifiable trust}): le dichiarazioni di sicurezza richiedono
+    requisiti ed \textbf{evidenze}. È il punto più importante del CSA.
+\end{itemize}
+
+\paragraph{Il parallelo con ISO/IEC~27001.} ISO (organizzazione svizzera) ha creato lo standard 27001,
+che certifica la sicurezza dell'\textbf{organizzazione}. Il CSA fa la stessa cosa a livello europeo,
+con ENISA e la Commissione, ma per i \textbf{prodotti} (e servizi e processi ICT): uno smartphone, un
+firewall. L'azienda si certifica 27001 (o 42001 per l'AI) per dimostrare di avere un'organizzazione
+conforme; il fabbricante usa uno schema del CSA per dimostrare la sicurezza del prodotto.
+
+\paragraph{Il collegamento con il CRA.} Prodotti $\Rightarrow$ CRA. Il CRA dice quali regole rispettare,
+ma non come; gli schemi del CSA danno requisiti concreti che offrono \textbf{la possibilità, non la
+certezza}, di dimostrare la conformità al CRA. Il CSA non è obbligatorio.
+\begin{esame}
+\begin{itemize}
+  \item CSA = \textbf{soft law} europea; CRA = \textbf{hard law} sui prodotti. Il CSA aiuta a rispettare il
+    CRA, ma non lo sostituisce.
+  \item ISO/IEC~27001 = organizzazione; CSA = prodotti, servizi e processi ICT.
+  \item Oggi in Europa \textbf{non esistono certificazioni di cybersicurezza obbligatorie} (resta da capire
+    il ruolo della marcatura CE).
+\end{itemize}
+\end{esame}
+
+\paragraph{Tre concetti.} \textbf{Cybersecurity}: proteggere sistemi, reti e informazioni.
+\textbf{Cyber resilience}: mantenere le funzioni essenziali o ripristinarle dopo un incidente.
+\textbf{Cyber assurance} (da non confondere con la \emph{cyber insurance}): creare \textbf{evidenze} che
+certi requisiti sono soddisfatti; è il vero obiettivo del CSA. Il limite della soft law resta
+l'incertezza delle conseguenze.
+
+% ---------------------------------------------------------------------
+\section{ENISA e la governance della certificazione}
+\textbf{ENISA} è l'Agenzia dell'Unione europea per la cybersicurezza (agenzia indipendente, legata alla
+Commissione). Compiti:
+\begin{itemize}
+  \item \textbf{policy}: linee guida, formazione ed esercitazioni;
+  \item \textbf{cooperazione operativa}: aiuta i CSIRT nazionali a lavorare insieme (con il
+    \emph{Digital Omnibus} si va verso la centralizzazione delle notifiche presso ENISA);
+  \item \textbf{schemi candidati}: prepara le regole tecniche di valutazione (compito centrale nel CSA);
+  \item \textbf{conoscenza delle minacce}: raccoglie e condivide analisi e buone pratiche.
+\end{itemize}
+Opinione del docente: le norme (CRA, Digital Omnibus) danno a ENISA molti compiti, ma ha poco personale.
+Il CSA~2 la rafforzerà ancora.
+
+\paragraph{Gli attori.}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm} X}
+\toprule
+\textbf{Attore} & \textbf{Ruolo}\\
+\midrule
+ENISA & prepara gli schemi candidati\\
+ECCG (\emph{European Cybersecurity Certification Group}) & rappresentanti delle autorità nazionali;
+  coopera alla preparazione ed esprime un parere sulla bozza\\
+Commissione europea & individua il bisogno di uno schema e lo \textbf{adotta}\\
+Autorità nazionali di certificazione & vigilano sulla certificazione; in Italia l'\textbf{ACN} (Agenzia per la
+  Cybersicurezza Nazionale)\\
+Laboratori e organismi di certificazione & eseguono i test e rilasciano i certificati\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Opportunità professionali: esperti esterni per ENISA o la Commissione (bandi sul sito), rappresentanti
+nazionali nell'ECCG (non solo da ACN: il docente cita una rappresentante che lavora al Garante privacy).
+
+\paragraph{Il processo di uno schema.} \textbf{Richiesta} (la Commissione individua il bisogno per una
+categoria di prodotti e chiede a ENISA uno schema candidato) $\rightarrow$ \textbf{bozza} (ENISA definisce
+requisiti e metodi di valutazione e consulta gli stakeholder e gli esperti) $\rightarrow$
+\textbf{parere} dell'ECCG $\rightarrow$ \textbf{adozione} da parte della Commissione.
+
+\paragraph{Framework, schema, certificato.}
+\begin{itemize}
+  \item \textbf{Framework} = il CSA: definisce ruoli e regole comuni. \textbf{Non contiene schemi}: chi cerca
+    uno schema nel testo del CSA ``non ha capito''.
+  \item \textbf{Schema} = il \emph{rule book} della valutazione, creato da ENISA con il processo sopra:
+    ambito, requisiti di sicurezza, test e \textbf{livelli di affidabilità}. Il primo e più importante è
+    l'\textbf{EUCC}.
+  \item \textbf{Certificato} = attesta che un prodotto rispetta lo schema. È l'obiettivo concreto
+    dell'azienda: l'unico modo per ridurre l'incertezza creata dalla hard law (``devi essere sicuro'': come?).
+\end{itemize}
+Uno schema non è un certificato, e un certificato non copre tutta l'azienda.
+
+\paragraph{Che cosa può coprire uno schema.}
+\begin{itemize}
+  \item \textbf{Prodotti ICT}: elemento o componente digitale valutabile (firewall, chip, software); non
+    solo prodotti di sicurezza;
+  \item \textbf{servizi ICT}: servizi che memorizzano, trasmettono o elaborano informazioni (es.\ cloud storage);
+  \item \textbf{processi ICT}: attività per progettare o mantenere prodotti e servizi; per ora nessuno schema;
+  \item \textbf{servizi di sicurezza gestiti}: svolti per un cliente (incident response, audit, penetration test).
+\end{itemize}
+Processi e servizi gestiti toccano il terreno della 27001 (organizzazione). Formalmente ISO certifica
+l'organizzazione e il CSA prodotti e servizi, ma per il docente la cooperazione tra ISO ed ENISA
+(con sede in Grecia) è decisiva: due organizzazioni che si contendono la governance creerebbero un
+\emph{single point of failure} proprio dove serve resilienza.
+
+% ---------------------------------------------------------------------
+\section{Livelli di affidabilità e autovalutazione}
+Il livello di affidabilità (\emph{assurance level}) esprime la fiducia che i requisiti siano soddisfatti,
+in proporzione al rischio:
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Livello} & \textbf{Rischio considerato} & \textbf{Chi valuta}\\
+\midrule
+Base (\emph{basic}) & rischi noti di base & anche \textbf{autovalutazione} del fabbricante\\
+Sostanziale (\emph{substantial}) & attaccanti con risorse limitate & terza parte indipendente\\
+Elevato (\emph{high}) & attaccanti con risorse significative & terza parte indipendente\\
+\bottomrule
+\end{tabular}
+\end{center}
+L'autovalutazione è possibile solo per il livello base, ma in pratica oggi non ci sono esempi: la
+certificazione è quasi sempre di \textbf{terza parte}. (``È come fare i compiti e dire: passerò l'esame.
+Poi il professore non sempre è d'accordo.'')
+
+\paragraph{Come funziona in pratica (esempio 27001).} Una società di consulenza come Bureau Veritas aiuta
+l'azienda a soddisfare i requisiti; poi un organismo di certificazione distinto (in Italia il docente
+cita CEPAS) verifica e certifica; il tutto fa capo a ISO. Per il CSA le stesse società potranno operare
+sugli schemi europei, riferendosi a ENISA; il sistema si costruirà nei prossimi 2--4 anni. Il docente
+invita a vederlo come un'opportunità professionale, anche imprenditoriale.
+
+% ---------------------------------------------------------------------
+\section{Che cosa fa (e non fa) un certificato}
+\begin{itemize}
+  \item Dà \textbf{evidenze} su un prodotto o servizio \textbf{identificato con precisione}, su requisiti e
+    test specifici, a un livello di affidabilità definito.
+  \item \textbf{Non prova che non esistano vulnerabilità}: ho il requisito MFA, non per questo sono al
+    sicuro (oggi gli attacchi aggirano anche l'MFA).
+  \item Il certificato aiuta a evitare sanzioni per violazione del CRA, ma \textbf{non in automatico}: dopo
+    un incidente si verifica, secondo il principio di accountability, se i requisiti certificati erano
+    davvero rispettati.
+\end{itemize}
+
+\subsection{EUCC}
+\textbf{EUCC} (\emph{EU Common Criteria-based scheme}): primo schema adottato sulla base del CSA.
+\begin{itemize}
+  \item valuta \textbf{prodotti e componenti ICT}: niente servizi, processi o management, quindi non è in
+    conflitto con ISO;
+  \item si basa sui \textbf{Common Criteria} (criteri internazionali per i requisiti di sicurezza);
+  \item applicabile dal \textbf{27 febbraio 2025};
+  \item livelli di affidabilità \textbf{sostanziale ed elevato} (un livello base in autovalutazione non
+    avrebbe senso).
+\end{itemize}
+Elementi della valutazione: \textbf{target of evaluation} (TOE, il prodotto esatto da certificare);
+\textbf{security target} (documento che descrive il TOE e i requisiti di sicurezza dichiarati);
+\textbf{protection profile} (insieme riutilizzabile di requisiti per un tipo di prodotto); metodi, analisi
+delle vulnerabilità, ipotesi e limiti operativi. Un certificato per la versione 3 di un modulo
+\textbf{non copre} automaticamente la versione 4 in un'altra configurazione.
+
+\paragraph{Il problema dei prodotti.} L'organizzazione cambia persone e strumenti, ma processi e
+sistemi di autenticazione e autorizzazione (la base della 27001) restano stabili. I prodotti invece
+cambiano a ogni release (iPhone 15, 17, 18\ldots): ogni prodotto va ricertificato. È un'opportunità
+economica, ma pesa sulle piccole aziende. Previsione del docente: solo alcune aziende useranno l'EUCC, e
+sarà un segno di qualità (come Parmigiano Reggiano e ``parmesan'': conta il processo, che richiede tempo).
+
+\subsection{La certificazione continua dopo il rilascio}
+Il certificato si riferisce a un prodotto definito, ma prodotto e minacce cambiano: valutare,
+certificare, \textbf{monitorare e mantenere} (controllare l'oggetto, registrare i risultati, osservare i
+cambiamenti, rivederne l'impatto). Una patch di sicurezza non invalida automaticamente il certificato,
+ma il suo \textbf{impatto va valutato}. È lo stesso monitoraggio continuo di DPIA e FRIA (AI Act).
+
+\subsection{Strumenti diversi per domande diverse}
+\begin{itemize}
+  \item \textbf{ISO/IEC~27001}: sistema di gestione della sicurezza dell'organizzazione;
+  \item \textbf{EUCC}: prodotti;
+  \item \textbf{marcatura CE}: il prodotto rispetta le norme UE che la richiedono. Timore del docente:
+    EUCC e marcatura CE potrebbero sovrapporsi per i prodotti ICT, imponendo un doppio percorso
+    (difficile da chiedere, ad esempio, a un produttore cinese);
+  \item \textbf{penetration test}: attacco simulato autorizzato, anch'esso soft law con possibili conseguenze
+    legali; probabilmente confluirà in EUCC o nella parte VAPT della 27001.
+\end{itemize}
+Riepilogo per norma: CSA $\rightarrow$ le dichiarazioni di sicurezza si valutano con un
+\textbf{quadro comune di certificazione}; NIS2 $\rightarrow$ reti e sistemi informativi; CRA
+$\rightarrow$ obblighi sulle vulnerabilità dei prodotti con elementi digitali; GDPR $\rightarrow$ la norma
+più generale; DORA $\rightarrow$ settore finanziario; poi AI Act.
+
+% ---------------------------------------------------------------------
+\section{Security by design e supply chain}
+\paragraph{Security by design.} Protezione e manutenzione si pianificano quando il prodotto è progettato
+(come privacy by design, forensics by design, ``legal by design''): ridurre la superficie d'attacco,
+\textbf{sapere cosa contiene il software} (\textbf{SBOM}, \emph{software bill of materials}), gestire le
+segnalazioni di vulnerabilità e distribuire gli aggiornamenti. Con le componenti AI spesso non si sa da
+cosa è composto un prodotto. Esempio dal lavoro del docente: in un data breach su un macchinario
+sanitario si è scoperto un fornitore canadese a 45 minuti dalla scadenza della notifica.
+
+\paragraph{Rischio della supply chain.} Domande da porsi a ogni nuovo fornitore: il componente può
+essere attaccato (sicurezza tecnica)? \textbf{Possiamo continuare a operare senza questo fornitore}
+(continuità)? Chi controlla servizi e decisioni chiave (governance)?
+\begin{itemize}
+  \item Esempi: CrowdStrike (2024); un mega breach finanziario causato dall'unico fornitore di servizi
+    KYC/AML (lavoro che nessuno vuole fare, quindi monopolio e poca attenzione alla sicurezza); il caso
+    Italiaonline con un fornitore israeliano consapevole di essere insostituibile.
+  \item Se c'è concorrenza il fornitore si cambia; senza alternative è un problema di resilienza e
+    continuità operativa.
+  \item \textbf{Governance}: conta chi controlla i dati, non dove risiedono. Dati in Europa ma controllo in
+    un altro Stato: se la capogruppo (es.\ negli USA) cambia la governance può chiudere l'entità europea.
+    La \emph{data residency} è un'illusione se il controllo è altrove.
+\end{itemize}
+
+\paragraph{CSA~2.} È una \textbf{proposta} di revisione del CSA (come da NIS a NIS2): più poteri a ENISA,
+semplificazione della certificazione, più attenzione al rischio della supply chain. Per ora basta sapere
+che esiste.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Severity del caso Google Form}: il docente non ricordava se i dati sanitari partano da DPC 2 o
+    3. Nella metodologia ENISA (slide \emph{03}) la categoria \emph{sensitive data} (salute, opinioni
+    politiche\ldots) ha punteggio di base \textbf{4}; controllare anche il valore del fattore
+    \emph{malicious intent} nella tabella delle circostanze (CB).
+  \item \textbf{Articoli GDPR}: persona autorizzata (art.~29) e responsabile del trattamento (art.~28)
+    ricostruiti dalla trascrizione (in quel passaggio quasi inintelligibile): ricontrollare.
+  \item \textbf{EUCC}: data di applicazione (27/02/2025) e livelli (sostanziale, elevato) dal parlato; fonte
+    attesa: regolamento di esecuzione EUCC e slide CSA quando saranno disponibili.
+  \item \textbf{Autovalutazione}: ammessa solo per il livello base, come detto in aula; verificare l'articolo
+    del CSA sulle slide.
+  \item \textbf{CSA~2}: stato e data della proposta da verificare (``probabilmente in vigore il prossimo anno''
+    secondo il docente).
+  \item Organismo di certificazione italiano citato come ``CEPAS'' (trascrizione incerta).
+\end{itemize}
+\end{verifica}

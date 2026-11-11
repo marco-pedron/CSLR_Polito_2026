@@ -1,0 +1,116 @@
+\chapter{Simulazioni d'esame}
+\label{cap:simulazioni}
+
+\section{Simulazione 1 -- Pulse K (CRA e GDPR)}
+Caso svolto in aula il 02/11/2026: vedi Sezione~\ref{sec:pulsek}. Per esercitarsi, rifare i quattro
+task senza guardare le soluzioni e confrontare il risultato con la lezione.
+
+% ---------------------------------------------------------------------
+\section{Simulazione 2 -- Istituto di pagamento (DORA e GDPR)}
+
+\begin{nota}
+Caso costruito sul modello della domanda aperta dell'appello precedente; non proviene dai docenti.
+\end{nota}
+
+\paragraph{Scenario.} \emph{PayNest S.p.A.} è un istituto di pagamento italiano con un'app usata da
+600.000 clienti in Italia e Spagna. L'hosting è affidato a un cloud provider statunitense certificato
+nell'EU--US Data Privacy Framework; il monitoraggio di sicurezza (SOC) a un MSSP italiano.
+\begin{itemize}
+  \item \textbf{Venerdì, 22:00}: il SOC rileva un ransomware che cifra il database delle transazioni.
+    Il servizio di pagamento resta fermo per 9 ore.
+  \item \textbf{Sabato, 02:00}: il comitato di crisi classifica l'incidente come grave.
+  \item \textbf{Sabato, 10:00}: i log confermano l'esfiltrazione di nome, IBAN e storico delle
+    transazioni di 120.000 clienti. Il vettore di accesso sono le credenziali VPN di un tecnico
+    dell'MSSP, prive di MFA.
+  \item I dati vengono ripristinati dai backup entro domenica.
+\end{itemize}
+
+\paragraph{Domande.}
+\begin{enumerate}[label=\Alph*)]
+  \item Quali norme si applicano? Perché NIS2 non è la norma di riferimento per la notifica?
+  \item Quali notifiche deve fare PayNest, a chi ed entro quando?
+  \item Calcolare la severità ENISA e decidere sugli artt.~33 e 34 GDPR.
+  \item Quali misure contrattuali e organizzative vanno adottate verso i fornitori?
+\end{enumerate}
+
+\begin{soluzione}[A) Norme applicabili]
+\begin{itemize}
+  \item \textbf{DORA}: PayNest è un'entità finanziaria (istituto di pagamento). Il settore bancario e
+    finanziario è anche nell'Allegato~I di NIS2, ma DORA è \textbf{lex specialis}: dove le norme si
+    sovrappongono (gestione del rischio ICT, notifica degli incidenti) si applica DORA.
+  \item \textbf{GDPR}: data breach con perdita di riservatezza (esfiltrazione) e di disponibilità
+    (cifratura). PayNest è titolare; cloud provider e MSSP sono responsabili.
+  \item \textbf{Trasferimento extra UE}: il cloud provider è certificato nel Data Privacy Framework,
+    quindi il trasferimento si fonda su una \textbf{decisione di adeguatezza}. Restano gli obblighi di
+    trasparenza e di monitoraggio.
+  \item I due fornitori sono \textbf{fornitori terzi di servizi ICT} ai sensi di DORA, e rispondono
+    verso PayNest per via contrattuale.
+\end{itemize}
+\end{soluzione}
+
+\begin{soluzione}[B) Notifiche e tempistiche]
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X l}
+\toprule
+\textbf{Obbligo} & \textbf{Decorrenza} & \textbf{Scadenza} \\ \midrule
+DORA, notifica iniziale  & 4 h dalla classificazione (Sab 02:00), max 24 h dalla conoscenza (Ven 22:00)
+  & \textbf{Sab 06:00} (vale la prima) \\
+DORA, relazione intermedia & 72 h dalla notifica iniziale & Mar 06:00 se inviata Sab 06:00 \\
+DORA, relazione finale & 1 mese & vedi Capitolo~\ref{cap:scadenze} \\
+GDPR, art.~33 (Garante) & Consapevolezza della compromissione di dati personali (Sab 10:00) & Mar 10:00 \\
+GDPR, art.~34 (clienti) & Rischio elevato & Senza ingiustificato ritardo \\ \bottomrule
+\end{tabularx}
+\end{center}
+\begin{itemize}
+  \item Destinatari: per DORA l'autorità competente di settore (per un istituto di pagamento italiano
+    la Banca d'Italia); per il GDPR il Garante, capofila perché lo stabilimento principale è in Italia
+    e i clienti sono anche in Spagna.
+  \item L'MSSP e il cloud provider devono informare PayNest senza ingiustificato ritardo (art.~33(2) GDPR).
+  \item Le scadenze cadono nel weekend e corrono comunque.
+\end{itemize}
+\end{soluzione}
+
+\begin{soluzione}[C) Severità e decisione]
+\begin{itemize}
+  \item DPC = 3 (dati finanziari: IBAN e transazioni, che permettono frodi);
+  \item EI = 1 (nome e IBAN identificano direttamente);
+  \item CB: riservatezza 0,5 (esfiltrazione verso destinatari ignoti e malevoli) + disponibilità 0,25
+    (temporanea, dati ripristinati dai backup) + intento malevolo 0,5 = 1,25.
+\end{itemize}
+\[
+SE = 3 \times 1 + 1{,}25 = 4{,}25 \quad\Rightarrow\quad \text{molto alta}
+\]
+Quindi notifica al Garante (art.~33) \textbf{e} comunicazione ai 120.000 clienti (art.~34). Ai clienti
+vanno indicati il rischio di phishing mirato e di frodi sull'IBAN, le misure adottate e le precauzioni
+da prendere. I valori scelti, in particolare 0,25 per la disponibilità, vanno motivati.
+\end{soluzione}
+
+\begin{soluzione}[D) Misure verso i fornitori]
+\begin{itemize}
+  \item Gestione del rischio ICT da terze parti (DORA): \textbf{registro delle informazioni} sugli
+    accordi con i fornitori ICT, valutazione del rischio prima e durante il rapporto, strategia
+    multi-vendor ed \textbf{exit strategy}.
+  \item Clausole contrattuali obbligatorie (DORA): requisiti di sicurezza, assistenza negli incidenti,
+    diritti di audit e ispezione, limiti al subappalto, diritti di recesso, livelli di servizio.
+  \item GDPR art.~28: DPA con entrambi i fornitori, clausola di notifica rapida dei breach, misure
+    dell'art.~32. L'MFA obbligatoria sugli accessi remoti dei fornitori è la misura che avrebbe impedito
+    l'incidente.
+  \item Follow-up: verifica della chiusura delle carenze emerse e riesame da parte dell'organo di gestione.
+\end{itemize}
+\end{soluzione}
+
+\begin{verifica}
+\begin{itemize}
+  \item Banca d'Italia come autorità DORA competente per gli istituti di pagamento italiani: verificare
+    sulle slide DORA.
+  \item Articoli DORA sulle terze parti (in genere artt.~28 e 30): gli appunti dell'anno precedente
+    citano anche un ``art.~13''; verificare.
+  \item L'app di PayNest potrebbe rientrare nel CRA come software installabile, ma l'incidente nasce da
+    credenziali compromesse e non da una vulnerabilità del prodotto: non scatta l'art.~14 CRA.
+    Lettura da confermare.
+\end{itemize}
+\end{verifica}
+
+\dacompletare{Aggiungere una simulazione per ogni nuovo laboratorio (es.\ audit Sestante Mobility,
+simulazione NIS2).}

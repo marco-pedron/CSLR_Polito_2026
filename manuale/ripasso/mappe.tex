@@ -1,0 +1,88 @@
+\chapter{Mappe concettuali}
+\label{cap:mappe}
+
+% ---------------------------------------------------------------------
+\section{Quale norma si applica?}
+
+Prima delle due competenze richieste dal corso (lezione del 02/11). Le domande \textbf{non sono
+alternative}: vanno poste tutte, perché le norme si cumulano.
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=6mm and 8mm,
+  q/.style={draw, rounded corners, fill=blue!6, text width=6.6cm, align=left,
+    font=\small, inner sep=5pt, minimum height=1.7cm},
+  r/.style={draw, thick, fill=green!8, text width=5.4cm, align=left,
+    font=\small, inner sep=5pt, minimum height=1.7cm},
+  >=Stealth]
+\node[q] (q1) {Sono coinvolti \textbf{dati personali} di persone fisiche?};
+\node[r, right=of q1] (r1) {\textbf{GDPR}\\ se data breach: artt.~33--34};
+
+\node[q, below=of q1] (q2) {Il soggetto è un'\textbf{entità finanziaria} (banca, istituto di
+  pagamento, assicurazione, \ldots) o un suo fornitore ICT?};
+\node[r, right=of q2] (r2) {\textbf{DORA}\\ lex specialis rispetto a NIS2; ai fornitori ICT si
+  applica per via contrattuale};
+
+\node[q, below=of q2] (q3) {Il soggetto è \textbf{essenziale o importante} in un settore degli
+  Allegati I--II di NIS2?};
+\node[r, right=of q3] (r3) {\textbf{NIS2}\\ in Italia D.Lgs.~138/2024, autorità ACN};
+
+\node[q, below=of q3] (q4) {È un \textbf{prodotto con elementi digitali} (hardware o software
+  installabile, connesso) messo a disposizione sul mercato UE e non coperto da un regime verticale?};
+\node[r, right=of q4] (r4) {\textbf{CRA}\\ obblighi di segnalazione dall'11/9/2026; tutto dall'11/12/2027};
+
+\node[q, below=of q4] (q5) {È o contiene un \textbf{sistema di IA}?};
+\node[r, right=of q5] (r5) {\textbf{AI Act}\\ alto rischio: presunzione di conformità all'art.~15 tramite CRA};
+
+\node[q, below=of q5] (q6) {Si vuole dimostrare la sicurezza con una \textbf{certificazione UE}?};
+\node[r, right=of q6] (r6) {\textbf{CSA}\\ schemi europei di certificazione, ENISA};
+
+\foreach \i in {1,...,6} {\draw[->] (q\i) -- node[above, font=\scriptsize]{sì} (r\i);}
+\foreach \i/\j in {1/2,2/3,3/4,4/5,5/6} {\draw[->] (q\i) -- node[left, font=\scriptsize]{in ogni caso} (q\j);}
+\end{tikzpicture}
+\end{center}
+
+\begin{nota}
+\begin{itemize}
+  \item Ospedale, società energetica, telco: NIS2 e, se ci sono dati personali, GDPR.
+  \item Banca o istituto di pagamento: DORA e GDPR (NIS2 cede a DORA dove le norme si sovrappongono).
+  \item Fabbricante di dispositivi IoT o di app: CRA e, quasi sempre, GDPR.
+  \item Un certificato ISO 27001 o CSA \textbf{supporta} l'accountability ma \textbf{non prova} la
+    conformità legale.
+\end{itemize}
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Il percorso in caso di incidente}
+
+Seconda competenza richiesta dal corso: individuare il percorso corretto quando si verifica un incidente.
+
+\begin{center}
+\begin{tikzpicture}[
+  node distance=4mm,
+  s/.style={draw, rounded corners, fill=orange!8, text width=12.5cm, align=left,
+    font=\small, inner sep=5pt},
+  >=Stealth]
+\node[s] (a) {\textbf{1. Rilevazione ed escalation}: chi riceve il segnale (SOC, reperibile, call
+  center) lo porta subito a chi decide, compresi DPO e legale.};
+\node[s, below=of a] (b) {\textbf{2. Contenimento e preservazione delle evidenze}: isolamento, immagini
+  forensi, log, catena di custodia.};
+\node[s, below=of b] (c) {\textbf{3. Qualificazione}: quali norme sono coinvolte (mappa precedente)?
+  Data breach? Incidente significativo/grave? Vulnerabilità attivamente sfruttata?};
+\node[s, below=of c] (d) {\textbf{4. Consapevolezza}: fissare e \textbf{documentare} il momento di
+  avvio di ciascun orologio, che può essere diverso per ciascuna norma.};
+\node[s, below=of d] (e) {\textbf{5. Valutazione della severità}: ENISA per il GDPR; criteri di
+  significatività/gravità per NIS2, DORA e CRA.};
+\node[s, below=of e] (f) {\textbf{6. Notifiche in parallelo} verso ciascuna autorità, rispettando
+  ogni scadenza (Capitolo~\ref{cap:scadenze}).};
+\node[s, below=of f] (g) {\textbf{7. Comunicazioni}: interessati (art.~34 GDPR), utenti (CRA),
+  destinatari dei servizi e pubblico (NIS2), retailer, stampa. Trasparenza: niente smentite false.};
+\node[s, below=of g] (h) {\textbf{8. Registri e chiusura}: registro degli incidenti e registro dei
+  data breach allineati; report finali; lezioni apprese e aggiornamento di risk assessment e DPIA.};
+\foreach \x/\y in {a/b,b/c,c/d,d/e,e/f,f/g,g/h} {\draw[->] (\x) -- (\y);}
+\end{tikzpicture}
+\end{center}
+
+\dacompletare{Altre mappe da aggiungere man mano: ruoli GDPR (titolare, responsabile,
+sub-responsabile); classificazione dei prodotti CRA; classificazione per rischio dell'AI Act;
+soggetti NIS2.}

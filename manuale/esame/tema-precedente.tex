@@ -1,0 +1,149 @@
+\chapter{Tema d'esame di un appello precedente}
+\label{cap:tema-precedente}
+
+\begin{nota}[Fonte]
+Messaggio nel gruppo Telegram del corso (``per i posteri''), riportato testualmente. Il testo delle
+opzioni delle domande chiuse non è disponibile: per ciascuna si indica cosa va saputo. Le domande
+chiuse ricostruite si trovano nel quiz (Capitolo~\ref{cap:quiz}).
+\end{nota}
+
+\begin{enumerate}
+  \item \emph{GDPR legal basis (select the WRONG answer)}
+  \item \emph{NIS2 incident definition}
+  \item \emph{ENISA: what is it, what role does it have}
+  \item \emph{DORA strategies (select the WRONG answer)}
+  \item \emph{Open question: a hospital with some IT service providers for storage (cloud) and security.
+    There is a data breach/incident.}
+    \begin{enumerate}[label=\Alph*)]
+      \item \emph{What regulation is involved?}
+      \item \emph{According to the regulation, what does the hospital have to do?}
+      \item \emph{Regardless of the incident, what does the hospital have to do regarding the
+        management of the supply chain?}
+    \end{enumerate}
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\section{Domande chiuse: cosa sapere}
+
+\paragraph{1. Basi giuridiche GDPR (art.~6).} Sono sei, tutte di pari valore: consenso, esecuzione di
+un contratto, obbligo legale, interessi vitali, interesse pubblico o pubblici poteri, legittimo
+interesse. Affermazioni errate tipiche:
+\begin{itemize}
+  \item ``il consenso è sempre necessario'' o ``prevale sulle altre basi'';
+  \item ``un'autorità pubblica può fondarsi sul legittimo interesse per i propri compiti'' (escluso
+    dall'art.~6(1));
+  \item ``la base contrattuale copre anche il marketing'';
+  \item ``si può condividere i dati con terzi per il loro marketing in base al legittimo interesse''
+    (laboratorio GDPR: serve il consenso).
+\end{itemize}
+
+\paragraph{2. Definizione di incidente NIS2 (art.~6).} Evento che compromette la
+\textbf{disponibilità, l'autenticità, l'integrità o la riservatezza} di dati conservati, trasmessi o
+elaborati, o dei servizi offerti dai sistemi informativi e di rete o accessibili attraverso di essi.
+Va distinto dall'\textbf{incidente significativo} (art.~23(3)): quello che ha causato o può causare
+una grave perturbazione operativa dei servizi o perdite finanziarie, oppure danni materiali o
+immateriali considerevoli ad altre persone. Il ``può causare'' è giuridicamente decisivo.
+Attenzione: NIS2 include l'\emph{autenticità}, la definizione GDPR di data breach no.
+
+\paragraph{3. ENISA.} Agenzia dell'UE per la cybersicurezza. Con il Cybersecurity Act ha ottenuto un
+\textbf{mandato permanente} e un ruolo attivo: supporto alle politiche UE e agli Stati membri,
+cooperazione operativa (rete dei CSIRT), situational awareness, preparazione degli schemi europei di
+certificazione su richiesta della Commissione, sensibilizzazione e formazione, gestione della
+\textbf{Single Reporting Platform} del CRA. \textbf{Non} irroga sanzioni, \textbf{non} è un CSIRT
+nazionale e \textbf{non} rilascia certificati alle imprese.
+
+\paragraph{4. Strategie DORA.} La strategia di resilienza operativa digitale comprende: tolleranza al
+rischio ICT, obiettivi, architettura, rilevazione, test; \textbf{strategia multi-vendor}; gestione e
+conformità dell'outsourcing ICT; \textbf{strategia di comunicazione} per gli incidenti ICT. È definita
+e approvata dall'\textbf{organo di gestione} dell'entità finanziaria. Affermazioni errate tipiche: che
+la approvi il fornitore ICT, che sia identica al risk assessment GDPR, che DORA imponga una checklist
+fissa (vale invece la proporzionalità).
+
+% ---------------------------------------------------------------------
+\section{Domanda aperta: risposta modello}
+
+\begin{soluzione}[A) Quali norme sono coinvolte]
+\begin{itemize}
+  \item \textbf{GDPR}. L'ospedale tratta dati personali, anche \textbf{sanitari} (categoria
+    particolare, art.~9), ed è \textbf{titolare}. Il fornitore cloud e il fornitore di sicurezza sono
+    \textbf{responsabili del trattamento} (art.~28), ed eventuali loro fornitori sono sub-responsabili.
+    Se sono coinvolti dati personali, l'incidente è un \textbf{data breach} (art.~4(12)).
+  \item \textbf{NIS2}. La sanità è un settore dell'Allegato~I: l'ospedale è \textbf{soggetto
+    essenziale} se grande impresa, \textbf{importante} se media (art.~3). In Italia la norma è il
+    D.Lgs.~138/2024, con l'ACN come autorità e il CSIRT Italia per le notifiche.
+  \item \textbf{I fornitori} sono a loro volta soggetti NIS2: i servizi di cloud computing rientrano
+    nelle infrastrutture digitali e i servizi di sicurezza gestiti nella gestione dei servizi ICT
+    (B2B), entrambi nell'Allegato~I. Hanno obblighi di notifica propri, distinti da quelli
+    dell'ospedale.
+  \item \textbf{Perché non le altre}: DORA no (l'ospedale non è un'entità finanziaria); CRA solo se
+    l'incidente nasce da una vulnerabilità attivamente sfruttata in un prodotto con elementi digitali,
+    e in quel caso l'obbligo è del fabbricante, non dell'ospedale; i dispositivi medici sono soggetti
+    all'MDR ed esclusi dal CRA.
+\end{itemize}
+\end{soluzione}
+
+\begin{soluzione}[B) Cosa deve fare l'ospedale secondo le norme]
+\textbf{Gestione immediata}
+\begin{itemize}
+  \item Attivare la procedura (idealmente integrata GDPR--NIS2), contenere l'incidente insieme ai
+    fornitori, preservare le evidenze (log, immagini forensi, catena di custodia) e informare l'organo
+    di gestione.
+  \item Ottenere dal fornitore le informazioni necessarie: il responsabile deve informare il titolare
+    \textbf{senza ingiustificato ritardo} (art.~33(2)).
+  \item Fissare e documentare il momento di consapevolezza per ciascuna norma.
+\end{itemize}
+\textbf{GDPR}
+\begin{itemize}
+  \item Valutare la severità per gli interessati (ENISA). Con dati sanitari il DPC è 4, quindi la
+    severità è quasi certamente alta o molto alta.
+  \item \textbf{Art.~33}: notificare il Garante entro \textbf{72 ore} dalla consapevolezza, anche in
+    forma preliminare, completando in seguito.
+  \item \textbf{Art.~34}: comunicare ai pazienti, in linguaggio chiaro, se il rischio è elevato (con
+    dati sanitari tipicamente sì). La comunicazione deve contenere natura della violazione, contatti
+    del DPO, conseguenze probabili, misure adottate e consigli agli interessati.
+  \item Annotare la violazione nel \textbf{registro dei data breach} (art.~33(5)), anche se non si notifica.
+\end{itemize}
+\textbf{NIS2} (se l'incidente è significativo)
+\begin{itemize}
+  \item \textbf{Early warning} al CSIRT entro \textbf{24 ore}, indicando se si sospetta un atto
+    illecito o un impatto transfrontaliero.
+  \item \textbf{Notifica dell'incidente} entro \textbf{72 ore}, con valutazione iniziale di gravità,
+    impatto e indicatori di compromissione; \textbf{relazione intermedia} su richiesta.
+  \item \textbf{Relazione finale} entro \textbf{un mese} dalla notifica: descrizione, causa, misure,
+    impatti transfrontalieri.
+  \item Informare, se opportuno, i destinatari dei servizi impattati.
+\end{itemize}
+\textbf{Inoltre}
+\begin{itemize}
+  \item Le notifiche al Garante e al CSIRT sono \textbf{separate e parallele}: l'una non sostituisce l'altra.
+  \item Valutare la denuncia alla Polizia Postale (non obbligatoria, ma la sua assenza può essere
+    valutata negativamente).
+  \item Allineare registro degli incidenti e registro dei data breach; far approvare le misure di
+    remediation dall'organo di gestione; aggiornare risk assessment e DPIA.
+\end{itemize}
+\end{soluzione}
+
+\begin{soluzione}[C) Supply chain: obblighi a prescindere dall'incidente]
+\begin{itemize}
+  \item \textbf{NIS2, art.~21(2)(d)}: la sicurezza della catena di approvvigionamento fa parte delle
+    misure obbligatorie di gestione del rischio. Secondo l'\textbf{art.~21(3)} vanno considerate le
+    vulnerabilità specifiche di ciascun fornitore, la qualità dei loro prodotti e delle loro pratiche di
+    sicurezza e le procedure di sviluppo sicuro.
+  \item In pratica (linee guida ACN): inventario dei fornitori e dei servizi critici; mappatura delle
+    dipendenze e dei rischi a cascata; requisiti minimi di sicurezza nei contratti; SLA e tempi di
+    ripristino; rivalutazione periodica; supervisione e approvazione da parte dell'organo di gestione
+    (art.~20, responsabilità non delegabile).
+  \item \textbf{GDPR, art.~28}: scegliere solo responsabili che offrano \textbf{garanzie sufficienti};
+    stipulare un contratto (DPA) con il contenuto dell'art.~28(3), cioè istruzioni documentate,
+    riservatezza, misure dell'art.~32, regole sui sub-responsabili, assistenza al titolare (anche per
+    gli artt.~33--36), cancellazione o restituzione dei dati, diritto di audit.
+  \item Prevedere una \textbf{clausola di notifica dei breach} con tempi stretti (es.\ 24 ore), così da
+    poter rispettare le 72 ore.
+  \item \textbf{Localizzazione dei dati}: se il cloud tratta dati fuori dall'UE servono gli strumenti
+    del Capo~V (decisione di adeguatezza oppure SCC con TIA).
+  \item Clausole su cooperazione negli incidenti, continuità operativa, backup, \textbf{exit strategy}
+    e reversibilità.
+  \item Le certificazioni dei fornitori (ISO 27001, 27017, 27018) sono utili come evidenza ma
+    \textbf{non bastano} da sole: le verifiche vanno documentate (accountability).
+\end{itemize}
+\end{soluzione}

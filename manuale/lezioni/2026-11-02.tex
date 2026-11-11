@@ -1,0 +1,514 @@
+% =====================================================================
+\lezione{02/11/2026}{Conclusione CRA e simulazione CRA--GDPR (Pulse K)}
+  {Prof.~Giuseppe Vaciago; Gianluca (laboratori)}
+  {obblighi di segnalazione CRA; CRA e AI Act; impatti del CRA; software nel perimetro CRA;
+   simulazione di incidente Pulse K; presentazione del laboratorio di audit}
+\label{lez:2026-11-02}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata. Le date, gli orari e i numeri del caso
+Pulse K sono ripresi dalle slide \emph{Case1\_PulseK\_CRA\_GDPR\_Simulation} (la trascrizione era
+inaffidabile su questi punti). Slide di riferimento: \emph{05.~PoliTO\_CRA}.
+\end{nota}
+
+\section{Sintesi}
+Conclusione della parte teorica sul Cyber Resilience Act: obblighi di segnalazione, rapporto con
+l'AI Act, impatti e sfide. Segue la prima simulazione di incidente (smartwatch per bambini Pulse K),
+che obbliga a lavorare insieme su CRA e GDPR: qualificazione del caso, orologi di notifica,
+severità ENISA e piano di remediation. Messaggio centrale: a fine corso si deve saper
+\textbf{(1) riconoscere la norma applicabile} e \textbf{(2) seguire il percorso corretto in caso di
+incidente}. Infine Gianluca presenta il laboratorio di venerdì, in cui gli studenti faranno gli auditor.
+
+% ---------------------------------------------------------------------
+\section{Obblighi di segnalazione del CRA: riepilogo}
+
+Il fabbricante (\emph{manufacturer}) deve notificare ogni \textbf{vulnerabilità attivamente
+sfruttata} presente in un prodotto con elementi digitali di cui venga a conoscenza. La notifica
+passa dalla \textbf{Single Reporting Platform} gestita da ENISA e raggiunge \textbf{due destinatari}:
+\begin{itemize}
+  \item il \textbf{CSIRT} designato come coordinatore (per l'Italia il CSIRT Italia presso l'ACN);
+  \item l'\textbf{ENISA}, che ha accesso alla piattaforma.
+\end{itemize}
+
+\paragraph{Vulnerabilità attivamente sfruttata (art.~14(2)).}
+\begin{itemize}
+  \item \textbf{Early warning}: entro \textbf{24 ore} dalla conoscenza;
+  \item \textbf{Notifica della vulnerabilità}: senza ingiustificato ritardo e comunque entro \textbf{72 ore};
+  \item \textbf{Final report}: entro \textbf{14 giorni} dal momento in cui è disponibile una misura
+    correttiva o di mitigazione.
+\end{itemize}
+
+\paragraph{Incidente grave (art.~14(4)).} Lo schema è parallelo: early warning entro 24 ore,
+notifica dell'incidente entro 72 ore, \textbf{final report entro un mese}. Il professore non ha
+messo questa scadenza nelle slide per non aggiungere complessità, ma ha anticipato che comparirà
+nella tabella riassuntiva preparata per l'esame.
+
+\paragraph{Date di applicazione.} Obblighi di segnalazione dall'\textbf{11 settembre 2026};
+applicazione integrale dall'\textbf{11 dicembre 2027}.
+
+\paragraph{Differenza principale con il GDPR.}
+Il CRA fissa una scadenza anche per il \emph{final report}, il GDPR no. Nel GDPR entro 72 ore va
+fatta la notifica, ma raccogliere tutte le informazioni del modulo in 72 ore è quasi impossibile:
+nella prassi la notifica completa arriva dopo almeno un mese e, trascorse due o tre settimane, è
+il Garante a sollecitarne il completamento. Non esiste però un termine vincolante.
+
+\begin{esame}
+\begin{itemize}
+  \item Primo passo: \textbf{qualificare il caso} (CRA, NIS2, DORA, GDPR?).
+  \item Secondo passo: ricordare con precisione le \textbf{tempistiche} applicabili
+    (vedi tabella al Capitolo~\ref{cap:scadenze}).
+  \item Errore tipico: confondere l'\emph{early warning} del CRA con la \emph{notifica preliminare}
+    del GDPR.
+\end{itemize}
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{CRA e AI Act: presunzione di conformità}
+
+I prodotti con elementi digitali che rientrano nel CRA e sono anche \textbf{sistemi di IA ad alto
+rischio} ai sensi dell'AI Act si considerano conformi ai requisiti di cybersicurezza dell'AI Act
+(art.~15 AI Act) se sono soddisfatte tre condizioni:
+\begin{enumerate}
+  \item il prodotto soddisfa i requisiti essenziali dell'\textbf{Allegato I, Parte I} del CRA;
+  \item i processi del fabbricante rispettano l'\textbf{Allegato I, Parte II} del CRA
+    (gestione delle vulnerabilità);
+  \item il livello di protezione richiesto dall'AI Act è dimostrato nella \textbf{dichiarazione di
+    conformità UE} rilasciata ai sensi del CRA.
+\end{enumerate}
+
+\noindent Anticipazione sull'AI Act: esistono \textbf{pratiche vietate} (es.\ \emph{social scoring})
+e \textbf{sistemi ad alto rischio}, cioè sistemi che possono causare un danno serio alle persone e
+sono soggetti a misure specifiche, anche di cybersicurezza. L'Allegato III dell'AI Act verrà
+approfondito più avanti.
+
+\begin{esame}
+Da ricordare: esiste un'interazione forte tra l'\textbf{art.~15 dell'AI Act} e il CRA per i sistemi
+di IA ad alto rischio. Gli allegati non vanno imparati a memoria.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Impatti e sfide del CRA}
+
+Il settore \textbf{tech e sviluppo software} sarà probabilmente il più colpito, data la pervasività
+degli elementi digitali: potranno servire cambiamenti significativi nelle pratiche di sviluppo e nei
+prodotti. Le sfide principali sono:
+\begin{itemize}
+  \item complessità dei requisiti;
+  \item integrazione della \emph{security by design} e \emph{by default} in prodotti e processi;
+  \item gestione della \emph{supply chain};
+  \item investimenti necessari;
+  \item gestione continua del rischio.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Perché il CRA è complesso: il quadro d'insieme}
+
+\begin{itemize}
+  \item \textbf{NIS2}: riguarda solo alcune categorie (soggetti \emph{essenziali} e \emph{importanti}),
+    legate a infrastrutture critiche, con requisiti di sicurezza specifici e numerosi.
+  \item \textbf{GDPR}: si applica a chiunque tratti dati personali, senza distinzioni di categoria.
+    L'art.~32 discende dal principio di \emph{accountability} e non prescrive regole tecniche puntuali.
+  \item \textbf{AI Act}: riguarda in primo luogo i \emph{provider} di sistemi di IA.
+  \item \textbf{CRA}: l'esempio classico è lo smartwatch o qualsiasi oggetto IoT, ma il regolamento
+    copre anche il \textbf{software}. Un'applicazione può quindi ricadere insieme sotto CRA, NIS2
+    (che include il settore digitale) e GDPR.
+\end{itemize}
+
+\begin{esame}
+\textbf{Le due competenze da portare a casa dal corso:}
+\begin{enumerate}
+  \item \textbf{ricondurre il rischio alla norma corretta}: capire quale quadro normativo si applica
+    a un prodotto, un sistema di IA o una situazione. Non serve diventare giuristi: per i dettagli
+    ci si può appoggiare a consulenti esperti della singola norma, ma il perimetro va riconosciuto da soli;
+  \item \textbf{in caso di incidente, individuare il percorso corretto} da seguire: a chi notificare,
+    cosa e entro quando.
+\end{enumerate}
+I requisiti tecnici, legali e organizzativi elencati negli allegati non vanno imparati a memoria.
+Il problema vero, secondo il professore, è non capire in quale quadro normativo ci si trova.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Chiarimento: il software nel perimetro del CRA}
+
+Su domanda di uno studente, il professore ha approfondito la nozione di \emph{prodotto con elementi
+digitali} applicata al software:
+\begin{itemize}
+  \item l'elemento chiave è la \textbf{connessione} (logica o fisica) a un dispositivo o a una rete;
+  \item un \textbf{software installabile} (un'applicazione) rientra nel CRA; un sito web di per sé no;
+  \item rientra anche il software \textbf{connesso a un hardware};
+  \item restano esclusi gli ambiti coperti da regimi settoriali (es.\ software sanitario soggetto a
+    normativa specifica) e l'ambito militare e della difesa.
+\end{itemize}
+
+\begin{esame}
+\textbf{Il software rientra nel CRA.} Domande di dettaglio su questa definizione non saranno chieste,
+perché la norma non è ancora pienamente applicabile e alcune interpretazioni restano incerte.
+\end{esame}
+
+% =====================================================================
+\section{Simulazione \#1 -- Pulse K (Volta Wear): CRA e GDPR}
+\label{sec:pulsek}
+% =====================================================================
+
+\begin{nota}
+Le slide della simulazione non sono materia d'esame, ma questo tipo di esercizio (notifica alle
+autorità) è molto probabile all'esame. Il caso aggiunge un livello di complessità in più: i dati
+riguardano \textbf{minori}. Lo strumento \emph{CRA--GDPR Incident Desk} usato in aula è disponibile
+sulla piattaforma del corso per esercitarsi.
+\end{nota}
+
+\subsection{Scenario}
+
+\begin{itemize}
+  \item \textbf{Volta Wear S.r.l.}, Torino (stabilimento principale in Italia), fondata nel 2019,
+    48 dipendenti, fatturato 2025 di \texteuro{}9,4 milioni: \textbf{piccola impresa}.
+  \item \textbf{Prodotto}: Pulse~K, smartwatch GPS per bambini di 5--12 anni, sul mercato UE da
+    settembre 2024. Vendite tramite web shop proprio e retailer, tra cui ElektroMax GmbH (Germania).
+  \item \textbf{182.000 orologi attivi}: Italia 118k, Francia 36k, Germania 17k, Spagna 11k.
+\end{itemize}
+
+\paragraph{Tre componenti, un solo prodotto.}
+\begin{itemize}
+  \item \textbf{Pulse K watch}: GPS, tasto SOS, messaggi vocali con contatti approvati;
+  \item \textbf{Pulse Cloud}: progettato e gestito da Volta Wear su server UE in affitto; collega
+    orologio e app;
+  \item \textbf{Pulse Family app}: i genitori vedono la posizione live, impostano le zone ``Casa''
+    e ``Scuola'', inviano messaggi vocali.
+\end{itemize}
+
+\paragraph{Dati trattati.}
+\begin{center}
+\begin{tabularx}{0.9\linewidth}{lXl}
+\toprule
+\textbf{Soggetto} & \textbf{Dato} & \textbf{Conservazione} \\ \midrule
+Bambino  & Nome, anno di nascita, foto (facoltativa) & Durata dell'account \\
+Bambino  & Posizione live e storico posizioni        & 30 giorni \\
+Bambino  & Zone sicure ``Casa'' e ``Scuola''         & Durata dell'account \\
+Bambino  & Messaggi vocali                           & 7 giorni \\
+Genitore & Nome, email, cellulare                    & Durata dell'account \\ \bottomrule
+\end{tabularx}
+\end{center}
+Non presenti nel cloud: dati di pagamento (gestiti dal payment provider) e password (salvate solo
+come hash).
+
+\subsection{La postura di sicurezza prima dell'incidente}
+
+\begin{itemize}
+  \item \textbf{Team}: un CTO e 9 sviluppatori, nessun addetto dedicato alla sicurezza.
+  \item \textbf{Segnalazione vulnerabilità}: indirizzo \texttt{security@voltawear.eu} e una policy di
+    due righe sul sito.
+  \item \textbf{Componenti}: nessun elenco del software di terze parti incluso nel prodotto (nessuna SBOM).
+  \item \textbf{Notti e weekend}: un solo sviluppatore reperibile; nessun legale né DPO reperibile;
+    nessuna procedura di emergenza.
+  \item \textbf{Customer care}: esternalizzato a CallPro S.r.l., con script fissi.
+  \item \textbf{Privacy}: DPO esterno; \textbf{DPIA svolta al lancio nel 2024 e mai aggiornata}.
+  \item \textbf{Formazione}: un e-learning generico di 45 minuti all'anno, uguale per tutti.
+  \item \textbf{Ticket di aprile 2026}: ``aggiornare la libreria di login TokenGate, fix di sicurezza
+    disponibile da marzo'', rinviato a dopo la campagna \emph{back to school}.
+\end{itemize}
+
+\begin{esame}
+\textbf{DPIA non aggiornata.} Alla domanda ``esiste una DPIA?'' la risposta formalmente è sì, ma una
+DPIA mai aggiornata può valere quasi quanto non averla. Averla resta meglio che non averla: tutto
+dipende da quanto è cambiato il software dal 2024. Dettagli di questo tipo compaiono sia nei casi
+reali sia nelle tracce d'esame.
+\end{esame}
+
+\subsection{Cronologia dell'incidente (i sei \emph{inject})}
+
+La falla nel cloud era sfruttata da \textbf{mercoledì 4 novembre 2026, ore 21:00}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{c p{2.6cm} X}
+\toprule
+\textbf{\#} & \textbf{Quando} & \textbf{Cosa succede} \\ \midrule
+1 & Gio 5/11, 23:10 & Le richieste di posizione salgono a 40 volte il volume abituale, da centinaia
+  di IP diversi. Lo sviluppatore reperibile blocca alcuni range IP e chiude il ticket come
+  ``bot scraping, nessun impatto''. Nessun altro viene informato. \\ \midrule
+2 & Ven 6/11, 08:30--11:05 & CallPro riceve 23 chiamate in due ore e mezza: gli orologi ricevono
+  messaggi vocali da adulti sconosciuti. Gli operatori seguono lo script (riavviare l'orologio,
+  cambiare il PIN). Alle 11:05 un team leader scrive al customer-care manager di Volta Wear;
+  nessuno avvisa CTO o DPO. \\ \midrule
+3 & Ven 6/11, 12:20 & Un ricercatore scrive a \texttt{security@}: cambiando il numero dell'orologio
+  nella richiesta dell'app, qualsiasi utente autenticato vede la posizione live di qualsiasi bambino
+  e può inviargli messaggi vocali. La falla è già sfruttata: un canale Telegram (``KidRadar'') vende
+  la posizione live di qualsiasi Pulse~K a \texteuro{}15 a ricerca. Il ricercatore allega screenshot
+  e annuncia la pubblicazione tra 30 giorni. \\ \midrule
+4 & Ven 6/11, 16:00 & Riunione di crisi. I log confermano \textbf{41.250 orologi interrogati},
+  \textbf{9.870 con posizione esposta} (posizione live, storico di 30 giorni, zone) e
+  \textbf{37 bambini contattati} da sconosciuti. Cause: libreria TokenGate obsoleta (login
+  falsificabile) e mancato controllo di \emph{ownership} (il cloud non verificava che l'orologio
+  richiesto appartenesse all'account). CVSS 9.1 (critico). Il CTO propone di disattivare la
+  condivisione della posizione; il CEO rifiuta: ``i genitori ci contano, non allarmiamo nessuno prima
+  di lunedì, sistemiamo in silenzio''. \\ \midrule
+5 & Sab 7/11 & Il retailer tedesco chiede se deve sospendere le vendite; una giornalista di
+  \emph{Le Parisien} chiede un commento entro le 18:00; il marketing pubblica su Instagram:
+  ``Pulse K è sicuro. Nessun dato è stato compromesso''. \\ \midrule
+6 & Dom 8/11, 20:00 & Fix sul cloud: controllo di ownership aggiunto, TokenGate aggiornato, tutte le
+  sessioni chiuse. Lunedì 9/11 alle 09:00 esce l'app 4.2. KidRadar resta online e ora vende gli
+  \emph{storici} delle posizioni. \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Lezioni emerse dai singoli inject}
+
+\paragraph{Inject 1 -- Sicurezza contro privacy.} Il riflesso tipico del tecnico di cybersicurezza è
+``c'è un attacco, lo blocco''. Manca la sensibilità privacy: ogni attacco può avere impatto sui dati
+personali, soprattutto quando riguarda minori.
+
+\paragraph{Inject 2 -- Informazioni che non risalgono.} Il call center aveva segnali chiari, ma
+nessuno ha avvisato DPO o CTO. Domanda aperta del debrief: ciò che sapeva un operatore del call
+center esternalizzato vale come conoscenza dell'azienda?
+
+\paragraph{Inject 3 -- Ricercatori e \emph{bug bounty}.} In alcuni casi l'attività è legale ed etica.
+Diventa problematica quando la segnalazione si accompagna a richieste di denaro, che di fatto
+equivalgono a un riscatto.
+
+\paragraph{Inject 4 -- Bilanciamento di interessi.} Il CEO punta su reputazione e continuità del
+servizio, ma non coglie che le conseguenze di un incidente gestito male possono essere molto più
+gravi. ``Sistemare in silenzio'' è incompatibile con un orologio normativo da 24 ore.
+
+\paragraph{Inject 5 -- Rischio reputazionale e comunicazione.} Esperienza maturata dal 2018 a oggi:
+\begin{itemize}
+  \item i clienti ricevono ormai spesso comunicazioni di data breach (es.\ il caso Trenitalia) e,
+    soprattutto i più giovani, le accettano come normali;
+  \item nel 2026 il rischio reputazionale di \emph{comunicare} un breach esiste ma raramente fa perdere
+    clienti in modo significativo; il rischio vero è \textbf{non comunicare correttamente,
+    minimizzare o mentire};
+  \item i dati finiranno comunque sul dark web: la verità emergerà;
+  \item ``chiedere scusa nel modo giusto'' è meglio che occultare;
+  \item se i clienti sono già stati informati, con la stampa si è in posizione di forza: si può dire
+    di aver già avvisato gli interessati e rifiutare dettagli coperti da indagini in corso;
+  \item il post Instagram (``nessun dato compromesso'') contraddice i fatti noti all'azienda.
+\end{itemize}
+È compito del consulente spiegare all'alta direzione perché la trasparenza conviene.
+
+\paragraph{Inject 6 -- Il fix fa partire un orologio CRA.} Si tratta del termine di 14 giorni per il
+\emph{final report} sulla vulnerabilità (art.~14(2)(c)).
+
+\subsection{Task 1 -- Qualificazione del caso ai sensi del CRA}
+
+\begin{itemize}
+  \item \textbf{È un prodotto con elementi digitali?} Sì. Pulse Cloud rientra come soluzione di
+    elaborazione dati da remoto (\emph{remote data processing}) del prodotto.
+  \item \textbf{Si applica un regime di esclusione?} No: non è un dispositivo medico, un veicolo,
+    un prodotto dell'aviazione civile o dell'equipaggiamento marittimo, non è sviluppato
+    esclusivamente per sicurezza nazionale o difesa, non è un pezzo di ricambio identico.
+  \item \textbf{Ruolo}: Volta Wear è il \textbf{fabbricante}.
+  \item \textbf{Categoria}: i wearable per bambini sono \textbf{prodotti importanti di Classe~I}
+    (Allegato III).
+  \item \textbf{Date}: l'evento (novembre 2026) cade dopo l'11/9/2026 (segnalazione già applicabile)
+    e prima dell'11/12/2027 (applicazione integrale). Quindi \textbf{l'art.~14 si applica,
+    l'Allegato~I non ancora}.
+  \item \textbf{Dimensione}: piccola impresa; per le micro e piccole imprese l'art.~64(10) prevede una
+    regola sanzionatoria specifica (vedi il riquadro \emph{Da verificare} in fondo alla lezione).
+  \item \textbf{Verdetto}: c'è evidenza affidabile che un attore malevolo ha sfruttato la
+    vulnerabilità, e l'incidente compromette la capacità del prodotto di proteggere dati sensibili o
+    importanti. Sono soddisfatti entrambi i presupposti: \textbf{vulnerabilità attivamente sfruttata}
+    e \textbf{incidente grave}, cioè \textbf{due binari di notifica CRA}.
+  \item C'è inoltre, senza dubbio, un \textbf{data breach ai sensi del GDPR}.
+\end{itemize}
+
+\subsection{Task 2 -- Gli orologi: CRA e GDPR}
+
+\paragraph{Consapevolezza ai fini del CRA.}
+\begin{itemize}
+  \item \textbf{Vulnerabilità attivamente sfruttata}: in aula (professore e Gianluca concordi) si è
+    adottata la lettura prudente, che fa coincidere la consapevolezza con la prima evidenza
+    disponibile all'azienda: l'alert di giovedì 5/11 alle 23:10. Lettura alternativa: venerdì 6/11
+    alle 12:20, quando l'email del ricercatore fornisce l'evidenza affidabile dello sfruttamento.
+  \item \textbf{Incidente grave}: venerdì 6/11 alle 16:00 (riunione di crisi, i log confermano).
+  \item \textbf{Mitigazione disponibile}: domenica 8/11 alle 20:00.
+\end{itemize}
+
+\paragraph{Consapevolezza ai fini del GDPR.}
+Il titolare è consapevole quando ha un ragionevole grado di certezza che \textbf{dati personali}
+siano stati compromessi. Qui le opzioni (5 o 6 novembre) distano circa un giorno e la scelta è poco
+delicata. Diventa invece delicatissima quando, per esempio, l'attacco avviene il 1° e il CEO viene
+informato l'8:
+\begin{itemize}
+  \item per sostenere una data di consapevolezza posticipata servono \textbf{evidenze documentali} del
+    momento in cui il titolare è stato informato: la \textbf{tracciabilità} nella gestione
+    dell'incidente è essenziale;
+  \item senza evidenze si rischia una \textbf{dichiarazione falsa} al Garante, punita con la
+    reclusione da sei mesi a tre anni;
+  \item \textbf{posizione di Gianluca}: l'orologio GDPR parte quando si è consapevoli della
+    compromissione di dati personali. L'attacco può essere in corso da giorni, settimane o mesi
+    (ricognizione, movimento laterale, ecc.): queste fasi fanno parte dell'incidente per CRA, DORA e
+    NIS2, ma non rilevano per l'orologio GDPR finché non toccano dati personali;
+  \item \textbf{aggiunta del professore}: se l'attacco era evidente e qualcuno (es.\ il CISO) l'ha
+    nascosto pensando di gestirlo da solo, è più prudente non far partire l'orologio dalla data in
+    cui è stato informato il CEO, perché un ritardo così lungo non sarebbe credibile. Un conto è un
+    attacco occulto rimasto ignoto per mesi, altro è un attacco evidente tenuto nascosto.
+\end{itemize}
+
+\begin{center}
+\textbf{Tabella delle scadenze}\par\smallskip
+\small
+\begin{tabularx}{\linewidth}{l X l l}
+\toprule
+\textbf{Binario} & \textbf{Obbligo} & \textbf{Decorrenza} & \textbf{Scadenza} \\ \midrule
+CRA  & Early warning vulnerabilità (14(2)(a))     & Gio 5/11 23:10       & Ven 6/11 23:10 \\
+CRA  & Notifica vulnerabilità (14(2)(b))          & Gio 5/11 23:10       & \textbf{Dom} 8/11 23:10 \\
+CRA  & Final report vulnerabilità (14(2)(c))      & Dom 8/11 20:00 (fix) & \textbf{Dom} 22/11 20:00 \\
+CRA  & Early warning incidente grave (14(4)(a))   & Ven 6/11 16:00       & \textbf{Sab} 7/11 16:00 \\
+CRA  & Notifica incidente (14(4)(b))              & Ven 6/11 16:00       & Lun 9/11 16:00 \\
+CRA  & Final report incidente (14(4)(c))          & Notifica 14(4)(b)    & $\approx$ Mer 9/12 \\
+CRA  & Informare gli utenti (14(8))               & Consapevolezza       & Tempestivamente \\
+GDPR & Notifica al Garante (art.~33), lettura prudente & Gio 5/11 23:10  & \textbf{Dom} 8/11 23:10 \\
+GDPR & Notifica al Garante (art.~33), lettura tardiva  & Ven 6/11 16:00  & Lun 9/11 16:00 \\
+GDPR & Comunicazione alle famiglie (art.~34)      & Consapevolezza       & Senza ingiustificato ritardo \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent Canale CRA: Single Reporting Platform ENISA, verso il CSIRT dello Stato dello stabilimento
+principale (Italia). L'early warning deve indicare gli Stati membri in cui il prodotto è messo a
+disposizione (Italia, Francia, Germania, Spagna).
+
+\noindent\textbf{Quanto costa ``aspettare lunedì''}: entro lunedì mattina sono già scaduti l'early
+warning sulla vulnerabilità, la notifica della vulnerabilità, l'early warning sull'incidente grave e,
+nella lettura prudente, anche le 72 ore GDPR.
+
+\subsection{Task 3 -- Severità del breach (metodologia ENISA 2013)}
+
+\[
+SE = DPC \times EI + CB
+\]
+Scale e valori sono riepilogati nella scheda di ripasso (Capitolo~\ref{cap:schede}).
+
+\paragraph{Gruppo A -- 31.380 famiglie (solo dati di profilo).}
+Nome, anno di nascita, foto del bambino; nome, email, cellulare del genitore.
+DPC = 1 (dati semplici), EI = 1 (massima), CB = 0,5 (riservatezza, destinatari ignoti) + 0,5
+(intento malevolo: vendita su Telegram).
+\[
+SE_A = 1 \times 1 + 1 = 2 \quad\Rightarrow\quad \text{media}
+\]
+
+\paragraph{Gruppo B -- 9.870 famiglie (profilo e posizione).}
+Profilo, posizione live, storico di 30 giorni, zone ``Casa'' e ``Scuola''; 37 bambini contattati.
+DPC = 2 (dati comportamentali), EI = 1, CB = 0,5 + 0,5.
+\[
+SE_B = 2 \times 1 + 1 = 3 \quad\Rightarrow\quad \text{alta (parte bassa della fascia)}
+\]
+
+\paragraph{Critica alla metodologia.} Il professore la definisce ``folle'' su questo punto: la
+metodologia ENISA, con un'impostazione pensata per il settore finanziario, \textbf{non distingue tra
+minori e adulti}. Gianluca precisa che, in senso stretto, i dati di profilo sono DPC~1, ma il valore
+può essere \textbf{aumentato motivatamente} in base al numero di interessati e alla loro
+vulnerabilità (\emph{accountability}).
+
+\paragraph{Decisioni.}
+\begin{itemize}
+  \item \textbf{Art.~33}: notifica al Garante \textbf{obbligatoria}. Il Garante italiano è l'autorità
+    capofila (stabilimento principale a Torino, trattamento transfrontaliero: art.~56).
+  \item \textbf{Art.~34}: comunicazione agli interessati del Gruppo~B \textbf{sì}, anche se il punteggio
+    (3) consentirebbe di discuterne e il CEO probabilmente spingerebbe per evitarla. Le ragioni:
+    \begin{itemize}
+      \item trasparenza;
+      \item interessati estremamente vulnerabili: i dati possono interessare criminali, inclusi pedofili;
+      \item secondo Gianluca, lavoratori, malati e bambini sono categorie particolarmente seguite
+        dalle autorità di controllo, quindi il rischio va valutato al livello più alto possibile.
+    \end{itemize}
+  \item \textbf{A chi si comunica}: ai \textbf{genitori} (titolari della responsabilità genitoriale),
+    non ai bambini.
+\end{itemize}
+
+\subsection{Task 4 -- Piano di remediation (da svolgere a casa)}
+
+Per mancanza di tempo il task è rimasto da svolgere individualmente con l'Incident Desk.
+Il piano va articolato su quattro assi:
+\begin{itemize}
+  \item \textbf{tecnico}: chiudere le due falle e fare in modo che il prossimo componente obsoleto
+    venga individuato in giorni, non in mesi;
+  \item \textbf{organizzativo}: chi decide alle 23:10 di un giovedì, e quali template devono già esistere;
+  \item \textbf{formazione}: almeno tre azioni, ciascuna con destinatari, contenuto e KPI, collegate a
+    un inject;
+  \item \textbf{comunicazione}: famiglie, tutti gli utenti, retailer, stampa, ricercatore, rettifica
+    del post Instagram.
+\end{itemize}
+
+\begin{esame}
+Serve un \textbf{piano di risposta agli incidenti integrato} che coordini contemporaneamente CRA,
+GDPR e, dove applicabile, NIS2 (tema della prossima lezione).
+\end{esame}
+
+% =====================================================================
+\section{Prossimo laboratorio (venerdì): il ruolo dell'auditor}
+% =====================================================================
+
+Presentato da Gianluca. Cambia il ruolo: non si gestisce più l'incidente dall'interno, si è
+\textbf{auditor esterno}.
+
+\paragraph{Scenario.}
+\begin{itemize}
+  \item \textbf{Sestante Mobility}, \textbf{media impresa} (non micro né piccola: si applicano tutti
+    gli obblighi previsti per le medie imprese).
+  \item Prodotto: box telematico installato su veicoli di flotte aziendali, collegato a una porta del
+    veicolo da cui estrae dati, con piattaforma cloud (SaaS) e app mobile.
+  \item Clienti: \emph{fleet operator} in diversi Paesi.
+  \item Dati raccolti: viaggi, eventi di guida e un punteggio del conducente calcolato dal dispositivo.
+    Il conducente ha nome e cognome, quindi si tratta di \textbf{dati personali}.
+\end{itemize}
+
+\paragraph{Eventi (date nel futuro).}
+\begin{itemize}
+  \item \textbf{Agosto 2027}: un ricercatore segnala che il firmware accetta manomissioni.
+  \item \textbf{Settembre 2027}: nei dispositivi ricondizionati (ritirati da ex clienti e riassegnati
+    a nuovi clienti) restano dati del cliente precedente.
+  \item \textbf{Novembre 2027}: un conducente scopre di essere tracciato 24 ore su 24, anche fuori
+    dall'orario di lavoro (i veicoli restano in uso al conducente), e il cliente non riesce a
+    disattivare il tracciamento.
+\end{itemize}
+
+\paragraph{Domande a cui rispondere.}
+\begin{itemize}
+  \item Si può mantenere il prodotto sul mercato, in particolare le unità vendute dopo il
+    \textbf{12 dicembre 2027}?
+  \item Come gestire un cliente che rinnova parte dei dispositivi entro il \textbf{24 aprile 2028}?
+    Le unità sono conformi?
+  \item Un nuovo dispositivo non ancora sul mercato: è valutabile? Senza evidenze, l'auditor deve
+    dichiararlo fuori perimetro o non valutabile.
+  \item Che ruolo ha Sestante ai fini GDPR: titolare, responsabile o entrambi?
+\end{itemize}
+
+\begin{esame}
+\textbf{Regole metodologiche dell'audit:}
+\begin{itemize}
+  \item le date di cut-off si applicano alla \textbf{singola unità} immessa sul mercato, non al
+    modello: unità dello stesso modello possono essere conformi o no a seconda della data di immissione;
+  \item \textbf{una fonte} = asserzione, da prendere con riserva; \textbf{due fonti concordanti} =
+    fatto accertato (evidenza);
+  \item \textbf{un certificato ISO non implica conformità CRA né GDPR}: il GDPR è una norma giuridica,
+    la ISO uno standard tecnico di sicurezza delle informazioni;
+  \item la scala di severità dell'audit è diversa da quella ISO (spiegata nel playbook);
+  \item il perimetro va preso sul serio: \textbf{non inventare né presumere nulla}. Ciò che non è
+    nelle evidenze non esiste.
+\end{itemize}
+\end{esame}
+
+\paragraph{Materiale e consegna.} 16 documenti brevi (poche frasi ciascuno) e le trascrizioni di due
+brevi interviste (tra cui il CTO), con un ordine di analisi suggerito: prima disclosure, configurazione
+e impostazioni di default del prodotto, poi le informazioni di secondo livello. Briefing e playbook
+vengono caricati in anticipo; la piattaforma online è attiva solo il giorno del laboratorio.
+Deliverable: un testo breve, da compilare online e caricare come file di testo secondo le istruzioni.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Data di consapevolezza CRA}: la trascrizione fa dire alla classe ``4 novembre'', ma il
+    4 è il giorno di inizio dello sfruttamento, di cui l'azienda non sapeva nulla. Qui si è usato
+    l'alert del 5/11 alle 23:10. Confermare con i propri appunti.
+  \item \textbf{Tabella delle scadenze}: in aula il calcolo non è stato completato; le date sono
+    calcolate applicando art.~14 CRA e art.~33 GDPR alle decorrenze scelte.
+  \item \textbf{Art.~64(10) CRA}: per micro e piccole imprese non si applicano sanzioni per il solo
+    mancato rispetto del termine di 24 ore dell'early warning. Verificare sul testo ufficiale.
+  \item \textbf{Art.~14(8) CRA}: l'obbligo di informare gli utenti non ha un termine in ore.
+    Verificare sul testo ufficiale.
+  \item Cognome del co-docente Gianluca (non ricavabile con certezza dalla trascrizione).
+\end{itemize}
+\end{verifica}

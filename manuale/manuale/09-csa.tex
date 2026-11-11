@@ -1,0 +1,160 @@
+\chapter{Cybersecurity Act (CSA)}
+\label{cap:csa}
+
+\begin{nota}[Fonti]
+Lezione del 09/11/2026 (Capitolo~\ref{lez:2026-11-09}). Le slide sul CSA non sono ancora disponibili:
+questa è una prima stesura dal parlato; articoli e date da completare sono segnalati.
+\end{nota}
+
+\section{Natura e finalità}
+Il Cybersecurity Act è un \textbf{regolamento} dell'Unione europea che introduce la \textbf{soft law
+europea} della cybersicurezza. Ha due pilastri:
+\begin{enumerate}
+  \item il \textbf{rafforzamento di ENISA}, con un mandato e compiti propri;
+  \item un \textbf{quadro europeo di certificazione} della cybersicurezza per prodotti, servizi e processi ICT.
+\end{enumerate}
+Nasce per superare quattro problemi:
+\begin{itemize}
+  \item l'\textbf{interdipendenza}: un fornitore può colpire molti clienti, in più paesi;
+  \item l'\textbf{asimmetria informativa} tra venditore e acquirente;
+  \item la \textbf{frammentazione} degli schemi nazionali;
+  \item la mancanza di \textbf{fiducia verificabile}: servono requisiti ed evidenze.
+\end{itemize}
+Obiettivo: la \textbf{cyber assurance}, cioè evidenze che certi requisiti sono soddisfatti (da non
+confondere con la cyber insurance). Le certificazioni del CSA sono \textbf{volontarie}: oggi in Europa
+non esistono certificazioni di cybersicurezza obbligatorie.
+
+\dacompletare{Riferimento normativo (Reg.~UE 2019/881), struttura del regolamento, articoli principali e
+mandato permanente di ENISA, dalle slide.}
+
+\section{Hard law, soft law e posizione del CSA}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X X}
+\toprule
+ & \textbf{Hard law} & \textbf{Soft law}\\
+\midrule
+Esempi & limiti di velocità; GDPR, CRA, NIS2, DORA, AI Act & policy aziendali (es.\ MFA), linee guida ENISA,
+  standard ISO, schemi del CSA\\
+Conseguenze & sanzioni predeterminate dalla legge, discrezionalità delimitata & non previste dalla legge,
+  ampio margine (es.\ provvedimenti disciplinari per violazione di policy)\\
+Tempi & 1--3 anni (o più) per una legge & adattabile in fretta\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Il CSA è soft law che aiuta a rispettare la hard law: in particolare, uno schema del CSA può fornire i
+requisiti concreti con cui dimostrare la conformità al \textbf{CRA} (Capitolo~\ref{cap:cra}). Offre
+\textbf{la possibilità, non la certezza}, di dimostrarla.
+
+\section{ENISA e governance}
+\begin{itemize}
+  \item \textbf{ENISA}, Agenzia dell'UE per la cybersicurezza: linee guida, formazione ed esercitazioni;
+    cooperazione operativa tra CSIRT; \textbf{preparazione degli schemi candidati}; analisi delle minacce e
+    buone pratiche.
+  \item \textbf{ECCG} (\emph{European Cybersecurity Certification Group}): rappresentanti delle autorità
+    nazionali; coopera alla preparazione degli schemi ed esprime un parere sulle bozze.
+  \item \textbf{Commissione europea}: individua il bisogno e adotta lo schema.
+  \item \textbf{Autorità nazionali di certificazione}: vigilano sulla certificazione; in Italia l'\textbf{ACN}.
+  \item \textbf{Organismi di valutazione e laboratori}: eseguono i test e rilasciano i certificati.
+\end{itemize}
+
+\section{Processo di adozione di uno schema}
+\begin{center}
+\begin{tikzpicture}[node distance=4mm, every node/.style={draw, rounded corners, align=center,
+    font=\small, minimum height=1.1cm, text width=2.9cm}]
+  \node (r) {\textbf{Richiesta}\\Commissione $\rightarrow$ ENISA};
+  \node (d) [right=of r] {\textbf{Bozza}\\ENISA + stakeholder};
+  \node (o) [right=of d] {\textbf{Parere}\\ECCG};
+  \node (a) [right=of o] {\textbf{Adozione}\\Commissione};
+  \draw[->] (r) -- (d); \draw[->] (d) -- (o); \draw[->] (o) -- (a);
+\end{tikzpicture}
+\end{center}
+\dacompletare{Atto di adozione (atto di esecuzione), programma di lavoro dell'Unione (URWP), durata e
+revisione degli schemi.}
+
+\section{Framework, schema e certificato}
+\begin{itemize}
+  \item \textbf{Framework}: il CSA, che fissa ruoli e regole comuni. Non contiene schemi.
+  \item \textbf{Schema}: il \emph{rule book} della valutazione per una categoria: ambito, requisiti di sicurezza,
+    test, livelli di affidabilità.
+  \item \textbf{Certificato}: attesta che uno specifico prodotto o servizio rispetta lo schema.
+\end{itemize}
+Oggetti possibili di uno schema: \textbf{prodotti ICT} (firewall, chip, software), \textbf{servizi ICT} (es.\ cloud
+storage), \textbf{processi ICT} (progettazione e manutenzione; ancora nessuno schema), \textbf{servizi di
+sicurezza gestiti} (incident response, audit, penetration test). ISO/IEC~27001 certifica invece
+l'\textbf{organizzazione}.
+
+\section{Livelli di affidabilità e valutazione della conformità}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Livello} & \textbf{Rischio} & \textbf{Valutazione}\\
+\midrule
+Base & rischi noti di base & anche autovalutazione del fabbricante\\
+Sostanziale & attaccanti con risorse limitate & terza parte\\
+Elevato & attaccanti con risorse significative & terza parte\\
+\bottomrule
+\end{tabular}
+\end{center}
+In pratica la certificazione è quasi sempre di terza parte. Un certificato:
+\begin{itemize}
+  \item dà evidenze su un oggetto \textbf{identificato con precisione}, su requisiti e test specifici, a un
+    livello definito;
+  \item \textbf{non} dimostra l'assenza di vulnerabilità;
+  \item non esonera in automatico da responsabilità: dopo un incidente conta se i requisiti erano davvero
+    rispettati (\emph{accountability});
+  \item richiede \textbf{monitoraggio e manutenzione}: prodotto e minacce cambiano; una patch non invalida
+    automaticamente il certificato, ma il suo impatto va valutato; una nuova versione va ricertificata.
+\end{itemize}
+\dacompletare{Articoli su livelli di affidabilità, autovalutazione della conformità, durata e revoca dei
+certificati, sanzioni nazionali.}
+
+\section{EUCC}
+Primo schema adottato: \textbf{EUCC} (\emph{EU Common Criteria-based scheme}), basato sui Common Criteria;
+riguarda \textbf{prodotti e componenti ICT} (niente servizi o processi), è applicabile dal
+\textbf{27 febbraio 2025} e prevede i livelli \textbf{sostanziale ed elevato}.
+Concetti: \textbf{target of evaluation} (il prodotto esatto), \textbf{security target} (il documento che lo
+descrive con i requisiti dichiarati), \textbf{protection profile} (requisiti riutilizzabili per un tipo di
+prodotto), metodi e analisi delle vulnerabilità, ipotesi e limiti operativi.
+\dacompletare{Riferimento al regolamento di esecuzione EUCC; altri schemi in preparazione (EUCS per il
+cloud, EU5G).}
+
+\section{Rapporto con le altre norme e strumenti}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.4cm} X}
+\toprule
+\textbf{Norma / strumento} & \textbf{Domanda a cui risponde}\\
+\midrule
+CSA & come si valutano le dichiarazioni di sicurezza: quadro comune di certificazione\\
+CRA & obblighi di sicurezza e sulle vulnerabilità dei prodotti con elementi digitali\\
+NIS2 & sicurezza di reti e sistemi informativi dei soggetti essenziali e importanti\\
+GDPR & protezione dei dati personali (la norma più generale)\\
+DORA & resilienza operativa digitale del settore finanziario\\
+ISO/IEC~27001 & sistema di gestione della sicurezza dell'organizzazione\\
+Marcatura CE & conformità del prodotto alle norme UE che la richiedono (possibile sovrapposizione con l'EUCC)\\
+Penetration test & attacco simulato autorizzato; soft law con possibili conseguenze legali\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Security by design e supply chain}
+Protezione e manutenzione si pianificano in progettazione: ridurre la superficie d'attacco, conoscere i
+componenti (\textbf{SBOM}), gestire le segnalazioni di vulnerabilità, distribuire gli aggiornamenti. Per ogni
+fornitore: il componente può essere attaccato? Possiamo operare senza? Chi controlla servizi, decisioni e
+dati (governance, non solo \emph{data residency})?
+
+\section{CSA~2}
+Proposta di revisione: più poteri a ENISA, certificazione semplificata, più attenzione alla supply chain.
+\dacompletare{Stato dell'iter legislativo e contenuti della proposta.}
+
+\begin{esame}
+\begin{itemize}
+  \item I due pilastri: \textbf{ENISA} e \textbf{schemi di certificazione}.
+  \item CSA = soft law sui prodotti; ISO/IEC~27001 = organizzazione; CRA = hard law sui prodotti.
+  \item Framework $\neq$ schema $\neq$ certificato; un certificato non prova l'assenza di vulnerabilità.
+  \item Livelli base/sostanziale/elevato; autovalutazione solo per il livello base.
+  \item EUCC: primo schema, prodotti ICT, Common Criteria, livelli sostanziale ed elevato.
+\end{itemize}
+\end{esame}

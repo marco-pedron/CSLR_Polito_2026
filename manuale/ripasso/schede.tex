@@ -1,0 +1,80 @@
+\chapter{Schede di ripasso}
+\label{cap:schede}
+
+% ---------------------------------------------------------------------
+\section{Severità di un data breach (metodologia ENISA 2013)}
+
+\[
+SE = DPC \times EI + CB
+\]
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Fattore} & \textbf{Valori} \\ \midrule
+\textbf{DPC} -- Data Processing Context & 1 semplici $\cdot$ 2 comportamentali $\cdot$ 3 finanziari
+  $\cdot$ 4 sensibili; aumentabile o riducibile in base al contesto (minori, sicurezza, volume),
+  motivando la scelta \\
+\textbf{EI} -- Ease of Identification & 0,25 trascurabile $\cdot$ 0,5 limitata $\cdot$
+  0,75 significativa $\cdot$ 1 massima \\
+\textbf{CB} -- Circumstances of the Breach & riservatezza 0--0,5 $\cdot$ integrità 0--0,5 $\cdot$
+  disponibilità 0--0,5 $\cdot$ intento malevolo +0,5 \\
+\midrule
+\textbf{Scala} & $SE<2$ bassa $\cdot$ $2 \le SE < 3$ media $\cdot$ $3 \le SE < 4$ alta $\cdot$
+  $SE \ge 4$ molto alta \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{esame}
+\begin{itemize}
+  \item Non conta ``indovinare il numero'' ma \textbf{motivare} ogni valore (accountability).
+  \item La metodologia non distingue minori e adulti: se ci sono soggetti vulnerabili (minori,
+    pazienti, lavoratori), conviene alzare il DPC motivando e comunicare comunque agli interessati.
+  \item Per i minori la comunicazione ex art.~34 va ai \textbf{genitori}.
+  \item Anche l'indisponibilità temporanea dei dati è un data breach.
+\end{itemize}
+\end{esame}
+
+\begin{nota}
+Scala tratta dalle slide del caso Pulse K (A.A.~2026/27). Gli appunti dell'anno precedente usano
+soglie leggermente diverse (es.\ 2--2,5 media, 2,5--3 medio-alta): fa fede la versione di quest'anno.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Ruoli nelle diverse norme}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Norma} & \textbf{Ruoli principali} \\ \midrule
+GDPR    & Titolare (decide finalità e mezzi; notifica i breach) $\cdot$ responsabile (tratta per conto
+  del titolare; avvisa il titolare senza ingiustificato ritardo) $\cdot$ sub-responsabile $\cdot$
+  contitolari $\cdot$ interessato $\cdot$ DPO \\
+NIS2    & Soggetti essenziali e importanti $\cdot$ organi di gestione (responsabilità non delegabile)
+  $\cdot$ punto di contatto NIS $\cdot$ CSIRT e autorità competente \\
+DORA    & Entità finanziarie $\cdot$ fornitori terzi di servizi ICT $\cdot$ organo di gestione
+  $\cdot$ funzione di controllo del rischio ICT \\
+CRA     & Fabbricante $\cdot$ importatore $\cdot$ distributore \\
+AI Act  & Provider $\cdot$ deployer $\cdot$ importatore $\cdot$ distributore $\cdot$ fabbricante del
+  prodotto (art.~25: riqualificazione come provider) \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------------------
+\section{Date da ricordare}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Data} & \textbf{Evento} \\ \midrule
+25/05/2018 & Il GDPR diventa applicabile \\
+17/01/2025 & DORA diventa applicabile \\
+11/09/2026 & CRA: si applicano gli obblighi di segnalazione (art.~14) \\
+11/12/2027 & CRA: applicazione integrale (requisiti dell'Allegato I) \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\dacompletare{Aggiungere: date NIS2 (recepimento) e calendario AI Act dopo le relative lezioni.}

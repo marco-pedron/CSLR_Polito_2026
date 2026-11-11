@@ -1,0 +1,76 @@
+% =====================================================================
+% Preambolo -- Manuale CSLR
+% =====================================================================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{amsmath}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  urlcolor=blue!60!black,
+  pdftitle={Cybersecurity Laws and Regulations -- Manuale del corso}
+}
+
+\setlist{itemsep=2pt,topsep=4pt}
+\renewcommand{\arraystretch}{1.25}
+
+% ---------------------------------------------------------------------
+% Riquadri
+% ---------------------------------------------------------------------
+% Punto che il docente ha indicato come rilevante per l'esame
+\newtcolorbox{esame}{breakable,colback=red!4,colframe=red!60!black,
+  fonttitle=\bfseries,title=Per l'esame}
+
+% Nota generica (titolo opzionale)
+\newtcolorbox{nota}[1][Nota]{breakable,colback=gray!6,colframe=gray!60!black,
+  fonttitle=\bfseries,title=#1}
+
+% Informazione non confermata in aula o calcolata da noi: da verificare
+\newtcolorbox{verifica}{breakable,colback=orange!6,colframe=orange!80!black,
+  fonttitle=\bfseries,title=Da verificare}
+
+% Soluzione di quiz / simulazioni (titolo opzionale)
+\newtcolorbox{soluzione}[1][Soluzione]{breakable,colback=green!4,colframe=green!45!black,
+  fonttitle=\bfseries,title=#1}
+
+% Segnaposto per parti ancora da scrivere
+\newcommand{\dacompletare}[1]{%
+  \begin{tcolorbox}[colback=yellow!8,colframe=yellow!60!black,
+    fonttitle=\bfseries,title=Da completare]#1\end{tcolorbox}}
+
+% ---------------------------------------------------------------------
+% Intestazione di una lezione
+%   \lezione{data}{titolo}{docenti}{argomenti}
+% ---------------------------------------------------------------------
+\newcommand{\lezione}[4]{%
+  \chapter[#1 -- #2]{#2}%
+  \begin{tcolorbox}[colback=blue!3,colframe=blue!50!black,
+    fonttitle=\bfseries,title=Scheda lezione]
+  \textbf{Data:} #1\\
+  \textbf{Docenti:} #3\\
+  \textbf{Argomenti:} #4
+  \end{tcolorbox}}
+
+% ---------------------------------------------------------------------
+% Quiz: domanda numerata + opzioni (a), (b), ...
+% ---------------------------------------------------------------------
+\newcounter{domanda}
+\newenvironment{domanda}[1][]{%
+  \refstepcounter{domanda}\par\medskip\noindent
+  \textbf{Domanda \thedomanda}\ifx&#1&\else\ \textit{(#1)}\fi\textbf{.}~}%
+  {\par}
+\newenvironment{opzioni}{\begin{enumerate}[label=(\alph*),nosep,leftmargin=2.2em]}{\end{enumerate}}

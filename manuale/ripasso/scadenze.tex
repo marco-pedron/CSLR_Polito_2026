@@ -1,0 +1,69 @@
+\chapter{Tabella comparativa delle notifiche}
+\label{cap:scadenze}
+
+Il professore ha avvertito che all'esame va identificata prima la norma applicabile e poi la
+tempistica corretta, senza confondere le fasi delle diverse norme. La tabella riassume le
+tempistiche viste finora.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.7cm}
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Norma} & \textbf{Evento e destinatario} & \textbf{Fase 1} & \textbf{Fase 2} & \textbf{Fase 3} \\
+\midrule
+\textbf{GDPR} (artt.~33--34)
+  & Data breach $\rightarrow$ autorità di controllo (Garante; capofila se transfrontaliero)
+  & Notifica entro \textbf{72 h dalla consapevolezza} (anche preliminare)
+  & Completamento: \textbf{nessun termine} (prassi $\approx$ 1 mese)
+  & Interessati \textbf{senza ingiustificato ritardo}, se rischio elevato (art.~34) \\
+\midrule
+\textbf{NIS2} (art.~23)
+  & Incidente significativo $\rightarrow$ CSIRT (Italia: CSIRT Italia, ACN)
+  & Early warning \textbf{24 h dalla consapevolezza}
+  & Notifica \textbf{72 h dalla consapevolezza}; relazione intermedia su richiesta
+  & Final report \textbf{1 mese dalla notifica} \\
+\midrule
+\textbf{DORA}
+  & Incidente ICT grave $\rightarrow$ autorità competente di settore
+  & Notifica iniziale \textbf{4 h dalla classificazione} come grave, max \textbf{24 h dalla conoscenza}
+  & Relazione intermedia \textbf{72 h dalla notifica iniziale}
+  & Relazione finale \textbf{1 mese} \\
+\midrule
+\textbf{CRA} (art.~14(2))
+  & Vulnerabilità attivamente sfruttata $\rightarrow$ CSIRT coordinatore + ENISA (Single Reporting Platform)
+  & Early warning \textbf{24 h dalla conoscenza}
+  & Notifica \textbf{72 h dalla conoscenza}
+  & Final report \textbf{14 giorni dalla disponibilità della misura correttiva} \\
+\midrule
+\textbf{CRA} (art.~14(4))
+  & Incidente grave sulla sicurezza del prodotto $\rightarrow$ come sopra
+  & Early warning \textbf{24 h}
+  & Notifica \textbf{72 h}
+  & Final report \textbf{1 mese dalla notifica} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{esame}
+\textbf{Trappole tipiche:}
+\begin{itemize}
+  \item le \textbf{72 ore di NIS2} decorrono dalla \emph{consapevolezza}; le \textbf{72 ore di DORA}
+    decorrono dalla \emph{notifica iniziale};
+  \item il \textbf{final report CRA sulle vulnerabilità} decorre dalla \emph{disponibilità del fix},
+    non dalla consapevolezza;
+  \item il \textbf{GDPR non ha final report} con scadenza;
+  \item l'\textbf{early warning CRA} non è la \textbf{notifica preliminare GDPR}: sono obblighi
+    distinti, verso autorità distinte;
+  \item una notifica fatta a un'autorità \textbf{non adempie} gli obblighi verso un'altra: se lo stesso
+    evento rientra in più norme, le notifiche corrono in parallelo;
+  \item le scadenze \textbf{corrono anche nel weekend}.
+\end{itemize}
+\end{esame}
+
+\begin{verifica}
+\textbf{DORA, relazione finale}: gli appunti dell'anno precedente (\emph{main.pdf}) riportano in un
+punto ``1 mese dalla relazione intermedia o dal suo ultimo aggiornamento'' e in un altro ``1 mese
+dall'incidente''. Verificare sulle slide DORA di quest'anno.
+\end{verifica}
