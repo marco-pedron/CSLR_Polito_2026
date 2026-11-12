@@ -1,0 +1,297 @@
+% =====================================================================
+\lezione{19/10/2026}{ISO/IEC 27001: famiglia 27k, clausole 4--10 e primi controlli tecnologici}
+  {Gianluca Gilardi; Prof.~Giuseppe Vaciago}
+  {famiglia ISO 27k; perché la 27001 è diffusa; ciclo di implementazione dell'ISMS; clausole 4--10;
+   ciclo di certificazione triennale; 93 controlli dell'Allegato A; controlli 8.1--8.8;
+   restituzione del laboratorio 2 (Sylvane Retraite); presentazioni dei gruppi}
+\label{lez:2026-10-19}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata (nei primi 14 minuti non c'è lezione; pausa
+intorno ai minuti 70--76). Numeri, clausole e controlli sono ripresi dalle slide
+\emph{04.~polito\_iso\_2026} (\emph{Fundamentals and ISO/IEC Standards}). Le parti sul laboratorio~2
+fanno riferimento al caso \emph{Sylvane Retraite} (cartella \texttt{lab/lab\_02}).
+\end{nota}
+
+\section{Sintesi}
+Lezione tenuta in gran parte da Gianluca per preparare il laboratorio sul \emph{risk register}. Dopo una
+panoramica della famiglia ISO/IEC~27k e delle ragioni per cui la 27001 è lo standard di riferimento in
+Europa, si ripercorrono le fasi di implementazione di un ISMS e le clausole 4--10, con molti esempi
+dalla pratica professionale (audit, costi, ciclo triennale). Nella parte centrale si restituisce il
+laboratorio~2 sulla severità del data breach e un gruppo presenta il proprio lavoro. Si chiude con i
+primi otto controlli tecnologici dell'Allegato~A (8.1--8.8). Messaggio di fondo: l'ISMS è un
+\textbf{processo basato sul rischio}, non un timbro; contano i processi più dei documenti.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Esercitazione sul risk register}: Gianluca annuncia un laboratorio in cui compilare un
+    registro dei rischi secondo la ISO~27001 per una società di consulenza; i rischi saranno già forniti,
+    agli studenti spetterà valutarli e scegliere i controlli tecnologici. (Il laboratorio si è poi tenuto
+    venerdì 30/10: vedi Capitolo~\ref{lab:03}.)
+  \item \textbf{Norme ISO non distribuite}: 27001 e 27002 sono documenti a pagamento e non possono essere
+    caricati sulla piattaforma per ragioni di copyright.
+  \item \textbf{Esiti del laboratorio~2}: pubblicati sulla piattaforma la sera precedente, con avviso in
+    bacheca.
+  \item \textbf{Presentazioni dei laboratori}: i gruppi invitati (quelli con il punteggio più alto)
+    devono essere presenti in aula; il professore ha escluso dal punto aggiuntivo i gruppi invitati e
+    assenti senza preavviso. Chi non può presentare deve avvisare per email: per il docente è una
+    questione di rispetto, non di regolamento.
+  \item \textbf{Calendario}: venerdì 23/10 lezione \textbf{online} (Gianluca prosegue con i controlli
+    ISO); lunedì 26/10 lezione del professore in presenza su un nuovo argomento; il venerdì successivo
+    (30/10) il laboratorio.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{La famiglia ISO/IEC 27k}
+
+La famiglia conta oltre 70 standard e continua a crescere (Gianluca segnala la recentissima ISO/IEC~27090
+sulla sicurezza dei sistemi di IA, approvata pochi giorni prima e quindi assente dalle slide). Quelli
+rilevanti in generale sono:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.4cm} X}
+\toprule
+\textbf{Standard} & \textbf{Ruolo} \\ \midrule
+ISO/IEC 27000 & panoramica e vocabolario dell'ISMS (liberamente disponibile) \\
+ISO/IEC 27001 & \textbf{requisiti} dell'ISMS: principi di alto livello ed elenco dei controlli; è lo
+  standard certificabile \\
+ISO/IEC 27002 & guida ai controlli: come attuarli e quali effetti devono produrre \\
+ISO/IEC 27003 & guida interpretativa dei requisiti (``should'', ``can'', ``may''): utile per capire
+  cosa conta per l'auditor \\
+ISO/IEC 27005 & guida alla gestione del rischio di sicurezza delle informazioni \\
+ISO/IEC 27701 & estensione privacy (PIMS) di 27001 e 27002 \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{itemize}
+  \item Gli standard ISO sono \textbf{neutrali rispetto ai fornitori}: indicano l'effetto da ottenere,
+    non quali prodotti usare.
+  \item Anche la ISO segue un \textbf{approccio basato sul rischio}, come GDPR, DORA e NIS2. Nessuna
+    metodologia di risk assessment è imposta: tassonomia dei rischi, scale di probabilità e impatto e
+    scelta dei controlli spettano all'organizzazione.
+  \item La \textbf{27701} è un'estensione: per ottenerla serve prima la certificazione 27001. Nella
+    pratica di Gianluca nessun cliente l'ha mai chiesta; ha senso solo per trattamenti molto sensibili su
+    larga scala (es.\ dati sanitari). (Integrazione: vale per l'edizione 2019; con la 27701:2025 lo
+    standard è diventato autonomo, vedi Capitolo~\ref{cap:iso}.)
+  \item Molte aziende non si certificano ma dichiarano di \textbf{seguire} i principi della 27001, per
+    evitare il peso delle verifiche e dei rinnovi.
+\end{itemize}
+
+\subsection{Perché la 27001 è così diffusa}
+Secondo le slide: è applicabile a qualsiasi organizzazione; è breve (corpo principale di circa 25
+pagine); è allineata ad altri sistemi di gestione; è collaudata (deriva dalla BS~7799-1 del 1995); ha
+principi semplici ma utili; è certificabile; molti professionisti la usano e quindi ``parlano la stessa
+lingua''. Gianluca aggiunge che circa il 75--80\% dei controlli 27001 si ritrova nel framework
+statunitense SOC~2, per cui il lavoro fatto è in buona parte riutilizzabile.
+
+\paragraph{Benefici.} Sicurezza complessiva, consapevolezza, riduzione dei rischi di business, fiducia
+degli stakeholder, conformità legale e contrattuale, maturità dei processi, trasparenza del budget di
+sicurezza e opportunità di marketing: nelle gare la certificazione può decidere l'aggiudicazione. Davanti
+a un'autorità dopo un incidente, essere certificati aiuta a dimostrare di aver fatto il possibile, ma
+\textbf{non garantisce} che il sistema sia sicuro.
+
+\paragraph{Diffusione (ISO Survey 2024).} Al 31/12/2024 risultano 96.709 certificati ISO/IEC~27001 validi
+(contro circa 1,47 milioni della ISO~9001 sulla qualità). Nella classifica per Paese guida la Cina
+(33.359); l'Italia è sesta con 3.284. Per il mercato del lavoro, conoscere la 27001 (o essere
+\emph{lead auditor}) è un titolo molto apprezzato; un corso completo da lead auditor dura circa 40 ore.
+
+% ---------------------------------------------------------------------
+\section{Implementare un ISMS}
+
+\paragraph{Le fasi.} Il ciclo (ISO~27003) è: \textbf{contesto} (bisogni dell'organizzazione e perimetro)
+$\rightarrow$ \textbf{rischi} $\rightarrow$ \textbf{controlli} $\rightarrow$ \textbf{monitoraggio}
+$\rightarrow$ \textbf{miglioramento}. Il perimetro può coprire tutta l'azienda o un solo prodotto o
+servizio. Sicurezza significa governare \textbf{persone, processi e tecnologia}: la tecnologia è la parte
+più semplice.
+
+\paragraph{Propensione al rischio (\emph{risk appetite}).} È il livello di rischio che l'azienda è
+disposta ad accettare senza ulteriori interventi. Esempio: su una scala 1--9, si accetta tutto ciò che sta
+sotto 3; il resto va mitigato, trasferito o evitato. Nell'esperienza di Gianluca, però, nessun rischio
+\emph{inerente} che compare nel registro è davvero accettabile così com'è: i rischi davvero minimi non
+vengono nemmeno percepiti e quindi non vengono mappati.
+
+\paragraph{Controlli efficaci.} Un controllo inefficace è il caso peggiore: si spendono soldi e tempo e il
+rischio si materializza comunque. Il monitoraggio dell'efficacia è quindi centrale; se i controlli
+falliscono servono \emph{gap analysis} e piano di miglioramento (aggiornare, trasferire il rischio,
+oppure abbandonare il prodotto o il processo).
+
+\subsection{Le clausole 4--10 (attività obbligatorie)}
+Le clausole 4--10 non possono essere escluse da chi dichiara la conformità alla norma.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.2cm} X}
+\toprule
+\textbf{Clausola} & \textbf{Contenuto e osservazioni in aula} \\ \midrule
+4 Contesto & fattori interni ed esterni, parti interessate, perimetro dell'ISMS (dettaglio non
+  richiesto all'esame) \\
+5 Leadership & impegno dell'alta direzione, politica, ruoli. Punto spesso critico: se il vertice non
+  conosce rischi e controlli non può decidere budget e priorità; ``tutto parte dall'alto'' \\
+6 Pianificazione & processo di valutazione e di trattamento del rischio (6.1), obiettivi (6.2),
+  pianificazione delle modifiche (6.3) \\
+7 Supporto & risorse, competenze, \textbf{consapevolezza} (molto verificata dagli auditor e richiesta
+  anche da GDPR e AI Act), comunicazione, informazioni documentate \\
+8 Attività operative & pianificazione e controllo; esecuzione del risk assessment (8.2) e del piano di
+  trattamento (8.3), con evidenze documentate \\
+9 Valutazione delle prestazioni & monitoraggio e misurazione (KPI: ``non si controlla ciò che non si
+  misura''), audit interno, riesame della direzione \\
+10 Miglioramento & miglioramento continuo, non conformità e azioni correttive \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Valutazione del rischio.} La 27001 richiede un risk assessment \textbf{documentato}. Nella
+convenzione usata nel corso (e nel Lab~3) l'impatto si valuta su riservatezza, integrità e disponibilità
+e la probabilità è unica; la norma in sé non impone un metodo. Dopo il trattamento si
+valuta quanto il controllo riduce il rischio e si calcola il \textbf{rischio residuo}, che a sua volta va
+accettato, rifiutato, trasferito o ulteriormente mitigato.
+
+\paragraph{Audit interno e riesame.} L'audit interno non deve essere un timbro: in un audit recente
+l'auditor ha contestato all'azienda l'assenza di un \textbf{programma pluriennale} di audit interni con
+perimetro definito in anticipo. La direzione deve riesaminare l'ISMS almeno una volta l'anno (l'ideale è
+ogni trimestre), lasciando evidenza del proprio coinvolgimento.
+
+\paragraph{Ciclo di certificazione.} La certificazione segue un ciclo \textbf{triennale}: audit di
+certificazione il primo anno, due audit di mantenimento negli anni successivi (solo su parti della
+norma), poi ricertificazione completa. Più l'organizzazione è certificata da tempo, più gli auditor sono
+severi: il primo anno controllano soprattutto i documenti, poi testano i processi e intervistano il
+personale.
+
+\paragraph{Costi.} La consulenza per arrivare alla certificazione costa da poche migliaia a decine di
+migliaia di euro; il costo vero è far funzionare davvero i processi e controllare i controlli. Dal punto
+di vista dell'azienda la compliance è un costo che non produce valore diretto, ma protegge clienti e
+pubblico. Implementare un ISMS da zero richiede in genere \textbf{un anno -- un anno e mezzo} per
+un'organizzazione di medie dimensioni.
+
+\begin{nota}[Cosa sapere dell'ISMS (slide)]
+Requisiti generici e flessibili; attenzione alle parti interessate (anche fornitori, consulenti e, per le
+informazioni pubbliche, il pubblico); approccio basato sul rischio; processi e miglioramento continuo;
+\textbf{i processi contano più delle policy}; non puntare subito alla certificazione, ma prima
+implementare i processi; l'implementazione è un progetto lungo. L'auditor chiede anche le
+\textbf{dipendenze} tra processi e unità organizzative.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Allegato A: i 93 controlli}
+Controllo = misura che mantiene o modifica il rischio. La revisione 2022 (che sostituisce quella del
+2013) conta \textbf{93 controlli}, di cui 11 nuovi, in quattro temi:
+\textbf{organizzativi (37)}, \textbf{persone (8)}, \textbf{fisici (14)}, \textbf{tecnologici (34)}.
+I controlli fisici sono spesso trascurati (armadi chiusi a chiave, scrivanie sgombre). La ISO~27002:2022
+assegna a ogni controllo \textbf{cinque attributi}: tipo (preventivo, detective, correttivo), proprietà
+CIA, concetti di cybersicurezza (\emph{identify, protect, detect, respond, recover}), capacità operative,
+domini di sicurezza.
+
+Non tutti i controlli valgono per ogni organizzazione: una piccola società di consulenza che non sviluppa
+software non ha codice sorgente da proteggere né ambienti separati di sviluppo e produzione (8.31). Lo
+standard evolve: un controllo oggi sufficiente può non bastare alla prossima revisione.
+
+\begin{esame}
+\begin{itemize}
+  \item Numeri da ricordare: \textbf{93 controlli} in 4 temi (37 / 8 / 14 / 34); clausole \textbf{4--10}
+    obbligatorie; ciclo di certificazione \textbf{triennale}.
+  \item La certificazione 27001 riguarda l'\textbf{organizzazione} e non garantisce l'assenza di
+    incidenti.
+  \item Il dettaglio della clausola~4 (contesto) è stato indicato come \emph{non} strettamente richiesto
+    all'esame; il focus del corso sono i controlli tecnologici.
+\end{itemize}
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Controlli tecnologici 8.1--8.8}
+\begin{description}
+  \item[8.1 Dispositivi endpoint degli utenti.] Antimalware, aggiornamenti, MDM, cifratura del disco. Il
+    livello di protezione segue la classificazione dei dati trattati: il portatile del CEO va protetto più
+    di quello della reception (nella realtà sono spesso i dirigenti a chiedere meno vincoli).
+  \item[8.2 Diritti di accesso privilegiato.] Principio del \textbf{minimo privilegio}. Problema
+    riscontrato ``otto volte su dieci'': i diritti di amministratore locale concessi a tutti per comodità.
+    Esempio: un account pubblicitario aziendale compromesso, con decine di migliaia di euro di campagne
+    addebitate, partito da un PC dell'agenzia esterna su cui era stato installato software non autorizzato.
+  \item[8.3 Restrizione dell'accesso alle informazioni.] Mentre l'8.2 riguarda la configurazione
+    dell'utente, l'8.3 riguarda l'informazione: nessuna discrepanza tra classificazione del dato e diritti
+    concessi.
+  \item[8.4 Accesso al codice sorgente.] Caso di un'azienda ad-tech con sviluppatori esterni (anche extra
+    UE) tutti con accesso completo al repository: servono tracciamento degli accessi, accessi limitati ai
+    moduli di competenza, eventualmente repository separati.
+  \item[8.5 Autenticazione sicura.] Per Gianluca l'MFA va imposta ovunque, anche con fattori biometrici.
+    Un attacco \emph{brute force} riuscito nel 2026 rivela password deboli e nessun limite ai tentativi.
+    I segreti vanno protetti per tutto il ciclo di vita: mai inviare credenziali in chiaro sull'email
+    personale del neoassunto senza cambio password obbligatorio al primo accesso.
+  \item[8.6 Gestione della capacità.] Riguarda soprattutto la \textbf{disponibilità}: con servizi cloud la
+    capacità è demandata al fornitore; con infrastruttura propria va monitorata per pianificare la
+    scalabilità.
+  \item[8.7 Protezione dal malware.] Non solo antivirus: protezione a strati (IDS/IPS, rete, collegamento
+    verso l'ISP). ``Non chiederti \emph{se} sarai violato, ma \emph{quando} e come ripartirai'': un'azienda
+    industriale senza protezione né backup è rimasta ferma un mese e mezzo e ha poi pagato il riscatto.
+  \item[8.8 Gestione delle vulnerabilità tecniche.] Inventario degli asset, scansione, prioritizzazione
+    in base al rischio, processo di patching. Casi reali: server Windows 2012 mai aggiornati e di cui
+    nessuno conosceva l'esistenza; attacco partito da un server interno ignoto al responsabile IT
+    (``risposta che nessuna autorità accetterà''); molti incidenti causati da firewall perimetrali non
+    aggiornati.
+\end{description}
+
+% ---------------------------------------------------------------------
+\section{Restituzione del laboratorio 2 (Sylvane Retraite)}
+
+\paragraph{Esito atteso.} L'incidente era un data breach da notificare \textbf{all'autorità di controllo e
+agli interessati}. Errore frequente: ``non ci sono prove di esfiltrazione, quindi il rischio è basso e non
+comunichiamo agli interessati''.
+\begin{itemize}
+  \item La \textbf{perdita di riservatezza} si ha con il semplice \textbf{accesso} non autorizzato ai dati,
+    anche senza esfiltrazione. Se l'attaccante ha avuto accesso al server, compresa la copia di backup
+    ``nascosta'' (il secondo colpo di scena del caso), tutti quei dati sono coinvolti e la severità sale.
+  \item Dati finanziari dettagliati sono ideali per campagne di \emph{phishing} mirate: il rischio per gli
+    interessati è alto.
+  \item Sulla \textbf{facilità di identificazione}: per il primo insieme (nome, cognome, valore del fondo
+    pensione) si poteva discutere; con il backup (codice fiscale, indirizzo, email, dati bancari) quella
+    difesa non regge.
+  \item Il professore precisa che, in pratica, l'impatto per l'interessato è molto diverso se i dati sono
+    stati solo visti o anche portati via; ma dal punto di vista formale la violazione di riservatezza c'è
+    in entrambi i casi.
+\end{itemize}
+
+\paragraph{La presentazione di un gruppo.} Divisione dei dati in due insiemi (dati del canale di scambio e
+backup), punteggi calcolati separatamente e insieme, entrambi sopra la soglia. Decisioni: notifica alla
+CNIL entro 72 ore senza attendere il quadro completo (i dettagli si integrano dopo); notifica anche del
+backup; lettera agli aderenti (``non vi chiederemo mai password o denaro''); segnalazione all'ACPR come
+grave incidente DORA; orologio GDPR fatto partire dalla comunicazione del fornitore, purché documentata;
+comunicazione coerente con la società sorella del gruppo; ogni passaggio documentato e firmato. Gianluca
+osserva che, se il vettore d'attacco è la compromissione dell'infrastruttura del responsabile del
+trattamento, la responsabilità di quest'ultimo resta anche se i dati stavano sul server del titolare.
+
+\paragraph{Il punteggio ``esattamente 3''.} Le fasce di rischio della sezione~6 del worksheet del Lab~2 (costruite sulla metodologia ENISA)
+sono una \textbf{guida, non una regola matematica}: le righe che delimitano il valore 3 si sovrappongono.
+Con un punteggio di confine la decisione spetta a chi valuta, che se ne assume la responsabilità in base al
+principio di accountability; l'autorità potrà comunque arrivare a conclusioni diverse.
+
+\begin{esame}
+\begin{itemize}
+  \item \textbf{Violazione di riservatezza = accesso non autorizzato}, anche senza esfiltrazione né
+    lettura provata.
+  \item \textbf{Non presumere nulla che non si possa provare}: le dichiarazioni false all'autorità di
+    controllo sono un reato, di cui risponde personalmente chi le rende. Nel dubbio, attenersi alle
+    evidenze.
+  \item Il reato richiede il dolo (\emph{mens rea}), che va dimostrato; ma un pubblico ministero poco
+    esperto di aspetti tecnici può partire dall'ipotesi opposta, e l'onere di spiegare ricade su chi ha
+    firmato. L'interpretazione delle evidenze va curata con estrema attenzione.
+\end{itemize}
+\end{esame}
+
+\noindent Il professore chiede infine agli studenti un riscontro sul livello di difficoltà dei
+laboratori, percepito come alto.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{ISO/IEC 27090} (sicurezza dei sistemi di IA): citata a voce come approvata pochi giorni
+    prima della lezione; non è nelle slide. Verificare numero e stato di pubblicazione.
+  \item \textbf{SOC~2}: la sovrapposizione del 75--80\% con i controlli 27001 è una stima del docente.
+  \item \textbf{Origine della 27001}: in aula ``prima versione del 1995''; le slide precisano che nel 1995
+    fu pubblicata la BS~7799-1, da cui la norma deriva.
+  \item \textbf{Fasce ENISA}: nel worksheet del Lab~2 (sezione~6) le fasce si sovrappongono sul valore 3; nella
+    metodologia ENISA (sezione~3.2) sono disgiunte: $2 \le SE < 3$ media, $3 \le SE < 4$ alta. Vedere la
+    metodologia (slide \emph{03}) e il Capitolo~\ref{cap:data-breach}.
+  \item Il passaggio sulle presentazioni dei gruppi è in parte confuso nella trascrizione: le regole esatte
+    (soglia di punteggio per presentare, punto aggiuntivo) vanno confermate dagli avvisi in piattaforma.
+\end{itemize}
+\end{verifica}

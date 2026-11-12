@@ -1,16 +1,834 @@
 \chapter{Cyber Resilience Act (CRA)}
 \label{cap:cra}
 
-\dacompletare{Fonti: slide \emph{05.~PoliTO\_CRA}; lezione del 02/11/2026
-(Capitolo~\ref{lez:2026-11-02}). Scaletta prevista:
+\begin{nota}[Fonti]
+Lezioni del 26/10/2026 (Capitolo~\ref{lez:2026-10-26}) e del 02/11/2026 (Capitolo~\ref{lez:2026-11-02});
+slide \emph{05.~PoliTO\_CRA}; slide della simulazione \emph{Case1\_PulseK\_CRA\_GDPR\_Simulation}
+(Sezione~\ref{sec:pulsek}); materiale del laboratorio~4 (Capitolo~\ref{lab:04}); richiami nelle lezioni
+del 21/09 e del 09/11 (Capitoli~\ref{lez:2026-09-21} e~\ref{lez:2026-11-09}). Come fonte secondaria, gli
+appunti degli studenti dell'A.A.~2025/26. Il testo del regolamento non è stato fornito con il materiale
+del corso: numeri di articoli e allegati che non compaiono nelle slide sono nei riquadri
+\emph{Integrazione}.
+\end{nota}
+
+Il diario racconta il CRA nell'ordine in cui è stato spiegato; questo capitolo lo riordina per temi.
+Il filo conduttore è quello indicato dal docente per l'esame: \textbf{capire se il CRA si applica}
+(prodotto, mercato, connessione, esclusioni), \textbf{chi ha gli obblighi} (fabbricante, importatore,
+distributore) e \textbf{che cosa fare in caso di vulnerabilità o incidente} (art.~14).
+
+% =====================================================================
+\section{Finalità e natura}
+\label{sec:cra-finalita}
+
+Il Cyber Resilience Act (Reg.~UE 2024/2847) tutela \textbf{consumatori e imprese} che acquistano o usano
+prodotti o software con una componente digitale, imponendo \textbf{requisiti obbligatori di
+cybersicurezza} a chi li fabbrica e a chi li mette in commercio.
+
+\paragraph{Il problema.} Due difetti strutturali del mercato:
 \begin{itemize}
-  \item finalità e natura (regolamento di prodotto, orizzontale);
-  \item ambito: prodotti con elementi digitali, elaborazione dati da remoto, software;
-  \item esclusioni e regimi verticali;
-  \item ruoli: fabbricante, importatore, distributore;
-  \item requisiti essenziali (Allegato I, Parti I e II);
-  \item prodotti importanti (Classi I e II) e critici; valutazione della conformità;
-  \item obblighi di segnalazione (art.~14): vulnerabilità attivamente sfruttate e incidenti gravi;
-  \item rapporto con AI Act, CSA, Data Act;
-  \item date di applicazione e regime transitorio (unità immesse prima e dopo l'11/12/2027).
-\end{itemize}}
+  \item molti prodotti hanno un livello di sicurezza inadeguato già in origine, o ricevono aggiornamenti
+    di sicurezza insufficienti;
+  \item chi compra non è in grado di capire quali prodotti siano sicuri, né di configurarli in modo sicuro
+    (asimmetria informativa).
+\end{itemize}
+Il docente spiega la causa economica: per restare sul mercato un dispositivo deve costare poco, e la
+sicurezza è la prima voce su cui si risparmia. Uno smartwatch da poche decine di euro offre le stesse
+funzioni di uno molto più caro.
+
+\paragraph{La risposta del CRA.}
+\begin{itemize}
+  \item \textbf{regole armonizzate} per immettere sul mercato prodotti o software con elementi digitali;
+  \item un quadro di requisiti che copre \textbf{pianificazione, progettazione, sviluppo e manutenzione},
+    con obblighi in ogni fase della catena del valore;
+  \item un \textbf{dovere di diligenza per l'intero ciclo di vita} del prodotto: la sicurezza non si
+    esaurisce al momento della vendita.
+\end{itemize}
+
+\paragraph{Perché serviva una norma nuova.} Il considerando~3 lo dice in modo esplicito: il diritto
+dell'Unione già vigente in materia di cybersicurezza, compresi il \textbf{Cybersecurity Act} e la
+\textbf{NIS2}, affronta il tema da vari punti di vista (anche la sicurezza della filiera digitale), ma
+\textbf{non stabilisce requisiti obbligatori di sicurezza dei prodotti}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X X X}
+\toprule
+ & \textbf{NIS2} & \textbf{CRA} & \textbf{Cybersecurity Act}\\
+\midrule
+Oggetto & reti e sistemi informativi delle \textbf{organizzazioni} (soggetti essenziali e importanti)
+  & il \textbf{prodotto} con elementi digitali & certificazione volontaria di prodotti, servizi e processi
+  ICT; ruolo di ENISA\\
+Tipo di atto & \textbf{direttiva}: serve il recepimento (in Italia D.Lgs.~138/2024)
+  & \textbf{regolamento}: direttamente applicabile in tutti gli Stati membri & regolamento\\
+Natura & hard law & hard law & soft law (schemi volontari; Capitolo~\ref{cap:csa})\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{esame}
+``Prima frase da ricordare'': la \textbf{NIS2} riguarda la rete e l'azienda, il \textbf{CRA} riguarda il
+prodotto; la NIS2 è una direttiva, il CRA un regolamento.
+\end{esame}
+
+Per introdurre il tema il docente ha presentato alcuni casi in cui dispositivi smart (braccialetti
+fitness, assistenti vocali, smart TV, un pacemaker) sono diventati prove in giudizio
+(Capitolo~\ref{lez:2026-10-26}): le stesse informazioni che servono agli investigatori servono a chi
+attacca. Secondo il docente il CRA, meno ``di moda'' di AI Act e NIS2, è più importante di entrambi.
+
+\begin{integrazione}[Il CRA come normativa di prodotto]
+Il CRA è stato pubblicato nella Gazzetta ufficiale dell'UE il 20/11/2024 ed è entrato in vigore il
+10/12/2024. Segue la logica del ``nuovo quadro legislativo'' delle norme UE di prodotto (come quelle su
+macchine, giocattoli, apparecchiature radio): requisiti essenziali fissati dalla legge, dettagli tecnici
+affidati a norme armonizzate, valutazione della conformità, dichiarazione UE di conformità e
+\textbf{marcatura CE}. Per questo il lessico (fabbricante, importatore, distributore, ``messa a
+disposizione sul mercato'', vigilanza del mercato) è quello delle norme sulla sicurezza dei prodotti.
+\end{integrazione}
+
+% =====================================================================
+\section{Ambito di applicazione}
+\label{sec:cra-ambito}
+
+Il CRA si applica ai \textbf{prodotti con elementi digitali messi a disposizione sul mercato} il cui
+\textbf{uso previsto o ragionevolmente prevedibile} comprende una \textbf{connessione dati}, diretta o
+indiretta, logica o fisica, a un dispositivo o a una rete.
+
+\paragraph{Prodotto con elementi digitali.} Un prodotto \textbf{software o hardware} e le relative
+\textbf{soluzioni di elaborazione dati da remoto}, compresi i componenti software o hardware immessi sul
+mercato separatamente.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X}
+\toprule
+\textbf{Connessione} & \textbf{Significato}\\
+\midrule
+Logica & rappresentazione virtuale di una connessione dati, realizzata tramite un'interfaccia software\\
+Fisica & connessione tra sistemi o componenti elettronici con mezzi fisici: interfacce elettriche, ottiche
+  o meccaniche, cavi, onde radio\\
+Indiretta & la connessione non avviene direttamente, ma come parte di un sistema più ampio che è
+  direttamente collegabile al dispositivo o alla rete\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\noindent La connessione indiretta allarga molto il perimetro: basta far parte di un sistema più grande
+che si connette.
+
+\paragraph{Il software.} Su domanda di uno studente (Capitolo~\ref{lez:2026-11-02}) il docente ha
+precisato:
+\begin{itemize}
+  \item l'elemento decisivo è la \textbf{connessione} (logica o fisica) a un dispositivo o a una rete;
+  \item un \textbf{software installabile} (un'applicazione) rientra nel CRA; un \textbf{sito web}, di per
+    sé, no;
+  \item rientra anche il software \textbf{connesso a un hardware};
+  \item restano fuori gli ambiti coperti da regimi settoriali (es.\ software sanitario soggetto a norme
+    specifiche) e quello militare e della difesa.
+\end{itemize}
+
+\paragraph{Il cloud del prodotto.} Nei due casi del corso il servizio cloud fa parte del prodotto come
+\textbf{soluzione di elaborazione dati da remoto}: Pulse Cloud per lo smartwatch Pulse~K
+(Sezione~\ref{sec:pulsek}) e Sestante Cloud per il box telematico B2 (Capitolo~\ref{lab:04}). Il
+riferimento indicato nelle slide della simulazione è l'art.~3, punti~1 e~2.
+
+\begin{esame}
+\begin{itemize}
+  \item \textbf{Il software è un prodotto ai fini del CRA.} Errore tipico: pensare solo a smartwatch e
+    smart TV ed escludere le applicazioni.
+  \item Le due parole chiave sono \textbf{mercato} (messa a disposizione sul mercato: prospettiva
+    commerciale) e \textbf{connessione}.
+  \item Non verranno chieste domande di dettaglio sui casi limite del software: la norma non è ancora
+    pienamente applicabile e alcune interpretazioni sono incerte.
+\end{itemize}
+\end{esame}
+
+\begin{integrazione}[Attività commerciale, open source e servizi remoti]
+\begin{itemize}
+  \item ``Messa a disposizione sul mercato'' significa fornitura nel corso di un'\textbf{attività
+    commerciale}, a pagamento o gratuita (per esempio se il prodotto è monetizzato in altro modo). Il
+    software libero e open source sviluppato o fornito \textbf{al di fuori} di un'attività commerciale
+    non rientra nel CRA.
+  \item Per gli \emph{open-source software steward} (per esempio fondazioni che sostengono stabilmente
+    progetti open source destinati ad attività commerciali) il CRA prevede un regime leggero (art.~24):
+    policy di cybersicurezza, cooperazione con le autorità, alcuni obblighi di segnalazione, nessuna
+    sanzione pecuniaria.
+  \item Una \textbf{soluzione di elaborazione dati da remoto} rientra nel prodotto solo se è progettata e
+    sviluppata dal fabbricante (o sotto la sua responsabilità) e se, senza di essa, il prodotto non
+    potrebbe svolgere una delle sue funzioni. Un servizio SaaS ``puro'', non legato a un prodotto,
+    resta fuori dal CRA e ricade semmai nella NIS2.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Esclusioni e regimi verticali}
+\label{sec:cra-esclusioni}
+
+Il CRA è una norma \textbf{orizzontale}: vale per tutti i prodotti con elementi digitali, salvo quelli
+già disciplinati da norme settoriali (\textbf{verticali}). Dalle slide:
+\begin{itemize}
+  \item \textbf{prodotti disciplinati da altre norme UE}, come il regolamento sui \textbf{dispositivi
+    medici}. Se una norma settoriale affronta in tutto o in parte gli stessi rischi, l'applicazione del CRA
+    può essere \textbf{limitata o esclusa} a due condizioni: (a)~coerenza con il quadro normativo di quei
+    prodotti; (b)~livello di protezione \textbf{pari o superiore} a quello del CRA. La Commissione può
+    chiarire con \textbf{atti delegati};
+  \item \textbf{pezzi di ricambio} che sostituiscono componenti identici, fabbricati secondo le stesse
+    specifiche;
+  \item prodotti sviluppati o modificati \textbf{esclusivamente} per \textbf{sicurezza nazionale o
+    difesa}, o progettati per trattare \textbf{informazioni classificate} (esclusione su cui il docente si
+    dice ``un po' in disaccordo'').
+\end{itemize}
+Nella simulazione Pulse~K la verifica delle esclusioni passa in rassegna: dispositivi medici, veicoli,
+aviazione civile, equipaggiamento marittimo, sicurezza nazionale e difesa, pezzi di ricambio
+(Capitolo~\ref{lez:2026-11-02}).
+
+\paragraph{Il confine con i dispositivi medici.} Un misuratore di pressione o uno strumento ospedaliero
+è un dispositivo medico; uno \textbf{smart ring} o uno \textbf{smartwatch} da fitness no, quindi ricade
+nel CRA. Il confine è discusso: in futuro anche alcuni sistemi di IA generativa potrebbero essere
+qualificati come dispositivi medici (non è materia d'esame).
+
+\begin{esame}
+Basta sapere che esiste un'\textbf{esclusione generale a favore delle norme settoriali più specifiche}
+(esempio tipico: dispositivi medici). Il rapporto è di genere (CRA) a specie (regime verticale).
+\end{esame}
+
+\begin{integrazione}[Le esclusioni nel testo (art.~2)]
+L'art.~2 esclude espressamente i prodotti soggetti a: regolamenti sui dispositivi medici (UE~2017/745) e
+sui dispositivi medico-diagnostici in vitro (UE~2017/746); regolamento sull'omologazione dei veicoli a
+motore (UE~2019/2144); regolamento sull'aviazione civile (UE~2018/1139); direttiva sull'equipaggiamento
+marittimo (2014/90/UE). Seguono la clausola di limitazione per le altre norme settoriali, i pezzi di
+ricambio identici e l'esclusione per sicurezza nazionale e difesa.
+\end{integrazione}
+
+% =====================================================================
+\section{Ruoli lungo la catena}
+\label{sec:cra-ruoli}
+
+Il CRA distribuisce gli obblighi tra gli operatori economici. Le slide li presentano sotto il titolo
+\emph{security by design \& by default}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.3cm} X}
+\toprule
+\textbf{Ruolo} & \textbf{Obblighi principali (slide)}\\
+\midrule
+\textbf{Fabbricante} & \emph{progettazione e sviluppo}: il prodotto è progettato, sviluppato e prodotto
+  in conformità ai requisiti essenziali, con la sicurezza integrata fin dall'inizio; \emph{risk
+  assessment} da considerare in pianificazione, progettazione, sviluppo, produzione, consegna e
+  manutenzione; \emph{integrazione dei componenti}: due diligence sui componenti di terzi, scegliendo
+  componenti sicuri per impostazione predefinita; \emph{gestione delle vulnerabilità} per tutto il
+  periodo di supporto\\
+\midrule
+\textbf{Importatore} & prima dell'immissione sul mercato verifica che il fabbricante abbia svolto la
+  valutazione della conformità e redatto la documentazione tecnica; verifica la \textbf{marcatura CE} e la
+  \textbf{dichiarazione UE di conformità}; se il prodotto non è conforme adotta misure correttive o lo
+  ritira; se scopre vulnerabilità informa il fabbricante e le autorità di vigilanza del mercato\\
+\midrule
+\textbf{Distributore} & due diligence: verifica che il prodotto rispetti i requisiti essenziali e che
+  fabbricante e importatore abbiano adempiuto ai propri obblighi; verifica marcatura CE e documentazione;
+  si assicura che siano adottate misure correttive; informa fabbricante e autorità di vulnerabilità o
+  rischi significativi\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Il fabbricante risponde anche di ciò che non ha scritto.} Nel caso Sestante il box è
+costruito da un terzo (Vistula EMS) su progetto di Sestante e contiene librerie di terze parti, ma
+Sestante lo commercializza \textbf{con il proprio marchio}: è il fabbricante, anche per i componenti
+acquistati e per il codice open source che distribuisce. Il distributore (Iberia Telematics) ha obblighi
+propri di verifica, ma i finding dell'audit si scrivono contro il fabbricante (Capitolo~\ref{lab:04}).
+Nel caso Pulse~K il fabbricante è Volta Wear; il retailer tedesco, che chiede se deve sospendere le
+vendite, è un distributore.
+
+\paragraph{Il problema pratico dei distributori.} Il docente cita un grande distributore italiano di
+hardware e software: se molti prodotti a basso costo provenienti da fuori UE non rispettano il CRA, dovrà
+toglierli dal catalogo. E se gli Stati membri applicassero il CRA con rigore diverso, i consumatori
+potrebbero comprare all'estero ciò che in Italia non si trova più. Anche per gli importatori la verifica
+è difficile quando i prodotti arrivano da Cina o Stati Uniti.
+
+\begin{integrazione}[Definizioni e passaggi di ruolo]
+\begin{itemize}
+  \item \textbf{Fabbricante} (art.~3, punto~13): chi sviluppa o fabbrica un prodotto con elementi digitali,
+    oppure lo fa progettare, sviluppare o fabbricare da altri, e lo commercializza \textbf{con il proprio
+    nome o marchio}, a pagamento, monetizzato o gratuitamente. Conta il marchio, non chi materialmente
+    produce.
+  \item \textbf{Importatore}: stabilito nell'UE, immette sul mercato un prodotto con il nome o il marchio
+    di un soggetto stabilito fuori dall'UE. \textbf{Distributore}: qualsiasi altro soggetto della catena
+    che mette il prodotto a disposizione senza modificarne le proprietà.
+  \item \textbf{Importatore o distributore che diventa fabbricante} (art.~21): se immette il prodotto con
+    il proprio nome o marchio, oppure vi apporta una \textbf{modifica sostanziale}.
+  \item \textbf{Altri soggetti} (art.~22): chiunque apporti una modifica sostanziale a un prodotto già sul
+    mercato è considerato fabbricante per la parte modificata (o per l'intero prodotto, se la modifica
+    incide su tutto).
+  \item \textbf{Modifica sostanziale}: modifica successiva all'immissione sul mercato, non prevista dal
+    fabbricante, che incide sul rispetto dei requisiti essenziali o cambia l'uso previsto. I normali
+    aggiornamenti di sicurezza, di regola, non lo sono.
+  \item Il fabbricante può nominare un \textbf{rappresentante autorizzato} (art.~18), che però non può
+    farsi carico della progettazione conforme né della documentazione tecnica.
+  \item Obblighi specifici sui componenti: il fabbricante che trova una vulnerabilità in un componente
+    di terzi, anche open source, la segnala a chi lo mantiene (art.~13).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Approccio basato sul rischio}
+\label{sec:cra-rischio}
+
+Come GDPR, NIS2 e AI Act, il CRA segue un \textbf{approccio basato sul rischio}. Il fabbricante deve
+svolgere un \textbf{cybersecurity risk assessment} del prodotto, che:
+\begin{itemize}
+  \item informa tutte le fasi del ciclo di vita, per ridurre i rischi, prevenire gli incidenti e
+    limitarne gli impatti, con attenzione particolare a salute e sicurezza degli utenti;
+  \item è \textbf{documentato} e aggiornato durante un \textbf{periodo di supporto} definito;
+  \item analizza i rischi in base all'\textbf{uso previsto e ragionevolmente prevedibile}, considera le
+    condizioni d'uso (ambiente operativo, beni da proteggere), valuta quali requisiti essenziali si
+    applicano e come, e quali processi di gestione delle vulnerabilità servono.
+\end{itemize}
+
+\paragraph{Un risk assessment tecnico.} A differenza di un risk assessment su un processo (per esempio la
+selezione del personale, dove si ragiona sui diritti fondamentali), quello del CRA è
+\textbf{profondamente tecnico}: bisogna entrare in ogni processo del dispositivo e nella sua filiera di
+fornitori, anche in altre giurisdizioni. Scoprire che una smart TV attivava la telecamera richiedeva di
+analizzare processi nascosti, non di leggere un banner.
+
+\paragraph{Uso prevedibile.} Il fabbricante non può conoscere tutti gli usi futuri. Quando emerge un uso
+non previsto, una risposta è aggiornare le condizioni d'uso: il docente cita un assistente di IA
+generativa le cui condizioni sono state aggiornate per escludere che sostituisca la decisione di un
+giudice.
+
+\paragraph{Security by design e by default.} È ``la stessa storia'' della privacy by design del GDPR: la
+privacy riguarda i diritti fondamentali, la security i requisiti di cybersicurezza, ma la sicurezza è
+parte della privacy. Il risk assessment è la base da cui parte tutto.
+
+% =====================================================================
+\section{Requisiti essenziali (Allegato~I)}
+\label{sec:cra-allegato1}
+
+Un prodotto con elementi digitali può essere messo a disposizione sul mercato \textbf{solo se}:
+\begin{enumerate}
+  \item soddisfa i requisiti essenziali dell'\textbf{Allegato~I, Parte~I} (requisiti \textbf{di
+    prodotto}), purché sia installato, mantenuto e usato correttamente, secondo l'uso previsto o in
+    condizioni ragionevolmente prevedibili, e con gli aggiornamenti di sicurezza installati;
+  \item i \textbf{processi} del fabbricante rispettano i requisiti dell'\textbf{Allegato~I, Parte~II}
+    (\textbf{gestione delle vulnerabilità}).
+\end{enumerate}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Parte~I -- Requisiti di prodotto} & \textbf{Parte~II -- Gestione delle vulnerabilità}\\
+\midrule
+Principio generale: livello di cybersicurezza adeguato ai rischi. In base al risk assessment e dove
+applicabile, il prodotto deve:
+\begin{itemize}[leftmargin=1.2em,nosep]
+  \item essere immesso senza \textbf{vulnerabilità sfruttabili note};
+  \item avere una configurazione \textbf{sicura per impostazione predefinita};
+  \item consentire di correggere le vulnerabilità con \textbf{aggiornamenti di sicurezza};
+  \item proteggere da \textbf{accessi non autorizzati};
+  \item proteggere \textbf{riservatezza e integrità} dei dati conservati, trasmessi o trattati;
+  \item trattare solo dati adeguati, pertinenti e limitati allo scopo (\textbf{minimizzazione});
+  \item proteggere la \textbf{disponibilità} delle funzioni essenziali, anche dopo un incidente;
+  \item ridurre l'impatto negativo sulla disponibilità di servizi di altri dispositivi o reti;
+  \item limitare la \textbf{superficie d'attacco};
+  \item ridurre l'impatto di un incidente;
+  \item \textbf{registrare e monitorare} le attività interne rilevanti;
+  \item consentire all'utente di \textbf{cancellare} in modo sicuro e permanente dati e impostazioni e,
+    se i dati si trasferiscono ad altri sistemi, farlo in modo sicuro.
+\end{itemize}
+&
+Il fabbricante deve:
+\begin{itemize}[leftmargin=1.2em,nosep]
+  \item \textbf{identificare e documentare} vulnerabilità e componenti del prodotto;
+  \item affrontare e correggere le vulnerabilità \textbf{senza ritardo}, anche con aggiornamenti;
+  \item svolgere \textbf{test e revisioni} di sicurezza efficaci e regolari;
+  \item una volta disponibile l'aggiornamento, \textbf{divulgare} le informazioni sulle vulnerabilità
+    corrette;
+  \item adottare e applicare una policy di \textbf{divulgazione coordinata delle vulnerabilità} (CVD);
+  \item facilitare la condivisione di informazioni sulle vulnerabilità, anche dei componenti di terzi;
+  \item prevedere meccanismi di \textbf{distribuzione sicura} degli aggiornamenti;
+  \item diffondere gli aggiornamenti di sicurezza senza ritardo e \textbf{gratuitamente} (salvo accordi
+    diversi per prodotti su misura con un utente commerciale), con messaggi che spiegano agli utenti che
+    cosa fare.
+\end{itemize}
+\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{I punti sottolineati in aula.} Tra i requisiti della Parte~I il docente evidenzia la
+\textbf{minimizzazione dei dati} e la \textbf{cancellazione sicura} con trasferimento sicuro verso altri
+prodotti: sono i collegamenti più diretti con il GDPR (minimizzazione, diritto alla cancellazione,
+portabilità).
+
+\begin{esame}
+\begin{itemize}
+  \item \textbf{Gli allegati non vanno imparati a memoria}: basta sapere ciò che c'è nelle slide, cioè la
+    distinzione tra requisiti di prodotto (Parte~I) e gestione delle vulnerabilità (Parte~II) e i
+    requisiti principali.
+  \item \textbf{Spunto per le domande aperte: il rovescio della minimizzazione.} Meno dati significa meno
+    rischio per l'interessato e una superficie minore in caso di incidente, ma anche meno elementi per il
+    debugging, per l'usabilità e soprattutto per l'\textbf{analisi forense}. ``Vince la privacy, muore
+    l'esperto di cybersecurity'': è una tensione strutturale tra privacy e sicurezza, la stessa vista con
+    i tempi di conservazione dei log.
+\end{itemize}
+\end{esame}
+
+\paragraph{I requisiti messi alla prova.} Il laboratorio~4 usa la tabella dell'Allegato~I come griglia
+di audit (Capitolo~\ref{lab:04}): firmware che accetta aggiornamenti non firmati (vulnerabilità nota,
+distribuzione non sicura degli aggiornamenti), credenziale di manutenzione identica su tutti i box
+(accessi non autorizzati), tracciamento attivo di default anche fuori orario (configurazione di default,
+minimizzazione), dispositivo ricondizionato con l'account cloud del cliente precedente ancora attivo
+(cancellazione sicura), segnalazione di un ricercatore respinta senza analisi (CVD). Nella simulazione
+Pulse~K la libreria di login obsoleta, con una correzione disponibile da mesi, è l'esempio di
+vulnerabilità nota non corretta.
+
+% =====================================================================
+\section{Periodo di supporto, SBOM e divulgazione coordinata}
+\label{sec:cra-supporto}
+
+Tre strumenti attraversano tutto l'Allegato~I, Parte~II, e ricorrono in entrambi i casi del corso:
+\begin{itemize}
+  \item \textbf{Periodo di supporto}: il risk assessment va aggiornato e le vulnerabilità vanno gestite
+    per tutto il periodo di supporto. Nel caso Sestante la policy non indica alcuna durata, il sito
+    promette ``cinque anni di aggiornamenti'', l'app store tace.
+  \item \textbf{SBOM} (\emph{software bill of materials}): sapere che cosa contiene il prodotto è la
+    premessa per ``identificare e documentare i componenti''. Volta Wear non aveva alcun elenco del
+    software di terze parti; il foglio componenti di Sestante copriva 8 moduli su 11, senza versioni. Il
+    tema torna nel Cybersecurity Act come pilastro della security by design (Capitolo~\ref{cap:csa}).
+  \item \textbf{Divulgazione coordinata (CVD)} e \textbf{canale di segnalazione}: Volta Wear aveva solo un
+    indirizzo e una policy di due righe; Sestante non pubblicava l'indirizzo del PSIRT. Il ricercatore
+    che segnala una falla e annuncia la pubblicazione è un attore normale di questo processo; diventa un
+    problema quando la segnalazione si accompagna a richieste di denaro, che equivalgono a un riscatto.
+\end{itemize}
+
+\begin{integrazione}[Che cosa dice il testo (art.~13 e Allegato~I, Parte~II)]
+\begin{itemize}
+  \item \textbf{SBOM}: l'Allegato~I, Parte~II, punto~1, chiede di documentare i componenti anche
+    redigendo una distinta base del software in un formato di uso comune e \textbf{leggibile da
+    macchina}, che copra almeno le \textbf{dipendenze di primo livello}. La SBOM fa parte della
+    documentazione tecnica, ma il fabbricante non è obbligato a pubblicarla.
+  \item \textbf{Periodo di supporto} (art.~13(8)): deve riflettere il tempo per cui ci si attende che il
+    prodotto sia usato e, di regola, essere di \textbf{almeno cinque anni}, salvo prodotti destinati a un
+    uso più breve. La data di fine del supporto va indicata in modo chiaro \textbf{al momento
+    dell'acquisto} (art.~13(19)). Ogni aggiornamento di sicurezza resta disponibile per almeno dieci anni
+    dal rilascio o per il resto del periodo di supporto, se più lungo.
+  \item \textbf{Punto di contatto unico} (art.~13(17)): il fabbricante designa un punto di contatto che
+    consenta agli utenti di comunicare con lui direttamente e rapidamente, anche per segnalare
+    vulnerabilità.
+  \item \textbf{Informazioni per l'utente} (Allegato~II): nome e contatti del fabbricante, punto di
+    contatto per le vulnerabilità, uso previsto, rischi noti, fine del periodo di supporto, istruzioni
+    per l'installazione sicura degli aggiornamenti e per la cancellazione dei dati.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Classificazione dei prodotti e valutazione della conformità}
+\label{sec:cra-classi}
+
+Il CRA distingue tre livelli di rischio del prodotto, a cui corrispondono percorsi di valutazione della
+conformità diversi.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X X}
+\toprule
+\textbf{Categoria} & \textbf{Quali prodotti} & \textbf{Conseguenza}\\
+\midrule
+Prodotti ``di default'' & tutti quelli che non rientrano nelle due categorie seguenti (la grande
+  maggioranza) & valutazione ordinaria\\
+\midrule
+\textbf{Importanti}, classi~I e~II (Allegato~III) & categorie elencate nell'Allegato~III che soddisfano
+  almeno uno di due criteri: svolgono \textbf{funzioni critiche per la sicurezza} di altri prodotti, reti o
+  servizi; oppure svolgono funzioni che comportano un \textbf{rischio significativo} di effetti negativi,
+  per intensità e capacità di disturbare, controllare o danneggiare molti altri prodotti, o la salute e
+  la sicurezza degli utenti. Esempi: \textbf{password manager}; i \textbf{dispositivi indossabili per
+  bambini} sono in classe~I (caso Pulse~K) & procedure di valutazione della conformità \textbf{più
+  rigorose}\\
+\midrule
+\textbf{Critici} (Allegato~IV) & la Commissione li individua con propri atti tra le categorie
+  dell'Allegato~IV. Esempio: \textbf{dispositivi hardware con \emph{security box}} &
+  \textbf{certificato europeo di cybersicurezza} con livello di affidabilità almeno
+  \textbf{sostanziale}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Il docente ammette che la distinzione pratica tra le categorie ``non è chiara nemmeno a me'': oggi
+l'unico obbligo già operativo è la segnalazione (art.~14). Il collegamento con il Cybersecurity Act passa
+proprio da qui: il certificato ``almeno sostanziale'' è un certificato rilasciato nell'ambito di uno schema
+del CSA (Capitolo~\ref{cap:csa}).
+
+\begin{esame}
+Due conseguenze da ricordare: \textbf{importanti} $\rightarrow$ valutazione della conformità più
+rigorosa; \textbf{critici} $\rightarrow$ certificato europeo di cybersicurezza almeno
+\textbf{sostanziale}. Per classificare un prodotto si cerca la voce nell'Allegato~III o~IV; se non c'è, il
+prodotto è ``di default''.
+\end{esame}
+
+\begin{integrazione}[Esempi dagli Allegati III e IV]
+\textbf{Classe~I}: sistemi di gestione delle identità e degli accessi privilegiati; browser; password
+manager; software antimalware; prodotti VPN; sistemi di gestione della rete; SIEM; boot manager; software
+per infrastrutture a chiave pubblica e certificati digitali; interfacce di rete fisiche e virtuali;
+sistemi operativi; router, modem e switch; microprocessori e microcontrollori con funzioni di sicurezza;
+ASIC e FPGA con funzioni di sicurezza; assistenti virtuali per la casa intelligente; prodotti per la casa
+intelligente con funzioni di sicurezza (serrature, videocamere, baby monitor, allarmi); giocattoli
+connessi con funzioni di interazione sociale o di localizzazione; dispositivi indossabili per il
+monitoraggio della salute non soggetti al regolamento sui dispositivi medici, o destinati ai bambini.
+
+\textbf{Classe~II}: hypervisor e sistemi di runtime per container; firewall e sistemi di rilevamento e
+prevenzione delle intrusioni; microprocessori e microcontrollori resistenti alle manomissioni.
+
+\textbf{Critici (Allegato~IV)}: dispositivi hardware con \emph{security box}; gateway dei contatori
+intelligenti e altri dispositivi per finalità di sicurezza avanzata, compresa l'elaborazione
+crittografica sicura; smartcard e dispositivi analoghi, compresi i \emph{secure element}.
+
+La descrizione tecnica delle categorie è affidata a un atto di esecuzione della Commissione (art.~7);
+l'obbligo di certificazione per i prodotti critici a un atto delegato (art.~8).
+\end{integrazione}
+
+\paragraph{Documentazione e dichiarazione.} Dal laboratorio~4: la \textbf{documentazione tecnica}
+(Allegato~VII) è l'oggetto stesso dell'audit di conformità; la scelta del percorso di valutazione
+(art.~32, Allegato~VIII) dipende dalla classificazione; al termine il fabbricante firma la
+\textbf{dichiarazione UE di conformità} e appone la \textbf{marcatura CE}. Nel caso Sestante la bozza di
+dichiarazione per il nuovo prodotto sceglie l'autovalutazione (modulo~A) ma non cita né norme né report
+di test: il problema non è solo il percorso, è il contenuto.
+
+\begin{integrazione}[Allegati del CRA e moduli di valutazione (art.~32, Allegato~VIII)]
+Numerazione degli allegati nel Reg.~(UE) 2024/2847:
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Allegato} & \textbf{Contenuto}\\
+\midrule
+I & requisiti essenziali: Parte~I (prodotto), Parte~II (gestione delle vulnerabilità)\\
+II & informazioni e istruzioni per l'utente\\
+III & prodotti importanti (classi I e II)\\
+IV & prodotti critici\\
+V & dichiarazione UE di conformità\\
+VI & dichiarazione UE di conformità semplificata\\
+VII & contenuto della documentazione tecnica\\
+VIII & procedure di valutazione della conformità (moduli A, B, C, H)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X}
+\toprule
+\textbf{Categoria} & \textbf{Percorsi ammessi (art.~32)}\\
+\midrule
+Default & \textbf{modulo~A} (controllo interno: il fabbricante valuta da sé); in alternativa B+C, H o
+  certificazione CSA\\
+Importanti classe~I & modulo~A \textbf{solo se} il fabbricante applica integralmente norme armonizzate,
+  specifiche comuni o una certificazione CSA almeno sostanziale; altrimenti \textbf{B+C} (esame UE del tipo
+  da parte di un organismo notificato + conformità al tipo) o \textbf{H} (garanzia di qualità totale)\\
+Importanti classe~II & B+C, H, oppure certificazione CSA almeno sostanziale\\
+Critici & certificato europeo di cybersicurezza, se imposto dall'atto delegato (art.~8); altrimenti come
+  la classe~II\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Per il software open source classificato come importante, se la documentazione tecnica è pubblica, è
+ammesso il modulo~A. Gli organismi notificati sono disciplinati dal capo~IV (artt.~35 ss.). La
+conformità alle norme armonizzate o a un certificato CSA indicato dalla Commissione fa
+\textbf{presumere} la conformità ai requisiti essenziali coperti (art.~27).
+\end{integrazione}
+
+% =====================================================================
+\section{Obblighi di segnalazione (art.~14)}
+\label{sec:cra-segnalazione}
+
+È l'unica parte del CRA già applicabile (dall'11/09/2026) e quella che il docente considera centrale per
+l'esame. Il fabbricante ha \textbf{due binari} di segnalazione, entrambi tramite la \textbf{Single
+Reporting Platform} gestita da ENISA (operativa dall'11/09/2026, secondo le slide della simulazione).
+La segnalazione arriva al \textbf{CSIRT designato come coordinatore} (per un fabbricante con stabilimento
+principale in Italia, il CSIRT Italia presso l'ACN) e a \textbf{ENISA}, che ha accesso alla piattaforma.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X X}
+\toprule
+ & \textbf{Vulnerabilità attivamente sfruttata} & \textbf{Incidente grave}\\
+\midrule
+Base (slide simulazione) & art.~14(2) & art.~14(4); nozione di gravità all'art.~14(5)\\
+Early warning & senza ingiustificato ritardo, \textbf{entro 24 ore} dalla conoscenza; indica gli Stati
+  membri in cui il prodotto è messo a disposizione & \textbf{entro 24 ore} dalla conoscenza\\
+Notifica & \textbf{entro 72 ore} dalla conoscenza: informazioni generali sul prodotto, natura dell'exploit
+  e della vulnerabilità, misure correttive o di mitigazione adottate e quelle che possono adottare gli
+  utenti & \textbf{entro 72 ore} dalla conoscenza\\
+Final report & \textbf{entro 14 giorni dalla disponibilità di una misura correttiva} o di mitigazione
+  (se le informazioni non sono già state date): descrizione, gravità e impatto, dettagli
+  dell'aggiornamento & \textbf{entro un mese} dalla notifica\\
+Utenti & informare gli utenti colpiti della vulnerabilità e delle misure da adottare (art.~14(8));
+  nessun termine in ore & lo stesso obbligo vale per l'incidente grave\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[node distance=4mm, every node/.style={draw, rounded corners, align=center,
+    font=\small, minimum height=1.2cm}]
+  \node[text width=2.4cm] (c) {\textbf{Conoscenza}\\del fabbricante};
+  \node[text width=2.4cm, right=of c] (ew) {\textbf{Early warning}\\entro 24 h};
+  \node[text width=2.4cm, right=of ew] (n) {\textbf{Notifica}\\entro 72 h};
+  \node[text width=4.2cm, right=of n] (f) {\textbf{Final report}\\vulnerabilità: 14 gg dalla correzione\\
+    incidente: 1 mese dalla notifica};
+  \draw[-{Stealth}] (c) -- (ew); \draw[-{Stealth}] (ew) -- (n); \draw[-{Stealth}] (n) -- (f);
+\end{tikzpicture}
+\end{center}
+
+Il docente non aveva messo nelle slide la scadenza del final report sugli incidenti gravi, per non
+aggiungere complessità, ma ha anticipato che compare nella tabella riassuntiva per l'esame
+(Capitolo~\ref{cap:scadenze}).
+
+\paragraph{Quando scatta.} Una vulnerabilità è \textbf{attivamente sfruttata} quando c'è evidenza
+affidabile che un attore malevolo l'abbia sfruttata. Nel caso Pulse~K entrambi i presupposti erano
+soddisfatti: la falla era venduta su un canale Telegram (vulnerabilità attivamente sfruttata) e
+l'incidente compromette la capacità del prodotto di proteggere dati importanti (incidente grave). Quindi
+\textbf{due binari}, con orologi e final report su date diverse. Il fix pubblicato la domenica sera fa
+partire i 14 giorni del final report sulla vulnerabilità.
+
+\paragraph{La consapevolezza.} Nella simulazione il docente e Gianluca hanno adottato la lettura
+prudente: la consapevolezza della vulnerabilità coincide con la \textbf{prima evidenza disponibile
+all'azienda} (l'alert notturno chiuso come ``traffico bot''), non con il momento in cui il management ne
+viene informato. Per l'incidente grave si è preso il momento in cui i log confermano l'impatto.
+``Sistemare in silenzio'' e ``aspettare lunedì'' sono incompatibili con un orologio da 24 ore: entro lunedì
+mattina erano già scadute tre delle sei scadenze CRA (Capitolo~\ref{lez:2026-11-02}).
+
+\paragraph{Differenze con il GDPR.} Il CRA fissa una scadenza anche per il \textbf{final report}; il GDPR
+no (nella prassi la notifica completa arriva dopo circa un mese, su sollecito del Garante). L'orologio
+CRA parte dalla conoscenza della vulnerabilità o dell'incidente sul prodotto; quello del GDPR dalla
+consapevolezza di una violazione di \emph{dati personali}. Lo stesso evento può far correre in parallelo
+24 ore CRA e 72 ore GDPR, verso autorità diverse.
+
+\begin{esame}
+\begin{itemize}
+  \item Primo passo: \textbf{qualificare il caso} (CRA, NIS2, DORA, GDPR?). Secondo passo: ricordare con
+    precisione le \textbf{tempistiche} (Capitolo~\ref{cap:scadenze}).
+  \item Il final report sulla vulnerabilità decorre dalla \textbf{disponibilità della correzione}, non
+    dalla conoscenza.
+  \item Errore tipico: confondere l'\textbf{early warning} del CRA con la \textbf{notifica preliminare}
+    del GDPR. Una notifica a un'autorità non adempie gli obblighi verso un'altra: serve un
+    \textbf{piano di risposta agli incidenti integrato} (CRA, GDPR e, se applicabile, NIS2).
+  \item Esercizi di notifica come Pulse~K sono molto probabili all'esame.
+\end{itemize}
+\end{esame}
+
+\begin{integrazione}[Dettagli dell'art.~14]
+\begin{itemize}
+  \item Struttura: l'obbligo di segnalare la vulnerabilità è al par.~1 e le scadenze al par.~2; l'obbligo
+    per gli incidenti gravi al par.~3 e le scadenze al par.~4. Per questo alcuni appunti citano i
+    paragrafi 1 e 3, le slide i paragrafi 2 e 4.
+  \item \textbf{Incidente grave} (par.~5): l'incidente incide o può incidere negativamente sulla capacità
+    del prodotto di proteggere disponibilità, autenticità, integrità o riservatezza di dati o funzioni
+    sensibili o importanti; oppure ha causato o può causare l'introduzione o l'esecuzione di codice
+    malevolo nel prodotto o nei sistemi dell'utente.
+  \item L'early warning sull'incidente indica anche se si sospetta che sia causato da atti illeciti o
+    malevoli. Il CSIRT coordinatore può chiedere una relazione intermedia (par.~6).
+  \item La segnalazione va al CSIRT dello Stato membro dello \textbf{stabilimento principale} del
+    fabbricante (par.~7).
+  \item Il fabbricante può segnalare su base \textbf{volontaria} vulnerabilità non sfruttate, minacce
+    informatiche e quasi-incidenti (art.~15). La piattaforma è disciplinata dall'art.~16.
+  \item Una prova di concetto mostrata da un ricercatore in una divulgazione responsabile, da sola, non è
+    evidenza di sfruttamento da parte di un attore malevolo (vedi il caso Sestante, Capitolo~\ref{lab:04}).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Date di applicazione e regime transitorio}
+\label{sec:cra-date}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X}
+\toprule
+\textbf{Data} & \textbf{Che cosa succede}\\
+\midrule
+\textbf{11/09/2026} & si applicano gli \textbf{obblighi di segnalazione} (art.~14), anche per i prodotti
+  già sul mercato; operativa la Single Reporting Platform\\
+\textbf{11/12/2027} & \textbf{applicazione integrale}: Allegato~I, obblighi del fabbricante (art.~13) e degli
+  altri operatori, valutazione della conformità, marcatura CE\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Le slide della simulazione indicano come basi l'art.~69(2)--(3) e l'art.~71(2). Le conseguenze pratiche:
+\begin{itemize}
+  \item nel novembre~2026 (caso Pulse~K) \textbf{l'art.~14 si applica, l'Allegato~I non ancora}. Una delle
+    domande del debrief era proprio quale fosse, nel 2026, l'aggancio giuridico per la libreria non
+    aggiornata;
+  \item la data di cut-off si applica alla \textbf{singola unità} immessa sul mercato, non al modello:
+    unità dello stesso modello possono essere vincolate o no all'Allegato~I a seconda della data di
+    immissione. Nel caso Sestante le circa 38.000 unità immesse fino all'11/12/2027 hanno solo gli
+    obblighi di segnalazione, le circa 8.000 successive il regime completo.
+\end{itemize}
+
+\begin{esame}
+Le date di applicazione del CRA valgono \textbf{per unità} e non per modello. Un finding come ``l'azienda
+non è conforme al CRA'', senza dire per quali unità e da quando, è la frase che fa contestare un audit.
+\end{esame}
+
+\begin{integrazione}[Le altre date del calendario]
+Il regolamento è entrato in vigore il \textbf{10/12/2024}. Dall'\textbf{11/06/2026} si applicano le
+norme sulla notifica degli organismi di valutazione della conformità (capo~IV), perché gli organismi
+notificati siano pronti prima dell'applicazione integrale.
+\end{integrazione}
+
+\begin{integrazione}[Prodotti già sul mercato e modifica sostanziale]
+I prodotti immessi prima dell'11/12/2027 restano fuori dai requisiti del CRA (salvo l'art.~14) a meno
+che, da quella data, subiscano una \textbf{modifica sostanziale} (art.~69(2)). Un aggiornamento che cambia
+in modo rilevante funzioni o profilo di rischio può quindi portare anche le unità ``vecchie'' nel regime
+completo.
+\end{integrazione}
+
+\begin{integrazione}[Atti di soft law sul CRA]
+Le slide della simulazione citano una comunicazione della Commissione con orientamenti
+sull'applicazione del CRA (C(2026)~5252), non vincolante: un esempio di soft law che accompagna la hard
+law, nel senso spiegato il 09/11 (Capitolo~\ref{lez:2026-11-09}).
+\end{integrazione}
+
+% =====================================================================
+\section{Sanzioni e vigilanza del mercato}
+\label{sec:cra-sanzioni}
+
+Le slide della simulazione rinviano all'art.~64, paragrafi~2 (sanzioni) e~10 (regola per le piccole
+imprese). Nel caso Pulse~K, Volta Wear è una \textbf{piccola impresa}, quindi rileva la regola speciale;
+Sestante è una \textbf{media impresa}, quindi non ne beneficia. Il materiale del laboratorio~4 ricorda
+anche le \textbf{misure correttive}: il fabbricante che sa che un prodotto non è conforme deve
+renderlo conforme, ritirarlo o richiamarlo, e le autorità di vigilanza del mercato possono ordinare le
+stesse misure. È questa l'esposizione che interessa davvero a un consiglio di amministrazione.
+
+\begin{integrazione}[Le sanzioni nel testo (art.~64)]
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{X l}
+\toprule
+\textbf{Violazione} & \textbf{Massimo}\\
+\midrule
+Requisiti essenziali (Allegato~I) e obblighi degli artt.~13 e~14 (art.~64(2)) & 15 milioni di euro o
+  2,5\% del fatturato mondiale annuo\\
+Altri obblighi degli operatori economici (art.~64(3)) & 10 milioni di euro o 2\%\\
+Informazioni inesatte, incomplete o fuorvianti a organismi notificati e autorità (art.~64(4)) & 5
+  milioni di euro o 1\%\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Vale l'importo più alto tra cifra fissa e percentuale. Le sanzioni sono stabilite dagli Stati membri.
+L'art.~64(10) esclude le sanzioni pecuniarie: (a)~per micro e piccole imprese, per il solo mancato
+rispetto del termine di 24 ore dell'early warning (art.~14(2)(a) e~14(4)(a)); (b)~per gli
+open-source software steward, per qualsiasi violazione. L'obbligo di correggere, ritirare o richiamare i
+prodotti non conformi è all'art.~13(21).
+\end{integrazione}
+
+% =====================================================================
+\section{Rapporti con le altre norme}
+\label{sec:cra-rapporti}
+
+Il CRA è complesso perché si sovrappone ad altre norme che guardano lo stesso oggetto da angoli diversi.
+Un'applicazione, per esempio, può ricadere insieme in CRA, NIS2 (che include il settore digitale) e
+GDPR.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.4cm} X}
+\toprule
+\textbf{Norma} & \textbf{Rapporto con il CRA}\\
+\midrule
+GDPR & si applica a chiunque tratti dati personali; l'art.~32 discende dall'accountability e non prescrive
+  regole tecniche puntuali. Il CRA ne riprende la logica by design e alcuni requisiti (minimizzazione,
+  cancellazione). Un incidente sul prodotto può essere anche un data breach: due orologi paralleli (caso
+  Pulse~K)\\
+NIS2 & riguarda alcune categorie di \textbf{organizzazioni} (soggetti essenziali e importanti), con
+  requisiti numerosi e specifici; il CRA riguarda il \textbf{prodotto}. Stesse scadenze 24~h / 72~h / 1
+  mese per gli incidenti\\
+AI Act & riguarda in primo luogo i \emph{provider} di sistemi di IA. Presunzione di conformità per i
+  sistemi ad alto rischio (vedi sotto)\\
+Cybersecurity Act & soft law: gli schemi di certificazione danno requisiti concreti con cui dimostrare la
+  conformità al CRA (``la possibilità, non la certezza''); per i prodotti critici il certificato almeno
+  sostanziale diventa il percorso richiesto (Capitolo~\ref{cap:csa})\\
+ISO/IEC~27001 & certifica l'organizzazione, non il prodotto: un certificato ISO \textbf{non implica}
+  conformità al CRA (caso Sestante, il cui certificato copriva solo il cloud)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{CRA e AI Act.} I prodotti con elementi digitali che rientrano nel CRA e sono anche
+\textbf{sistemi di IA ad alto rischio} si considerano conformi ai requisiti di cybersicurezza dell'AI
+Act (art.~15 AI Act) se:
+\begin{enumerate}
+  \item il prodotto soddisfa i requisiti dell'Allegato~I, Parte~I del CRA;
+  \item i processi del fabbricante rispettano l'Allegato~I, Parte~II;
+  \item il livello di protezione richiesto dall'AI Act è dimostrato nella \textbf{dichiarazione UE di
+    conformità} rilasciata ai sensi del CRA.
+\end{enumerate}
+
+\begin{esame}
+Esiste un'interazione forte tra l'\textbf{art.~15 dell'AI Act} e il CRA per i sistemi di IA ad alto
+rischio. Più in generale, le due competenze da portare a casa: \textbf{ricondurre il rischio alla norma
+corretta} e, in caso di incidente, \textbf{individuare il percorso corretto} (a chi notificare, che cosa,
+entro quando).
+\end{esame}
+
+\paragraph{Impatti e sfide.} Il settore più colpito sarà probabilmente quello \textbf{tecnologico e dello
+sviluppo software}, data la pervasività degli elementi digitali: potranno servire cambiamenti
+significativi nelle pratiche di sviluppo e nella gestione del prodotto, e una collaborazione più stretta
+con i fornitori di sicurezza. Le sfide: complessità dei requisiti, integrazione di security by design e by
+default, gestione della supply chain, investimenti, gestione continua del rischio.
+
+\begin{integrazione}[Altri riferimenti]
+\begin{itemize}
+  \item La presunzione di conformità per i sistemi di IA ad alto rischio è all'art.~12 del CRA.
+  \item \textbf{Data Act} (Reg.~UE 2023/2854, applicabile da settembre 2025): disciplina l'accesso e la
+    condivisione dei dati generati dai prodotti connessi. Il CRA regola la sicurezza dello stesso oggetto
+    di cui il Data Act regola i dati.
+  \item \textbf{Nuova direttiva sulla responsabilità da prodotto difettoso} (Dir.~UE 2024/2853): estende la
+    responsabilità al software, IA compresa; la mancanza di aggiornamenti di sicurezza può rendere il
+    prodotto difettoso. Il docente vi ha accennato senza citarla per nome.
+  \item Il \emph{Digital Omnibus} prevede un punto unico di segnalazione degli incidenti presso ENISA,
+    costruito sulla piattaforma del CRA; non è ancora operativo (Capitolo~\ref{lez:2026-09-21}).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{I casi visti a lezione}
+\label{sec:cra-casi}
+
+\paragraph{Pulse~K (simulazione del 02/11, Sezione~\ref{sec:pulsek}).} Smartwatch GPS per bambini di una
+piccola impresa torinese; una falla nel cloud (libreria di login obsoleta e mancato controllo di
+\emph{ownership}) consente a chiunque di vedere la posizione di qualsiasi bambino ed è sfruttata a fini
+di lucro. Qualificazione: prodotto con elementi digitali (il cloud è elaborazione da remoto), nessuna
+esclusione, fabbricante Volta Wear, prodotto importante di classe~I, evento dopo l'11/09/2026 e prima
+dell'11/12/2027 (art.~14 sì, Allegato~I no). Due binari CRA più il data breach GDPR. Lezioni: le
+informazioni devono risalire (call center, sviluppatore reperibile), la DPIA mai aggiornata vale poco,
+comunicare male è peggio che comunicare.
+
+\paragraph{Sestante Mobility (laboratorio~4, Capitolo~\ref{lab:04}).} Box telematico per flotte aziendali
+di una media impresa, visto da auditor esterni nel 2028. Lezioni: la data di cut-off vale per unità; una
+fonte è un'asserzione, due fonti concordanti un fatto; un certificato ISO/IEC~27001 non prova la
+conformità al CRA; ciò che non è nelle evidenze non si presume; l'Allegato~I diventa una griglia di audit.
+
+% =====================================================================
+\section{Punti da verificare}
+\label{sec:cra-verifica}
+
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Numeri di articoli e paragrafi} non presenti nelle slide (art.~3 punto~13; artt.~7, 8,
+    12, 13(8), 13(17), 13(19), 13(21), 14(5)--(8), 15, 16, 18, 21, 22, 24, 27, 32, 64(3)--(4)): ricostruiti
+    senza il testo ufficiale; controllare sul Reg.~(UE) 2024/2847 (EUR-Lex). Le slide della simulazione
+    confermano solo artt.~2, 3(1)--(2), 3(42), 3(44), 14(1)--(5), 14(7)--(8), 64(2), 64(10), 69(3), 71(2)
+    e l'Allegato~III.
+  \item \textbf{Allegati}: la numerazione della tabella (II informazioni per l'utente, V dichiarazione UE,
+    VII documentazione tecnica, VIII moduli) corregge un riferimento impreciso del playbook del lab~4
+    (Capitolo~\ref{lab:04}); verificare comunque sul testo.
+  \item \textbf{Data degli obblighi di segnalazione}: in aula il 26/10 il docente ha detto ``21
+    settembre, se ricordo bene''; le slide della simulazione e il glossario del corso indicano
+    l'\textbf{11/09/2026}.
+  \item \textbf{Elenchi degli Allegati III e IV} e percorsi di valutazione per classe: riportati dalla
+    conoscenza dei redattori, non spiegati in aula.
+  \item \textbf{Art.~64(10)}: esclusione delle sanzioni per micro e piccole imprese limitata al termine di
+    24 ore; verificare la formulazione esatta.
+  \item \textbf{Orientamenti della Commissione C(2026)~5252}: citati solo nelle slide della simulazione.
+\end{itemize}
+\end{verifica}

@@ -1,0 +1,255 @@
+% =====================================================================
+\lezione{12/10/2026}{Debrief del Lab~1; introduzione a ISO/IEC~27001; presentazione del caso Sylvane}
+  {Prof.~Giuseppe Vaciago; Gianluca Gilardi}
+  {presentazioni dei gruppi sul caso Arvenza e commenti; triade CIA; esiti della gestione del rischio
+   (mitigare, accettare, trasferire); ISMS e sue componenti; famiglia ISO 27k; presentazione del
+   Lab~2 (Sylvane Retraite)}
+\label{lez:2026-10-12}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata (pausa tra il minuto 66 e l'87 circa). La
+parte delle presentazioni è in larga parte inintelligibile: si riportano solo i commenti dei docenti
+e i contenuti ricorrenti. Slide di riferimento: \emph{04.~polito\_iso\_2026} (Fundamentals and
+ISO/IEC Standards). Il caso del Lab~2 è nel Capitolo~\ref{lab:02}.
+\end{nota}
+
+\section{Sintesi}
+La lezione ha tre parti. Nei primi 50 minuti alcuni gruppi presentano il proprio lavoro sul caso
+Arvenza (Lab~1) e i docenti commentano. Segue la prima lezione di \textbf{Gianluca Gilardi}:
+introduzione all'\textbf{ISO/IEC~27001} come sistema di gestione basato sul rischio, con triade CIA,
+tre esiti della gestione del rischio e componenti dell'ISMS. Infine Gianluca presenta il caso
+\textbf{Sylvane Retraite} per il laboratorio di venerdì~16/10.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Esiti del Lab~1}: ogni gruppo ha ricevuto una valutazione via email. Soglie
+    comunicate: sotto 20 nessun punto bonus; da 20 a 25 si ottiene il punto bonus; da 25 a 30 si può
+    anche presentare il caso in aula. Chi ritiene di avere diritto al bonus ma non è in elenco deve
+    segnalarlo al docente.
+  \item \textbf{Ritardi}: tollerati i lavori arrivati entro le 14:00 e quelli inviati in tempo ma
+    senza allegato (``siete esperti di sicurezza: ricordatevi l'allegato''); non accettati quelli
+    arrivati il giorno dopo.
+  \item \textbf{Regole formali per i prossimi lab}: nomi di tutti i componenti in prima pagina e
+    \textbf{file nominato con il nome del gruppo}. Con oltre 90 studenti e più di 25 gruppi, un lavoro
+    non attribuibile viene scartato.
+  \item \textbf{Consegna del Lab~2}: caricamento sul repository SharePoint indicato nel caso
+    (preferito); in alternativa email al docente o sezione \emph{Elaborati} del portale, ma è meglio un
+    solo punto di raccolta.
+  \item Su Zoom non si useranno più le sale separate: le domande si fanno nella sala principale (o in
+    chat se brevi).
+  \item Le slide ISO vengono caricate sul portale la sera stessa. Agli studenti senza gruppo viene
+    chiesto di trovarne uno (anche online).
+  \item Il materiale del caso Sylvane è online dalla mattina; si può studiare in anticipo, ma il lavoro
+    si svolge venerdì.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Debrief del Lab~1 (Arvenza)}
+
+\subsection{Che cosa è emerso dalle presentazioni}
+Le presentazioni, da cinque--sette minuti, hanno mostrato approcci diversi, tutti basati sulla
+formula ENISA:
+\begin{itemize}
+  \item \textbf{EI = 1} per tutti i gruppi di dati (nome, codice fiscale, IBAN identificano
+    direttamente la persona);
+  \item \textbf{intento malevolo +0,5} ovunque (l'attaccante voleva deviare gli stipendi);
+  \item due \textbf{perimetri}: solo ciò che risulta letto dai log, oppure l'intera mailbox;
+  \item più gruppi hanno sottolineato che \textbf{la severità non è il rischio}: alcuni dati hanno
+    severità alta ma nessuna prova di accesso (rischio basso), altri severità media ma rischio molto
+    alto (IBAN già usati per la frode);
+  \item date di inizio delle 72 ore diverse: 20/9 (alert di sicurezza) oppure 28/9 (segnalazione del
+    payroll bureau);
+  \item decisioni variabili: quasi tutti hanno respinto la posizione del CEO e combinato le altre due.
+\end{itemize}
+
+\subsection{Commenti di Gianluca}
+\begin{esame}
+\begin{itemize}
+  \item \textbf{Certificati di malattia}: molti li hanno valutati DPC~2 senza motivare. Gianluca è
+    personalmente d'accordo, ma ai sensi dell'\textbf{art.~9 GDPR} ogni dato relativo alla salute ha
+    la stessa natura e ricade nel \textbf{DPC~4} del modello ENISA. Abbassarlo è possibile solo
+    \textbf{argomentando}.
+  \item \textbf{Data di consapevolezza}: un ispettore del Garante contesterebbe quasi certamente una
+    data di consapevolezza così tardiva. La violazione era forse attribuibile già all'inizio della
+    cronologia (richieste di modifica dell'IBAN respinte e verificate con gli interessati). Chi
+    sostiene una data tardiva deve essere pronto a dimostrare perché la conoscenza effettiva è
+    arrivata dopo.
+  \item In generale: si può sostenere quasi tutto, ma ogni affermazione e decisione deve avere
+    \textbf{fondamento ed evidenze}. Nel caso successivo servirà un'analisi ancora più accurata.
+\end{itemize}
+\end{esame}
+
+\paragraph{Commenti del docente.} Si è apprezzata la divisione dei ruoli nel gruppo; in una
+presentazione devono parlare tutti i componenti, non uno solo. Quando si parla in pubblico si guarda
+chi \emph{non} sta ascoltando, non il docente. Un gruppo ha riconosciuto di aver sovrastimato il CB
+aggiungendo integrità e disponibilità ``per prudenza''.
+
+% ---------------------------------------------------------------------
+\section{ISO/IEC 27001: introduzione (Gianluca Gilardi)}
+
+\begin{nota}[Il docente]
+Gianluca è stato avvocato per 13 anni, poi \emph{digital forensics} per otto anni (spiegava la
+tecnologia ad avvocati e giudici e i requisiti legali ai tecnici); da otto anni è CEO della società di
+legal tech fondata dal prof.~Vaciago. Assiste aziende durante data breach e audit.
+\end{nota}
+
+\subsection{Perché ISO 27001}
+\begin{itemize}
+  \item La certificazione ISO/IEC 27001 significa che una \textbf{terza parte fidata} ha verificato
+    che l'organizzazione ha misure e controlli appropriati per la sicurezza delle informazioni.
+  \item \textbf{Non è richiesta da nessuna legge}: è uno schema volontario. Dal punto di vista del
+    mercato, però, conoscerla è quasi un requisito per chi lavora in cybersecurity, anche senza
+    certificarsi.
+  \item È un sistema \textbf{basato sul rischio}: i controlli si adottano dove il rischio valutato lo
+    richiede, per portarlo a un livello accettabile.
+  \item Esistono alternative: negli USA i clienti chiedono più spesso il \textbf{SOC~2}; in Europa è
+    più accettata la ISO. La differenza è di mercato, non tecnica.
+  \item ``Sono troppo piccolo'': nel 2026 nessuna organizzazione è esente, perché tutte raccolgono,
+    trattano, conservano e trasmettono informazioni che sono \textbf{asset} esposti a rischio.
+    Battuta del settore: non chiederti \emph{se} subirai un incidente, ma \emph{quando}.
+\end{itemize}
+
+\subsection{I tre esiti della gestione del rischio}
+Secondo Gianluca ogni processo di gestione del rischio si chiude con una di tre decisioni:
+\begin{enumerate}
+  \item \textbf{mitigare}: adottare controlli che riducano il rischio a un livello accettabile;
+  \item \textbf{accettare} il rischio (mitigato o no);
+  \item \textbf{trasferire} il rischio a un terzo (il ``Santo Graal'' del risk manager), come con
+    l'assicurazione auto. Bisogna però poter dimostrare che la scelta del terzo è solida: non basta
+    una firma su un foglio.
+\end{enumerate}
+
+\begin{nota}[Dalle slide successive del corso]
+Le slide \emph{06.~27001\_2026} elencano anche una quarta opzione, \textbf{evitare} (cessare
+l'attività che genera il rischio), che corrisponde allo ``stop del trattamento'' visto per la DPIA
+(Capitolo~\ref{lez:2026-10-05}).
+\end{nota}
+
+\subsection{La triade CIA}
+Dalle slide (definizioni ISO 27000): la sicurezza delle informazioni è la preservazione di
+\textbf{riservatezza, integrità e disponibilità}; possono rilevare anche autenticità,
+accountability, non ripudio e affidabilità.
+\begin{itemize}
+  \item \textbf{Riservatezza}: l'informazione non è resa disponibile né divulgata a persone, entità o
+    processi non autorizzati. Non tutte le informazioni hanno la stessa sensibilità:
+    \textbf{classificare} serve a non sprecare risorse su informazioni irrilevanti.
+  \item \textbf{Integrità}: accuratezza e completezza.
+  \item \textbf{Disponibilità}: accessibile e utilizzabile su richiesta da un'entità autorizzata.
+\end{itemize}
+
+\begin{esame}
+\begin{itemize}
+  \item Le \textbf{definizioni formali} di riservatezza, integrità e disponibilità sono molto
+    importanti ed è probabile che vengano chieste all'esame.
+  \item Anche una \textbf{perdita temporanea di disponibilità} di dati personali (poche ore) è un
+    data breach. Il severity assessment potrà concludere che il rischio è così basso da non
+    richiedere notifiche, ma la violazione va comunque \textbf{annotata nel registro}.
+\end{itemize}
+\end{esame}
+
+\subsection{Che cos'è un ISMS}
+Un \textbf{Information Security Management System} è un approccio sistematico per stabilire,
+attuare, gestire, monitorare, riesaminare, mantenere e migliorare la sicurezza delle informazioni
+di un'organizzazione. Un \emph{sistema}, non un patchwork: componenti tecniche, organizzative e
+documentali devono stare in armonia (approccio olistico).
+
+\paragraph{Monitoraggio e data governance.} Nel Lab~1 era difficile stabilire quando il titolare
+fosse venuto a conoscenza della violazione: è il problema di chi non monitora. Il peccato più grave
+nella gestione dei dati è non saper provare \emph{cosa}, \emph{dove}, \emph{quando}, \emph{chi} e
+\emph{perché}: prima ancora della sicurezza viene la \textbf{data governance}.
+
+\paragraph{Componenti dell'ISMS (slide).}
+\begin{enumerate}[label=\alph*)]
+  \item \textbf{policy}: la parte più facile da scrivere (spesso quasi un copia-incolla dei
+    controlli), più difficile da mantenere aggiornata;
+  \item \textbf{persone con responsabilità definite}: senza responsabilità formali (chi monitora, chi
+    segnala, chi decide) non c'è un sistema di gestione ma un ``sistema della speranza'';
+  \item \textbf{processi di gestione}: definizione delle policy, consapevolezza e competenze
+    (gli auditor intervistano anche chi sta alla reception), pianificazione, attuazione, operatività,
+    valutazione delle prestazioni, \textbf{riesame della direzione}, miglioramento;
+  \item \textbf{informazioni documentate}: niente ``tradizione orale'';
+  \item \textbf{valutazione del rischio} per la sicurezza delle informazioni;
+  \item \textbf{trattamento del rischio}, con scelta e attuazione dei controlli.
+\end{enumerate}
+Le componenti a)--d) sono comuni a qualsiasi sistema di gestione; e) e f) sono specifiche
+dell'ISMS.
+
+\begin{itemize}
+  \item \textbf{Ruolo della direzione}: le decisioni strategiche sulla sicurezza vengono dall'alto.
+    Uno dei primi controlli in audit è come il management è coinvolto e informato.
+  \item \textbf{Miglioramento continuo}: un ISMS nasce e cresce. Se l'auditor non vede miglioramenti
+    solleva un rilievo, che può essere un'\emph{opportunità di miglioramento}, una \emph{non
+    conformità minore} o una \emph{non conformità maggiore}.
+\end{itemize}
+
+\subsection{Valutare e trattare il rischio}
+\begin{itemize}
+  \item Rischio = severità (o impatto) $\times$ probabilità. Dalle slide: rischio come ``effetto
+    dell'incertezza sugli obiettivi''; il rischio informativo è la possibilità che una minaccia sfrutti
+    una vulnerabilità di un asset.
+  \item Il risk manager prudente valuta sempre lo \textbf{scenario peggiore}, compresi i
+    \textbf{cigni neri}: il COVID-19 è stato il più duro esercizio di gestione del rischio, e il
+    mondo non era pronto perché la probabilità era stata giudicata troppo bassa.
+  \item Il management chiederà di tagliare i costi: bisogna \textbf{prioritizzare} in base a
+    criticità degli asset, impatto, probabilità e \textbf{rapporto costi/benefici} dei controlli.
+  \item Esistono \emph{quick win}: i \textbf{backup}. Gianluca cita un cliente bloccato oltre due mesi
+    da un ransomware perché non aveva backup dei dati cifrati.
+  \item Alcuni controlli sono specifici per rischi ristretti, altri hanno portata più ampia: anche
+    questo incide sul costo.
+\end{itemize}
+
+\subsection{Benefici e famiglia ISO 27k}
+\begin{itemize}
+  \item Ridurre il rischio per la sicurezza delle informazioni significa anche \textbf{ridurre il
+    rischio di compliance}: è un investimento in conformità (le sanzioni sono rilevanti).
+  \item La ISO 27001 è lo standard più usato per attuare e certificare un ISMS. La famiglia 27k conta
+    \textbf{oltre 70 standard} (cloud, protezione dei dati personali, ecc.).
+  \item Secondo Gianluca le altre certificazioni 27k sono ``figlie'' della 27001: senza la 27001 non
+    si possono ottenere.
+\end{itemize}
+
+\begin{integrazione}[27k ``figlie'' della 27001]
+Era vero per la ISO/IEC~27701:2019 (estensione della 27001). Dall'edizione 2025 la 27701 è uno standard
+autonomo, certificabile anche senza 27001 (vedi Capitolo~\ref{cap:iso}).
+\end{integrazione}
+
+\begin{esame}
+Il docente sottolinea che l'\textbf{ISMS è la base della ISO 27001}: è il primo concetto da fissare.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Presentazione del Lab~2: Sylvane Retraite (Gianluca)}
+Nuovo caso di data breach, più complesso sotto certi aspetti e più semplice sotto altri (dati meno
+eterogenei, cronologia più breve). Dettagli e svolgimento nel Capitolo~\ref{lab:02}.
+\begin{itemize}
+  \item \textbf{Wall clock} 105 minuti (tempo reale del lab) e \textbf{exercise clock} tre giorni (il
+    tempo della storia, nei tre giorni dopo la presa di conoscenza).
+  \item La violazione arriva da una \textbf{comunicazione del responsabile del trattamento}: questo
+    semplifica l'individuazione del momento in cui parte l'orologio per il titolare.
+  \item Il responsabile ha già notificato l'incidente a un'autorità di settore \textbf{ai sensi del
+    DORA}: diverse norme, diverse notifiche.
+  \item Stavolta il \textbf{modulo di severity assessment è obbligatorio}; se si decide di notificare,
+    si compila anche il file Excel del modulo di notifica (modello usato da molte autorità europee), e
+    per gli interessati va scritto il testo effettivo della comunicazione (art.~34).
+  \item Durante il lab arriveranno \textbf{curveball}, nuove informazioni che possono cambiare la
+    valutazione: ``la vita è ciò che accade mentre fai l'esercizio''.
+  \item \textbf{Honne e tatemae}: il modulo chiede sia la giustificazione da dare all'autorità
+    (\emph{tatemae}, la facciata) sia il vero ragionamento interno (\emph{honne}, la verità, anche
+    ``temo di essere licenziato'').
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Cognome di Gianluca}: ``Gilardi'' (dalla trascrizione del 09/10 e dall'indirizzo del
+    repository SharePoint del Lab~2). La trascrizione oscilla tra ``Gilardi'' e ``Gillardi''.
+  \item Soglie del bonus (20 / 25 / 30): dal parlato del docente; confermare con l'email ricevuta.
+  \item ``Senza 27001 non si ottengono le altre certificazioni 27k'': affermazione di Gianluca, vera
+    per le estensioni come la 27701; da verificare per gli altri standard della famiglia.
+  \item Gianluca indica come \emph{honne} il ``paragrafo 10'': nel modulo il paragrafo~9 è la
+    giustificazione (tatemae) e il 10 la strategia interna (honne). Coerente, ma verificare.
+\end{itemize}
+\end{verifica}

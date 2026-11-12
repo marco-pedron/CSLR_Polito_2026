@@ -1,0 +1,405 @@
+% =====================================================================
+\lezione{05/10/2026}{DPIA e data breach; presentazione del caso Arvenza}
+  {Prof.~Giuseppe Vaciago}
+  {regole del laboratorio; compliance anticipatoria; DPIA (contenuto, rischio inerente e residuo,
+   consultazione preventiva); privacy by design e by default; data breach: definizione, artt.~33 e 34,
+   consapevolezza del titolare, fattori di rischio, contenuto della notifica, responsabile del trattamento,
+   remediation plan, registro dei data breach; presentazione del Lab~1 (Arvenza)}
+\label{lez:2026-10-05}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata (pausa tra il minuto 94 e il 112 circa, con
+formazione dei gruppi: non riportata). Slide di riferimento: \emph{02.~Cybersecurity Laws and
+Regulations -- II Privacy} (moduli M4 \emph{DPIA} e M5 \emph{Data Breach}) e
+\emph{03.~Data breach severity methodology~1.0} (ENISA, 2013). Il caso del laboratorio è nel PDF
+\emph{Arvenza Breach Case Study} (vedi Capitolo~\ref{lab:01}).
+\end{nota}
+
+\section{Sintesi}
+Lezione in due parti. La prima, più breve, è sulla \textbf{valutazione d'impatto (DPIA)}: il
+docente la inquadra nel passaggio da una valutazione del rischio ``statica'' (basata sugli incidenti
+già accaduti) a una \textbf{compliance anticipatoria}, che deve prevedere l'evoluzione del rischio
+digitale. La seconda, centrale, è sul \textbf{data breach}: definizione, notifica al Garante entro 72
+ore, comunicazione agli interessati, chi è ``il titolare'' in concreto, perché servono un piano prima
+e un remediation plan dopo, e perché il \textbf{registro dei data breach} è la prova
+dell'\emph{accountability}. In chiusura viene presentato il caso Arvenza per il laboratorio di
+venerdì~9/10.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Laboratori non obbligatori}, ma fanno parte del programma d'esame: durante il lab il
+    docente dà indicazioni utili per le \textbf{domande aperte}. Chi non partecipa deve comunque
+    ascoltare la registrazione (anche in differita; il docente suggerisce di usare un'IA per trovare
+    i punti in cui parla, dato che lunghi tratti sono muti).
+  \item \textbf{Punti bonus}: ogni laboratorio consegnato con esito sufficiente vale un piccolo
+    punteggio aggiuntivo (in aula si parla di 0,25 punti a lab, su un totale previsto di 8--10 lab).
+    Una parte dei gruppi (indicativamente il 25--30\%, forse di più) potrà presentare il proprio
+    lavoro il lunedì successivo.
+  \item \textbf{Formazione dei gruppi}: si è dedicata parte della lezione a creare i gruppi (in aula
+    e online) per partire subito venerdì. Si può lavorare anche da soli, ma il docente lo sconsiglia.
+  \item \textbf{Tempi del lab}: un'ora e mezza in aula, consegna via email al docente entro la fine
+    del lab (indicate le 13:15); nessun lavoro richiesto prima o dopo. Solo per questo primo lab è
+    consentito prepararsi in anticipo. Le consegne in ritardo non sono considerate, salvo situazioni
+    eccezionali.
+  \item \textbf{Formato libero}: il docente non fornisce un modello di severity assessment; ogni
+    gruppo sceglie il formato che ritiene più efficace per presentare il rischio al Garante.
+  \item Se pochi gruppi parteciperanno, il docente si riserva di cambiare formato ai laboratori.
+  \item Il docente è disponibile per \textbf{tesi} (meno per tirocini, perché come avvocato ha meno
+    contatti con aziende che cercano profili IT).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Dalla valutazione statica alla compliance anticipatoria}
+
+Il settore in cui la valutazione del rischio è nata è la \textbf{salute e sicurezza sul lavoro}:
+nell'industria (anche a Torino, nell'automotive) per decenni si moriva sul lavoro per mancanza di
+prevenzione. In Italia il percorso arriva a compimento con il \textbf{D.Lgs.~81/2008}. In quel
+contesto la valutazione può essere relativamente \emph{statica}: le macchine fanno sempre la stessa
+cosa, l'errore nasce soprattutto dall'interazione uomo--macchina e la prevenzione passa in gran parte
+dalla formazione.
+
+Il ``corpo digitale'' è diverso: è ovunque e cambia a una velocità enorme (si pensi all'IA
+generativa dal 2022 a oggi). Ne derivano tre conseguenze:
+\begin{itemize}
+  \item non si può risolvere il problema in modo \textbf{tattico} (``mettiamo l'antivirus''): serve una
+    \textbf{strategia}, anche perché una PMI non ha il budget per prevenire tutto;
+  \item il punto di rottura resta il \textbf{comportamento umano}, che va anticipato;
+  \item la valutazione va scritta pensando a come verrà letta tra uno, due, tre anni:
+    \textbf{compliance anticipatoria}, basata su elementi di \emph{foresight}. L'IA è insieme
+    soluzione e fonte di nuovi rischi.
+\end{itemize}
+
+\begin{nota}[Indicazione per i laboratori]
+Ogni valutazione fatta ``oggi'' deve reggere quando sarà riletta in futuro: chiedersi sempre come
+apparirà quel documento tra qualche anno.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{La valutazione d'impatto (DPIA)}
+
+\subsection{L'approccio del GDPR: fiducia nel titolare}
+Il docente illustra la logica dell'\emph{accountability} con l'esempio di uno studente
+(``Simone''): il GDPR si fida che il titolare faccia i compiti, senza che nessuno li controlli
+preventivamente. La DPIA la redige il titolare e, se il rischio risulta alto, ha due strade: chiedere
+la consultazione preventiva all'autorità o rinunciare al trattamento. Nella prassi, osserva il
+docente, la tentazione è valutare il rischio come ``medio'' per evitare entrambe. Nell'AI Act invece,
+secondo il docente, il sistema cambia: per i sistemi ad alto rischio non basta l'autovalutazione e
+serve un passaggio con le autorità prima dell'uso (tema rinviato alla parte sull'AI Act).
+
+\subsection{Quando serve una DPIA}
+La DPIA va fatta quando un trattamento è \textbf{probabilmente ad alto rischio}, ma stabilirlo è
+spesso una \textbf{zona grigia} lasciata alla valutazione del titolare (a differenza di norme come
+NIS2, dove si entra o non si entra in una categoria). Esempi citati:
+\begin{itemize}
+  \item \textbf{videosorveglianza (CCTV)}: riconosciuta come trattamento che incide sui diritti
+    fondamentali, quindi soggetta a DPIA;
+  \item \textbf{whistleblowing}: chi lavora con un ente (dipendenti, collaboratori, fornitori) può
+    segnalare violazioni in forma anonima; le piattaforme di whistleblowing sono soggette a DPIA.
+\end{itemize}
+Di conseguenza può capitare che per lo stesso strumento un'azienda faccia la DPIA e un'altra no,
+perché i rispettivi DPO valutano il rischio in modo diverso.
+
+\subsection{Contenuto e ciclo}
+Dalle slide, la DPIA contiene: descrizione sistematica del trattamento e delle finalità;
+valutazione di \textbf{necessità e proporzionalità}; valutazione dei rischi per i diritti e le libertà
+degli interessati; misure previste per affrontarli e per dimostrare la conformità. Seguono
+documentazione e monitoraggio.
+
+Il rischio va valutato da \textbf{due punti di vista}: \textbf{giuridico} (impatto sui diritti
+fondamentali) e \textbf{tecnico} (sicurezza del trattamento).
+
+\paragraph{Necessità e proporzionalità.} Esempio del docente: chiedere a tutti gli studenti l'ultimo
+certificato medico per dividerli in classi in base alle patologie può avere una logica sanitaria, ma
+non è proporzionato, perché dà accesso a una quantità di informazioni sensibili che potrebbero essere
+usate contro di loro.
+
+\paragraph{Rischio inerente e residuo.}
+\[
+\text{rischio inerente} = \text{severità} \times \text{probabilità}
+\qquad
+\text{rischio residuo} = \text{rischio inerente} - \text{mitigazione}
+\]
+\begin{itemize}
+  \item residuo \textbf{alto}: consultazione preventiva (art.~36) oppure stop del trattamento;
+  \item residuo \textbf{medio o basso}: si prosegue, ma il docente raccomanda di ripetere la
+    valutazione \textbf{ogni sei mesi}, perché nel digitale il rischio cambia in fretta (problema
+    tipico: DPIA scritte nel 2020 e mai riviste).
+\end{itemize}
+
+\begin{esame}
+Non fermarsi a ``rischio = severità $\times$ probabilità'': quello è solo il \textbf{rischio
+inerente}. La valutazione si chiude sul \textbf{rischio residuo} (inerente meno mitigazioni), ed è il
+residuo che decide se proseguire, consultare l'autorità o fermarsi. Il docente ha detto che lo
+ripeterà anche in altri contesti.
+\end{esame}
+
+\paragraph{Natura e approccio (slide).} Valutazione \emph{a domande} (checklist, che il docente
+preferisce perché evita dimenticanze), basata sul contesto; team interdisciplinare; analisi fin dalla
+fase di progettazione; verifiche periodiche; approccio by design / by default. Una sola DPIA può
+coprire trattamenti simili per natura, ambito, contesto, finalità e rischi. La pubblicazione non è
+obbligatoria, ma l'EDPB suggerisce di pubblicarne almeno una sintesi o le conclusioni. Esiti possibili
+della consultazione preventiva: ulteriori misure oppure stop del trattamento per mancanza di misure
+di mitigazione disponibili.
+
+\subsection{Privacy by design e by default (art.~25)}
+\begin{itemize}
+  \item \textbf{By design}: fin dall'inizio parte legale e parte tecnica lavorano insieme per
+    integrare le garanzie nel trattamento, tenendo conto di stato dell'arte, costi di attuazione,
+    natura, ambito, contesto, finalità e rischi (gli stessi criteri dell'\emph{accountability}).
+  \item \textbf{By default}: per impostazione predefinita si trattano solo i dati necessari alla
+    finalità (quantità, portata, conservazione, accessibilità). Contrasto con la cultura
+    statunitense dell'\emph{opt-out}: in Europa vale l'\emph{opt-in}.
+\end{itemize}
+
+\begin{esame}
+La DPIA non è, secondo il docente, una parte consistente dell'esame e una domanda specifica è
+``rara'', ma \textbf{non si può escludere}; molte nozioni (proporzionalità, rischio residuo, by
+design/by default) servono comunque per altre domande. Il ciclo della DPIA non va imparato a memoria.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Data breach}
+
+\begin{esame}
+Sul data breach ci sarà \textbf{quasi sempre almeno una domanda} all'esame: è la parte più rilevante,
+anche perché tutte le norme successive (DORA, AI Act, CRA, NIS2) prevedono notifiche di incidenti
+costruite sullo stesso principio.
+\end{esame}
+
+\subsection{Perché il GDPR è stato il primo}
+Il GDPR (deciso nel 2016, applicabile dal 2018) è stato la prima norma a imporre la notifica a
+\textbf{tutti} i titolari, senza distinzione di settore: anche il pub che conserva le preferenze
+alimentari dei clienti. Le norme successive sono invece segmentate (DORA solo per il settore
+finanziario, NIS2 per alcune categorie). Anche dati apparentemente banali ``possono aprire molte
+porte''.
+
+\subsection{Definizione e tipologie}
+L'\textbf{art.~4(12)} definisce la violazione dei dati personali come la violazione di sicurezza che
+comporta accidentalmente o in modo illecito la \textbf{distruzione, perdita, modifica, divulgazione
+non autorizzata o accesso} a dati personali trasmessi, conservati o comunque trattati.
+Collegamento con la triade CIA:
+\begin{itemize}
+  \item distruzione e perdita $\rightarrow$ \textbf{disponibilità};
+  \item modifica $\rightarrow$ \textbf{integrità};
+  \item divulgazione o accesso non autorizzati $\rightarrow$ \textbf{riservatezza}.
+\end{itemize}
+Esempi dalle slide: smarrimento di un dispositivo non cifrato; ransomware (indisponibilità, ma spesso
+anche riservatezza).
+
+\begin{esame}
+La definizione dell'art.~4(12) va \textbf{memorizzata bene}, insieme al collegamento con riservatezza,
+integrità e disponibilità.
+\end{esame}
+
+\subsection{Gli obblighi: artt.~33 e 34}
+\begin{itemize}
+  \item \textbf{Art.~33}: notifica all'autorità di controllo \textbf{senza ingiustificato ritardo e,
+    ove possibile, entro 72 ore}. Il ``ove possibile'' conta: se era materialmente impossibile (esempio
+    del docente: incendio presso un fornitore) il ritardo può essere giustificato; se era possibile e
+    non è stato fatto, è un problema.
+  \item \textbf{Art.~34}: comunicazione agli \textbf{interessati} quando la violazione è suscettibile
+    di presentare un \textbf{rischio elevato} per i loro diritti e libertà. Le aziende la temono per
+    il danno reputazionale.
+\end{itemize}
+
+\subsection{Chi è ``il titolare'' quando parte l'orologio}
+Le 72 ore decorrono da quando il \textbf{titolare è venuto a conoscenza} della violazione. Il titolare
+è la persona giuridica, ma un'azienda ``è consapevole'' quando lo è chi la rappresenta: il
+\textbf{legale rappresentante}.
+\begin{itemize}
+  \item Il legale rappresentante è nominato dai soci; nel 90\% dei casi coincide con il CEO, ma va
+    verificato (in Italia con la \textbf{visura camerale}). Nelle multinazionali possono esistere
+    deleghe specifiche, ad esempio in materia di trattamento dei dati.
+  \item Per qualsiasi comunicazione legale a un'azienda conviene rivolgersi al legale
+    rappresentante, che ha il dovere di rispondere.
+  \item \textbf{Verità legale e verità reale}: se il legale rappresentante è informato per telefono
+    martedì ma l'unica prova è un'email di giovedì, in giudizio conta ciò che si può provare.
+    Da qui l'importanza delle \textbf{evidenze} della data di consapevolezza.
+  \item Se il legale rappresentante non è raggiungibile (ferie, volo) e non c'è una procedura di
+    delega, l'autorità lo leggerà come \textbf{carenza organizzativa}: secondo il docente in quel caso
+    la sanzione è molto probabile.
+\end{itemize}
+
+\begin{esame}
+Distinguere \textbf{errore umano} e \textbf{carenza organizzativa}. L'errore del singolo (il click sul
+link di phishing) è umano e può essere compreso; la mancanza di procedure (chi avvisa chi, chi
+decide quando il CEO è in volo) è un difetto prevedibile dell'organizzazione ed è ciò che le autorità
+sanzionano. Strumento utile: la \textbf{matrice RACI} (\emph{Responsible, Accountable, Consulted,
+Informed}), che sarà ripresa nelle esercitazioni su procedure e policy. Distinzione da usare nei lab.
+\end{esame}
+
+\subsection{Fattori di rischio per i diritti e le libertà}
+Dalle slide, sei elementi da considerare come questione di metodo:
+\begin{enumerate}[label=\alph*)]
+  \item tipo di violazione;
+  \item natura, numero e grado di sensibilità dei dati;
+  \item facilità di associare i dati a una persona (es.\ dati pseudonimizzati: milioni di record
+    ridotti a codici);
+  \item gravità delle conseguenze (dati utilizzabili subito contro l'interessato: frode, sostituzione
+    di persona);
+  \item numero di interessati coinvolti;
+  \item caratteristiche del titolare (un ospedale non è una casa vacanze).
+\end{enumerate}
+Il metodo operativo è la \textbf{metodologia ENISA} di severity assessment (vedi
+Capitolo~\ref{lab:01} e la scheda al Capitolo~\ref{cap:schede}). Tutto è relativo: un milione di
+interessati è molto per l'Italia, poco per l'India. Non esistono soluzioni bianco/nero.
+
+\subsection{Contenuto della notifica (art.~33(3))}
+Natura della violazione (categorie e numero approssimativo di interessati e di registrazioni);
+contatti del \textbf{DPO}; probabili conseguenze; misure adottate o proposte per porre rimedio e
+attenuarne gli effetti.
+
+\begin{nota}[Attenzione alla sigla DPA]
+``DPA'' indica sia la \emph{Data Protection Authority} sia il \emph{Data Processing Agreement}
+(contratto con il responsabile ex art.~28). Il docente invita a chiedere chiarimenti, anche all'esame,
+se la sigla è ambigua.
+\end{nota}
+
+Oltre ai contenuti, il titolare deve \textbf{motivare le proprie decisioni}, in particolare quando
+decide di non notificare, ritarda la notifica o non comunica la violazione agli interessati. La
+motivazione parte dal severity assessment: è l'applicazione diretta dell'\emph{accountability}.
+
+\subsection{Lo scopo della notifica e la capacità di reazione}
+In origine l'idea era lo \textbf{scambio di informazioni in tempo reale} per proteggere altre
+organizzazioni da attacchi simili (il docente cita un lavoro del 2013, precedente al GDPR, e il ruolo
+di centralizzazione di ENISA). Oggi la giurisprudenza delle autorità europee chiede di
+\textbf{dimostrare la capacità di reazione}:
+\begin{enumerate}
+  \item un \textbf{piano prima}: procedure già in vigore (vedi il caso del legale rappresentante
+    irraggiungibile);
+  \item un \textbf{remediation plan dopo}. Alcuni esperti temono che un piano di rimedio equivalga
+    ad ammettere una colpa, ma la violazione c'è già stata: più il piano è solido, più si abbassa il
+    rischio. In alcuni casi il docente, in base all'accountability, ha deciso di non notificare
+    perché il remediation plan riduceva il rischio in modo convincente.
+\end{enumerate}
+
+\begin{nota}[Indicazione per il laboratorio]
+Il remediation plan può incidere sulla valutazione del rischio: considerarlo sempre, non limitarsi a
+calcolare il numero. La slide sul remediation plan è indicata come ``molto importante'' per il lab.
+\end{nota}
+
+\subsection{Mappatura severità -- obblighi ed esenzioni dell'art.~34(3)}
+Mappatura indicata in aula (e ripresa nel caso Arvenza):
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Severità} & \textbf{Esito} & \textbf{Base} \\ \midrule
+Bassa ($SE<2$) & solo registro & art.~33(5) \\
+Media ($2 \le SE < 3$) & notifica all'autorità & art.~33 \\
+Alta / molto alta ($SE \ge 3$) & autorità e interessati & art.~34, salvo 34(3) \\
+\bottomrule
+\end{tabular}
+\end{center}
+Il docente ammette che, da avvocato, si tende a ``tirare'' un po' questi livelli, ma vale ciò che è
+scritto nella metodologia.
+
+Esenzioni dalla comunicazione agli interessati (art.~34(3)):
+\begin{enumerate}[label=\alph*)]
+  \item misure tecniche e organizzative adeguate applicate ai dati violati (es.\ cifratura);
+  \item misure successive che scongiurano il rischio elevato: difficile da sostenere, perché non si
+    può garantire che una carta d'identità o di credito sottratta non venga usata;
+  \item sforzo sproporzionato: si sostituisce con una \textbf{comunicazione pubblica}. Esempio vissuto
+    dal docente: un'azienda di trasporto pubblico milanese con molti utenti senza email e non più
+    rintracciabili, per cui si è scelto un avviso sui giornali.
+\end{enumerate}
+
+\subsection{Gestione del processo e costi}
+\begin{itemize}
+  \item \textbf{Preparazione}: piano di risposta agli incidenti, ruoli e responsabilità (incluso il
+    CEO), simulazioni, modalità di interazione con le autorità. \textbf{Prevenzione}: formazione e
+    misure di sicurezza.
+  \item \textbf{Costi} di un data breach (slide): danno diretto, abbandono anomalo dei clienti, danno
+    reputazionale, attività di help desk, indagini interne, spese legali, ripristino dei sistemi. Per il
+    docente il più importante oggi è il \textbf{danno reputazionale}.
+  \item \textbf{Aspetti pratici}: verificare quali notifiche sono obbligatorie; \textbf{analizzare con
+    cura le ipotesi}, perché ogni assunzione può essere letta in due modi; usare i modelli e i canali
+    ufficiali. Il modulo di notifica conta circa 55--60 domande: si è annunciata una simulazione di
+    compilazione.
+\end{itemize}
+
+\subsection{Il responsabile del trattamento}
+Il fornitore è oggi ``la base di tutti i problemi''. L'art.~28(3) rimanda al contratto; l'art.~33(2)
+obbliga il responsabile a informare il titolare \textbf{senza ingiustificato ritardo} (nei contratti
+si trovano tipicamente 24--36 ore). Nella pratica, soprattutto con i grandi fornitori, la
+comunicazione arriva anche un mese dopo.
+
+\begin{esame}
+Se il responsabile avvisa con un mese di ritardo, il titolare non viola le 72 ore
+\textbf{purché dimostri} che la violazione era imprevedibile e a lui ignota: l'orologio parte dalla
+comunicazione del responsabile. Il titolare può poi chiedere i danni al responsabile per
+inadempimento contrattuale. Tema ripreso nel Lab~2 (Capitolo~\ref{lab:02}).
+\end{esame}
+
+\subsection{Remediation plan (slide)}
+Correggere la vulnerabilità che ha permesso l'incidente; \textbf{lesson learned}; condividere
+informazioni con gli stakeholder per rafforzare il perimetro; se la causa è l'errore umano, rafforzare
+la formazione. Sono esempi, non un elenco completo.
+
+\subsection{Il registro dei data breach (art.~33(5))}
+Strumenti: \textbf{incident log} (sintetico ma completo e aggiornato) e \textbf{report interni}
+(modelli standard, decisioni documentate). L'art.~33(5) impone di documentare ogni violazione, le
+circostanze, le conseguenze e i provvedimenti adottati, così che l'autorità possa verificare il
+rispetto dell'articolo.
+
+\begin{esame}
+\textbf{Il registro è la prova dell'accountability.} Il controllo dell'autorità avviene su due livelli:
+\begin{enumerate}
+  \item \textbf{esistenza del registro}: se manca, la sanzione è automatica (e, se l'autorità trova i
+    dati sul dark web, la massima possibile);
+  \item \textbf{merito della valutazione}: se il rischio è stato dichiarato basso ma era evidentemente
+    alto, si viene sanzionati comunque; la buona fede aiuta, ``me l'ha chiesto il CEO'' no.
+\end{enumerate}
+Il compito tipico dell'esperto di sicurezza sarà ridurre il rischio in modo che il titolare possa
+legittimamente non notificare, ma sempre lasciando traccia del ragionamento.
+\end{esame}
+
+\paragraph{Firmare digitalmente il registro?} Su domanda di uno studente: un documento firmato
+digitalmente (o con marca temporale, o inviato via PEC, o accompagnato da un hash) non può essere
+modificato senza lasciare traccia e ``ferma l'orologio''. In Italia solo una minoranza di aziende
+(5--10\% secondo il docente) lo fa; le altre tengono file Excel o PDF modificabili. Esistono anche
+strumenti dedicati (es.\ OneTrust).
+
+\paragraph{Alterare il registro è reato.} Le false dichiarazioni al Garante sono punite
+dall'\textbf{art.~168 del Codice privacy} (reclusione da sei mesi a tre anni). Ne risponde non solo
+il legale rappresentante ma anche chi ha materialmente alterato il documento: obbedire a un ordine
+non scusa (\emph{ignorantia legis non excusat}). Se si deve correggere un file, meglio dirlo
+all'autorità spiegando il motivo. Il docente racconta di un cliente che, dopo un'ispezione, gli
+chiese di modificare il registro: rifiutò.
+
+% ---------------------------------------------------------------------
+\section{Presentazione del Lab~1: il caso Arvenza}
+Il docente presenta il caso (dettagli e soluzione nel Capitolo~\ref{lab:01}): mailbox paghe
+compromessa via phishing, sei gruppi di dati, tre posizioni in sala (CEO, IT Manager, HR Director).
+Gli studenti fanno il \textbf{DPO}, che il docente descrive come funzione insieme legale e IT
+(``nel mio sogno''), anche se in pratica è quasi sempre affidata a giuristi.
+\begin{itemize}
+  \item Formula ENISA: $SE = DPC \times EI + CB$.
+  \item Va prodotto un \textbf{severity assessment} con un \textbf{parere} che concili o respinga le
+    tre posizioni: ``non c'è una sola soluzione''.
+  \item Non basta il numero: la mitigazione conta, e bisogna proporre una strategia (anche di
+    prevenzione futura).
+  \item Uso dell'IA: ammesso, ma se il lavoro è solo dell'IA sarà difficile presentarlo a voce.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{AI Act e autorizzazione preventiva}: la trascrizione fa dire al docente che per i
+    sistemi ad alto rischio serve un'autorizzazione dell'autorità nazionale prima dell'uso. Il passaggio
+    è confuso (si parla anche di FRIA) e va verificato sulle slide dell'AI Act.
+  \item \textbf{Revisione semestrale della DPIA}: è una raccomandazione del docente, non un termine
+    fissato dal GDPR (che chiede un riesame quando cambia il rischio, art.~35(11)). Confermare.
+  \item Nella trascrizione il docente cita l'``art.~32.2'' per l'obbligo del responsabile di informare
+    il titolare; le slide (e il testo del GDPR) indicano correttamente l'\textbf{art.~33(2)}.
+  \item \textbf{Punti bonus}: il valore (0,25 a lab) e il numero di lab sono ricostruiti dal parlato,
+    poco nitido; il totale massimo citato non è chiaro.
+  \item Il ``paper del 2013'' sullo scambio di informazioni citato dal docente: autore e titolo non
+    ricavabili con certezza dalla trascrizione.
+  \item Concorso nel reato: il docente parla di ``associazione criminale'' tra legale rappresentante,
+    IT manager ed esecutore; in termini tecnici potrebbe trattarsi di concorso di persone nel reato.
+    Da non usare all'esame senza verifica.
+\end{itemize}
+\end{verifica}

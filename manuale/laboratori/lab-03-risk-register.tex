@@ -1,0 +1,372 @@
+% =====================================================================
+\chapter{Lab 3 -- Risk register ISO/IEC 27001 per uno studio professionale}
+\label{lab:03}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Laboratorio del 30/10/2026 (Capitolo~\ref{lez:2026-10-30}), presentato da Gianluca a fine lezione il
+26/10 (Capitolo~\ref{lez:2026-10-26}). Fonti: le slide \emph{The Risk Register Exercise} (briefing), il
+\emph{Risk Register Exercise Playbook} e il file Excel dell'esercitazione
+(\texttt{lab/lab\_03/materiale}). Richiami teorici: slide \emph{04.~polito\_iso\_2026} (controlli 8.x) e
+\emph{06.~27001\_2026\_2310} (\emph{Risk Management}). I due esempi R-01 e R-17 sono quelli svolti nel
+playbook; le altre righe ragionate \textbf{non} sono soluzioni ufficiali e si trovano nei riquadri
+\emph{Integrazione}.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Il contesto}
+
+Si è il \textbf{responsabile della sicurezza delle informazioni} di un piccolo \textbf{studio
+professionale} (consulenza fiscale, legale o tecnica) che tratta dati personali dei clienti e documenti
+riservati su servizi cloud, portatili e un gestionale di studio. Lo studio sta implementando un ISMS in
+vista della certificazione ISO/IEC~27001:2022 e ha già individuato \textbf{18 scenari di rischio}. Il
+compito è completarne la \textbf{valutazione} e il \textbf{trattamento}.
+
+\paragraph{Perimetro.} Il registro riguarda \textbf{solo la clausola~8 dell'Allegato~A}, cioè i 34
+controlli tecnologici. I rischi trattabili solo con controlli organizzativi, documentali o fisici
+(clausole 5, 6, 7) stanno in registri separati, così nessun rischio viene valutato due volte. Ogni riga
+deve quindi citare almeno un controllo 8.x: un rischio senza controllo tecnologico applicabile appartiene
+ai registri organizzativi.
+
+\paragraph{Il punto di partenza.} Gli scenari descrivono uno studio con una \textbf{baseline debole}:
+quasi nessun controllo tecnologico in essere. È proprio per questo che i rischi sono stati sollevati, e
+il rischio inerente va stimato con i controlli che lo studio ha oggi.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l >{\raggedright\arraybackslash}p{3.2cm} X}
+\toprule
+\textbf{ID} & \textbf{Categoria} & \textbf{Scenario (in sintesi)} \\ \midrule
+R-01 & Accessi e identità & credenziali di gestionale ed email compromesse (niente MFA, password
+  riusate o condivise): accesso ai dati fiscali dei clienti \\
+R-02 & Malware e phishing & ransomware da allegato o link malevolo: documenti cifrati, attività ferma \\
+R-03 & Endpoint & accesso ai dati da dispositivi personali o non gestiti (BYOD, lavoro da remoto): dati
+  portati via o contaminati, nessuna tracciabilità \\
+R-04 & Backup e continuità & backup non eseguiti, non cifrati o mai verificati: perdita definitiva
+  dell'archivio \\
+R-05 & Logging e monitoraggio & nessun log centralizzato né monitoraggio: incidenti non rilevati, eventi
+  non ricostruibili in un contenzioso \\
+R-06 & Cloud e SaaS & documenti condivisi con link pubblici o cartelle aperte a tutti: dati dei clienti
+  esposti \\
+R-07 & Vulnerabilità e patch & sistemi operativi e applicazioni obsoleti: vulnerabilità note sfruttate \\
+R-08 & Rete & configurazioni insicure (credenziali di default, servizi esposti inutili, protocolli
+  obsoleti) \\
+R-09 & Rete & rete unica e piatta (ospiti, IoT, postazioni): movimento laterale dell'attacco \\
+R-10 & Cifratura e trasferimenti & documenti trasmessi in chiaro (email, chiavette USB, link cloud) \\
+R-11 & Endpoint & furto o smarrimento di portatili e smartphone con documenti non cifrati \\
+R-12 & Fornitori IT & amministratore di sistema esterno con privilegi permanenti e attività non
+  registrata: modifiche non attribuibili \\
+R-13 & Applicazioni & gestionale e portale clienti acquistati o commissionati senza requisiti né test di
+  sicurezza \\
+R-14 & Change management & aggiornamenti e modifiche non controllati: regressioni, fermi, configurazioni
+  non conformi \\
+R-15 & Backup e continuità & saturazione o indisponibilità di servizi critici (connettività, storage,
+  cloud) senza ridondanza: scadenze dei clienti mancate \\
+R-16 & Dati e supporti & dismissione di PC e supporti senza cancellazione certificata: dati recuperati
+  da apparati venduti, smaltiti o in riparazione \\
+R-17 & Servizi esposti & DDoS o indisponibilità di sito e portale clienti: interruzione e danno
+  reputazionale \\
+R-18 & Dati e supporti & metadati nascosti nei documenti inviati (autori, revisioni, percorsi,
+  commenti): fuga di informazioni riservate \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------------------
+\section{La consegna}
+
+\paragraph{Il file.} Sette fogli: \emph{Group Name and members} (da compilare per primo),
+\emph{Instructions} (il metodo), \emph{Risk Register} (il lavoro: 18 righe), \emph{Annex A clause 8}
+(i 34 controlli con nota di applicabilità e attuazione tipica), \emph{3x3 Matrix}, \emph{Summary}
+(indicatori e controlli di coerenza), \emph{Lists} (i menu a tendina).
+
+\paragraph{Le colonne del registro.} Trenta colonne per riga:
+\begin{itemize}
+  \item \textbf{precompilate} (da non toccare): ID, categoria, rischio, minaccia/causa, asset; risk owner,
+    data obiettivo, ultima revisione;
+  \item \textbf{da compilare} (13): probabilità e impatti C, I, A inerenti; controlli 8.x applicabili;
+    misure; \textbf{giustificazione}; efficacia; probabilità e impatti residui; decisione di trattamento;
+  \item \textbf{calcolate} (mai scriverci dentro): punteggi per dimensione, livello inerente e residuo,
+    controllo ``entro la propensione?''.
+\end{itemize}
+
+\paragraph{Regole pratiche.} Lavoro in gruppo, 90 minuti, consegna del file completato con nome del
+gruppo come prefisso del nome del file, caricamento nella cartella condivisa indicata. Un lavoro non
+attribuibile (gruppo o partecipanti mancanti) non viene valutato. La valutazione premia il
+\textbf{ragionamento}, non la coincidenza con un numero.
+
+% ---------------------------------------------------------------------
+\section{Metodologia}
+
+\subsection{Tre dimensioni, due passaggi}
+\begin{itemize}
+  \item Ogni rischio si valuta \textbf{tre volte}, una per proprietà: \textbf{C} riservatezza (accesso o
+    divulgazione non autorizzati), \textbf{I} integrità (alterazione, cancellazione, inesattezza, anche
+    per errore), \textbf{A} disponibilità (indisponibilità oltre il fermo tollerabile).
+  \item Per ogni dimensione: $\text{punteggio} = \text{Probabilità} \times \text{Impatto}$, entrambi su
+    scala \textbf{1--3}. La probabilità è unica per la riga, gli impatti sono tre.
+  \item Il livello complessivo è il \textbf{massimo} dei tre punteggi, \textbf{mai la media}.
+  \item Si valuta due volte: \textbf{inerente} (con i controlli di oggi) e \textbf{residuo} (dopo le
+    misure scelte). Il residuo si \textbf{rivaluta da capo}: non è ``inerente meno efficacia''.
+\end{itemize}
+
+\begin{center}
+\small
+\textbf{Ancore della scala 1--3 (dal foglio \emph{Instructions})}\par\smallskip
+\begin{tabularx}{\linewidth}{c X X}
+\toprule
+\textbf{Valore} & \textbf{Probabilità} & \textbf{Impatto (C, I, A)} \\ \midrule
+1 & Bassa: servono condizioni insolite o un attore motivato; nessun precedente nel settore negli ultimi
+  due anni & Basso: limitato e reversibile; nessun obbligo di notifica; attività ripristinata in poche ore
+  senza conseguenze per i clienti \\
+2 & Media: plausibile entro l'anno (configurazioni diffuse, errore umano ricorrente, minaccia
+  opportunistica) & Medio: uno--due giorni di interruzione, perdita parziale di dati recuperabili,
+  possibile reclamo o segnalazione all'autorità \\
+3 & Alta: evento atteso o già accaduto (minaccia automatizzata e diffusa, nessun controllo, punto
+  ricorrente nei verbali) & Alto: perdita definitiva di dati dei clienti, \textbf{breach da notificare ex
+  art.~33 GDPR}, danno reputazionale o contenzioso \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Propensione al rischio}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l l X}
+\toprule
+\textbf{Punteggio} & \textbf{Livello} & \textbf{Regola} \\ \midrule
+1--2 & Basso & accettabile; nessuna azione obbligatoria; monitoraggio annuale al riesame della direzione \\
+3--4 & Medio & accettabile solo con trattamento documentato o accettazione formale del residuo da parte
+  della direzione \\
+6--9 & Alto & \textbf{non accettabile}: piano di trattamento con owner e scadenza; il residuo deve scendere
+  a medio o meno \\ \bottomrule
+\end{tabularx}
+\end{center}
+\noindent (Con due fattori 1--3 i prodotti possibili sono 1, 2, 3, 4, 6, 9: il valore 5 non esiste.) Il
+playbook collega i concetti della lezione: la \emph{propensione} corrisponde alle soglie, la
+\emph{tolleranza} all'owner e alla scadenza del singolo rischio.
+
+\subsection{La decisione di trattamento}
+La decisione dice \textbf{che cosa fa lo studio del rischio residuo}; non misura quanto è alto il
+residuo. Un residuo medio può portare una qualsiasi delle quattro decisioni.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Decisione} & \textbf{Significato} \\ \midrule
+Ridotto (\emph{Reduced}) & uno o più controlli 8.x mitigano il rischio; il residuo è accettato dalla
+  direzione. Corrisponde a ``mitigare'' nelle slide \\
+Accettato (\emph{Accepted}) & \textbf{nessun ulteriore controllo}: il residuo coincide con l'inerente,
+  già abbastanza basso, e altri controlli non sono giustificati dai costi. Accettazione formale e motivata \\
+Trasferito (\emph{Transferred}) & la perdita \textbf{economica} passa a un terzo (assicurazione cyber,
+  clausole contrattuali, SLA del fornitore); la \textbf{responsabilità} del trattamento resta allo studio \\
+Evitato (\emph{Avoided}) & si abbandona (o non si avvia) l'attività che genera il rischio \\ \bottomrule
+\end{tabularx}
+\end{center}
+Due conseguenze: un rischio \textbf{inerente alto non può mai essere ``Accettato''} (senza misure resterebbe
+alto); una riga ``Trasferita'' può essere inerente alta, ma deve comunque citare controlli 8.x e avere
+residuo medio o basso: il trasferimento copre ciò che i controlli non possono coprire, non li sostituisce.
+Nel lavoro reale ogni accettazione di un residuo medio va firmata dalla direzione.
+
+\subsection{Scegliere i controlli}
+\begin{enumerate}
+  \item Partire dalla \textbf{minaccia/causa} della riga e dagli asset, \textbf{mai dal catalogo}.
+  \item Chiedersi quale dei 34 controlli \textbf{interrompe quella causa}: di solito due--quattro.
+  \item Tenere l'\textbf{insieme minimo} sufficiente. Non si inventa mai un rischio per dare una ``casa''
+    a un controllo: il registro va dal rischio al controllo, non viceversa (il documento guidato dai
+    controlli è la SoA, fuori dall'esercizio).
+\end{enumerate}
+Nella colonna delle misure va un'\textbf{azione concreta} (``TLS obbligatorio su tutti gli scambi con i
+clienti, cifratura completa dei dischi, backup cifrati con gestione documentata delle chiavi''), non il
+nome del controllo (``8.24 uso della crittografia''). Nella giustificazione: minaccia affrontata,
+controllo applicato, proporzionalità, perché il residuo è accettabile; e se la misura agisce sulla
+\textbf{probabilità}, sull'\textbf{impatto} o su entrambi.
+
+\paragraph{Applicabilità.} Dal foglio \emph{Annex A clause 8}:
+\begin{itemize}
+  \item \textbf{26 controlli} applicabili senza riserve;
+  \item \textbf{8.4, 8.25, 8.28} (codice sorgente, sviluppo sicuro, secure coding) \textbf{non applicabili}:
+    lo studio non sviluppa software. Citarli è un errore;
+  \item \textbf{8.11, 8.14, 8.27, 8.30, 8.34} da valutare caso per caso.
+\end{itemize}
+Restano \textbf{31 controlli} di cui rendere conto: ciascuno deve essere citato in qualche riga oppure
+registrato come ``non implicato'', con la motivazione, nel blocco in fondo al foglio dei controlli. Il
+playbook segnala tre controlli che non derivano dai titoli degli scenari e vanno cercati nel testo:
+\textbf{8.30} (sviluppo esternalizzato), \textbf{8.33} (dati di test), \textbf{8.34} (protezione dei
+sistemi durante audit e test).
+
+\subsection{Controlli di coerenza prima della consegna}
+\begin{enumerate}[label=(\alph*)]
+  \item nessun rischio residuo è alto;
+  \item ogni rischio inerente alto ha una decisione con controlli, owner e scadenza (Ridotto o
+    Trasferito; mai Accettato);
+  \item tutti i 31 controlli applicabili sono citati o dichiarati non implicati (l'unica regola senza
+    contatore automatico: va verificata a mano);
+  \item ogni accettazione di un residuo medio è motivata e firmata.
+\end{enumerate}
+Inoltre: probabilità e impatti residui mai superiori agli inerenti; giustificazione presente su ogni riga;
+intestazione del registro compilata. L'efficacia (bassa, media, alta) non entra in alcuna formula: è il
+giudizio che rende credibile il residuo.
+
+\paragraph{Taratura.} La soluzione di riferimento usata in aula valuta \textbf{17 scenari su 18 alti}
+come rischio inerente e \textbf{nessuno alto} dopo il trattamento. Se il proprio profilo inerente è
+quasi tutto medio, probabilmente si sta sottostimando la probabilità di uno studio senza controlli.
+
+% ---------------------------------------------------------------------
+\section{Svolgimento ragionato}
+
+\subsection{R-01 -- Credenziali compromesse (esempio del playbook)}
+\paragraph{Inerente.} Probabilità \textbf{3}: minaccia automatizzata e diffusa (credential stuffing,
+phishing), niente MFA e credenziali condivise. Impatto C \textbf{3} (accesso ai dati fiscali dei clienti:
+breach notificabile e contenzioso), I \textbf{2} (dati alterabili ma recuperabili da backup), A \textbf{1}
+(lo studio continua a lavorare). Punteggi C/I/A = 9/6/3 $\Rightarrow$ \textbf{alto}.
+
+\paragraph{Controlli e misure.} \textbf{8.2, 8.3, 8.5}: MFA su tutti i servizi cloud e sul gestionale,
+eliminazione degli account condivisi, permessi per ruolo con minimo privilegio, password manager, revisione
+trimestrale degli accessi. Efficacia alta.
+
+\paragraph{Residuo.} Probabilità 1, impatti 1/1/1 $\Rightarrow$ \textbf{basso}. Il ragionamento copre
+entrambi gli assi: l'MFA abbatte la \textbf{probabilità}; minimo privilegio e niente account condivisi
+riducono l'\textbf{impatto}, perché limitano ciò che un singolo account compromesso può raggiungere. Chi
+ritiene che l'accesso a dati dei clienti resti comunque notificabile può tenere C~=~2: con probabilità 1 il
+livello resta basso (1~$\times$~2~=~2). Il numero cambia, la conclusione no.
+\textbf{Decisione: Ridotto.}
+
+\subsection{R-17 -- Portale indisponibile (esempio del playbook)}
+\paragraph{Inerente.} Probabilità \textbf{3} (attacco volumetrico automatizzato, un solo hosting
+provider, nessuna mitigazione). Impatto A \textbf{3} (un portale che i clienti non raggiungono è il caso
+tipico di danno reputazionale), C \textbf{1} (un DDoS non divulga nulla), I \textbf{1}. Punteggi 3/3/9
+$\Rightarrow$ \textbf{alto}, come R-01 ma per un motivo opposto.
+
+\paragraph{Controlli e misure.} \textbf{8.21, 8.14, 8.6}: SLA con il provider con impegni di disponibilità
+e penali, mitigazione DDoS lato provider, piano di ripiego documentato (pagina di stato, canale
+alternativo verso i clienti), monitoraggio della disponibilità con alert. Efficacia media: le misure
+riducono frequenza e durata dei fermi, ma non eliminano la minaccia, che sta fuori dal controllo dello
+studio.
+
+\paragraph{Residuo.} Probabilità 2, impatti 1/1/2 $\Rightarrow$ punteggi 2/2/4 $\Rightarrow$
+\textbf{medio}. Una parte dell'esposizione è irriducibile e viene \textbf{spostata}: la perdita economica
+residua va al provider (penali) e a una polizza cyber per interruzione dell'attività; allo studio restano
+il danno reputazionale e la franchigia. \textbf{Decisione: Trasferito}, non perché il residuo sia alto ma
+perché il trasferimento è ciò che chiude la riga.
+
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\toprule
+& \textbf{R-01} & \textbf{R-17} \\ \midrule
+Punteggi inerenti C / I / A & 9 / 6 / 3 & 3 / 3 / 9 \\
+Livello inerente & alto & alto \\
+Controlli & 8.2, 8.3, 8.5 & 8.21, 8.14, 8.6 \\
+Efficacia & alta & media \\
+Livello residuo & basso & medio \\
+Decisione & Ridotto & Trasferito \\ \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{esame}
+Stesso livello inerente, ragioni diverse: il livello da solo non dice come trattare un rischio. Bisogna
+sapere \textbf{quale dimensione} lo rende alto (qui riservatezza in un caso, disponibilità nell'altro) e
+scegliere controlli che agiscono su quella.
+\end{esame}
+
+\begin{integrazione}[Altre righe ragionate (proposta non ufficiale)]
+Valori coerenti con le ancore del file; sono una delle risposte difendibili, non ``la'' risposta.
+\begin{itemize}
+  \item \textbf{R-02 Ransomware.} Inerente: P 3; C 2 (l'attaccante può aver letto dati prima di
+    cifrarli), I 2, A 3 (studio fermo) $\Rightarrow$ 6/6/9, alto. Controlli \textbf{8.7, 8.23, 8.13}: EDR
+    con protezione comportamentale, blocco delle macro nei file da Internet, filtro web e DNS, backup
+    immutabile fuori sede con test di ripristino. I primi due agiscono sulla probabilità (tre strati sulla
+    catena di consegna), il backup è il controllo \emph{correttivo} che riduce l'impatto sulla
+    disponibilità. Residuo: P 1; 2/2/2 $\Rightarrow$ basso. Ridotto.
+  \item \textbf{R-06 Link pubblici.} Inerente: P 3 (impostazioni predefinite del cloud ed errore umano);
+    C 3 (breach notificabile), I 1, A 1 $\Rightarrow$ 9, alto. Controlli \textbf{8.3, 8.9, 8.12}: un
+    controllo per ciascuna causa (restrizione degli accessi con condivisioni solo ad ospiti autenticati e a
+    scadenza; baseline sicura del tenant senza link ``chiunque''; etichette di classificazione con regole DLP).
+    Residuo: P 1, C resta 3 (un documento condiviso con la persona sbagliata resta un breach): 3,
+    \textbf{medio}. Ridotto, con accettazione formale del residuo medio.
+  \item \textbf{R-12 Amministratore esterno.} Inerente: P 2; C 3, I 3, A 2 $\Rightarrow$ alto. Controlli
+    \textbf{8.2, 8.15, 8.18}: account nominativi, elevazione temporanea su richiesta, strumenti di
+    amministrazione remota limitati e tracciati, log centralizzati non modificabili dal fornitore. Le
+    clausole contrattuali e gli audit sul fornitore sono controlli organizzativi: vanno nell'altro registro.
+    Residuo medio (C resta 3: un amministratore che aggira i controlli vede comunque tutto). Ridotto.
+  \item \textbf{R-18 Metadati.} È l'unico scenario plausibilmente \emph{medio} già come inerente: P 2
+    (errore ricorrente, ma i metadati rivelano qualcosa di rilevante solo a volte), C 2 (contesto interno,
+    non una divulgazione massiva di dati personali), I 1, A 1 $\Rightarrow$ 4. È il caso tipico di
+    \textbf{Accettato}: nessuna misura, residuo = inerente, accettazione motivata e firmata; si cita
+    comunque \textbf{8.12} come controllo che lo tratterebbe (rimozione automatica dei metadati in uscita)
+    se la valutazione cambiasse.
+\end{itemize}
+\end{integrazione}
+
+\begin{integrazione}[Una mappatura possibile rischi--controlli]
+\small
+\begin{tabularx}{\linewidth}{l X l X}
+\toprule
+\textbf{ID} & \textbf{Controlli} & \textbf{ID} & \textbf{Controlli} \\ \midrule
+R-01 & 8.2, 8.3, 8.5 & R-10 & 8.24, 8.12 \\
+R-02 & 8.7, 8.23, 8.13 & R-11 & 8.1, 8.24 \\
+R-03 & 8.1, 8.15 & R-12 & 8.2, 8.15, 8.18 \\
+R-04 & 8.13, 8.24 & R-13 & 8.26, 8.27, 8.29, 8.30 \\
+R-05 & 8.15, 8.16, 8.17 & R-14 & 8.32, 8.31, 8.19, 8.9 \\
+R-06 & 8.3, 8.9, 8.12 & R-15 & 8.6, 8.14 \\
+R-07 & 8.8 & R-16 & 8.10, 8.24 \\
+R-08 & 8.9, 8.21 & R-17 & 8.21, 8.14, 8.6 \\
+R-09 & 8.20, 8.22 & R-18 & 8.12 \\ \bottomrule
+\end{tabularx}
+\medskip
+
+\noindent Con questa mappatura restano da dichiarare \emph{non implicati}, con motivazione: \textbf{8.11}
+(nessuno scenario usa dati reali in test o in report verso terzi), \textbf{8.33} (nessuna minaccia riguarda
+la scelta o protezione dei dati di test: in R-14 l'ambiente di test non esiste ancora) e \textbf{8.34}
+(nessuno scenario riguarda audit o test su sistemi operativi; le scansioni di R-07 e i penetration test di
+R-13 sono misure, da pianificare fuori orario o in staging). L'8.30 trova invece posto in R-13, dove il
+portale è ``commissionato'' a un fornitore.
+\end{integrazione}
+
+% ---------------------------------------------------------------------
+\section{Errori tipici}
+\begin{enumerate}
+  \item \textbf{Fare la media} di C, I, A invece di prendere il massimo (C~=~9, I~=~1, A~=~1 è alto).
+  \item Usare \textbf{lo stesso impatto per tutte e tre le dimensioni}: quasi sempre sbagliato, rispondono
+    a domande diverse.
+  \item Scrivere il \textbf{nome del controllo} al posto della misura concreta.
+  \item Scrivere nelle colonne con formule o fuori dai menu a tendina.
+  \item Lasciare un \textbf{residuo alto} non trattato.
+  \item Citare controlli \textbf{non applicabili} (8.4, 8.25, 8.28).
+  \item \textbf{Sottostimare la probabilità} inerente di uno studio senza controlli (troppi rischi medi).
+  \item Residuo uguale all'inerente \textbf{senza spiegazione}; o residuo \emph{superiore} all'inerente.
+    Se un controllo agisce solo sulla probabilità, dirlo: i controlli detective rilevano, non prevengono.
+  \item ``Accettare'' un rischio inerente alto.
+  \item Dimenticare l'\textbf{accountability}: il trasferimento sposta il rischio economico, non l'obbligo.
+  \item Ignorare la dimensione dei \textbf{dati personali}: un impatto C~=~3 va ricondotto a un breach
+    notificabile ex art.~33 GDPR nella giustificazione.
+  \item Dimenticare di rendere conto dei controlli che nessuna riga cita (regola~(c)).
+\end{enumerate}
+
+% ---------------------------------------------------------------------
+\section{Collegamenti}
+\begin{itemize}
+  \item \textbf{ISO/IEC 27001}: il registro attua le clausole \textbf{6.1.2} (valutazione del rischio),
+    \textbf{6.1.3} (trattamento) e \textbf{8.2/8.3} (esecuzione e documentazione) ed è la fonte principale
+    della \textbf{Statement of Applicability}. Teoria nel Capitolo~\ref{cap:iso}; clausole e controlli
+    nelle lezioni del 19/10 e del 23/10 (Capitoli~\ref{lez:2026-10-19} e~\ref{lez:2026-10-23}); risk
+    register, opzioni di trattamento e SoA nella lezione del 26/10 (Capitolo~\ref{lez:2026-10-26}).
+  \item \textbf{ENISA}: la metodologia per i dati personali valuta l'impatto dal punto di vista
+    dell'interessato e, come qui, prende il valore più alto tra C, I, A; utile per controllare ogni impatto
+    C~=~3. Da non confondere con la metodologia di severità dei breach (Capitolo~\ref{cap:data-breach}).
+  \item \textbf{GDPR}: art.~32 (misure adeguate al rischio) e art.~33 (notifica) come ancora dell'impatto
+    massimo.
+  \item \textbf{Esame}: il docente ha indicato tra le ``regole del gioco'' il saper distinguere
+    \textbf{rischio inerente e misure di mitigazione} (lezione del 09/11, Capitolo~\ref{lez:2026-11-09}).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item La soluzione di riferimento del docente non è stata distribuita: si conoscono solo i due esempi del
+    playbook (R-01, R-17) e la taratura ``17 alti su 18, nessuno alto dopo il trattamento''.
+  \item Il file indica come scadenza di R-17 ``Q3 2026'', anteriore alla data di revisione del registro
+    (19/10/2026): probabilmente un refuso del materiale.
+  \item Gli esiti e i criteri di valutazione dei gruppi non sono riportati qui per scelta.
+\end{itemize}
+\end{verifica}

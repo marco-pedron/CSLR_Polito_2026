@@ -37,7 +37,7 @@
 
 % Nota generica (titolo opzionale)
 \newtcolorbox{nota}[1][Nota]{breakable,colback=gray!6,colframe=gray!60!black,
-  fonttitle=\bfseries,title=#1}
+  fonttitle=\bfseries,title={#1}}
 
 % Informazione non confermata in aula o calcolata da noi: da verificare
 \newtcolorbox{verifica}{breakable,colback=orange!6,colframe=orange!80!black,
@@ -45,7 +45,12 @@
 
 % Soluzione di quiz / simulazioni (titolo opzionale)
 \newtcolorbox{soluzione}[1][Soluzione]{breakable,colback=green!4,colframe=green!45!black,
-  fonttitle=\bfseries,title=#1}
+  fonttitle=\bfseries,title={#1}}
+
+% Integrazione dei redattori: contenuto NON detto a lezione né presente nelle slide
+% (titolo opzionale, es. \begin{integrazione}[Art. 33 GDPR])
+\newtcolorbox{integrazione}[1][]{breakable,colback=violet!5,colframe=violet!60!black,
+  fonttitle=\bfseries,title={Integrazione -- non dal corso\ifx&#1&\else: #1\fi}}
 
 % Segnaposto per parti ancora da scrivere
 \newcommand{\dacompletare}[1]{%
@@ -73,4 +78,6 @@
   \refstepcounter{domanda}\par\medskip\noindent
   \textbf{Domanda \thedomanda}\ifx&#1&\else\ \textit{(#1)}\fi\textbf{.}~}%
   {\par}
+% Rimando cliccabile a una lezione del diario: \rif{AAAA-MM-GG}{GG/MM}
+\newcommand{\rif}[2]{\hyperref[lez:#1]{lez.~#2}}
 \newenvironment{opzioni}{\begin{enumerate}[label=(\alph*),nosep,leftmargin=2.2em]}{\end{enumerate}}

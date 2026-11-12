@@ -1,11 +1,483 @@
 \chapter{Introduzione e quadro normativo europeo}
 \label{cap:introduzione}
 
-\dacompletare{Fonte: slide \emph{01.~Cybersecurity Laws and Regulations -- I -- Introductory class}.
-Scaletta prevista:
+\begin{nota}[Fonti]
+Lezione introduttiva del 21/09/2026 (Capitolo~\ref{lez:2026-09-21}) e slide \emph{01.~Cybersecurity
+Laws and Regulations -- I -- Introductory class: the red thread}. Per hard law e soft law: lezione del
+09/11/2026 (Capitolo~\ref{lez:2026-11-09}). Questo capitolo dà la mappa del corso: i dettagli di ogni
+norma sono nei capitoli successivi.
+\end{nota}
+
+% =====================================================================
+\section{Perché un diritto della cybersicurezza}
+\label{sec:intro-perche}
+
+Il corso studia come il diritto protegge beni \textbf{immateriali} (dati, sistemi, prodotti, modelli di
+IA) e chi risponde quando la protezione fallisce. Per un ingegnere la differenza tra un dato personale e
+uno non personale, o tra un incidente e una violazione di dati, può sembrare minima; per il diritto è
+enorme, perché da quella qualificazione dipendono obblighi, scadenze, autorità e sanzioni.
+
+Tre ragioni per studiare le norme europee, anche per chi lavorerà fuori dall'Unione:
 \begin{itemize}
-  \item regolamenti e direttive: applicabilità diretta e recepimento nazionale;
-  \item gerarchia delle fonti: norme UE, norme nazionali e di settore, standard tecnici (ISO);
-  \item panoramica delle norme del corso (GDPR, NIS2, DORA, CRA, AI Act, CSA) e del loro ambito;
-  \item principi trasversali: approccio basato sul rischio, accountability, onere della prova.
-\end{itemize}}
+  \item la regolazione UE \textbf{fa scuola}: il GDPR è stato ripreso da molti ordinamenti (Brasile,
+    Svizzera, Singapore tra gli esempi citati), e alcuni Stati USA si avvicinano all'AI Act;
+  \item l'approccio europeo basato su \textbf{valutazione del rischio} (\emph{risk assessment}) e
+    \textbf{responsabilizzazione} (\emph{accountability}) è ormai il linguaggio comune della sicurezza
+    in tutto il mondo;
+  \item chi ha competenze tecniche \emph{e} un minimo di compliance può gestire da sé le decisioni
+    durante un incidente (notificare o no, con quale motivazione), invece di doverle spiegare a chi non
+    conosce l'IT. Gli esempi del docente: un CEO convinto di conoscere la \emph{root cause} di un
+    breach, che non era quella reale; un altro che rifiutava di avvisare gli interessati per timore del
+    danno reputazionale, rischiando che l'autorità imponesse poi la comunicazione.
+\end{itemize}
+
+\paragraph{Diritto e tecnologia.} La privacy è un \textbf{diritto fondamentale} (artt.~7 e 8 della Carta
+dei diritti fondamentali dell'UE): per questo si può regolare in modo stabile. La tecnologia, invece,
+cambia continuamente, e quando la legge la ``insegue'' arriva sempre in ritardo. L'esempio è l'AI Act:
+la prima bozza (2020) non prevedeva nulla sull'IA generativa, esplosa dal novembre 2022, e la parte sui
+modelli generativi è stata aggiunta in corsa. Le norme che durano sono quelle che fissano un
+\textbf{metodo} (valutare il rischio, scegliere misure adeguate, dimostrarlo) invece di un elenco di
+tecnologie.
+
+\begin{esame}
+\begin{itemize}
+  \item L'obiettivo del corso è capire \textbf{risk assessment} e \textbf{compliance}, su cui si
+    basano tutte le norme studiate: non serve imparare gli articoli a memoria.
+  \item Saper fare un \textbf{severity assessment} di un data breach vale, secondo il docente,
+    ``circa il 20\% dell'esame'' (Capitolo~\ref{cap:data-breach}).
+  \item Tipica domanda aperta: capire \textbf{quale soggetto} deve notificare e \textbf{a quale norma}
+    è soggetta l'organizzazione (ad esempio: è soggetta a DORA o no?).
+  \item ``Sapere quale domanda pone una norma è la competenza più utile che il corso può dare.''
+\end{itemize}
+\end{esame}
+
+% =====================================================================
+\section{Il filo rosso: lunedì, ore 8:14}
+\label{sec:intro-scenario}
+
+Tutto il corso ruota intorno a uno scenario. Lunedì alle 8:14 un \textbf{ransomware} colpisce la
+società che gestisce la piattaforma di prenotazione online di una rete ospedaliera regionale. Alle 8:20
+è un problema tecnico; alle 9:00 è un problema legale. In ogni incidente vanno guardati tre elementi:
+\begin{itemize}
+  \item \textbf{dati}: 200.000 cartelle cifrate e una copia esfiltrata; sono \textbf{dati sanitari},
+    cioè categorie particolari (art.~9 GDPR);
+  \item \textbf{servizio}: prenotazioni ferme per quattro giorni, si torna alla carta. Dieci anni fa
+    contava soprattutto il dato; oggi conta anche la \textbf{continuità}, perché un paziente che non
+    riesce a prenotare può subire un danno (e ne nasce un contenzioso);
+  \item \textbf{supply chain}: l'ingresso è avvenuto attraverso un componente vulnerabile del software
+    di un fornitore. ``Non è un problema mio'' è falso: chi sceglie il fornitore ne risponde, salvo
+    rivalersi su di lui.
+\end{itemize}
+In più, lo strumento di \emph{triage} basato su IA, addestrato su quel database, comincia a dare
+risultati inaffidabili e nessuno se ne accorge per due giorni. La domanda del corso è: \emph{quanti
+obblighi legali sono partiti alle 8:14?}
+
+\subsection{Un evento, cinque regimi (più il diritto penale)}
+\label{sec:intro-regimi}
+
+Nessuna norma, da sola, governa quella mattina. Ne valgono diverse contemporaneamente, ciascuna con il
+proprio \textbf{bene protetto}, la propria \textbf{autorità} e il proprio \textbf{orologio}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.1cm} X >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{1.8cm}}
+\toprule
+\textbf{Regime} & \textbf{Che cosa protegge} & \textbf{A chi si risponde} & \textbf{Capitolo}\\
+\midrule
+GDPR (Reg.~UE 2016/679) & i dati personali dei pazienti & Garante / autorità capofila &
+  \ref{cap:gdpr}, \ref{cap:data-breach}\\
+NIS2 (Dir.~UE 2022/2555; in Italia D.lgs.~138/2024) & la continuità di un servizio essenziale &
+  CSIRT Italia / ACN & \ref{cap:nis2}\\
+CRA (Reg.~UE 2024/2847) & il prodotto con elementi digitali & CSIRT + piattaforma unica ENISA &
+  \ref{cap:cra}\\
+DORA (Reg.~UE 2022/2554) & la resilienza di una funzione finanziaria & autorità competente / ESA &
+  \ref{cap:dora}\\
+AI Act (Reg.~UE 2024/1689) & il sistema di IA e chi vi è esposto & autorità di vigilanza del mercato &
+  \ref{cap:aiact}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nello scenario ospedaliero non tutti i regimi si applicano davvero: DORA, per esempio, riguarda solo
+banche, finanza e assicurazioni. Il punto è un altro: \textbf{stessi fatti, domande diverse}. Il primo
+passo di ogni analisi è capire quali norme sono attivate e da quale evento parte ciascun orologio
+(Sezione~\ref{sec:intro-orologi}).
+
+\paragraph{Il diritto penale in parallelo.} Gli stessi fatti sono anche \textbf{reati}: la Convenzione
+di Budapest sul cybercrime (23 novembre 2001) armonizza le fattispecie (accesso illegale,
+intercettazione illecita, danneggiamento di dati e sistemi, abuso di dispositivi, falso e frode
+informatica), i poteri procedurali (conservazione rapida dei dati, ordini di esibizione, perquisizione
+e sequestro di dati) e la cooperazione internazionale; il Secondo Protocollo addizionale (2022)
+riguarda le prove elettroniche. In Italia le fattispecie corrispondono agli artt.~615-\emph{ter},
+617-\emph{quater}, 635-\emph{bis} e 640-\emph{ter} del codice penale. Lo stesso evento si divide in due
+fascicoli: uno \textbf{amministrativo}, in cui l'organizzazione deve dimostrare di essere stata
+diligente, e uno \textbf{penale}, in cui è lo Stato a dover dimostrare che qualcuno non lo è stato.
+Procedura e standard probatorio sono diversi. La Convenzione non ha una lezione dedicata, ma conta per
+la \textbf{giurisdizione}: anche ciò che sta nel cloud ha una giurisdizione.
+
+\begin{integrazione}[i reati informatici citati]
+Art.~615-\emph{ter} c.p.: accesso abusivo a un sistema informatico o telematico.
+Art.~617-\emph{quater} c.p.: intercettazione, impedimento o interruzione illecita di comunicazioni
+informatiche o telematiche. Art.~635-\emph{bis} c.p.: danneggiamento di informazioni, dati e programmi
+informatici. Art.~640-\emph{ter} c.p.: frode informatica. La L.~90/2024 ha inasprito diverse di queste
+pene. La Convenzione di Budapest non è stata firmata, tra gli altri, da Russia e Cina (come ricordato
+in aula).
+\end{integrazione}
+
+% =====================================================================
+\section{Le quattro domande e la mappa del corso}
+\label{sec:intro-domande}
+
+Ogni lezione risponde a una di quattro domande:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.3cm} X >{\raggedright\arraybackslash}p{3.2cm}}
+\toprule
+\textbf{Domanda} & \textbf{Contenuti} & \textbf{Dove nel manuale}\\
+\midrule
+1. \textbf{Che cosa} proteggiamo? & dati personali e non personali, reti e sistemi informativi,
+  prodotti con elementi digitali, modelli di IA & Sez.~\ref{sec:intro-dati}; cap.~\ref{cap:gdpr},
+  \ref{cap:cra}, \ref{cap:aiact}\\
+2. \textbf{Come} dobbiamo proteggerlo? & approccio basato sul rischio, misure di sicurezza, sistemi di
+  gestione, certificazione e valutazione di conformità & Sez.~\ref{sec:intro-rischio};
+  cap.~\ref{cap:iso}, \ref{cap:csa}\\
+3. \textbf{Che cosa succede} se la protezione fallisce? & obblighi di notifica e scadenze,
+  responsabilità, sanzioni amministrative, reati & cap.~\ref{cap:data-breach}, \ref{cap:scadenze}\\
+4. \textbf{Chi decide}? & autorità di controllo, CSIRT, ENISA, agenzie nazionali, organismi notificati,
+  tribunali & Sez.~\ref{sec:intro-autorita}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Le due parti del corso.} La \textbf{Parte~I (dati e privacy)} dà gli oggetti e il linguaggio:
+quadro internazionale (Consiglio d'Europa, OCSE), GDPR, applicazioni settoriali e Reg.~(UE) 2018/1807
+sui dati non personali, AI Act e approccio basato sul rischio. La \textbf{Parte~II (cybersicurezza e
+cybercrime)} li mette sotto pressione: Convenzione di Budapest, data breach, NIS2 e Cybersecurity Act,
+AI Act e sicurezza, ISO/IEC~27001 e risk assessment, organismi UE e casi di studio.
+
+\subsection{L'oggetto che si sposta}
+Ogni generazione di norme risponde ai limiti della precedente e allarga ciò che il diritto considera
+``la cosa da proteggere''. Cambia il bene; il metodo resta lo stesso.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{4.2cm} X}
+\toprule
+\textbf{Anno} & \textbf{Strumento} & \textbf{Che cosa cambia}\\
+\midrule
+1980 & Linee guida OCSE & le misure di sicurezza diventano un principio (soft law)\\
+1981 & Convenzione 108 (Consiglio d'Europa) & primo trattato vincolante sulla protezione dei dati:
+  si protegge un \emph{archivio}\\
+2001 & Convenzione di Budapest & il cybercrime diventa una categoria internazionale\\
+2016 & GDPR (e prima direttiva NIS) & la sicurezza diventa un obbligo sanzionabile: si protegge un
+  \emph{processo}\\
+2018 & Reg.~(UE) 2018/1807 & entrano in scena i dati non personali\\
+2019 & Cybersecurity Act & mandato permanente di ENISA e certificazione europea\\
+2022 & NIS2 e DORA & resilienza, supply chain, responsabilità degli organi di vertice: si protegge un
+  \emph{servizio}\\
+2024 & AI Act e CRA & entrano nel perimetro il \emph{prodotto} e il \emph{modello}\\
+2026 & segnalazioni CRA, misure NIS2, AI Omnibus & la frontiera continua a muoversi\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% =====================================================================
+\section{Le fonti del diritto}
+\label{sec:intro-fonti}
+
+\subsection{Tre livelli}
+I dati ignorano i confini; l'\emph{enforcement} no. Per questo la materia si studia su tre livelli
+contemporaneamente:
+\begin{itemize}
+  \item \textbf{internazionale}: Convenzione 108 del Consiglio d'Europa (1981), primo trattato
+    vincolante, e Convenzione 108+ (aperta alla firma nel 2018; secondo le slide 34 ratifiche delle 38
+    necessarie, quindi non ancora in vigore); Linee guida OCSE sulla privacy (1980, riviste nel 2013),
+    soft law che ha influenzato tutto ciò che è venuto dopo; Convenzione di Budapest (2001) e Secondo
+    Protocollo (2022);
+  \item \textbf{Unione europea}: regolamenti e direttive (sotto); è da qui che proviene ormai quasi tutto
+    il diritto vincolante della cybersicurezza;
+  \item \textbf{nazionale}: in Italia il D.lgs.~196/2003 (Codice privacy, modificato), il
+    D.lgs.~138/2024 (recepimento della NIS2), la L.~90/2024; le istituzioni (Garante per la protezione
+    dei dati personali, ACN, CSIRT Italia); i reati informatici del codice penale.
+\end{itemize}
+Per un ingegnere la conseguenza è concreta: la stessa architettura (una region cloud, un fornitore, un
+modello) è un oggetto giuridico diverso a seconda di dove stanno i dati, dove è offerto il servizio e chi
+ne subisce gli effetti.
+
+\begin{nota}[Corti europee: attenzione]
+La \textbf{Corte di giustizia dell'Unione europea} (CGUE, Lussemburgo) è un'istituzione dell'UE e
+interpreta il diritto dell'Unione (per esempio nei casi \emph{Google Spain} e \emph{Lindqvist},
+Capitolo~\ref{cap:gdpr}). La \textbf{Corte europea dei diritti dell'uomo} (CEDU, Strasburgo)
+appartiene invece al Consiglio d'Europa e \textbf{non fa parte dell'UE}: le slide lo segnalano
+esplicitamente come trappola.
+\end{nota}
+
+\subsection{Regolamento e direttiva}
+\label{sec:intro-reg-dir}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X X}
+\toprule
+ & \textbf{Regolamento} & \textbf{Direttiva}\\
+\midrule
+Efficacia & si applica direttamente e in modo identico in tutti gli Stati membri & obbliga gli Stati a
+  raggiungere un risultato; va \textbf{recepita} con una legge nazionale\\
+Margine nazionale & minimo (salvo le aperture previste dal regolamento stesso) & ampio: ambito, sanzioni e
+  vigilanza possono differire da Stato a Stato\\
+Effetto pratico & stesse regole in Germania e in Italia & 27 ``perimetri'' nazionali diversi\\
+Esempi del corso & GDPR, Cybersecurity Act, DORA, AI Act, CRA & NIS2 (in Italia D.lgs.~138/2024)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Secondo il docente oggi circa il 90\% degli atti UE della materia sono regolamenti: un vantaggio
+rispetto agli Stati Uniti, dove federazione e singoli Stati legiferano separatamente (California, New
+York e Washington hanno leggi proprie sull'IA). Il docente presenta la distinzione come un
+\textbf{principio generale da capire}, più che come probabile domanda d'esame.
+
+\begin{integrazione}[base giuridica della distinzione]
+La distinzione è fissata dall'art.~288 del Trattato sul funzionamento dell'Unione europea (TFUE): il
+regolamento ha portata generale, è obbligatorio in tutti i suoi elementi ed è direttamente applicabile
+in ciascuno Stato membro; la direttiva vincola lo Stato cui è rivolta quanto al risultato da
+raggiungere, lasciando agli organi nazionali la scelta della forma e dei mezzi. Anche
+un regolamento può però lasciare spazi agli Stati: il GDPR, per esempio, consente norme nazionali su età
+del consenso dei minori, dati sanitari, rapporti di lavoro e sanzioni penali (in Italia attuate con il
+D.lgs.~101/2018, che ha adeguato il Codice privacy).
+\end{integrazione}
+
+\subsection{Hard law e soft law}
+\label{sec:intro-hard-soft}
+La \textbf{hard law} è la norma vincolante con conseguenze \emph{predeterminate} dalla legge (GDPR, CRA,
+NIS2, DORA, AI Act); la \textbf{soft law} comprende policy aziendali, linee guida (ad esempio quelle
+ENISA), standard (ISO) e schemi di certificazione, la cui violazione ha conseguenze non fissate dalla
+legge e lasciate a un'ampia discrezionalità. Le norme del corso dicono di ``essere sicuri'' ma non come:
+la sostanza operativa della cybersicurezza è soft law, che ogni organizzazione deve costruire per
+dimostrare il rispetto della hard law. Il tema è sviluppato nella lezione del 09/11
+(Capitolo~\ref{lez:2026-11-09}) e nel capitolo sul Cybersecurity Act (Capitolo~\ref{cap:csa}); secondo
+il docente non è una domanda d'esame, ma serve per rispondere bene alle altre.
+
+% =====================================================================
+\section{Dato personale e dato non personale}
+\label{sec:intro-dati}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X X}
+\toprule
+ & \textbf{Dati personali (GDPR)} & \textbf{Dati non personali (Reg.~UE 2018/1807)}\\
+\midrule
+Definizione & qualsiasi informazione relativa a una persona fisica identificata o
+  \textbf{identificabile} & tutto il resto: dati macchina, telemetria, dati aggregati e anonimizzati\\
+Bene protetto & un diritto fondamentale (artt.~7--8 della Carta) & il mercato interno, non l'individuo\\
+Obblighi & legati a finalità, liceità e rischio per la persona & divieto di obblighi di localizzazione
+  dei dati; portabilità per gli utenti professionali\\
+Sicurezza & è un principio del trattamento (art.~5(1)(f) GDPR) & gli obblighi arrivano da altre fonti:
+  NIS2, DORA, CRA, contratti\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{I dataset misti sono la regola.} Se dati personali e non personali sono inestricabilmente
+collegati, il GDPR si applica all'intero insieme (art.~2(2) Reg.~2018/1807). La maggior parte dei
+dataset reali è mista.
+
+\paragraph{Anonimizzare non è togliere il nome.} Giuridicamente un dato è anonimo solo se nessun
+elemento consente di ricondurlo alla persona, \textbf{né direttamente né indirettamente}. Esempi
+citati: un riferimento a fatti noti che identifica subito un politico famoso anche senza nominarlo;
+``l'unica persona in città con questa malattia''. Negli audit le aziende convinte di aver anonimizzato
+scoprono spesso molte possibilità di re-identificazione indiretta, e con i modelli linguistici la
+re-identificazione è diventata molto più facile. Le slide aggiungono che l'anonimizzazione ``non è una
+porta a senso unico'': sono proprio le misure di sicurezza a mantenere anonimi i dati ``anonimi''. I dati
+non personali hanno molti meno vincoli, e il docente indica nei \textbf{dati sintetici} un settore in
+crescita.
+
+\paragraph{L'indirizzo IP è un dato personale?} Sì, perché rende la persona \emph{identificabile}, anche
+quando è dinamico. Il percorso per risalire alla persona passa per il fornitore del servizio (quale IP
+era in uso in quel momento) e poi per l'operatore di rete (chi pagava la connessione); in Europa la
+richiesta passa dall'autorità giudiziaria, e il risultato è solo un indizio (chi paga la bolletta non è
+necessariamente chi ha agito). Anche un indirizzo email come \texttt{nomignolo74@gmail.com} è un dato
+personale, perché il fornitore può ricondurlo a una persona.
+
+\begin{integrazione}[pseudonimizzazione e IP dinamico]
+\begin{itemize}
+  \item Il dato \textbf{pseudonimizzato} (art.~4(5) GDPR: non più attribuibile all'interessato senza
+    informazioni aggiuntive conservate separatamente) resta un \textbf{dato personale}; solo il dato
+    davvero anonimo esce dal GDPR (considerando 26). La pseudonimizzazione è una misura di sicurezza
+    (art.~32(1)(a)), non un modo per uscire dalla norma.
+  \item Sull'IP dinamico la CGUE si è pronunciata nella sentenza \emph{Breyer} (C-582/14, 2016): è dato
+    personale per il gestore del sito se questi dispone di mezzi giuridici ragionevoli per ottenere
+    dal fornitore di accesso le informazioni che consentono l'identificazione.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{L'approccio basato sul rischio}
+\label{sec:intro-rischio}
+
+\subsection{Il GDPR come prima legge sulla cybersicurezza}
+Molto prima della NIS2, il GDPR ha dato alla sicurezza un nome giuridico, un metodo e un prezzo:
+\begin{itemize}
+  \item \textbf{art.~5(1)(f)}: integrità e riservatezza come \emph{principio} del trattamento, non come
+    allegato o opzione;
+  \item \textbf{artt.~24--25}: accountability (dimostrare la conformità), protezione dei dati fin dalla
+    progettazione e per impostazione predefinita;
+  \item \textbf{art.~32}: misure adeguate al rischio, tenendo conto dello stato dell'arte e dei costi;
+  \item \textbf{artt.~33--34 e 35}: notifica in 72 ore, comunicazione agli interessati se il rischio è
+    elevato, valutazione d'impatto (DPIA) per i trattamenti ad alto rischio.
+\end{itemize}
+L'art.~32 è ``il cardine del corso'' perché dice tre cose che tutte le norme successive ripetono: la
+sicurezza è \textbf{relativa al rischio}; si misura rispetto a uno standard che si muove (lo
+\textbf{stato dell'arte}); qualcuno deve poterla \textbf{dimostrare}. Nessun articolo del GDPR indica
+quale controllo adottare: è un silenzio voluto, riempito da ISO/IEC~27001 e dalle metodologie ENISA.
+
+\subsection{Una grammatica comune}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}p{2.6cm} X}
+\toprule
+\textbf{Strumento} & \textbf{Dove} & \textbf{Che cosa chiede}\\
+\midrule
+GDPR & artt.~32, 35 & misure adeguate al rischio per diritti e libertà; DPIA se il rischio è elevato\\
+NIS2 & art.~21 & misure di gestione del rischio ``multi-rischio'', proporzionate a esposizione,
+  dimensione e impatto\\
+DORA & artt.~5--16 & un quadro di gestione del rischio ICT approvato dall'organo di gestione\\
+AI Act & artt.~9, 15 & un sistema di gestione del rischio lungo tutto il ciclo di vita; accuratezza,
+  robustezza, cybersicurezza\\
+ISO/IEC~27001 & cl.~6.1 e Allegato~A & identificare, analizzare, valutare, trattare: in modo
+  documentato, verificabile, certificabile\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Il metodo è sempre lo stesso: \textbf{contesto} $\rightarrow$ \textbf{identificazione} $\rightarrow$
+\textbf{analisi} $\rightarrow$ \textbf{valutazione} $\rightarrow$ \textbf{trattamento} $\rightarrow$
+\textbf{monitoraggio}. Il rischio si stima con due grandezze, \textbf{probabilità} e \textbf{gravità};
+le misure riducono il rischio \emph{inerente} a un rischio \emph{residuo}, ed è quest'ultimo che decide
+(Capitolo~\ref{cap:gdpr}, DPIA; Capitolo~\ref{cap:iso}).
+
+L'approccio basato sul rischio \textbf{non è una fuga dalle regole}: è una regola che dice che gli
+obblighi crescono con ciò che si può rompere. Per questo la stessa azienda deve di più a un ospedale che a
+una newsletter, e ``abbiamo seguito la checklist'' non è mai stato una difesa.
+
+\subsection{La compliance è un problema di prova}
+In due sensi: preservare le \textbf{prove digitali} e, soprattutto, poter \textbf{dimostrare} di aver
+fatto il possibile per prevenire l'incidente (accountability). Gli attacchi non si possono evitare del
+tutto (la citazione di Eugene Spafford chiude le slide sul GDPR): la domanda non è \emph{se} ma
+\emph{quando}. Sistemi di gestione (ISO/IEC~27001), certificazione dei prodotti (Cybersecurity Act,
+schema EUCC) e valutazione di conformità (CRA, AI Act) servono a questo. Un certificato è un
+\textbf{elemento di prova}, mai un'immunità: GDPR (artt.~42--43), NIS2 (art.~24) e Cybersecurity Act
+trattano la certificazione come prova da pesare, non come porto sicuro.
+
+\subsection{Il perimetro è la supply chain}
+Tutti i regimi del corso sono arrivati alla stessa conclusione: si risponde anche di chi non si impiega.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2cm} >{\raggedright\arraybackslash}p{2.4cm} X}
+\toprule
+\textbf{Norma} & \textbf{Dove} & \textbf{Effetto sui contratti con i fornitori}\\
+\midrule
+GDPR & art.~28 & responsabili vincolati da contratto, istruzioni, diritti di audit, consenso ai
+  sub-responsabili\\
+NIS2 & art.~21(2)(d) & sicurezza della catena di approvvigionamento come misura obbligatoria\\
+DORA & artt.~28--30 & contenuti contrattuali obbligatori, registro degli accordi, sorveglianza UE sui
+  fornitori ICT critici\\
+CRA & artt.~13--14 & obblighi che seguono il prodotto (fabbricante, importatore, distributore): SBOM,
+  gestione delle vulnerabilità, aggiornamenti\\
+AI Act & artt.~22--25 & ruoli lungo la catena del valore; chi modifica un sistema può diventarne il
+  fornitore\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% =====================================================================
+\section{Le autorità}
+\label{sec:intro-autorita}
+
+Ogni regime porta la propria autorità: disegnare correttamente questa mappa è metà della risposta a un
+incidente. ``Alle 8:14 bisogna sapere chi chiamare.''
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.2cm} X}
+\toprule
+\textbf{Ambito} & \textbf{Autorità}\\
+\midrule
+Protezione dei dati & Garante per la protezione dei dati personali (autorità indipendente); Comitato
+  europeo per la protezione dei dati (EDPB: coerenza, linee guida); Garante europeo (EDPS) per le
+  istituzioni UE\\
+Cybersicurezza -- UE & ENISA (certificazione, panorama delle minacce, piattaforma unica di
+  segnalazione); NIS Cooperation Group (strategia e indirizzi); EU-CyCLONe (crisi su larga scala)\\
+Risposta operativa & CSIRT Italia, all'interno dell'ACN (``il numero da chiamare''); rete europea dei
+  CSIRT; CERT di settore\\
+Vigilanza NIS2 & ACN come autorità nazionale competente; autorità di settore per soggetti specifici\\
+Finanza (DORA) & EBA, ESMA, EIOPA e autorità nazionali; sorveglianza dei fornitori ICT critici\\
+Intelligenza artificiale & AI Office e AI Board; autorità nazionali di vigilanza del mercato; autorità
+  di notifica e organismi notificati\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Due conseguenze, secondo le slide: \textbf{non si sceglie il foro}, e un difetto di coordinamento tra
+queste autorità è un rischio dell'organizzazione, non loro. Per l'AI Act il docente cita in Italia
+l'\textbf{AgID}, agenzia governativa (non indipendente come il Garante).
+
+\paragraph{Verso un punto unico di segnalazione.} Con il pacchetto \emph{Digital Omnibus} si andrà verso
+un \textbf{punto unico di segnalazione} degli incidenti presso ENISA, che poi informerà le autorità
+competenti: per il docente sarà ``la rivoluzione più importante'', perché oggi le autorità nazionali non
+si parlano abbastanza mentre lo stesso malware colpisce in tutta Europa. Non è però ancora operativo.
+
+\begin{esame}
+\begin{itemize}
+  \item Vanno studiate \textbf{tutte le autorità} e lo \textbf{schema delle notifiche vigente}: il
+    punto unico ENISA del Digital Omnibus non è ancora operativo.
+  \item \textbf{Attenzione alla sigla DPA}: \emph{Data Protection Authority} (l'autorità) ma anche
+    \emph{Data Processing Agreement} (il contratto con il responsabile, art.~28 GDPR). Il docente usa
+    ``DPA'' per il contratto e dice \emph{data protection authority} per l'autorità; nel dubbio, all'esame
+    si può chiedere chiarimento.
+\end{itemize}
+\end{esame}
+
+\begin{integrazione}[autorità italiane per l'AI Act]
+La legge italiana sull'intelligenza artificiale (L.~132/2025) designa come autorità nazionali per l'AI
+Act l'\textbf{AgID} (autorità di notifica, con compiti di promozione) e l'\textbf{ACN} (vigilanza,
+incluse le attività ispettive e sanzionatorie, e profili di cybersicurezza), ferme restando le
+competenze di Garante e autorità di settore. Da confrontare con il capitolo sull'AI Act
+(Capitolo~\ref{cap:aiact}).
+\end{integrazione}
+
+% =====================================================================
+\section{Un incidente, cinque orologi}
+\label{sec:intro-orologi}
+
+La parte difficile della risposta a un incidente non è tecnica: ogni regime conta il tempo in modo
+diverso e \textbf{da un evento diverso}. La tabella mostra solo da che cosa parte ciascun orologio e che
+cosa misura; fasi, scadenze intermedie e trappole sono nella tabella comparativa del
+Capitolo~\ref{cap:scadenze}.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.3cm} X >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+\textbf{Regime} & \textbf{L'orologio parte quando\ldots} & \textbf{Che cosa misura} & \textbf{Prima scadenza}\\
+\midrule
+GDPR artt.~33--34 & il titolare è consapevole di una violazione di dati personali & il danno alle
+  persone & 72 h\\
+NIS2 art.~23 & si è consapevoli di un incidente significativo & l'interruzione del servizio & 24 h\\
+DORA art.~19 & l'incidente è classificato come grave & l'impatto su una funzione & 4 h\\
+CRA art.~14 & si è consapevoli di una vulnerabilità attivamente sfruttata o di un incidente grave &
+  la sfruttabilità del prodotto & 24 h\\
+AI Act art.~73 & si accerta un incidente grave e il nesso causale con il sistema & la gravità
+  dell'esito & 15 giorni\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Il docente sottolinea le sole \textbf{4 ore} di DORA. Le notifiche corrono \textbf{in parallelo}: una
+notifica fatta a un'autorità non adempie gli obblighi verso un'altra (esempi nei laboratori:
+GDPR + DORA nel caso Sylvane, Capitolo~\ref{lab:02}; GDPR + CRA nella simulazione Pulse~K,
+Sezione~\ref{sec:pulsek}).
+
+\begin{verifica}
+\begin{itemize}
+  \item Ruolo delle autorità italiane per l'AI Act (AgID, ACN): il docente ha citato solo l'AgID; il
+    quadro va confermato nella parte del corso sull'AI Act.
+  \item Stato del \emph{Digital Omnibus}: in aula è stato detto sia che è stato ``applicato a luglio''
+    sia che il punto unico di segnalazione non è in vigore; le slide citano solo l'\emph{AI Omnibus}
+    (in vigore dal 27 luglio 2026).
+  \item Le date e le scadenze delle slide cambiano spesso (``tre scadenze di queste slide sono cambiate
+    negli ultimi dodici mesi''): verificare sempre sul testo vigente.
+\end{itemize}
+\end{verifica}

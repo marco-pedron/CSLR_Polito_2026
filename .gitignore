@@ -1,0 +1,11 @@
+# Whitelist: nel repo vanno SOLO i sorgenti LaTeX del manuale e il README.
+# Video, audio, trascrizioni, slide e materiale del corso restano in locale (copyright).
+/*
+!/.gitignore
+!/README.md
+!/manuale/
+
+/manuale/**
+!/manuale/**/
+!/manuale/**/*.tex
+!/manuale/latexmkrc

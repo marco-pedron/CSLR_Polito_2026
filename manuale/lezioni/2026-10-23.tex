@@ -1,0 +1,170 @@
+% =====================================================================
+\lezione{23/10/2026}{Controlli tecnologici 8.8--8.34 e introduzione al risk management ISO}
+  {Gianluca Gilardi (lezione online)}
+  {gestione delle vulnerabilità; configurazione; cancellazione sicura; data masking; DLP; backup;
+   ridondanza; logging e limite dei 21 giorni; monitoraggio; rete e zero trust; crittografia;
+   sviluppo sicuro; change management; dati di test; risk management ISO vs GDPR; asset, minacce,
+   vulnerabilità}
+\label{lez:2026-10-23}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione (lezione online), revisionata. Numeri e titoli dei controlli
+dalle slide \emph{04.~polito\_iso\_2026} (slide 39--49); la parte sul rischio dalle slide
+\emph{06.~27001\_2026\_2310} (\emph{Risk Management}). Lezione chiusa in anticipo dal docente.
+\end{nota}
+
+\section{Sintesi}
+Gianluca completa la rassegna dei 34 controlli tecnologici dell'Allegato~A, insistendo sui punti in cui
+la sicurezza entra in tensione con il GDPR e il diritto del lavoro (DLP, logging, monitoraggio). Molti
+controlli sono ``buon senso'', ma proprio per questo vengono spesso trascurati. Nell'ultima parte avvia il
+\textbf{risk management secondo la ISO}: qui impatto e probabilità si misurano sull'\textbf{organizzazione},
+non sui diritti e le libertà degli interessati come nella valutazione di severità di un breach.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item Le slide sul risk management vengono caricate in piattaforma subito dopo la lezione; domande
+    sul tema si possono porre lunedì 26/10.
+  \item Gianluca chiede al professore un'ora del lunedì per completare il risk management prima del
+    laboratorio del venerdì successivo (30/10).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Controlli tecnologici 8.8--8.34}
+
+\begin{nota}[Attualità: perché l'8.8 serve davvero]
+Nelle 48 ore precedenti la lezione, alcune vulnerabilità molto critiche in librerie PHP hanno costretto
+mezzo mondo a spegnere sistemi in attesa delle patch. Avere un inventario degli asset, sapere quali
+sistemi sono esposti e un processo di patching già definito è ciò che ha permesso di gestire la crisi.
+\end{nota}
+
+\begin{description}
+  \item[8.9 Gestione della configurazione.] Si definisce una \emph{baseline} sicura; ogni modifica
+    rilevante segue un processo con valutazione dei rischi, piano di rollback e benefici attesi. In ogni
+    momento si deve poter dire quanto la configurazione corrente si discosta dalla baseline.
+  \item[8.10 Cancellazione delle informazioni.] Cancellazione sicura a fine ciclo di vita, inclusi i
+    backup (serve sapere quante copie esistono e dove). Con i grandi fornitori cloud non si ottengono
+    evidenze di cancellazione di un singolo bucket: si deve almeno documentare come si è gestito il
+    problema, perché l'auditor lo chiederà.
+  \item[8.11 Data masking.] Nasce per la conformità GDPR ma vale per ogni informazione riservata;
+    soprattutto negli ambienti non di produzione. Alternativa diffusa: i dati sintetici.
+  \item[8.12 Data leakage prevention.] Controllo introdotto nell'ultima revisione: rilevare e bloccare
+    l'esfiltrazione via email e altri canali significa monitorare le comunicazioni, con tensione rispetto
+    al GDPR e all'art.~4 dello Statuto dei lavoratori. Chi esclude 8.8 o 8.12 dalla dichiarazione di
+    applicabilità deve avere una motivazione documentata molto solida.
+  \item[8.13 Backup.] Un backup vale quanto la possibilità di ripristinarlo: serve un piano di
+    \textbf{test di ripristino} periodico (backup ``vuoti'' per uno script fallito equivalgono a nessun
+    backup).
+  \item[8.14 Ridondanza.] Disaster recovery, eventualmente con sito \emph{hot}; equilibrio tra requisiti
+    di sicurezza, operativi e budget. Tutela la disponibilità.
+  \item[8.15 Logging.] La ``traccia documentale'' di cosa è successo ai dati e ai sistemi (vedi sotto il
+    nodo dei 21 giorni).
+  \item[8.16 Monitoraggio.] Guardare i log, in tempo reale o quasi (SIEM, SOC), e gestire gli alert.
+    Caso reale: un alert inviato il venerdì sera non è stato letto da nessuno e nel weekend l'attaccante
+    ha esfiltrato terabyte di dati sensibili. Raccogliere senza presidiare non serve.
+  \item[8.17 Sincronizzazione degli orologi.] Senza orologi allineati (fusi, UTC, derive) non si ricostruisce
+    una timeline affidabile degli eventi.
+  \item[8.18 Utility privilegiate] e \textbf{8.19 Installazione di software}: niente software che richiede
+    privilegi elevati senza intervento della sicurezza; installazione limitata a software vagliato
+    (eventuale whitelist tramite MDM).
+  \item[8.20--8.22 Rete.] Segregazione (VLAN, mai reti piatte), attenzione all'IoT (telecamere IP, DVR
+    esposti in rete e accessibili da terzi), paradigma \textbf{zero trust}: anche un dispositivo collegato
+    via cavo nei locali aziendali va autenticato. Il Wi-Fi è di per sé un rischio. La segregazione limita
+    il \emph{blast radius}: va separato soprattutto l'ambiente industriale (SCADA) dal back office, perché
+    l'attacco arriva di solito dal PC che controlla le macchine.
+  \item[8.24 Crittografia.] Cifrare tutto, ma la crittografia è forte quanto il controllo sulle chiavi:
+    delegare la gestione delle chiavi al cloud provider è comodo, ma se il fornitore le perde o blocca
+    l'accesso i dati diventano inaccessibili. Protegge riservatezza e integrità (hash).
+  \item[8.25--8.30 Sviluppo.] Ciclo di vita sicuro (rilevante solo per chi sviluppa, o in settori con
+    lunghe pipeline come il farmaceutico); requisiti di sicurezza fin dalla progettazione, anche quando lo
+    sviluppo è esternalizzato; principi di architettura sicura (caso di un sistema di sviluppo ``ombra''
+    fuori dal perimetro, compromesso e con credenziali in chiaro); \emph{secure coding} (es.\ OWASP); test di
+    sicurezza prima del rilascio (VA/PT, oltre ai test funzionali); supervisione del fornitore esterno.
+  \item[8.31 Separazione di sviluppo, test e produzione.] Caso di una compagnia assicurativa che usava
+    dati di produzione nei test e talvolta testava direttamente in produzione.
+  \item[8.32 Change management.] Ogni cambiamento \textbf{rilevante} va valutato sotto il profilo della
+    sicurezza delle informazioni, documentato, possibilmente testato, con piano di rollback. Non solo IT:
+    anche un trasloco di sede o una riorganizzazione aziendale.
+  \item[8.33 Dati di test.] Preferire dati sintetici, ma attenzione: conservano le proprietà statistiche
+    dei dati di origine. L'uso di dati di produzione è ammesso solo in casi limite documentati (es.\ un
+    ticket di assistenza riproducibile solo con quei dati), cancellandoli subito dopo.
+  \item[8.34 Protezione durante audit e test.] Esempio: un cliente che commissiona un penetration test
+    sull'istanza SaaS in produzione concorda prima il carico sostenibile, per non compromettere la
+    disponibilità.
+\end{description}
+
+\begin{nota}[Buon senso, ma obbligatorio]
+Molti controlli sembrano ovvi (backup, monitoraggio\ldots). Sono requisiti della ISO, ma anche buone
+pratiche che chiunque dovrebbe adottare, certificato o no. Il buon senso, osserva Gianluca, non è
+distribuito in modo uniforme.
+\end{nota}
+
+\subsection{Logging e privacy: il limite dei 21 giorni}
+Secondo un documento del Garante privacy citato in aula, i \textbf{metadati della posta elettronica} dei
+dipendenti, generati dai sistemi di logging, possono essere conservati per non più di \textbf{21 giorni},
+salvo accordo sindacale o autorizzazione. Il problema operativo:
+\begin{itemize}
+  \item molti servizi (es.\ Microsoft~365, Google Workspace) hanno retention non personalizzabili e più
+    lunghe;
+  \item per la sicurezza servono log molto più lunghi: in Italia il tempo medio di rilevazione di un
+    incidente è stimato in circa sei mesi;
+  \item un documento di accountability che giustifichi una conservazione più lunga per motivi di
+    sicurezza non è bastato a evitare una sanzione (circa \texteuro{}50.000) a una Regione.
+\end{itemize}
+Prima di raccogliere dati di monitoraggio occorre chiedersi se sono dati personali: se sì, si applica
+tutto il GDPR.
+
+\subsection{Privacy by design: un caso}
+Un'applicazione legacy a cui la sicurezza è stata aggiunta solo a posteriori è costata a una banca
+spagnola una sanzione di \texteuro{}500.000 per mancanza di privacy by design: sicurezza e privacy vanno
+integrate dalla fase di progettazione.
+
+% ---------------------------------------------------------------------
+\section{Risk management secondo la ISO: primi concetti}
+
+\paragraph{ISO e GDPR: due prospettive.} Nel GDPR il rischio si misura sui \textbf{diritti e le libertà
+degli interessati}; nella ISO si misura sull'\textbf{organizzazione}. Un'azienda preoccupata per le
+conseguenze di un incidente sulla propria operatività non ha, solo per questo, un problema di notifica
+GDPR: sono valutazioni distinte.
+
+\paragraph{Impatto e probabilità in chiave ISO.} L'impatto è la conseguenza per l'organizzazione dello
+sfruttamento di una vulnerabilità; la probabilità è quella che la vulnerabilità venga sfruttata.
+Esempio della settimana: la vulnerabilità PHP (esecuzione di codice da remoto) aveva da subito impatto
+altissimo e probabilità bassa; quando è stato pubblicato un \emph{proof of concept} la probabilità è
+schizzata in alto e tutti hanno corso a installare le patch.
+
+\paragraph{Definizioni (slide).}
+\begin{itemize}
+  \item \textbf{Asset}: ciò che ha valore e va protetto. Tipi: informazioni, hardware, software,
+    \textbf{persone}, beni intangibili (reputazione, marchio, avviamento). Non tutto va protetto (un
+    bilancio destinato al deposito pubblico no). Le persone sono l'asset più dimenticato: chi detiene
+    conoscenza non documentata (\emph{key people}) è un asset critico, e il suo abbandono impatta su
+    disponibilità e integrità delle informazioni. Da qui il peso dell'ingegneria sociale.
+  \item \textbf{Minaccia}: evento o attore che \emph{potrebbe} danneggiare un asset. Categorie: dolose,
+    accidentali, ambientali, tecniche.
+  \item \textbf{Vulnerabilità}: debolezza sfruttabile (patch mancanti, password deboli o di default,
+    scarsa formazione, configurazioni insicure, lacune fisiche come un cassetto senza chiave, applicazioni
+    progettate male).
+\end{itemize}
+
+\begin{esame}
+Nella ISO l'impatto è valutato sull'\textbf{organizzazione} (triade CIA); nella metodologia di severità
+ENISA e nel GDPR sui \textbf{diritti e le libertà degli interessati}. Non confondere i due piani.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Limite dei 21 giorni}: ricostruito dal parlato (``linee guida del Garante di fine 2024''
+    sui metadati della posta elettronica). Verificare il provvedimento del Garante e le condizioni per
+    superare il limite.
+  \item \textbf{Sanzione alla Regione Lombardia} (circa \texteuro{}50.000) e \textbf{sanzione di
+    \texteuro{}500.000 a una banca spagnola}: importi e soggetti dal parlato, da verificare.
+  \item \textbf{8.12 DLP ``nuovo'' nella revisione 2022}: detto in aula; le slide indicano solo che i
+    controlli nuovi sono 11. (Integrazione: confermato, l'8.12 è tra gli 11 controlli nuovi del 2022.)
+  \item Vulnerabilità PHP ``delle ultime 48 ore'': non identificata con precisione nella trascrizione.
+  \item ``Tempo medio di rilevazione di circa sei mesi in Italia'': stima del docente, senza fonte.
+\end{itemize}
+\end{verifica}

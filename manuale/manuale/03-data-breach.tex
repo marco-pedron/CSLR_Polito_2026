@@ -1,15 +1,869 @@
 \chapter{Data breach e valutazione della severità}
 \label{cap:data-breach}
 
-\dacompletare{Fonte: slide \emph{03.~Data breach severity methodology\_1.0}; Simulazione Pulse K
-(Sezione~\ref{sec:pulsek}). Scaletta prevista:
+\begin{nota}[Fonti]
+Lezioni del 02/10 (simulazione sul caso Alpha, Capitolo~\ref{lez:2026-10-02}), del 05/10 (teoria del
+data breach, Capitolo~\ref{lez:2026-10-05}), del 12/10 e del 19/10 (debrief dei laboratori,
+Capitoli~\ref{lez:2026-10-12} e~\ref{lez:2026-10-19}), del 02/11 (simulazione Pulse~K,
+Sezione~\ref{sec:pulsek}) e del 09/11 (caso del Google Form, Capitolo~\ref{lez:2026-11-09}); Lab~1 e
+Lab~2 (Capitoli~\ref{lab:01} e~\ref{lab:02}); slide \emph{02.~II Privacy} (modulo M5) e documento
+\emph{03.~Data breach severity methodology 1.0} (ENISA, \emph{Recommendations for a methodology of the
+assessment of severity of personal data breaches}, v1.0, dicembre 2013); testo ufficiale del GDPR.
+\end{nota}
+
+% =====================================================================
+\section{Perché è il tema centrale}
+\label{sec:breach-perche}
+
+Il GDPR (adottato nel 2016, applicabile dal 2018) è stata la prima norma a imporre la notifica delle
+violazioni a \textbf{tutti} i titolari, senza distinzione di settore: anche il pub che conserva le
+preferenze alimentari dei clienti. A livello UE esisteva già un obbligo settoriale per i fornitori di
+servizi di comunicazione elettronica (Direttiva ePrivacy, come modificata nel 2009, e Reg.~UE 611/2013), da cui
+nasce anche la metodologia ENISA. Le norme successive (NIS2, DORA, CRA, AI Act) prevedono notifiche
+costruite sullo stesso principio, ma per soggetti o oggetti specifici.
+
+\begin{esame}
 \begin{itemize}
-  \item definizione di violazione dei dati personali (art.~4(12)): riservatezza, integrità, disponibilità;
-  \item incidente di sicurezza e data breach: differenza;
-  \item art.~33 (notifica all'autorità) e art.~34 (comunicazione agli interessati);
-  \item metodologia ENISA: DPC, EI, CB e scala di severità;
-  \item registro dei data breach (art.~33(5));
-  \item ruolo del responsabile (art.~33(2));
-  \item notifica preliminare e notifica completa; modulo del Garante;
-  \item linee guida EDPB 9/2022.
-\end{itemize}}
+  \item Sul data breach ci sarà \textbf{quasi sempre almeno una domanda} all'esame: è la parte più
+    rilevante del corso.
+  \item Saper fare bene un \textbf{severity assessment} vale, secondo il docente, ``circa il 20\%
+    dell'esame''.
+  \item Questo tipo di esercizio (qualificare il caso, individuare chi notifica, a chi e entro quando) è
+    ``molto probabile'' all'esame.
+\end{itemize}
+\end{esame}
+
+% =====================================================================
+\section{Definizione e tipologie}
+\label{sec:breach-definizione}
+
+\subsection{L'art.~4(12)}
+La \textbf{violazione dei dati personali} è la violazione di sicurezza che comporta,
+\textbf{accidentalmente o in modo illecito}, la \textbf{distruzione}, la \textbf{perdita}, la
+\textbf{modifica}, la \textbf{divulgazione non autorizzata} o l'\textbf{accesso} a dati personali
+trasmessi, conservati o comunque trattati. Tre elementi da tenere fermi:
+\begin{itemize}
+  \item serve una \textbf{violazione di sicurezza}: ogni data breach è un incidente di sicurezza, ma
+    non ogni incidente è un data breach (lo diventa quando tocca \textbf{dati personali});
+  \item conta anche l'evento \textbf{accidentale} (errore umano, guasto, smarrimento), non solo
+    l'attacco;
+  \item basta uno dei cinque effetti: non serve che i dati siano stati rubati o pubblicati.
+\end{itemize}
+
+\subsection{La triade CIA}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{3.6cm} X}
+\toprule
+\textbf{Tipo di violazione} & \textbf{Effetto dell'art.~4(12)} & \textbf{Esempi dal corso}\\
+\midrule
+Riservatezza (\emph{confidentiality breach}) & divulgazione non autorizzata o accesso, accidentale o
+  abusivo & mailbox delle paghe letta da un attaccante (Lab~1); file esfiltrati da un server SFTP
+  (Lab~2); posizione dei bambini consultabile da chiunque (Pulse~K); dati sanitari raccolti su un account
+  personale (Google Form)\\
+Integrità (\emph{integrity breach}) & modifica non autorizzata & richiesta contraffatta di cambio IBAN;
+  record alterato in un servizio online\\
+Disponibilità (\emph{availability breach}) & distruzione o perdita, anche \textbf{temporanea} &
+  ransomware che blocca una piattaforma per 24 ore (Alpha); smarrimento di un dispositivo senza
+  backup\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Gli incidenti reali combinano spesso più tipi: il \textbf{ransomware} è anzitutto una violazione di
+disponibilità, ma con la \emph{doppia estorsione} (riscatto più pubblicazione di un campione dei dati sul
+dark web) scatta una presunzione di perdita di riservatezza. Lo smarrimento di un dispositivo
+\textbf{non cifrato} che contiene dati personali è già una violazione.
+
+\paragraph{Tre punti su cui i laboratori hanno insistito.}
+\begin{itemize}
+  \item \textbf{Riservatezza senza esfiltrazione.} La perdita di riservatezza si ha con il semplice
+    \textbf{accesso} non autorizzato, anche se i dati non sono stati portati via né risulta che siano
+    stati letti. In concreto l'impatto per l'interessato è diverso se i dati sono stati solo visti o
+    anche sottratti, ma formalmente la violazione c'è in entrambi i casi.
+  \item \textbf{Anche l'indisponibilità temporanea è un breach.} Poche ore di indisponibilità di dati
+    personali sono una violazione: il severity assessment potrà concludere che il rischio è così basso da
+    non richiedere notifiche, ma l'evento va comunque \textbf{annotato nel registro}.
+  \item \textbf{Il tentativo fallito non cancella la violazione.} Nel Lab~1 la frode sugli stipendi non è
+    riuscita (``nessun euro perso''), ma l'attaccante ha letto la mailbox: la violazione è l'accesso
+    illecito, non il danno economico.
+\end{itemize}
+
+\begin{esame}
+\begin{itemize}
+  \item La definizione dell'art.~4(12) va \textbf{memorizzata bene}, insieme al collegamento con
+    riservatezza, integrità e disponibilità.
+  \item \textbf{Violazione di riservatezza = accesso non autorizzato}, anche senza esfiltrazione né
+    lettura provata.
+  \item Una \textbf{perdita temporanea di disponibilità} è un data breach e va registrata.
+\end{itemize}
+\end{esame}
+
+\paragraph{Incidente e data breach non coincidono nel tempo.} Un attacco può essere in corso da giorni
+o mesi (ricognizione, movimento laterale): queste fasi sono già ``incidente'' per NIS2, DORA o CRA, ma
+per l'orologio GDPR conta il momento in cui la compromissione riguarda \textbf{dati personali}
+(Gianluca, simulazione Pulse~K).
+
+\paragraph{La violazione di una policy è un data breach?} Nel caso del Google Form (un dipendente
+raccoglie le intolleranze dei colleghi per la cena aziendale su un proprio account personale, contro la
+policy) i dati sono \textbf{sanitari} e sono finiti fuori dal controllo del titolare: c'è una perdita di
+riservatezza, senza intento malevolo. La risposta ``in buona fede non succede niente'' è ragionevole ma
+rischiosa all'esame: va fatto il \textbf{ragionamento di severity assessment}. Paradossalmente quell'elenco
+può avere una severità più alta di una lista di due milioni di nomi. La conclusione del docente: non si
+notifica al Garante solo perché un dipendente ha violato una policy, ma il rischio va valutato e
+documentato.
+
+% =====================================================================
+\section{Chi fa che cosa: titolare, responsabile, ``chi sa''}
+\label{sec:breach-ruoli}
+
+\subsection{Notifica il titolare, informa il responsabile}
+Gli obblighi di notifica sono del \textbf{titolare}. Il \textbf{responsabile} che viene a conoscenza di
+una violazione deve informare il titolare \textbf{senza ingiustificato ritardo} (art.~33(2)); nei
+contratti si trovano tipicamente termini di 24--36 ore. È il paradosso tipico degli incidenti: notifica
+il titolare, ma le informazioni le ha il responsabile, che deve collaborare.
+\begin{itemize}
+  \item Se il responsabile lavora per più titolari, \textbf{ciascun titolare} notifica per conto proprio
+    (nel caso Alpha, venti clienti significano venti notifiche sullo stesso evento). In un caso raccontato
+    dal docente il Garante chiese al responsabile un'unica notifica per conto di tutti i titolari: è una
+    soluzione eccezionale, non la regola.
+  \item Se il vettore d'attacco è l'infrastruttura del responsabile, la responsabilità di quest'ultimo
+    resta anche se i dati stavano sui server del titolare (Lab~2); ma ``è colpa del fornitore'' non è mai
+    un motivo per non notificare.
+\end{itemize}
+
+\paragraph{Il responsabile che avvisa in ritardo.} Nella pratica, soprattutto con i grandi fornitori, la
+comunicazione arriva anche un mese dopo. Il titolare non viola le 72 ore se \textbf{dimostra} che la
+violazione gli era ignota e non prevedibile: per lui l'orologio parte dalla comunicazione del
+responsabile. Il ritardo del responsabile è una sua violazione dell'art.~33(2), per cui il titolare
+può chiedergli i danni sul piano contrattuale. È lo schema del Lab~2: il fornitore sa dal 4 aprile, il
+fondo viene informato l'11 aprile alle 10:44, e le 72 ore del fondo scadono lunedì 14 aprile alle 10:44.
+
+\begin{esame}
+\begin{itemize}
+  \item Ruoli e flusso: il \textbf{responsabile} informa il \textbf{titolare}; il \textbf{titolare}
+    notifica all'autorità.
+  \item Con un responsabile in ritardo, l'orologio del titolare parte dalla comunicazione ricevuta,
+    \textbf{purché} il titolare dimostri di non aver potuto sapere prima.
+\end{itemize}
+\end{esame}
+
+\subsection{Quando il titolare ``sa''}
+Le 72 ore decorrono da quando il titolare è \textbf{venuto a conoscenza} della violazione. Secondo le
+Linee guida EDPB 9/2022, richiamate nella soluzione del Lab~1 e nella simulazione Pulse~K, il titolare è
+consapevole quando ha un \textbf{ragionevole grado di certezza} che un incidente di sicurezza ha
+compromesso dati personali. Conseguenze pratiche:
+\begin{itemize}
+  \item il titolare è una persona giuridica, che ``sa'' quando sa chi la rappresenta: il \textbf{legale
+    rappresentante} (spesso, ma non sempre, il CEO: va verificato, in Italia con la visura camerale) o
+    chi ha una delega specifica;
+  \item \textbf{non si rinvia la consapevolezza non guardando}: nel Lab~1 un alert di sicurezza su una
+    sessione dell'attaccante nella mailbox paghe, chiuso come ticket IT senza verificare i dati, rende
+    poco credibile una data di consapevolezza successiva;
+  \item \textbf{verità legale e verità reale}: se il legale rappresentante è informato a voce martedì ma
+    l'unica prova è un'email di giovedì, in giudizio conta ciò che si può provare. Per sostenere una data
+    posticipata servono \textbf{evidenze documentali}; senza, si rischia una dichiarazione falsa;
+  \item un attacco \emph{occulto} rimasto ignoto per mesi è diverso da un attacco \emph{evidente} tenuto
+    nascosto da qualcuno all'interno (per esempio il CISO che pensa di gestirlo da solo): in questo caso
+    è prudente non far partire l'orologio dalla data in cui è stato informato il CEO;
+  \item se il legale rappresentante è irraggiungibile (ferie, volo) e non esiste una procedura di
+    delega, l'autorità lo leggerà come \textbf{carenza organizzativa}.
+\end{itemize}
+
+\begin{esame}
+\begin{itemize}
+  \item Distinguere \textbf{errore umano} e \textbf{carenza organizzativa}: il clic sul link di phishing è
+    un errore del singolo e può essere compreso; la mancanza di procedure (chi avvisa chi, chi decide
+    quando il CEO è in volo) è un difetto prevedibile dell'organizzazione ed è ciò che le autorità
+    sanzionano. Strumento: la matrice \textbf{RACI}.
+  \item Una data di consapevolezza tardiva va sostenuta con \textbf{evidenze}: un ispettore del Garante
+    la contesterebbe quasi certamente.
+\end{itemize}
+\end{esame}
+
+\begin{integrazione}[Linee guida EDPB 9/2022]
+Le linee guida (che aggiornano quelle del Gruppo Art.~29, WP250) ammettono un breve periodo di indagine
+iniziale per accertare se c'è stata davvero una violazione, purché avviato tempestivamente; durante
+questo periodo il titolare non è ancora ``consapevole''. Se le informazioni non sono complete entro 72
+ore si notifica comunque e si integra in seguito (notifica per fasi). Le 72 ore sono ore di calendario:
+weekend e festivi contano.
+\end{integrazione}
+
+% =====================================================================
+\section{La notifica all'autorità (art.~33)}
+\label{sec:breach-art33}
+
+\subsection{L'obbligo}
+In caso di violazione il titolare notifica all'autorità di controllo competente
+\textbf{senza ingiustificato ritardo e, ove possibile, entro 72 ore} dal momento in cui ne è venuto a
+conoscenza, \textbf{a meno che sia improbabile} che la violazione presenti un rischio per i diritti e le
+libertà delle persone (art.~33(1)). Se la notifica arriva oltre le 72 ore, va accompagnata dai
+\textbf{motivi del ritardo}.
+\begin{itemize}
+  \item Il ``ove possibile'' conta: se notificare era materialmente impossibile (esempio del docente: un
+    incendio presso il fornitore) il ritardo può essere giustificato; se era possibile e non è stato
+    fatto, è un problema.
+  \item Nei trattamenti transfrontalieri si notifica all'\textbf{autorità capofila} (stabilimento
+    principale, art.~56): nella simulazione Pulse~K il Garante italiano, anche se gli interessati sono in
+    quattro Stati.
+  \item La notifica rende ``pubblico'' l'incidente verso l'autorità, che può verificare se le misure di
+    sicurezza erano adeguate (art.~32): è per questo che i vertici aziendali la temono, e per questo il
+    severity assessment deve reggere.
+\end{itemize}
+
+\subsection{Contenuto (art.~33(3)) e notifica per fasi (art.~33(4))}
+La notifica deve almeno:
+\begin{enumerate}[label=(\alph*)]
+  \item descrivere la \textbf{natura} della violazione, comprese, ove possibile, le categorie e il numero
+    approssimativo di interessati e di registrazioni coinvolti;
+  \item indicare nome e contatti del \textbf{DPO} o di un altro punto di contatto;
+  \item descrivere le \textbf{probabili conseguenze};
+  \item descrivere le \textbf{misure adottate o proposte} per porre rimedio alla violazione e attenuarne
+    gli effetti.
+\end{enumerate}
+Se non è possibile fornire tutto insieme, le informazioni si danno \textbf{in fasi} senza ulteriore
+ingiustificato ritardo (art.~33(4)): \textbf{notifica preliminare} entro le 72 ore e \textbf{notifica
+completa} quando l'analisi forense lo consente. Se la causa non è nota, si dichiara che al momento non è
+nota e che servono ulteriori analisi: all'autorità va data la causa corretta, non quella che il CEO
+ritiene tale.
+
+\paragraph{Il modulo.} Il modulo del Garante conta circa 55--60 domande. Nella versione usata nel Lab~2
+le sezioni sono: chi notifica (legale rappresentante o delegato, con la dichiarazione sulle conseguenze
+delle dichiarazioni false); notifica preliminare o completa; titolare; DPO; altri soggetti coinvolti
+(il responsabile); informazioni sulla violazione (date dell'incidente e della consapevolezza, modalità
+con cui se ne è venuti a conoscenza, motivi dell'eventuale ritardo, natura, causa, sistemi, misure già in
+essere, categorie e numero di interessati e registrazioni); misure adottate e future; comunicazione agli
+interessati (con il \textbf{testo effettivo}); altre autorità notificate; trattamenti transfrontalieri.
+La data della violazione e quella della consapevolezza sono decisive per le 72 ore; spesso
+l'esfiltrazione precede di molto il ransomware ed è difficile datarla. Sul sito del Garante c'è anche uno
+\textbf{strumento di autovalutazione} che guida le prime domande (c'è stato un incidente? riguarda dati
+personali?) e rimanda alla metodologia ENISA.
+
+\paragraph{Motivare le decisioni.} Oltre ai contenuti, il titolare deve \textbf{motivare} le proprie
+scelte, in particolare quando decide di \textbf{non notificare}, quando \textbf{ritarda} la notifica o
+quando \textbf{non comunica} la violazione agli interessati. La motivazione parte dal severity
+assessment: è l'applicazione diretta dell'accountability.
+
+\begin{integrazione}[canale telematico e collocazione dell'eccezione]
+\begin{itemize}
+  \item In Italia la notifica al Garante si invia con una procedura telematica dedicata, obbligatoria
+    dal luglio 2021, che riprende le sezioni descritte sopra.
+  \item L'eccezione ``improbabile che presenti un rischio'' sta nell'art.~33(1); l'art.~33(5) impone
+    invece di documentare \emph{tutte} le violazioni. Quando nei laboratori si scrive ``solo registro
+    (art.~33(5))'' si intende: nessuna notifica per l'eccezione dell'art.~33(1), ma documentazione
+    obbligatoria ai sensi dell'art.~33(5).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{La comunicazione agli interessati (art.~34)}
+\label{sec:breach-art34}
+
+Quando la violazione è suscettibile di presentare un \textbf{rischio elevato} per i diritti e le
+libertà delle persone, il titolare la comunica agli interessati \textbf{senza ingiustificato ritardo}
+(art.~34(1)): non c'è un termine in ore. La comunicazione descrive la natura della violazione in un
+\textbf{linguaggio semplice e chiaro} e contiene almeno contatti del DPO, probabili conseguenze e misure
+adottate (art.~34(2), che rinvia all'art.~33(3)(b)--(d)). Nei laboratori si aggiungono \textbf{consigli
+pratici} che riducono il rischio principale: ``non vi chiederemo mai password o denaro'', ``non
+confermate mai dati bancari via email'', ``controllate gli addebiti''. Se gli interessati sono minori si
+comunica ai \textbf{genitori}.
+
+\subsection{Le esenzioni (art.~34(3))}
+\begin{enumerate}[label=(\alph*)]
+  \item il titolare aveva applicato ai dati violati \textbf{misure tecniche e organizzative adeguate},
+    in particolare misure che li rendono incomprensibili a chi non è autorizzato, come la
+    \textbf{cifratura} (nel Lab~1 le buste paga in ZIP AES-256 con password inviate solo via SMS,
+    purché le password siano robuste);
+  \item il titolare ha adottato \textbf{misure successive} che scongiurano il rischio elevato: difficile
+    da sostenere, perché non si può garantire che una carta d'identità o di credito sottratta non venga
+    usata;
+  \item la comunicazione richiederebbe \textbf{sforzi sproporzionati}: si sostituisce con una
+    \textbf{comunicazione pubblica} ugualmente efficace (esempio del docente: un'azienda di trasporto
+    pubblico con molti utenti senza email e non più rintracciabili, per cui si è scelto un avviso sui
+    giornali).
+\end{enumerate}
+Se il titolare non ha comunicato, l'autorità può \textbf{imporgli} di farlo, oppure ritenere che ricorra
+un'esenzione (art.~34(4)).
+
+\paragraph{Comunicare conviene.} Le aziende temono il danno reputazionale, ma l'esperienza dal 2018 a oggi
+dice che i clienti ricevono spesso comunicazioni di data breach e le accettano; il rischio vero è
+\textbf{non comunicare correttamente, minimizzare o mentire}, perché i dati finiranno comunque sul dark
+web e la verità emergerà (simulazione Pulse~K). Se gli interessati sono già stati informati, con la
+stampa si è in posizione di forza. Per questo il docente consiglia spesso di avvisare gli utenti anche
+quando non è strettamente obbligatorio (caso Alpha; i 25.000 indirizzi email del suo esempio).
+
+% =====================================================================
+\section{Il registro dei data breach (art.~33(5))}
+\label{sec:breach-registro}
+
+Il titolare documenta \textbf{qualsiasi} violazione, comprese le circostanze, le conseguenze e i
+provvedimenti adottati, in modo che l'autorità possa verificare il rispetto dell'art.~33. Gli strumenti
+indicati nelle slide sono due: un \textbf{incident log} sintetico ma completo e aggiornato
+tempestivamente, e \textbf{report interni} su modelli standard, che documentano valutazione del rischio e
+decisioni. Nel registro va anche la \textbf{motivazione} di ogni scelta: perché non si è notificato,
+perché si è notificato in ritardo, perché non si sono informati gli interessati.
+
+\begin{esame}
+\textbf{Il registro è la prova dell'accountability.} Il controllo dell'autorità avviene su due livelli:
+\begin{enumerate}
+  \item \textbf{esistenza del registro}: se manca, la sanzione è automatica (e, se l'autorità trova i dati
+    sul dark web, la massima possibile);
+  \item \textbf{merito della valutazione}: se il rischio è stato dichiarato basso ma era evidentemente
+    alto, si viene sanzionati comunque; la buona fede aiuta, ``me l'ha chiesto il CEO'' no.
+\end{enumerate}
+Il compito tipico dell'esperto di sicurezza è ridurre il rischio in modo che il titolare possa
+legittimamente non notificare, lasciando sempre traccia del ragionamento.
+\end{esame}
+
+\paragraph{Integrità del registro.} Un documento firmato digitalmente, con marca temporale, inviato via
+PEC o accompagnato da un hash non può essere modificato senza lasciare traccia e ``ferma l'orologio''.
+Secondo il docente solo una minoranza di aziende lo fa; le altre tengono file modificabili.
+\textbf{Alterare il registro è reato}: le false dichiarazioni al Garante sono punite dall'art.~168 del
+Codice privacy con la reclusione da sei mesi a tre anni, e ne risponde anche chi ha materialmente
+modificato il documento su ordine altrui (Sezione~\ref{sec:gdpr-sanzioni}). Se un file va corretto,
+meglio dirlo all'autorità spiegando il motivo.
+
+% =====================================================================
+\section{La metodologia ENISA di severity assessment}
+\label{sec:breach-enisa}
+
+\subsection{Origine e scopo}
+La metodologia è stata elaborata dalle autorità di protezione dei dati di \textbf{Grecia e Germania}
+con ENISA, partendo da una proposta del 2011 legata alla Direttiva ePrivacy; la versione usata nel corso
+è il documento di lavoro \textbf{v1.0 del dicembre 2013}. È pensata sia per i titolari (valutare la
+violazione e decidere le notifiche) sia per le autorità (verificare le valutazioni ricevute e
+armonizzarle in Europa). La \textbf{severità} è definita come la \emph{stima dell'entità del potenziale
+impatto sulle persone} derivante dalla violazione: misura l'impatto sugli \textbf{interessati}, non
+sull'azienda. Il documento ENISA non è materia d'esame in sé, ma è ``la Bibbia'' per i laboratori.
+
+\subsection{La formula}
+\[
+SE = DPC \times EI + CB
+\]
+\begin{itemize}
+  \item \textbf{DPC} (\emph{Data Processing Context}): tipo di dati violati, corretto in base al contesto
+    del trattamento. È il \textbf{nucleo} della metodologia.
+  \item \textbf{EI} (\emph{Ease of Identification}): quanto è facile risalire alla persona. È un
+    \textbf{fattore correttivo} del DPC: lo moltiplica e quindi può solo ridurlo (EI $\le 1$).
+  \item \textbf{CB} (\emph{Circumstances of the Breach}): circostanze specifiche (perdita di
+    riservatezza, integrità, disponibilità e intento malevolo). Si \textbf{somma} e quindi può solo
+    aumentare la severità.
+\end{itemize}
+
+\begin{esame}
+La formula $SE = DPC \times EI + CB$ è ``la regola d'oro'': va \textbf{ricordata a memoria} e descritta
+con chiarezza. È una ``formula stupida'' con conseguenze molto concrete: ogni scelta pesa e va
+\textbf{motivata}.
+\end{esame}
+
+\subsection{DPC: tipo di dati e contesto}
+\label{sec:breach-dpc}
+\paragraph{Passo 1: classificare i dati.} Ogni tipo di dato violato si assegna ad almeno una delle quattro
+categorie, ciascuna con un punteggio di base:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} X c >{\raggedright\arraybackslash}p{2.2cm}}
+\toprule
+\textbf{Categoria} & \textbf{Esempi} & \textbf{Base} & \textbf{Range ammesso}\\
+\midrule
+Semplici & dati anagrafici e biografici, contatti, nome completo, istruzione, famiglia, esperienza
+  professionale & 1 & 1--4 (solo in aumento)\\
+Comportamentali & ubicazione, dati di traffico, preferenze e abitudini personali & 2 & 1--4\\
+Finanziari & redditi, transazioni, estratti conto, investimenti, carte di credito, fatture; dati
+  previdenziali di natura economica & 3 & 1--4\\
+Sensibili & salute, opinioni politiche, vita sessuale (le categorie dell'art.~9) & 4 & 1--4 (solo in
+  diminuzione)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Le credenziali non sono una categoria a sé: si valutano in base ai dati dei sistemi a cui danno accesso
+(credenziali di un negozio di musica online: 1; di un home banking che consente bonifici: 4). Se i dati
+rientrano in più categorie si valuta ciascuna e \textbf{vale il punteggio più alto}.
+
+\paragraph{Passo 2: correggere per il contesto.} Il punteggio di base si alza o si abbassa (sempre tra
+1 e 4) in presenza di fattori di contesto:
+\begin{itemize}
+  \item \textbf{in aumento}: \textbf{volume} dei dati sulla stessa persona (nel tempo o nel contenuto: un
+    anno di traffico pesa più di una settimana); \textbf{caratteristiche del titolare} (la lista clienti di
+    una farmacia online rivela più di quella di una cartoleria); \textbf{caratteristiche degli
+    interessati} (minori, gruppi vulnerabili, persone esposte);
+  \item \textbf{in diminuzione}: \textbf{inesattezza} nota dei dati (di cui il titolare deve essere
+    certo); \textbf{disponibilità pubblica} prima della violazione; \textbf{natura} del dato (un
+    certificato medico che attesta solo la buona salute vale 1 anziché 4; fattore da usare con grande
+    cautela e spiegazione chiara).
+\end{itemize}
+\textbf{Ogni scostamento dal punteggio di base va motivato} per iscritto, indicando i fattori di contesto e
+la loro influenza.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.3cm} X X X X}
+\toprule
+\textbf{Esempio ENISA} & \textbf{DPC 1} & \textbf{DPC 2} & \textbf{DPC 3} & \textbf{DPC 4}\\
+\midrule
+Lista di nomi e telefoni (semplici) & clienti di un supermercato & clienti di auto di lusso (status
+  economico) & farmacia online per diabetici (salute) & agenti sotto copertura (sicurezza personale)\\
+Storico chiamate (comportamentali) & chiamate all'helpdesk tecnico & storico dell'ultima settimana &
+  storico dell'ultimo anno (profilo dettagliato) & centro di supporto psicologico per malati gravi\\
+Carte di credito (finanziari) & carte scadute da oltre dieci anni & dati parziali, inutilizzabili per
+  pagare & dati parziali con un anno di acquisti & dati completi utilizzabili per frodi\\
+Analisi del sangue (sensibili) & solo il fatto di aver fatto esami generici & esami in pronto soccorso,
+  senza dettagli & test per una specifica malattia, senza esito & risultati degli esami\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Indicazioni emerse in aula.}
+\begin{itemize}
+  \item \textbf{Dati sanitari}: ai sensi dell'art.~9 GDPR ogni dato relativo alla salute ha la stessa
+    natura e parte da \textbf{DPC~4}; abbassarlo (per esempio a 2 per un attestato di malattia senza
+    diagnosi) è possibile solo \textbf{argomentando} (Gianluca, debrief del Lab~1).
+  \item \textbf{Dati finanziari}: per il GDPR sono dati comuni, ma ENISA li pesa 3, con una logica di
+    cybersicurezza vicina al settore finanziario (``l'obiettivo finale del criminale è quasi sempre il
+    denaro''). Un IBAN senza saldi o movimenti può scendere a 2; il valore di una posizione pensionistica
+    dà invece un'indicazione concreta del patrimonio.
+  \item \textbf{Comportamentali sì o no}: lo storico degli acquisti su più marchi permette di ricostruire
+    un profilo (gusti, capacità di spesa). È un punto su cui ``si può litigare'' a lungo: il CEO dirà di
+    no, il DPO può dire di sì; conta la motivazione.
+  \item \textbf{Minori}: il docente critica la metodologia perché, con un'impostazione nata per il
+    settore finanziario, \textbf{non distingue tra minori e adulti}. Il DPC dei dati di profilo resta 1 in
+    senso stretto, ma può essere \textbf{aumentato motivatamente} per numero e vulnerabilità degli
+    interessati (simulazione Pulse~K).
+\end{itemize}
+
+\subsection{EI: facilità di identificazione}
+\label{sec:breach-ei}
+Quattro livelli a crescita lineare: \textbf{trascurabile 0,25}, \textbf{limitata 0,5},
+\textbf{significativa 0,75}, \textbf{massima 1}. Il punteggio minimo indica che è estremamente difficile
+ricondurre i dati a una persona (ma non impossibile); il massimo che l'identità si ricava direttamente,
+senza ricerche particolari. Vanno considerati tutti i mezzi che chiunque potrebbe ragionevolmente usare,
+comprese le informazioni pubbliche su Internet e l'incrocio con altre fonti; la \textbf{combinazione} di
+più identificativi aumenta automaticamente l'EI.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X}
+\toprule
+\textbf{Identificativo} & \textbf{Esempi di punteggio (ENISA, Allegato~2)}\\
+\midrule
+Nome e cognome & 0,25 se molto diffuso nel Paese; 0,5 se poco diffuso; 0,75 se raro in una piccola
+  città; 1 se accompagnato da data di nascita ed email\\
+Numero di documento o codice previdenziale & 0,25 se isolato e non collegabile senza la banca dati di
+  riferimento; 0,75 se rivela altri dati ed è collegato ad altri dati; 1 se c'è anche la banca dati (es.\
+  documento più nome o foto)\\
+Telefono o indirizzo & 0,25 se non in elenchi pubblici; 0,5 in una piccola città; 1 se in un elenco
+  pubblico\\
+Email & 0,25 se non rivela nulla e non è l'indirizzo principale; 0,75 se è usata come indirizzo
+  principale su siti e social; 1 se contiene nome e cognome ed è l'indirizzo principale\\
+Foto & da 0,25 (immagine sfocata da lontano) a 1 (immagine nitida con altre informazioni)\\
+Codici e pseudonimi & 0,25 se non collegabili senza la banca dati di riferimento; fino a 1 se lo
+  pseudonimo rivela il nome o la banca dati è disponibile\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Esempi del corso: nome, cognome, data di nascita e telefono insieme danno \textbf{EI~=~1}; un'email
+composta da un numero di matricola renderebbe l'identificazione difficile (0,25), mentre
+\texttt{nome.cognome@polito.it} no. Nei laboratori nome, codice fiscale e datore di lavoro hanno sempre
+dato EI~=~1. Gli identificativi contano \textbf{solo nell'EI}: niente doppio conteggio nel DPC.
+
+\subsection{CB: circostanze della violazione}
+\label{sec:breach-cb}
+Gli elementi del CB si \textbf{sommano} (diversamente da DPC ed EI, dove si sceglie il valore più alto),
+perché più circostanze possono coesistere nella stessa violazione.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}p{1.1cm} X}
+\toprule
+\textbf{Elemento} & \textbf{Punti} & \textbf{Quando (esempi ENISA)}\\
+\midrule
+Riservatezza & 0 & dati esposti senza prova di trattamento illecito (fascicolo o portatile smarrito,
+  apparecchiature dismesse senza cancellazione)\\
+ & +0,25 & dati esposti a un numero di \textbf{destinatari noti} (email inviata per errore a destinatari
+  identificati; clienti che vedono l'account di altri clienti)\\
+ & +0,5 & dati esposti a un \textbf{numero indeterminato} di destinatari (pubblicazione su Internet o su
+  reti P2P, vendita dei dati, sito mal configurato accessibile a tutti)\\
+\midrule
+Integrità & 0 & dati alterati ma ripristinati prima di qualsiasi uso\\
+ & +0,25 & dati alterati e forse usati in modo scorretto, ma \textbf{recuperabili}\\
+ & +0,5 & come sopra, ma \textbf{non recuperabili}\\
+\midrule
+Disponibilità & 0 & dati recuperabili senza difficoltà (esiste un'altra copia)\\
+ & +0,25 & indisponibilità \textbf{temporanea} (ricostruibili con un certo lavoro, o forniti di nuovo
+  dall'interessato)\\
+ & +0,5 & indisponibilità \textbf{totale} (nessun backup, non recuperabili)\\
+\midrule
+Intento malevolo & +0,5 & violazione dovuta a un'azione intenzionale per danneggiare le persone o il
+  titolare, o per profitto (furto, hacking, vendita di dati); 0 per errore umano o tecnico\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Come si è applicato il CB nel corso.}
+\begin{itemize}
+  \item \textbf{Riservatezza +0,25 o +0,5}: nel caso Alpha il docente ha usato +0,25 (dati in mano
+    all'attaccante, forse sul dark web, senza certezza di una pubblicazione aperta), riservando +0,5 alla
+    pubblicazione accessibile a tutti; ha però ammesso che si poteva sostenere +0,5. Nella soluzione del
+    Lab~1 si usa +0,5 quando il destinatario è un criminale non identificato e la divulgazione non è
+    delimitabile, e \textbf{0} per i dati esposti ma senza prova di accesso. Il dark web è in generale da
+    considerare una perdita definitiva, anche se i dati vengono poi rimossi.
+  \item \textbf{Intento malevolo}: caratterizza la violazione, non il singolo dato; nel ransomware, nel
+    phishing e nella vendita su Telegram è sempre +0,5.
+  \item \textbf{Non gonfiare il CB}: aggiungere integrità e disponibilità ``per prudenza'' quando nessun
+    dato è stato alterato o perso è un errore emerso nei debrief.
+\end{itemize}
+
+\subsection{Livelli di severità}
+\label{sec:breach-livelli}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{1.8cm} X}
+\toprule
+\textbf{Punteggio} & \textbf{Severità} & \textbf{Conseguenze per le persone (ENISA, parafrasi)}\\
+\midrule
+$SE < 2$ & bassa & nessuna conseguenza o piccoli disagi superabili senza problemi (tempo per reinserire
+  dati, fastidi)\\
+$2 \le SE < 3$ & media & disagi significativi superabili con qualche difficoltà (costi extra, servizi
+  negati, paura, stress, lievi disturbi fisici)\\
+$3 \le SE < 4$ & alta & conseguenze significative superabili con gravi difficoltà (sottrazione di
+  fondi, segnalazione nelle liste delle banche, danni alla proprietà, perdita del lavoro, peggioramento
+  della salute)\\
+$SE \ge 4$ & molto alta & conseguenze significative o irreversibili, non superabili (gravi difficoltà
+  economiche, incapacità di lavorare, disturbi psicologici o fisici permanenti, morte)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Due \emph{flag}.} Accanto al livello si segnalano all'autorità due elementi che non entrano
+nel punteggio ma pesano nella valutazione finale: \textbf{più di 100 interessati} (una violazione grande
+aumenta la probabilità di divulgazione e la scala del problema) e \textbf{dati incomprensibili} (per
+esempio cifratura forte con chiave non compromessa, che riduce di molto l'impatto e si collega
+all'esenzione dell'art.~34(3)(a)).
+
+\subsection{Dal punteggio alla decisione}
+\label{sec:breach-decisione}
+Mappatura di lavoro usata in aula e nei casi dei laboratori:
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Severità} & \textbf{Esito} & \textbf{Base}\\
+\midrule
+Bassa ($SE<2$) & solo registro & art.~33(1) eccezione + art.~33(5)\\
+Media ($2 \le SE < 3$) & notifica all'autorità & art.~33\\
+Alta o molto alta ($SE \ge 3$) & autorità e interessati & art.~34, salvo art.~34(3)\\
+\bottomrule
+\end{tabular}
+\end{center}
+È \textbf{un punto di partenza, non una regola}: ci si può discostare spiegando perché. La stessa ENISA
+precisa che il livello che fa scattare la comunicazione agli interessati può essere concordato tra le
+autorità o variare secondo criteri nazionali, e che l'autorità resta libera di accettare o respingere la
+valutazione del titolare.
+
+\begin{integrazione}[le soglie del GDPR]
+Le soglie giuridiche restano quelle del GDPR: notifica all'autorità salvo che sia \emph{improbabile} un
+rischio (art.~33(1)); comunicazione agli interessati se il rischio è \emph{elevato} (art.~34(1)). Le fasce
+ENISA sono uno strumento per motivare queste due valutazioni, non la norma stessa.
+\end{integrazione}
+
+\paragraph{Il punteggio di confine.} Con $SE = 3$ (o $SE = 2$) si è in zona grigia: le fasce sono una
+\textbf{guida, non una regola matematica}. Chi valuta decide e se ne assume la responsabilità in base
+all'accountability; l'autorità potrà arrivare a conclusioni diverse. Con molte ipotesi incerte, la
+strada sicura è notificare.
+
+\paragraph{La severità non è il rischio.} Il punteggio ENISA misura l'\textbf{impatto} potenziale, non la
+\textbf{probabilità} che si concretizzi. Nel Lab~1 alcuni gruppi di dati avevano severità alta ma nessuna
+prova di accesso (rischio basso), altri severità media ma rischio molto alto (IBAN già usati per la
+frode). L'art.~34 richiede un rischio \emph{elevato}, cioè severità \emph{e} probabilità: mandare centinaia
+di comunicazioni per qualcosa che probabilmente non è avvenuto genera paura e stress (danni che la stessa
+ENISA elenca) e diluisce il messaggio a chi è davvero esposto.
+
+\paragraph{Il remediation plan può cambiare la valutazione.} Un piano di rimedio solido abbassa il
+rischio: in alcuni casi il docente, in base all'accountability, ha deciso di non notificare perché il
+remediation plan riduceva il rischio in modo convincente. Va sempre considerato, non basta calcolare il
+numero.
+
+\subsection{Motivare le scelte}
+\label{sec:breach-motivare}
+\begin{itemize}
+  \item \textbf{Ogni punteggio deve poggiare su un fatto} e ogni scostamento dal valore di base va
+    spiegato: ``non ho una risposta: è la vostra scelta, il vostro livello di accountability''.
+  \item \textbf{Il CEO chiederà di abbassare il punteggio} (``nel 95\% dei casi''). Abbassarlo è
+    legittimo quando ha senso ed è motivato; farlo nascondendo o falsando informazioni espone alla
+    sanzione (fino a 10 milioni o 2\%) e al rischio penale per false dichiarazioni al Garante. Un
+    incidente ad alto rischio non si ``abbassa'' a posteriori.
+  \item \textbf{Non presumere nulla che non si possa provare}: ogni affermazione all'autorità deve avere
+    evidenze; nel dubbio ci si attiene ai fatti.
+  \item \textbf{Due perimetri}: ciò che risulta certamente coinvolto e ciò che poteva esserlo (l'intera
+    mailbox, l'intero server). Entrambi vanno analizzati; il secondo non va trattato come provato, ma
+    l'assenza di prove causata da un buco nei propri log non è prova di assenza.
+  \item \textbf{Giustificazione e strategia}: il worksheet del Lab~2 distingueva la motivazione da dare
+    all'autorità (\emph{tatemae}, la facciata) dal ragionamento interno (\emph{honne}, la verità): nella
+    realtà sono spesso due cose diverse, e conviene saperlo.
+\end{itemize}
+
+% =====================================================================
+\section{Esempio svolto: il caso Alpha}
+\label{sec:breach-alpha}
+
+\paragraph{Il caso.} Alpha S.r.l.\ gestisce in modalità SaaS l'e-commerce di circa venti grandi marchi
+(moda, bricolage\ldots): chi compra sul sito del marchio è servito dalla piattaforma di Alpha, basata a
+sua volta su Shopify. Un ransomware blocca tutte le transazioni per \textbf{24 ore}; i backup sono integri
+e, con i piani di business continuity e disaster recovery, tutto è ripristinato in 24 ore. Attacco il 30
+settembre, consapevolezza il 1° ottobre; interessati: qualche centinaio di dipendenti dei clienti e circa
+\textbf{50.000 utenti finali} (ipotesi della simulazione).
+
+\paragraph{Qualificazione.}
+\begin{itemize}
+  \item È una violazione di dati personali: la \textbf{disponibilità} è certamente persa (24 ore), e i
+    clienti di Alpha sono persone giuridiche ma i dati sono quelli dei loro dipendenti e degli utenti
+    finali. La \textbf{riservatezza} è il vero nodo (doppia estorsione?).
+  \item \textbf{Ruoli}: i marchi sono \textbf{titolari}; Alpha è \textbf{responsabile}; Shopify è
+    \textbf{sub-responsabile}. Alpha informa senza ingiustificato ritardo ciascun marchio, e ciascun
+    marchio notifica.
+\end{itemize}
+
+\paragraph{Punteggio.}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} c X}
+\toprule
+\textbf{Fattore} & \textbf{Valore} & \textbf{Motivazione}\\
+\midrule
+DPC & 1 & dati semplici (nome, cognome, email, codice fiscale, telefono). Comportamentali (2) sostenibile
+  per lo storico degli acquisti; finanziari esclusi perché i pagamenti passano da un servizio esterno e i
+  dati delle carte non sono conservati; dati sanitari dei dipendenti di Alpha estranei al titolare
+  considerato\\
+EI & 1 & nome, cognome, data di nascita e telefono insieme\\
+CB -- riservatezza & +0,25 & dati in mano all'attaccante, senza certezza di pubblicazione aperta (+0,5
+  sostenibile)\\
+CB -- integrità & 0 & nessuna alterazione\\
+CB -- disponibilità & +0,25 & indisponibilità temporanea (24 ore)\\
+CB -- intento malevolo & +0,5 & attacco intenzionale\\
+\midrule
+\textbf{SE} & \textbf{2,0} & $1 \times 1 + (0{,}25 + 0 + 0{,}25 + 0{,}5) = 2$: \textbf{media}, al confine
+  con la bassa\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Quanto pesano le scelte.} Il punteggio cambia molto con decisioni tutte argomentabili:
+\begin{center}
+\small
+\begin{tabular}{lccl}
+\toprule
+\textbf{Variante} & \textbf{DPC $\times$ EI} & \textbf{CB} & \textbf{SE e livello}\\
+\midrule
+Scelta del docente & $1 \times 1$ & 1,00 & 2,00 -- media\\
+Riservatezza +0,5 & $1 \times 1$ & 1,25 & 2,25 -- media\\
+Dati comportamentali & $2 \times 1$ & 1,00 & 3,00 -- alta (al limite)\\
+Dati delle carte coinvolti & $3 \times 1$ & 1,00 & 4,00 -- molto alta\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{soluzione}[Decisione nel caso Alpha]
+Con $SE = 2$ si è al confine: in teoria si potrebbe discutere se evitare la notifica, ma con tante
+ipotesi incerte la strada sicura è \textbf{notificare al Garante} (ciascun marchio titolare, entro 72
+ore dalla consapevolezza del 1° ottobre, quindi entro il 4 ottobre), con la causa dichiarata come ``non
+ancora nota'' se non accertata. Nella sezione sulle misure conviene descrivere il ripristino in 24 ore,
+che aiuta a giustificare un punteggio contenuto. La comunicazione agli utenti non è obbligatoria, ma il
+docente consiglia di \textbf{avvisarli} comunque, per fiducia e perché i dati potrebbero essere usati per
+frodi. Con i dati delle carte la severità sarebbe stata alta o molto alta e la comunicazione agli
+interessati immediata. Tutto va annotato nel registro con le motivazioni.
+\end{soluzione}
+
+\subsection{Gli altri casi del corso a confronto}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}p{2.7cm} c X}
+\toprule
+\textbf{Caso} & \textbf{Calcolo} & \textbf{SE} & \textbf{Esito discusso}\\
+\midrule
+Lab~1, IBAN e codici fiscali di 50 dipendenti (Cap.~\ref{lab:01}) & $2 \times 1 + 1{,}0$ & 3,0 &
+  accesso certo e dati già usati per la frode: Garante e interessati\\
+Lab~1, buste paga cifrate con dati art.~9 & $4 \times 1 + 1{,}0$ & 5,0 & flag ``dati incomprensibili'':
+  Garante, esenzione dall'art.~34 per la cifratura, se le password sono robuste\\
+Lab~2, nome e valore della posizione pensionistica (Cap.~\ref{lab:02}) & tra $2 \times 1 + 1{,}0$ e
+  $3 \times 1 + 1{,}0$ (stima dei redattori) & 3--4 & esito atteso indicato nel debrief: autorità
+  \emph{e} interessati\\
+Pulse~K, gruppo A: dati di profilo (Sez.~\ref{sec:pulsek}) & $1 \times 1 + 1{,}0$ & 2,0 & notifica al
+  Garante\\
+Pulse~K, gruppo B: profilo e posizione dei bambini & $2 \times 1 + 1{,}0$ & 3,0 & Garante e genitori:
+  trasparenza e interessati molto vulnerabili\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% =====================================================================
+\section{Il flusso decisionale}
+\label{sec:breach-flusso}
+
+\begin{center}
+\begin{tikzpicture}[node distance=5mm and 8mm,
+    box/.style={draw, rounded corners, align=center, font=\small, text width=6.2cm, minimum height=8mm},
+    dec/.style={box, fill=orange!10},
+    esito/.style={draw, rounded corners, align=center, font=\small, text width=4.2cm,
+      minimum height=8mm, fill=green!6}]
+  \node[box] (inc) {Incidente di sicurezza rilevato\\(il responsabile informa subito il titolare, art.~33(2))};
+  \node[dec, below=of inc] (pd) {Sono coinvolti dati personali?\\(perdita di riservatezza, integrità o disponibilità)};
+  \node[esito, right=of pd] (nopd) {Non è un data breach GDPR: verificare NIS2, DORA, CRA, AI Act};
+  \node[box, below=of pd] (reg) {Data breach (art.~4(12)): fissare la data di consapevolezza e
+    annotare nel registro (art.~33(5))};
+  \node[dec, below=of reg] (r1) {Severity assessment (ENISA) e probabilità:\\è improbabile un rischio per le persone?};
+  \node[esito, right=of r1] (solo) {Solo registro, con motivazione della scelta};
+  \node[box, below=of r1] (n33) {Notifica all'autorità (capofila se transfrontaliero) entro 72 ore,
+    anche per fasi (art.~33)};
+  \node[dec, below=of n33] (r2) {Il rischio è elevato?};
+  \node[esito, right=of r2] (no34) {Nessuna comunicazione: motivarla nel registro};
+  \node[dec, below=of r2] (es) {Si applica un'esenzione dell'art.~34(3)?\\(cifratura, misure successive, sforzo sproporzionato)};
+  \node[esito, right=of es] (pub) {(a), (b): nessuna comunicazione, motivata;\\(c): comunicazione pubblica};
+  \node[box, below=of es] (n34) {Comunicazione agli interessati senza ingiustificato ritardo (art.~34)};
+  \draw[-{Stealth}] (inc) -- (pd);
+  \draw[-{Stealth}] (pd) -- node[right, font=\footnotesize] {sì} (reg);
+  \draw[-{Stealth}] (pd) -- node[above, font=\footnotesize] {no} (nopd);
+  \draw[-{Stealth}] (reg) -- (r1);
+  \draw[-{Stealth}] (r1) -- node[above, font=\footnotesize] {sì} (solo);
+  \draw[-{Stealth}] (r1) -- node[right, font=\footnotesize] {no} (n33);
+  \draw[-{Stealth}] (n33) -- (r2);
+  \draw[-{Stealth}] (r2) -- node[above, font=\footnotesize] {no} (no34);
+  \draw[-{Stealth}] (r2) -- node[right, font=\footnotesize] {sì} (es);
+  \draw[-{Stealth}] (es) -- node[above, font=\footnotesize] {sì} (pub);
+  \draw[-{Stealth}] (es) -- node[right, font=\footnotesize] {no} (n34);
+\end{tikzpicture}
+\end{center}
+In parallelo: le altre notifiche (Sezione~\ref{sec:breach-altre}), il \textbf{remediation plan} e, se
+del caso, la denuncia all'autorità giudiziaria. L'autorità può sempre imporre la comunicazione agli
+interessati (art.~34(4)).
+
+% =====================================================================
+\section{Gestire il processo}
+\label{sec:breach-processo}
+
+\paragraph{Prima: preparazione e prevenzione.} Il GDPR oggi chiede di \textbf{dimostrare la capacità di
+reazione}. Serve un \textbf{piano di risposta agli incidenti} con ruoli e responsabilità (compreso il
+CEO), simulazioni e aggiornamenti continui, modalità di interazione con le autorità; e prevenzione con
+formazione, consapevolezza e misure di sicurezza. In origine la notifica serviva soprattutto a
+\textbf{condividere informazioni} in tempo reale, per proteggere altre organizzazioni da attacchi simili.
+
+\paragraph{Durante: aspetti pratici.} Verificare quali notifiche sono obbligatorie (verso quali autorità
+e stakeholder); \textbf{analizzare con cura le ipotesi}, perché ogni assunzione può essere letta in due
+modi; usare i modelli e i canali ufficiali.
+
+\paragraph{Dopo: il remediation plan.} Correggere la vulnerabilità che ha permesso l'incidente; trarre
+\textbf{lezioni apprese}; condividere informazioni con gli stakeholder per rafforzare il perimetro; se la
+causa è l'errore umano, rafforzare la formazione. Alcuni temono che un piano di rimedio equivalga ad
+ammettere una colpa, ma la violazione c'è già stata: più il piano è solido, più il rischio scende. Nei
+laboratori il piano va articolato su più assi (tecnico, organizzativo, formazione, comunicazione) e ogni
+misura va collegata a una lacuna emersa.
+
+\paragraph{I costi di un data breach (slide).} Danno diretto (perdita di dati o denaro), abbandono
+anomalo dei clienti, danno reputazionale e perdita di fiducia, attività di help desk, indagini interne,
+spese legali, ripristino dei sistemi. Per il docente oggi il più importante è il \textbf{danno
+reputazionale}.
+
+% =====================================================================
+\section{Errori tipici emersi nei laboratori}
+\label{sec:breach-errori}
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{6.4cm} >{\raggedright\arraybackslash}p{7.8cm}}
+\toprule
+\textbf{Errore} & \textbf{Perché è sbagliato}\\
+\midrule
+\endhead
+``Non ci sono prove di esfiltrazione, quindi il rischio è basso'' (Lab~2) & la riservatezza è violata
+  anche con il solo accesso; e l'assenza di prova non è prova di assenza\\
+``Nessun euro perso, volevano i soldi e non i dati'' (Lab~1) & la violazione è l'accesso illecito; e
+  l'obiettivo finanziario è proprio ciò che rende alto il rischio\\
+``È colpa del fornitore, non notifichiamo'' (Lab~2) & gli obblighi di notifica restano del titolare; il
+  fornitore risponde verso il titolare\\
+Abbassare il DPC dei dati sanitari senza motivare (Lab~1) & ai sensi dell'art.~9 partono da DPC~4;
+  scendere è possibile solo argomentando\\
+Data di consapevolezza tardiva senza evidenze (Lab~1) & non si rinvia la consapevolezza non guardando
+  un alert; serve la prova del momento in cui si è saputo\\
+Far partire le 72 ore dalla conoscenza del fornitore, o rinviarle in attesa di dettagli (Lab~2) &
+  l'orologio è del titolare; la notifica preliminare esiste proprio per non attendere\\
+Confondere severità e rischio & il punteggio misura l'impatto, non la probabilità\\
+Gonfiare il CB ``per prudenza'' & integrità e disponibilità si contano solo se dati alterati o persi\\
+Contare due volte gli identificativi & il codice fiscale pesa nell'EI, non anche nel DPC\\
+Trattare la fascia di rischio come regola matematica, specie con $SE = 3$ & è una guida: si decide e si
+  motiva\\
+Trattare come provato tutto il perimetro possibile, o ignorarlo & vanno analizzati entrambi i perimetri,
+  pesando la probabilità\\
+Dimenticare categorie di interessati (ex dipendenti, familiari, candidati, minori) & la valutazione deve
+  coprire tutti gli interessati\\
+Valutare voce per voce senza un giudizio complessivo (Lab~2) & la decisione riguarda la violazione nel
+  suo insieme\\
+Confondere la notifica GDPR con altre notifiche (CNIL/ACPR, Garante/CSIRT) & due binari, due autorità,
+  due orologi\\
+Reagire solo da tecnici (Pulse~K: ``blocco gli IP e chiudo il ticket'') & ogni attacco può avere impatto
+  sui dati personali: il DPO va coinvolto subito\\
+Comunicare il falso (``nessun dato è stato compromesso'') & contraddice i fatti noti e aggrava la
+  posizione del titolare\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+% =====================================================================
+\section{Il rapporto con le altre notifiche}
+\label{sec:breach-altre}
+
+Lo stesso evento può far partire più orologi, ciascuno con il proprio presupposto, la propria autorità e
+le proprie fasi (Sezione~\ref{sec:intro-orologi}; tabella completa nel Capitolo~\ref{cap:scadenze}):
+\begin{itemize}
+  \item \textbf{GDPR}: violazione di dati personali, notifica all'autorità di protezione dei dati entro 72
+    ore dalla consapevolezza; nessuna relazione finale con scadenza;
+  \item \textbf{NIS2}: incidente significativo per un soggetto essenziale o importante, preallarme al CSIRT
+    entro 24 ore (Capitolo~\ref{cap:nis2});
+  \item \textbf{DORA}: incidente ICT grave di un'entità finanziaria, notifica iniziale all'autorità di
+    settore entro 4 ore dalla classificazione (Capitolo~\ref{cap:dora}); nel Lab~2 il fondo notifica la
+    CNIL per il GDPR e l'ACPR per il DORA;
+  \item \textbf{CRA}: vulnerabilità attivamente sfruttata o incidente grave sulla sicurezza di un prodotto
+    con elementi digitali, preallarme entro 24 ore tramite la piattaforma ENISA (Capitolo~\ref{cap:cra});
+    nella simulazione Pulse~K il fabbricante ha due binari CRA più il GDPR;
+  \item \textbf{AI Act}: incidente grave di un sistema di IA ad alto rischio (Capitolo~\ref{cap:aiact}).
+\end{itemize}
+Una notifica a un'autorità \textbf{non adempie} gli obblighi verso un'altra: le notifiche corrono in
+parallelo e vanno coordinate in un \textbf{piano di risposta agli incidenti integrato}. Il punto unico di
+segnalazione presso ENISA previsto dal \emph{Digital Omnibus} non è ancora operativo.
+
+\begin{esame}
+\begin{itemize}
+  \item Ambito della norma e timeline di notifica sono ``il cuore dell'esame'': prima si identifica la
+    norma applicabile, poi la tempistica corretta, senza confondere le fasi delle diverse norme.
+  \item Serve un piano di risposta agli incidenti \textbf{integrato} che coordini GDPR, CRA e, dove
+    applicabile, NIS2.
+\end{itemize}
+\end{esame}
+
+\begin{integrazione}[coordinamento tra autorità e casi EDPB]
+\begin{itemize}
+  \item La NIS2 prevede che, se le autorità competenti NIS2 vengono a sapere che una violazione degli
+    obblighi di sicurezza può comportare un data breach, ne informino senza ritardo le autorità di
+    protezione dei dati (art.~35 NIS2).
+  \item Le Linee guida EDPB 01/2021 raccolgono esempi di notifica: ransomware con dati cifrati a riposo,
+    nessuna esfiltrazione e ripristino rapido dai backup (nessun rischio: solo registro); ransomware con
+    esfiltrazione o senza backup (notifica, e comunicazione se il rischio è elevato); casi di errore umano
+    e di dispositivi smarriti, in cui l'esito dipende dalla natura dei dati e dalla cifratura. Sono utili
+    da citare per motivare una scelta (verificare i singoli casi sul testo delle linee guida).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Riservatezza +0,25 o +0,5}: nella metodologia ENISA +0,25 indica destinatari
+    \emph{noti}; un attaccante che può rivendere i dati è difficilmente un destinatario noto. La scelta
+    del docente nel caso Alpha (+0,25) è dichiaratamente discutibile e diverge dalla soluzione del Lab~1
+    (+0,5).
+  \item \textbf{Esempio di slide da correggere}: nel modulo M5 le slide indicano come ``perdita di
+    disponibilità'' l'invio accidentale di dati a un terzo non autorizzato; secondo l'art.~4(12) e la
+    classificazione delle stesse slide è una violazione di \textbf{riservatezza}.
+  \item \textbf{Fasce ``sovrapposte''}: nella metodologia ENISA (sezione~3.2) le fasce sono disgiunte
+    ($2 \le SE < 3$; $3 \le SE < 4$); la sovrapposizione sul valore 3 segnalata nel debrief del 19/10
+    riguarda il worksheet del Lab~2, non il documento ENISA.
+  \item \textbf{Data della metodologia}: in aula è stata detta ``del 2014''; il documento è datato
+    dicembre 2013.
+  \item \textbf{Termine per la notifica completa}: il GDPR non lo fissa (``senza ulteriore ingiustificato
+    ritardo''); la prassi indicata nella tabella delle scadenze ($\approx$ un mese) va confermata.
+\end{itemize}
+\end{verifica}

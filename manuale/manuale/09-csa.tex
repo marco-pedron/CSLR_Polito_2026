@@ -2,32 +2,78 @@
 \label{cap:csa}
 
 \begin{nota}[Fonti]
-Lezione del 09/11/2026 (Capitolo~\ref{lez:2026-11-09}). Le slide sul CSA non sono ancora disponibili:
-questa è una prima stesura dal parlato; articoli e date da completare sono segnalati.
+Lezione del 09/11/2026 (Capitolo~\ref{lez:2026-11-09}); richiami nella lezione introduttiva del 21/09
+(Capitolo~\ref{lez:2026-09-21}) e nel capitolo sul CRA (Capitolo~\ref{cap:cra}); glossario del
+laboratorio~1. Come fonte secondaria, gli appunti degli studenti dell'A.A.~2025/26. Le slide sul CSA non
+sono ancora disponibili: il corpo del testo viene dal parlato; articoli, date e atti di esecuzione sono
+nei riquadri \emph{Integrazione}.
 \end{nota}
 
+\dacompletare{Rivedere il capitolo sulle slide CSA quando saranno pubblicate: confermare definizioni,
+esempi, date ed eventuali articoli citati, e spostare nel corpo del testo ciò che le slide riportano.}
+
+% =====================================================================
 \section{Natura e finalità}
-Il Cybersecurity Act è un \textbf{regolamento} dell'Unione europea che introduce la \textbf{soft law
-europea} della cybersicurezza. Ha due pilastri:
+\label{sec:csa-natura}
+
+Il Cybersecurity Act (Reg.~UE 2019/881) è il regolamento con cui l'Unione europea introduce la
+\textbf{soft law europea} della cybersicurezza. Ha \textbf{due pilastri}:
 \begin{enumerate}
-  \item il \textbf{rafforzamento di ENISA}, con un mandato e compiti propri;
-  \item un \textbf{quadro europeo di certificazione} della cybersicurezza per prodotti, servizi e processi ICT.
+  \item il \textbf{rafforzamento di ENISA}, con un mandato e compiti propri (il glossario del corso
+    parla di \textbf{mandato permanente});
+  \item il \textbf{quadro europeo di certificazione} della cybersicurezza per prodotti, servizi e processi
+    ICT, con tre livelli di affidabilità (base, sostanziale, elevato).
 \end{enumerate}
-Nasce per superare quattro problemi:
+``Ricordate: \emph{scheme} ed ENISA.'' Il docente ammette che finora il successo del CSA è limitato, ma
+si aspetta che cresca.
+
+\paragraph{I problemi da risolvere.} Standard e certificazioni erano nazionali: una multinazionale doveva
+rispettare regole diverse in ogni paese. Per la cybersicurezza i problemi sono quattro:
 \begin{itemize}
   \item l'\textbf{interdipendenza}: un fornitore può colpire molti clienti, in più paesi;
-  \item l'\textbf{asimmetria informativa} tra venditore e acquirente;
+  \item l'\textbf{asimmetria informativa}: il venditore conosce il prodotto meglio dell'acquirente;
   \item la \textbf{frammentazione} degli schemi nazionali;
-  \item la mancanza di \textbf{fiducia verificabile}: servono requisiti ed evidenze.
+  \item la mancanza di \textbf{fiducia verificabile} (\emph{verifiable trust}): le dichiarazioni di
+    sicurezza richiedono requisiti ed \textbf{evidenze}. È il punto più importante.
 \end{itemize}
-Obiettivo: la \textbf{cyber assurance}, cioè evidenze che certi requisiti sono soddisfatti (da non
-confondere con la cyber insurance). Le certificazioni del CSA sono \textbf{volontarie}: oggi in Europa
-non esistono certificazioni di cybersicurezza obbligatorie.
 
-\dacompletare{Riferimento normativo (Reg.~UE 2019/881), struttura del regolamento, articoli principali e
-mandato permanente di ENISA, dalle slide.}
+\paragraph{Tre concetti.}
+\begin{itemize}
+  \item \textbf{Cybersecurity}: proteggere sistemi, reti e informazioni.
+  \item \textbf{Cyber resilience}: mantenere le funzioni essenziali o ripristinarle dopo un incidente.
+  \item \textbf{Cyber assurance}: creare \textbf{evidenze} che certi requisiti sono soddisfatti. È il
+    vero obiettivo del CSA (da non confondere con la \emph{cyber insurance}, l'assicurazione).
+\end{itemize}
 
+\paragraph{Il parallelo con la ISO/IEC 27001.} ISO ha creato la 27001, che certifica la sicurezza
+dell'\textbf{organizzazione}. Il CSA fa una cosa analoga a livello europeo, con ENISA e la Commissione,
+ma per \textbf{prodotti, servizi e processi ICT} (uno smartphone, un firewall). Le certificazioni del CSA
+sono \textbf{volontarie}: secondo il docente oggi in Europa non esistono certificazioni di cybersicurezza
+obbligatorie (resta da capire il ruolo della marcatura CE).
+
+\begin{integrazione}[Il regolamento in sintesi]
+\begin{itemize}
+  \item Pubblicato nella Gazzetta ufficiale il 07/06/2019, in vigore dal 27/06/2019; alcune norme del
+    quadro di certificazione (autorità nazionali, organismi di valutazione, reclami, sanzioni) si applicano
+    dal 28/06/2021.
+  \item Struttura: Titolo~I, disposizioni generali e definizioni (artt.~1--2); Titolo~II,
+    \textbf{ENISA} (artt.~3--45); Titolo~III, \textbf{quadro di certificazione} (artt.~46--65);
+    Titolo~IV, disposizioni finali.
+  \item Ha sostituito il precedente regolamento su ENISA (UE~526/2013), che prevedeva un mandato a
+    termine.
+  \item È stato modificato dal Reg.~(UE) 2025/37 per includere nel quadro di certificazione i
+    \textbf{servizi di sicurezza gestiti} (vedi Sezione~\ref{sec:csa-schema}).
+  \item Forma e sostanza: il CSA è un regolamento, quindi vincolante per ENISA, Commissione e Stati
+    membri (che devono, per esempio, designare un'autorità di certificazione); per le imprese, invece,
+    la certificazione è volontaria (art.~56), salvo che un'altra norma la renda obbligatoria. Per questo
+    il docente lo colloca nella soft law.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
 \section{Hard law, soft law e posizione del CSA}
+\label{sec:csa-softlaw}
+
 \begin{center}
 \small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X X}
@@ -36,29 +82,119 @@ mandato permanente di ENISA, dalle slide.}
 \midrule
 Esempi & limiti di velocità; GDPR, CRA, NIS2, DORA, AI Act & policy aziendali (es.\ MFA), linee guida ENISA,
   standard ISO, schemi del CSA\\
-Conseguenze & sanzioni predeterminate dalla legge, discrezionalità delimitata & non previste dalla legge,
-  ampio margine (es.\ provvedimenti disciplinari per violazione di policy)\\
+Conseguenze & predeterminate dalla legge, con discrezionalità delimitata & non previste dalla legge,
+  ampio margine (es.\ provvedimenti disciplinari per violazione di una policy)\\
 Tempi & 1--3 anni (o più) per una legge & adattabile in fretta\\
 \bottomrule
 \end{tabularx}
 \end{center}
-Il CSA è soft law che aiuta a rispettare la hard law: in particolare, uno schema del CSA può fornire i
-requisiti concreti con cui dimostrare la conformità al \textbf{CRA} (Capitolo~\ref{cap:cra}). Offre
-\textbf{la possibilità, non la certezza}, di dimostrarla.
+Il CSA è soft law che aiuta a rispettare la hard law: uno schema del CSA può fornire i requisiti
+concreti con cui dimostrare la conformità al \textbf{CRA} (Capitolo~\ref{cap:cra}). Il CRA dice quali
+regole rispettare ma non come; lo schema offre \textbf{la possibilità, non la certezza}, di dimostrarlo.
+Il limite della soft law resta l'incertezza delle conseguenze. Secondo il docente, in futuro la hard law
+fisserà pochi principi invalicabili (una sorta di \emph{kill switch}) e il resto sarà soft law.
 
-\section{ENISA e governance}
+\begin{esame}
 \begin{itemize}
-  \item \textbf{ENISA}, Agenzia dell'UE per la cybersicurezza: linee guida, formazione ed esercitazioni;
-    cooperazione operativa tra CSIRT; \textbf{preparazione degli schemi candidati}; analisi delle minacce e
-    buone pratiche.
-  \item \textbf{ECCG} (\emph{European Cybersecurity Certification Group}): rappresentanti delle autorità
-    nazionali; coopera alla preparazione degli schemi ed esprime un parere sulle bozze.
-  \item \textbf{Commissione europea}: individua il bisogno e adotta lo schema.
-  \item \textbf{Autorità nazionali di certificazione}: vigilano sulla certificazione; in Italia l'\textbf{ACN}.
-  \item \textbf{Organismi di valutazione e laboratori}: eseguono i test e rilasciano i certificati.
+  \item CSA = \textbf{soft law} europea; CRA = \textbf{hard law} sui prodotti. Il CSA aiuta a rispettare il
+    CRA, ma non lo sostituisce.
+  \item La differenza hard law / soft law ``non è una domanda d'esame'', ma serve per rispondere.
 \end{itemize}
+\end{esame}
 
-\section{Processo di adozione di uno schema}
+\begin{integrazione}[Dove il CSA entra nel CRA]
+\begin{itemize}
+  \item Un certificato rilasciato nell'ambito di uno schema del CSA, se indicato dalla Commissione, fa
+    \textbf{presumere} la conformità ai requisiti essenziali del CRA che copre (art.~27 CRA).
+  \item Per i \textbf{prodotti critici} il CRA può rendere obbligatorio un certificato europeo di livello
+    almeno \textbf{sostanziale} (art.~8 CRA); per i prodotti importanti la certificazione è uno dei
+    percorsi di valutazione ammessi (art.~32 CRA). È il caso in cui una certificazione del CSA diventa di
+    fatto obbligatoria: la volontarietà del CSA non esclude che un'altra norma la imponga.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{ENISA e governance della certificazione}
+\label{sec:csa-enisa}
+
+\textbf{ENISA} è l'Agenzia dell'Unione europea per la cybersicurezza. Compiti visti a lezione:
+\begin{itemize}
+  \item \textbf{policy}: linee guida, formazione ed esercitazioni;
+  \item \textbf{cooperazione operativa}: aiuta i CSIRT nazionali a lavorare insieme (con il
+    \emph{Digital Omnibus} si va verso la centralizzazione delle notifiche presso ENISA);
+  \item \textbf{schemi candidati}: prepara le regole tecniche di valutazione (compito centrale nel CSA);
+  \item \textbf{conoscenza delle minacce}: raccoglie e condivide analisi e buone pratiche.
+\end{itemize}
+Opinione del docente: le norme recenti (CRA, Digital Omnibus) danno a ENISA molti compiti, ma il
+personale è poco; il CSA~2 la rafforzerà ancora.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{4.2cm} X}
+\toprule
+\textbf{Attore} & \textbf{Ruolo}\\
+\midrule
+ENISA & prepara gli schemi candidati\\
+ECCG (\emph{European Cybersecurity Certification Group}) & rappresentanti delle autorità nazionali;
+  coopera alla preparazione degli schemi ed esprime un parere sulla bozza\\
+Commissione europea & individua il bisogno di uno schema e lo \textbf{adotta}\\
+Autorità nazionali di certificazione & vigilano sulla certificazione; in Italia l'\textbf{ACN} (Agenzia per
+  la Cybersicurezza Nazionale)\\
+Laboratori e organismi di valutazione & eseguono i test e rilasciano i certificati\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Il docente segnala le opportunità professionali: esperti esterni per ENISA o la Commissione,
+rappresentanti nazionali nell'ECCG, società di consulenza e organismi di certificazione che lavoreranno
+sugli schemi europei nei prossimi 2--4 anni.
+
+\begin{integrazione}[ENISA e gli organismi nel testo]
+\begin{itemize}
+  \item I compiti di ENISA sono agli artt.~5--12: sviluppo delle politiche, sviluppo delle capacità,
+    cooperazione operativa (anche come segretariato della rete dei CSIRT), mercato, certificazione e
+    normazione, conoscenza e informazione, sensibilizzazione, ricerca e innovazione, cooperazione
+    internazionale.
+  \item Organi di ENISA: consiglio di amministrazione, comitato esecutivo, direttore esecutivo, gruppo
+    consultivo e rete dei funzionari nazionali di collegamento.
+  \item Il \textbf{gruppo di portatori di interessi per la certificazione} (SCCG, art.~22) consiglia
+    Commissione ed ENISA e contribuisce al programma di lavoro sulla certificazione.
+  \item L'\textbf{ECCG} è disciplinato dall'art.~62; le autorità nazionali di certificazione dall'art.~58;
+    gli organismi di valutazione della conformità, che devono essere accreditati, dall'art.~60.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Framework, schema, certificato}
+\label{sec:csa-schema}
+
+\begin{itemize}
+  \item \textbf{Framework} = il CSA: fissa ruoli e regole comuni. \textbf{Non contiene schemi}: chi cerca
+    uno schema nel testo del CSA ``non ha capito''.
+  \item \textbf{Schema} = il \emph{rule book} della valutazione per una categoria: ambito, requisiti di
+    sicurezza, test, livelli di affidabilità.
+  \item \textbf{Certificato} = attesta che uno specifico prodotto o servizio rispetta lo schema. È
+    l'obiettivo concreto dell'azienda e l'unico modo per ridurre l'incertezza creata dalla hard law
+    (``devi essere sicuro'': come?).
+\end{itemize}
+Uno schema non è un certificato, e un certificato non copre tutta l'azienda.
+
+\paragraph{Che cosa può coprire uno schema.}
+\begin{itemize}
+  \item \textbf{Prodotti ICT}: elemento o componente digitale valutabile (firewall, chip, software), non
+    solo prodotti di sicurezza;
+  \item \textbf{servizi ICT}: servizi che memorizzano, trasmettono o elaborano informazioni (es.\ cloud
+    storage);
+  \item \textbf{processi ICT}: attività per progettare, sviluppare o mantenere prodotti e servizi; per ora
+    nessuno schema;
+  \item \textbf{servizi di sicurezza gestiti}: svolti per un cliente (incident response, audit,
+    penetration test).
+\end{itemize}
+Processi e servizi gestiti toccano il terreno della 27001. Formalmente ISO certifica l'organizzazione e
+il CSA prodotti e servizi; per il docente la cooperazione tra ISO ed ENISA è decisiva, perché due
+organizzazioni in competizione sulla governance creerebbero un \emph{single point of failure} proprio
+dove serve resilienza.
+
+\paragraph{Il processo di adozione.}
 \begin{center}
 \begin{tikzpicture}[node distance=4mm, every node/.style={draw, rounded corners, align=center,
     font=\small, minimum height=1.1cm, text width=2.9cm}]
@@ -66,61 +202,126 @@ requisiti concreti con cui dimostrare la conformità al \textbf{CRA} (Capitolo~\
   \node (d) [right=of r] {\textbf{Bozza}\\ENISA + stakeholder};
   \node (o) [right=of d] {\textbf{Parere}\\ECCG};
   \node (a) [right=of o] {\textbf{Adozione}\\Commissione};
-  \draw[->] (r) -- (d); \draw[->] (d) -- (o); \draw[->] (o) -- (a);
+  \draw[-{Stealth}] (r) -- (d); \draw[-{Stealth}] (d) -- (o); \draw[-{Stealth}] (o) -- (a);
 \end{tikzpicture}
 \end{center}
-\dacompletare{Atto di adozione (atto di esecuzione), programma di lavoro dell'Unione (URWP), durata e
-revisione degli schemi.}
+La Commissione individua il bisogno per una categoria di prodotti e chiede a ENISA uno schema candidato;
+ENISA definisce requisiti e metodi di valutazione consultando stakeholder ed esperti; l'ECCG esprime un
+parere; la Commissione adotta lo schema.
 
-\section{Framework, schema e certificato}
+\begin{integrazione}[Procedura e contenuto degli schemi (artt.~47--57)]
 \begin{itemize}
-  \item \textbf{Framework}: il CSA, che fissa ruoli e regole comuni. Non contiene schemi.
-  \item \textbf{Schema}: il \emph{rule book} della valutazione per una categoria: ambito, requisiti di sicurezza,
-    test, livelli di affidabilità.
-  \item \textbf{Certificato}: attesta che uno specifico prodotto o servizio rispetta lo schema.
+  \item Le priorità sono fissate nel \textbf{programma di lavoro progressivo dell'Unione} (URWP, art.~47).
+    La richiesta a ENISA è disciplinata dall'art.~48; la preparazione, l'adozione e il riesame dall'art.~49.
+  \item ENISA prepara lo schema candidato con un gruppo di lavoro ad hoc e consulta gli stakeholder; il
+    parere dell'ECCG non è vincolante, ma ENISA deve tenerne conto.
+  \item La Commissione adotta lo schema con un \textbf{atto di esecuzione}; ENISA lo valuta almeno ogni
+    \textbf{cinque anni}.
+  \item Ogni schema indica almeno (art.~54): oggetto e ambito, requisiti di sicurezza, livelli di
+    affidabilità, criteri e metodi di valutazione, regole di monitoraggio, gestione delle vulnerabilità
+    scoperte dopo il rilascio, periodo massimo di validità dei certificati, condizioni di rilascio,
+    rinnovo, sospensione e revoca.
+  \item Gli schemi nazionali che coprono gli stessi prodotti cessano di produrre effetti dalla data
+    stabilita nell'atto di esecuzione (art.~57).
+  \item Le definizioni di prodotto, servizio e processo ICT sono all'art.~2; i servizi di sicurezza
+    gestiti sono stati aggiunti dal Reg.~(UE) 2025/37.
 \end{itemize}
-Oggetti possibili di uno schema: \textbf{prodotti ICT} (firewall, chip, software), \textbf{servizi ICT} (es.\ cloud
-storage), \textbf{processi ICT} (progettazione e manutenzione; ancora nessuno schema), \textbf{servizi di
-sicurezza gestiti} (incident response, audit, penetration test). ISO/IEC~27001 certifica invece
-l'\textbf{organizzazione}.
+\end{integrazione}
 
+% =====================================================================
 \section{Livelli di affidabilità e valutazione della conformità}
+\label{sec:csa-livelli}
+
+Il livello di affidabilità (\emph{assurance level}) esprime la fiducia che i requisiti siano soddisfatti,
+in proporzione al rischio:
 \begin{center}
 \small
 \begin{tabular}{lll}
 \toprule
-\textbf{Livello} & \textbf{Rischio} & \textbf{Valutazione}\\
+\textbf{Livello} & \textbf{Rischio considerato} & \textbf{Chi valuta}\\
 \midrule
-Base & rischi noti di base & anche autovalutazione del fabbricante\\
-Sostanziale & attaccanti con risorse limitate & terza parte\\
-Elevato & attaccanti con risorse significative & terza parte\\
+Base (\emph{basic}) & rischi noti di base & anche \textbf{autovalutazione} del fabbricante\\
+Sostanziale (\emph{substantial}) & attaccanti con risorse limitate & terza parte indipendente\\
+Elevato (\emph{high}) & attaccanti con risorse significative & terza parte indipendente\\
 \bottomrule
 \end{tabular}
 \end{center}
-In pratica la certificazione è quasi sempre di terza parte. Un certificato:
+L'autovalutazione è possibile solo per il livello base, ma in pratica oggi non ci sono esempi: la
+certificazione è quasi sempre di \textbf{terza parte} (``è come fare i compiti e dire: passerò
+l'esame'').
+
+\paragraph{Che cosa fa (e non fa) un certificato.}
 \begin{itemize}
-  \item dà evidenze su un oggetto \textbf{identificato con precisione}, su requisiti e test specifici, a un
-    livello definito;
-  \item \textbf{non} dimostra l'assenza di vulnerabilità;
-  \item non esonera in automatico da responsabilità: dopo un incidente conta se i requisiti erano davvero
-    rispettati (\emph{accountability});
-  \item richiede \textbf{monitoraggio e manutenzione}: prodotto e minacce cambiano; una patch non invalida
-    automaticamente il certificato, ma il suo impatto va valutato; una nuova versione va ricertificata.
+  \item dà evidenze su un oggetto \textbf{identificato con precisione}, su requisiti e test specifici, a
+    un livello definito;
+  \item \textbf{non} dimostra l'assenza di vulnerabilità (ho il requisito MFA, ma gli attacchi oggi
+    aggirano anche l'MFA);
+  \item non esonera in automatico da responsabilità: dopo un incidente si verifica, secondo il principio
+    di \emph{accountability}, se i requisiti certificati erano davvero rispettati;
+  \item richiede \textbf{monitoraggio e manutenzione}: prodotto e minacce cambiano. Una patch non
+    invalida automaticamente il certificato, ma il suo impatto va valutato; una nuova versione in
+    un'altra configurazione va ricertificata. È lo stesso monitoraggio continuo di DPIA e FRIA.
 \end{itemize}
-\dacompletare{Articoli su livelli di affidabilità, autovalutazione della conformità, durata e revoca dei
-certificati, sanzioni nazionali.}
 
+\paragraph{Il problema dei prodotti.} L'organizzazione cambia persone e strumenti, ma processi e sistemi
+di autenticazione restano stabili; i prodotti invece cambiano a ogni release, e ogni prodotto va
+ricertificato. È un'opportunità economica, ma pesa sulle piccole aziende. Previsione del docente: solo
+alcune aziende useranno gli schemi europei, e la certificazione sarà un segno di qualità.
+
+\begin{integrazione}[Livelli e certificazione nel testo (artt.~52--56)]
+\begin{itemize}
+  \item \textbf{Art.~52}: \emph{base} = ridurre al minimo i rischi di base noti; valutazione almeno con un
+    riesame della documentazione tecnica. \emph{Sostanziale} = ridurre al minimo i rischi noti e quelli
+    di attacchi da parte di soggetti con abilità e risorse limitate; valutazione almeno con verifica
+    dell'assenza di vulnerabilità note pubblicamente e test della corretta attuazione delle funzionalità
+    di sicurezza. \emph{Elevato} = ridurre al minimo il rischio di attacchi allo stato dell'arte da parte
+    di soggetti con abilità e risorse significative; si aggiungono test di resistenza (penetration test).
+  \item \textbf{Art.~53}: lo schema può ammettere l'\textbf{autovalutazione} della conformità solo per il
+    livello base; il fabbricante rilascia una dichiarazione UE di conformità e ne risponde.
+  \item \textbf{Art.~56}: la certificazione è \textbf{volontaria}, salvo che il diritto dell'Unione o degli
+    Stati membri disponga altrimenti; la Commissione valuta periodicamente se renderla obbligatoria per
+    alcuni prodotti. I certificati di livello elevato sono rilasciati, di regola, dall'autorità nazionale
+    di certificazione o da un organismo da essa autorizzato.
+  \item \textbf{Art.~65}: le sanzioni per la violazione degli schemi e dei certificati sono stabilite
+    dagli Stati membri.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
 \section{EUCC}
-Primo schema adottato: \textbf{EUCC} (\emph{EU Common Criteria-based scheme}), basato sui Common Criteria;
-riguarda \textbf{prodotti e componenti ICT} (niente servizi o processi), è applicabile dal
-\textbf{27 febbraio 2025} e prevede i livelli \textbf{sostanziale ed elevato}.
-Concetti: \textbf{target of evaluation} (il prodotto esatto), \textbf{security target} (il documento che lo
-descrive con i requisiti dichiarati), \textbf{protection profile} (requisiti riutilizzabili per un tipo di
-prodotto), metodi e analisi delle vulnerabilità, ipotesi e limiti operativi.
-\dacompletare{Riferimento al regolamento di esecuzione EUCC; altri schemi in preparazione (EUCS per il
-cloud, EU5G).}
+\label{sec:csa-eucc}
 
-\section{Rapporto con le altre norme e strumenti}
+Primo schema adottato: \textbf{EUCC} (\emph{EU Common Criteria-based scheme}), basato sui
+\textbf{Common Criteria} (criteri internazionali per i requisiti di sicurezza).
+\begin{itemize}
+  \item riguarda \textbf{prodotti e componenti ICT}: niente servizi, processi o management, quindi non è
+    in conflitto con ISO;
+  \item applicabile dal \textbf{27 febbraio 2025};
+  \item livelli \textbf{sostanziale ed elevato} (un livello base in autovalutazione non avrebbe senso).
+\end{itemize}
+Concetti della valutazione: \textbf{target of evaluation} (TOE, il prodotto esatto da certificare),
+\textbf{security target} (il documento che descrive il TOE e i requisiti di sicurezza dichiarati),
+\textbf{protection profile} (insieme riutilizzabile di requisiti per un tipo di prodotto), metodi e
+analisi delle vulnerabilità, ipotesi e limiti operativi. Un certificato per la versione~3 di un modulo
+\textbf{non copre} automaticamente la versione~4 in un'altra configurazione.
+
+\begin{integrazione}[EUCC e altri schemi]
+\begin{itemize}
+  \item L'EUCC è stato adottato con il \textbf{regolamento di esecuzione (UE) 2024/482} della Commissione
+    (31/01/2024), applicabile dal 27/02/2025. Sostituisce progressivamente gli schemi nazionali basati
+    sui Common Criteria dell'accordo SOG-IS.
+  \item Il livello dipende dalla profondità dell'analisi delle vulnerabilità (componente
+    \emph{AVA\_VAN} dei Common Criteria): livelli 1--2 per il sostanziale, 3--5 per l'elevato. I
+    certificati durano al massimo \textbf{cinque anni}, rinnovabili.
+  \item Altri schemi in preparazione: \textbf{EUCS} per i servizi cloud (in discussione da anni, anche sul
+    tema dei requisiti di sovranità) ed \textbf{EU5G} per le reti 5G.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Strumenti diversi per domande diverse}
+\label{sec:csa-rapporti}
+
 \begin{center}
 \small
 \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.4cm} X}
@@ -128,33 +329,99 @@ cloud, EU5G).}
 \textbf{Norma / strumento} & \textbf{Domanda a cui risponde}\\
 \midrule
 CSA & come si valutano le dichiarazioni di sicurezza: quadro comune di certificazione\\
-CRA & obblighi di sicurezza e sulle vulnerabilità dei prodotti con elementi digitali\\
+CRA & obblighi di sicurezza e sulle vulnerabilità dei prodotti con elementi digitali
+  (Capitolo~\ref{cap:cra})\\
 NIS2 & sicurezza di reti e sistemi informativi dei soggetti essenziali e importanti\\
 GDPR & protezione dei dati personali (la norma più generale)\\
 DORA & resilienza operativa digitale del settore finanziario\\
 ISO/IEC~27001 & sistema di gestione della sicurezza dell'organizzazione\\
-Marcatura CE & conformità del prodotto alle norme UE che la richiedono (possibile sovrapposizione con l'EUCC)\\
-Penetration test & attacco simulato autorizzato; soft law con possibili conseguenze legali\\
+EUCC & certificazione dei prodotti ICT\\
+Marcatura CE & conformità del prodotto alle norme UE che la richiedono. Timore del docente: per i
+  prodotti ICT EUCC e marcatura CE potrebbero sovrapporsi, con un doppio percorso difficile da imporre
+  ai produttori extraeuropei\\
+Penetration test & attacco simulato autorizzato; soft law con possibili conseguenze legali, che
+  probabilmente confluirà in EUCC o nella parte VAPT della 27001\\
 \bottomrule
 \end{tabularx}
 \end{center}
 
+\begin{nota}[Come si certifica in pratica]
+Nell'esempio della 27001 una società di consulenza aiuta l'azienda a soddisfare i requisiti, poi un
+organismo di certificazione distinto verifica e certifica. Per il CSA le stesse società potranno operare
+sugli schemi europei, con ENISA come riferimento. Il laboratorio~4 mostra il rovescio: un certificato
+ISO/IEC~27001 con perimetro limitato al cloud non prova nulla sul firmware né sulla conformità al CRA
+(Capitolo~\ref{lab:04}).
+\end{nota}
+
+% =====================================================================
 \section{Security by design e supply chain}
-Protezione e manutenzione si pianificano in progettazione: ridurre la superficie d'attacco, conoscere i
-componenti (\textbf{SBOM}), gestire le segnalazioni di vulnerabilità, distribuire gli aggiornamenti. Per ogni
-fornitore: il componente può essere attaccato? Possiamo operare senza? Chi controlla servizi, decisioni e
-dati (governance, non solo \emph{data residency})?
+\label{sec:csa-supplychain}
 
+Protezione e manutenzione si pianificano quando il prodotto è progettato (come privacy by design,
+forensics by design, ``legal by design''): ridurre la superficie d'attacco, \textbf{sapere che cosa
+contiene il software} (\textbf{SBOM}), gestire le segnalazioni di vulnerabilità e distribuire gli
+aggiornamenti. Sono gli stessi temi dell'Allegato~I, Parte~II del CRA (Sezione~\ref{sec:cra-supporto}).
+Con le componenti di IA spesso non si sa da che cosa è composto un prodotto.
+
+\paragraph{Rischio della supply chain.} Domande da porsi per ogni fornitore:
+\begin{itemize}
+  \item il componente può essere attaccato? (sicurezza tecnica)
+  \item \textbf{possiamo continuare a operare senza questo fornitore?} (continuità)
+  \item chi controlla servizi, decisioni chiave e dati? (governance)
+\end{itemize}
+Se c'è concorrenza il fornitore si cambia; senza alternative è un problema di resilienza e continuità
+operativa (esempi del docente: CrowdStrike nel 2024, un fornitore unico di servizi KYC/AML all'origine
+di un grande breach finanziario). Conta \textbf{chi controlla} i dati, non dove risiedono: la
+\emph{data residency} è un'illusione se il controllo è altrove.
+
+% =====================================================================
 \section{CSA~2}
-Proposta di revisione: più poteri a ENISA, certificazione semplificata, più attenzione alla supply chain.
-\dacompletare{Stato dell'iter legislativo e contenuti della proposta.}
+\label{sec:csa-csa2}
 
+È una \textbf{proposta} di revisione del CSA (come da NIS a NIS2): più poteri a ENISA, certificazione
+semplificata, più attenzione al rischio della supply chain. Per ora basta sapere che esiste; secondo il
+docente entrerà probabilmente in vigore il prossimo anno.
+
+\begin{integrazione}[La proposta]
+La Commissione ha presentato la proposta di revisione nel gennaio 2026. Tra i contenuti annunciati: un
+mandato più ampio per ENISA (anche sul supporto operativo e sulla segnalazione degli incidenti), un quadro
+di certificazione più rapido e semplice (procedure di adozione più brevi, possibilità di certificare
+anche la postura di sicurezza delle organizzazioni) e strumenti per ridurre i rischi dei
+\textbf{fornitori ad alto rischio} nelle catene di approvvigionamento ICT critiche, sul modello del
+\emph{5G toolbox}. L'iter legislativo è in corso.
+\end{integrazione}
+
+\dacompletare{Caso di studio sul CSA della lezione successiva (punti di vista di un ospedale, di un
+fornitore e di un valutatore tecnico).}
+
+% =====================================================================
 \begin{esame}
 \begin{itemize}
   \item I due pilastri: \textbf{ENISA} e \textbf{schemi di certificazione}.
-  \item CSA = soft law sui prodotti; ISO/IEC~27001 = organizzazione; CRA = hard law sui prodotti.
-  \item Framework $\neq$ schema $\neq$ certificato; un certificato non prova l'assenza di vulnerabilità.
+  \item CSA = soft law sui prodotti (volontaria); ISO/IEC~27001 = organizzazione; CRA = hard law sui
+    prodotti.
+  \item Framework $\neq$ schema $\neq$ certificato; un certificato non prova l'assenza di vulnerabilità e
+    non esonera dalla responsabilità.
   \item Livelli base/sostanziale/elevato; autovalutazione solo per il livello base.
   \item EUCC: primo schema, prodotti ICT, Common Criteria, livelli sostanziale ed elevato.
+  \item Oggi in Europa non esistono certificazioni di cybersicurezza obbligatorie; il CRA potrà imporle
+    per i prodotti critici.
 \end{itemize}
 \end{esame}
+
+\section{Punti da verificare}
+\label{sec:csa-verifica}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Articoli del CSA} (artt.~5--12, 22, 47--58, 60, 62, 65) e date (pubblicazione,
+    entrata in vigore, 28/06/2021): dalla conoscenza dei redattori, da controllare sul Reg.~(UE)
+    2019/881 consolidato.
+  \item \textbf{EUCC}: estremi del regolamento di esecuzione (UE) 2024/482, corrispondenza tra livelli e
+    \emph{AVA\_VAN}, durata massima dei certificati.
+  \item \textbf{Reg.~(UE) 2025/37} sui servizi di sicurezza gestiti: estremi da verificare.
+  \item \textbf{CSA~2}: data e contenuti della proposta della Commissione; stato dell'iter.
+  \item \textbf{Mandato permanente di ENISA}: riportato dal glossario del corso; manca l'articolo.
+  \item Il riferimento del CRA alla certificazione CSA per i prodotti critici e alla presunzione di
+    conformità (artt.~8, 27, 32 CRA): vedi anche le verifiche del Capitolo~\ref{cap:cra}.
+\end{itemize}
+\end{verifica}

@@ -1,14 +1,474 @@
 \chapter{NIS2}
 \label{cap:nis2}
 
-\dacompletare{Fonte: slide ancora da ricevere. Scaletta prevista:
+\begin{nota}[Stato e fonti]
+\textbf{Stato: non ancora trattata a lezione} (lezione frontale prevista venerdì 13/11/2026, online:
+Capitolo~\ref{lez:2026-11-09}). Questo capitolo è un \textbf{inquadramento provvisorio}. Fonti usate:
+slide introduttive (\emph{01.~Introductory class}), glossario del laboratorio~1, diario delle lezioni
+del 21/09, 05/10, 26/10, 02/11 e 09/11, tema d'esame precedente (Capitolo~\ref{cap:tema-precedente});
+come fonte secondaria gli \textbf{appunti di studenti dell'A.A.~2025/26}, sempre indicati come tali.
+Tutto il resto è nei riquadri viola di integrazione.
+\end{nota}
+
+% =====================================================================
+\section{Che cosa protegge e perché conta}
+\label{sec:nis2-inquadramento}
+
+La NIS2 (Direttiva (UE) 2022/2555) protegge la \textbf{continuità dei servizi essenziali}: nello
+scenario della lezione introduttiva (ransomware sulla piattaforma di prenotazione di una rete
+ospedaliera) si applica perché si è fermato un servizio su cui la società fa affidamento. Il bene
+protetto non è il dato personale (GDPR) né il prodotto (CRA), ma il \textbf{servizio} erogato
+attraverso reti e sistemi informativi. Nella ``linea del tempo'' delle slide la generazione 2022
+(NIS2 e DORA) è quella che porta in primo piano resilienza, supply chain e responsabilità degli organi
+di amministrazione.
+
+Punti emersi a lezione:
 \begin{itemize}
-  \item dal NIS1 al NIS2: perché si è ampliato il perimetro;
-  \item soggetti essenziali e importanti; settori degli Allegati I e II;
-  \item recepimento italiano (D.Lgs.~138/2024) e ruolo dell'ACN;
-  \item misure di gestione del rischio (art.~21), inclusa la supply chain;
-  \item responsabilità degli organi di gestione (art.~20);
-  \item incidente e incidente significativo; notifica (art.~23);
-  \item CSIRT, ENISA, NIS Cooperation Group, EU-CyCLONe;
-  \item sanzioni; rapporto con DORA (lex specialis).
-\end{itemize}}
+  \item per il docente la NIS2 è ``il vero futuro'': un livello di cybersicurezza molto più spinto
+    dell'art.~32 GDPR, che ha dominato la generazione di norme 2016--2026 (lezione del 21/09);
+  \item è una \textbf{direttiva}: va recepita dagli Stati e lascia ``27 perimetri nazionali'' diversi
+    per ambito, sanzioni e vigilanza. In Italia è recepita con il \textbf{D.lgs.~138/2024}; autorità
+    competente è l'\textbf{ACN} (Agenzia per la Cybersicurezza Nazionale), che ospita il
+    \textbf{CSIRT Italia};
+  \item riguarda le reti e le \textbf{organizzazioni}, mentre il CRA riguarda il \textbf{prodotto}; in
+    Italia i soggetti obbligati sarebbero, secondo una stima a voce del docente, circa 20.000
+    (lezione del 26/10);
+  \item si applica solo ad \textbf{alcune categorie} di soggetti, legate a infrastrutture e servizi
+    critici, con requisiti di sicurezza specifici e numerosi (lezione del 02/11). A differenza della
+    DPIA del GDPR, che spesso è una zona grigia, nella NIS2 ``si entra o non si entra in una
+    categoria'' (lezione del 05/10);
+  \item con la NIS2 molte aziende hanno bisogno della certificazione ISO/IEC~27001 per stare sul
+    mercato, perché i grandi clienti scelgono i fornitori anche in base a essa (lezione del 21/09).
+\end{itemize}
+
+\paragraph{Dalla NIS alla NIS2 (appunti A.A.~2025/26).} La prima direttiva NIS (2016) si applicava a un
+gruppo ristretto di operatori e fu recepita in modo disomogeneo; la NIS2 la sostituisce allargando
+l'ambito a 18 settori, distinguendo soggetti essenziali e importanti, rafforzando vigilanza e obblighi
+di segnalazione e inserendo la gestione del rischio della catena di fornitura.
+
+\begin{integrazione}[dati formali]
+\begin{itemize}
+  \item Direttiva (UE) 2022/2555 del 14 dicembre 2022, in vigore dal 16 gennaio 2023; termine di
+    recepimento il 17 ottobre 2024. La direttiva NIS (UE) 2016/1148 è abrogata dal 18 ottobre 2024.
+  \item Il limite della NIS1 era anche di metodo: erano gli Stati a individuare uno per uno gli
+    ``operatori di servizi essenziali'', con criteri molto diversi tra Paesi. La NIS2 sostituisce
+    l'identificazione caso per caso con un criterio generale (settore + dimensione).
+  \item Il D.lgs.~4 settembre 2024, n.~138 è in vigore dal 16 ottobre 2024.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Chi è soggetto: soggetti essenziali e importanti}
+\label{sec:nis2-ambito}
+
+La NIS2 distingue \textbf{soggetti essenziali} e \textbf{soggetti importanti}. Dal glossario del corso:
+le due classi hanno una \textbf{vigilanza diversa} (\emph{ex ante} per gli essenziali, \emph{ex post}
+per gli importanti) e \textbf{sanzioni diverse} (Sezione~\ref{sec:nis2-vigilanza}).
+
+Nel tema d'esame precedente (Capitolo~\ref{cap:tema-precedente}) la qualificazione è il primo passo
+della risposta: la sanità è un settore dell'Allegato~I, quindi un ospedale è \textbf{essenziale} se
+grande impresa e \textbf{importante} se media; i suoi fornitori di cloud e di servizi di sicurezza
+gestiti sono a loro volta soggetti NIS2 (infrastrutture digitali e gestione dei servizi ICT B2B).
+
+\paragraph{Appunti A.A.~2025/26.} Agli ambiti già coperti dalla NIS1 (energia, trasporti, sanità,
+finanza, acqua, infrastrutture digitali) si aggiungono, tra gli altri, alimenti, servizi postali,
+rifiuti, comunicazioni elettroniche e piattaforme digitali, gestione dei servizi ICT e alcune
+manifatture strategiche. Gli Stati possono designare come essenziali ulteriori soggetti per ragioni
+strategiche nazionali.
+
+\begin{integrazione}[criterio dimensionale (art.~2) e classificazione (art.~3)]
+\textbf{Regola generale (\emph{size-cap}).} La NIS2 si applica ai soggetti dei settori degli Allegati~I
+e~II che sono almeno \textbf{medie imprese} secondo la Raccomandazione 2003/361/CE, cioè che superano i
+limiti della piccola impresa: almeno \textbf{50 dipendenti} oppure fatturato annuo \emph{e} totale di
+bilancio superiori a \textbf{10 milioni di euro}.
+
+\textbf{Indipendentemente dalla dimensione} rientrano, tra gli altri: fornitori di reti o servizi di
+comunicazione elettronica accessibili al pubblico, prestatori di servizi fiduciari, gestori di registri
+dei nomi di dominio di primo livello (TLD) e fornitori di servizi DNS; il fornitore unico in uno Stato
+di un servizio essenziale; i soggetti la cui perturbazione avrebbe impatto significativo su sicurezza o
+salute pubblica; le \textbf{entità critiche} individuate ai sensi della Direttiva CER (UE) 2022/2557;
+gli enti della pubblica amministrazione centrale.
+
+\textbf{Essenziali (art.~3(1))}: in sintesi, i soggetti dell'Allegato~I che superano le soglie della
+media impresa (cioè \textbf{grandi imprese}: almeno 250 dipendenti oppure fatturato superiore a
+50 milioni e bilancio superiore a 43 milioni di euro); prestatori di servizi fiduciari qualificati,
+registri TLD e fornitori DNS a prescindere dalla dimensione; fornitori di comunicazioni elettroniche
+pubbliche almeno medi; PA centrale; entità critiche CER; altri soggetti designati dallo Stato.
+
+\textbf{Importanti (art.~3(2))}: tutti gli altri soggetti degli Allegati~I e~II nell'ambito, quindi le
+medie imprese dell'Allegato~I e le medie e grandi imprese dell'Allegato~II.
+
+\medskip
+\textbf{Allegato~I -- settori ad alta criticità (11)}: energia (elettricità, teleriscaldamento,
+petrolio, gas, idrogeno); trasporti (aereo, ferroviario, per vie d'acqua, su strada); settore bancario;
+infrastrutture dei mercati finanziari; sanità; acqua potabile; acque reflue; infrastrutture digitali
+(IXP, DNS, TLD, cloud, data center, CDN, servizi fiduciari, comunicazioni elettroniche); gestione dei
+servizi ICT B2B (fornitori di servizi gestiti e di servizi di sicurezza gestiti); pubblica
+amministrazione; spazio.
+
+\textbf{Allegato~II -- altri settori critici (7)}: servizi postali e di corriere; gestione dei rifiuti;
+fabbricazione, produzione e distribuzione di sostanze chimiche; produzione, trasformazione e
+distribuzione di alimenti; fabbricazione (dispositivi medici, computer ed elettronica, apparecchiature
+elettriche, macchinari, autoveicoli, altri mezzi di trasporto); fornitori di servizi digitali
+(mercati online, motori di ricerca, social network); ricerca.
+
+\medskip
+\textbf{Italia.} Il D.lgs.~138/2024 aggiunge propri allegati (pubbliche amministrazioni e ulteriori
+categorie, ad esempio trasporto pubblico locale, istituti di istruzione che svolgono ricerca, soggetti
+culturali) e prevede un meccanismo di \textbf{auto-registrazione} dei soggetti sulla piattaforma
+dell'ACN: è il soggetto a valutare se rientra nell'ambito; l'ACN redige poi l'elenco dei soggetti
+essenziali e importanti e comunica loro l'inclusione.
+\end{integrazione}
+
+\begin{verifica}
+\begin{itemize}
+  \item Gli appunti A.A.~2025/26 parlano in un punto di ``18 settori'' e in un altro di ``25 settori'':
+    il dato corretto per la direttiva è 18 (11 + 7); il numero maggiore potrebbe contare anche i
+    sottosettori o gli allegati italiani. Verificare sulle slide NIS2.
+  \item Allegati italiani del D.lgs.~138/2024, finestre di registrazione sulla piattaforma ACN e
+    calendario degli obblighi: dettagli da confermare sulle slide e sul sito dell'ACN.
+\end{itemize}
+\end{verifica}
+
+% =====================================================================
+\section{Governance: l'organo di gestione (art.~20)}
+\label{sec:nis2-governance}
+
+Il glossario del corso indica tra i tratti distintivi della NIS2 la \textbf{responsabilità degli
+organi di gestione} (\emph{management liability}); nelle schede di ripasso è riassunta come
+responsabilità \textbf{non delegabile}. Nella risposta modello del tema precedente
+(Capitolo~\ref{cap:tema-precedente}) la gestione della supply chain va supervisionata e approvata
+dall'organo di gestione (art.~20).
+
+\paragraph{Appunti A.A.~2025/26.} Amministratori e rappresentanti legali restano responsabili della
+conformità anche se affidano la cybersicurezza a specialisti interni, a consulenti esterni o al punto
+di contatto NIS. La gestione del rischio è però condivisa nei fatti (CISO, responsabile dell'ISMS,
+amministratori di sistema, red e blue team, punto di contatto NIS): serve molta comunicazione interna.
+Risultanze, piani di trattamento e decisioni di accettazione del rischio vanno riportati all'organo di
+gestione: la cybersicurezza diventa materia da consiglio di amministrazione. Il riesame della
+direzione previsto dalla ISO/IEC~27001 può essere riutilizzato per dimostrare questa supervisione. Nel
+laboratorio NIS2 dello scorso anno, dopo l'incidente il consiglio doveva prendere atto formalmente
+dell'evento, approvare il budget di remediation e documentare le decisioni; tra le misure raccomandate,
+un CISO a riporto diretto del consiglio e formazione obbligatoria per gli amministratori.
+
+\begin{integrazione}[art.~20 e responsabilità personale]
+\begin{itemize}
+  \item \textbf{Art.~20(1)}: gli organi di gestione dei soggetti essenziali e importanti
+    \textbf{approvano} le misure di gestione del rischio dell'art.~21, ne \textbf{sovrintendono
+    l'attuazione} e possono essere ritenuti \textbf{responsabili} delle violazioni.
+  \item \textbf{Art.~20(2)}: i membri degli organi di gestione devono seguire una
+    \textbf{formazione} specifica; gli Stati incoraggiano formazione periodica anche per i dipendenti.
+  \item Per i soggetti essenziali, in caso di inosservanza persistente, l'autorità può chiedere di
+    vietare temporaneamente a chi esercita funzioni dirigenziali (fino al livello di amministratore
+    delegato o rappresentante legale) di svolgerle (art.~32(5)); le persone fisiche responsabili
+    possono essere chiamate a rispondere secondo il diritto nazionale (artt.~32(6) e~33).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Misure di gestione del rischio (art.~21)}
+\label{sec:nis2-misure}
+
+Nella ``grammatica comune'' delle slide introduttive la NIS2 compare con l'\textbf{art.~21}: misure di
+gestione del rischio \textbf{multi-rischio} (\emph{all-hazards}), \textbf{proporzionate} a esposizione,
+dimensione e impatto. È lo stesso metodo delle altre norme del corso (contesto, identificazione,
+analisi, valutazione, trattamento, monitoraggio): la norma dice di essere sicuri, non quali controlli
+adottare, e ``abbiamo seguito la checklist'' non è mai una difesa.
+
+\paragraph{Supply chain.} L'\textbf{art.~21(2)(d)} rende la sicurezza della catena di
+approvvigionamento una misura obbligatoria, ``compresa la qualità dei fornitori'' (slide sul
+perimetro). Nella risposta modello del tema precedente: l'\textbf{art.~21(3)} chiede di considerare le
+vulnerabilità specifiche di ciascun fornitore, la qualità dei loro prodotti e delle loro pratiche di
+sicurezza, comprese le procedure di sviluppo sicuro; in pratica, inventario dei fornitori e dei
+servizi critici, mappatura delle dipendenze, requisiti minimi nei contratti, SLA e tempi di
+ripristino, rivalutazione periodica.
+
+\paragraph{Certificazioni.} Le slide ricordano che l'\textbf{art.~24} NIS2, come gli artt.~42--43 GDPR e
+il Titolo~III del Cybersecurity Act, tratta la certificazione come \textbf{elemento di prova} da
+valutare, mai come immunità (Capitolo~\ref{cap:csa}).
+
+\paragraph{Appunti A.A.~2025/26: le linee guida ACN.} L'ACN ha pubblicato linee guida e una matrice di
+controlli che, pur non vincolanti, sono il riferimento nazionale più concreto. Punti riportati:
+\begin{itemize}
+  \item la conformità non è una checklist: il controllo cardine (indicato come \emph{GVRM-03}) chiede
+    un ciclo continuo di identificazione, analisi, valutazione, trattamento e monitoraggio del rischio;
+    l'ACN chiede una valutazione basata su probabilità e impatto ma non impone una metodologia;
+  \item inventario aggiornato degli asset (hardware, software incluse librerie e componenti open
+    source, servizi gestiti da terzi);
+  \item valutazione dei fornitori e delle società del gruppo (privilegi di accesso, dipendenza,
+    resilienza), da cui discendono requisiti contrattuali, SLA e analisi dei rischi a cascata;
+  \item la valutazione deve essere documentata e riproducibile (minaccia, asset esposto, impatto,
+    probabilità), non un'impressione;
+  \item la matrice ACN suggerirebbe di rivedere ruoli e risk assessment ogni due anni, intervallo
+    giudicato insufficiente a lezione (almeno annuale);
+  \item tensioni da gestire con l'accountability: conservazione dei log (lunga per la sicurezza,
+    limitata dalla protezione dei dati) e politiche crittografiche;
+  \item lo Statement of Applicability della ISO/IEC~27001 può essere esteso per mappare i requisiti
+    ACN/NIS2 sui controlli esistenti.
+\end{itemize}
+
+\begin{nota}[Segnalato l'anno scorso: logica NIS2 e logica DORA]
+Negli appunti A.A.~2025/26 il confronto è indicato come sottolineato più volte dal docente e
+``probabile domanda d'esame'': la \textbf{NIS2} presidia soprattutto la \textbf{postura preventiva}
+(misure adeguate prima dell'incidente), il \textbf{DORA} la \textbf{resilienza e la continuità}
+(rendere la perturbazione recuperabile entro parametri accettabili). Da confermare nelle lezioni di
+quest'anno.
+\end{nota}
+
+\begin{integrazione}[le dieci misure minime dell'art.~21(2)]
+Le misure devono comprendere almeno:
+\begin{enumerate}[label=(\alph*)]
+  \item politiche di analisi dei rischi e di sicurezza dei sistemi informativi;
+  \item gestione degli incidenti;
+  \item continuità operativa (gestione dei backup, disaster recovery) e gestione delle crisi;
+  \item sicurezza della catena di approvvigionamento, compresi i rapporti con i fornitori diretti;
+  \item sicurezza nell'acquisizione, nello sviluppo e nella manutenzione di reti e sistemi, compresa
+    la gestione e divulgazione delle vulnerabilità;
+  \item politiche e procedure per valutare l'efficacia delle misure;
+  \item pratiche di igiene informatica di base e formazione;
+  \item politiche e procedure sull'uso della crittografia e, se opportuno, della cifratura;
+  \item sicurezza delle risorse umane, controllo degli accessi e gestione degli asset;
+  \item autenticazione a più fattori o continua, comunicazioni vocali, video e testuali protette e
+    sistemi di comunicazione di emergenza protetti, ove opportuno.
+\end{enumerate}
+Altri elementi utili: se un soggetto scopre di non rispettare le misure deve adottare senza indebito
+ritardo le correzioni necessarie (art.~21(4)); per i fornitori digitali (cloud, data center, DNS,
+servizi gestiti, piattaforme, ecc.) i requisiti tecnici sono dettagliati dal Regolamento di esecuzione
+(UE) 2024/2690; l'art.~22 prevede valutazioni coordinate a livello UE dei rischi di catene di
+approvvigionamento critiche (per esempio il 5G).
+\end{integrazione}
+
+% =====================================================================
+\section{Incidenti e obblighi di notifica (art.~23)}
+\label{sec:nis2-notifica}
+
+\paragraph{Incidente e incidente significativo.} L'\textbf{incidente} (art.~6) è un evento che
+compromette la \textbf{disponibilità, l'autenticità, l'integrità o la riservatezza} di dati conservati,
+trasmessi o elaborati, o dei servizi offerti da reti e sistemi informativi o accessibili attraverso di
+essi. L'obbligo di notifica scatta solo per l'\textbf{incidente significativo} (art.~23(3)): quello che
+ha causato o \emph{può causare} una grave perturbazione operativa dei servizi o perdite finanziarie per
+il soggetto, oppure si è ripercosso o può ripercuotersi su altre persone fisiche o giuridiche causando
+danni materiali o immateriali considerevoli. Il ``può causare'' è giuridicamente decisivo.
+
+\begin{esame}
+\begin{itemize}
+  \item La \textbf{definizione di incidente NIS2} è uscita come domanda chiusa in un appello
+    precedente (Capitolo~\ref{cap:tema-precedente}). Attenzione: la NIS2 include
+    l'\emph{autenticità}, la definizione GDPR di data breach no.
+  \item Il docente ha ricordato che l'\textbf{early warning} va fatto entro 24 ore \textbf{anche di
+    sabato o domenica} (lezione del 21/09).
+  \item Per l'esame vanno conosciuti l'ambito della norma e le tempistiche di notifica, che sono ``il
+    cuore dell'esame'' (lezione del 09/11).
+\end{itemize}
+\end{esame}
+
+\paragraph{Le tempistiche.} L'orologio parte dalla \textbf{consapevolezza} di un incidente
+significativo. Destinatario è il \textbf{CSIRT} (in Italia il CSIRT Italia, presso l'ACN). Le slide
+precisano che \textbf{in Italia, da gennaio 2026}, gli incidenti significativi vanno segnalati al CSIRT
+Italia.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{3.6cm} X}
+\toprule
+\textbf{Fase} & \textbf{Termine} & \textbf{Contenuto} \\ \midrule
+Preallarme (\emph{early warning}) & \textbf{24 h} dalla consapevolezza
+  & Segnala l'incidente; indica se si sospetta un atto illegittimo o malevolo e se può avere impatto
+    transfrontaliero \\
+Notifica dell'incidente & \textbf{72 h} dalla consapevolezza
+  & Aggiorna il preallarme: valutazione iniziale di gravità e impatto, indicatori di compromissione
+    (IoC) \\
+Relazione intermedia & su richiesta del CSIRT & Aggiornamenti pertinenti \\
+Relazione finale & \textbf{1 mese} dalla notifica dell'incidente
+  & Descrizione dettagliata, causa di fondo, misure di mitigazione, impatto transfrontaliero \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Nelle slide la tabella dei cinque ``orologi'' riassume la logica: la NIS2 conta la
+\textbf{perturbazione di un servizio}, il GDPR il danno alle persone, il DORA l'impatto su una funzione.
+Il confronto completo con le altre norme è nel Capitolo~\ref{cap:scadenze}: in particolare le 72 ore
+NIS2 decorrono dalla consapevolezza, quelle DORA dalla notifica iniziale.
+
+\begin{esame}
+Per l'esame va studiato lo \textbf{schema delle notifiche oggi vigente}: con il pacchetto
+\emph{Digital Omnibus} si andrà verso un \textbf{punto unico di segnalazione presso ENISA}, che per il
+docente sarà ``la rivoluzione più importante'', ma non è ancora operativo (lezione del 21/09).
+\end{esame}
+
+\paragraph{Appunti A.A.~2025/26.} Notifica tramite il punto di contatto NIS del soggetto. Il CSIRT
+risponde al preallarme entro 24 ore con un primo riscontro e, se possibile, indicazioni operative: la
+logica è di \textbf{supporto} più che sanzionatoria, a differenza del GDPR. Se l'incidente è ancora in
+corso dopo un mese si invia una relazione sui progressi e la finale alla chiusura. In caso di impatto
+transfrontaliero il CSIRT informa gli altri CSIRT ed ENISA; per le crisi su larga scala interviene
+EU-CyCLONe. Manca ancora una metodologia armonizzata di valutazione della gravità comparabile a quella
+ENISA per i data breach. In pratica servono percorsi di escalation interni, personale formato, buone
+capacità forensi e di logging (per rispettare le 72 ore e il mese) e dialogo con i fornitori; la
+tendenza è verso una \textbf{procedura unica di gestione degli incidenti} per GDPR, NIS2, DORA e norme
+di settore. Nel laboratorio NIS2 dello scorso anno (fornitore di energia, soggetto essenziale) si
+aggiungevano: comunicazione al pubblico per evitare allarme, autorità di settore (ARERA), denuncia alla
+Polizia Postale (non obbligatoria, ma la sua assenza può essere valutata negativamente) e
+allineamento tra registro degli incidenti e registro dei data breach.
+
+\begin{integrazione}[dettagli dell'art.~23]
+\begin{itemize}
+  \item \textbf{Destinatari dei servizi}: il soggetto informa senza indebito ritardo i destinatari dei
+    propri servizi dell'incidente significativo che può pregiudicare la fornitura (art.~23(1)) e, in
+    caso di minaccia informatica significativa, delle misure che possono adottare (art.~23(2)).
+  \item \textbf{Prestatori di servizi fiduciari}: la notifica dell'incidente va fatta entro
+    \textbf{24 ore} invece di 72 (art.~23(4)(b)).
+  \item Il CSIRT o l'autorità rispondono al preallarme \textbf{entro 24 ore} (art.~23(5)); se
+    l'incidente riguarda più Stati, informano gli altri Stati ed ENISA (art.~23(6)); possono informare
+    il pubblico se necessario (art.~23(7)).
+  \item Per i fornitori digitali i casi in cui un incidente è ``significativo'' sono precisati dal
+    Regolamento di esecuzione (UE) 2024/2690 (art.~23(11)).
+  \item \textbf{Notifiche volontarie} (art.~30): incidenti non significativi, minacce informatiche e
+    quasi-incidenti, anche da parte di soggetti fuori ambito.
+  \item In Italia anche la \textbf{L.~90/2024} prevede obblighi di notifica all'ACN (24 ore e
+    72 ore) per pubbliche amministrazioni e altri soggetti indicati dalla legge.
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+\begin{itemize}
+  \item ``Da gennaio 2026'' (slide): coerente con il calendario del D.lgs.~138/2024, che fa decorrere
+    l'obbligo di notifica dal 1 gennaio 2026 per i soggetti inclusi nell'elenco ACN. Confermare sulle
+    slide NIS2.
+  \item Le soglie di ``incidente significativo'' fissate dall'ACN per i soggetti italiani (determinazioni
+    dell'Agenzia) non sono state ancora viste a lezione.
+\end{itemize}
+\end{verifica}
+
+% =====================================================================
+\section{Istituzioni: CSIRT, ACN, ENISA, NIS Cooperation Group, EU-CyCLONe}
+\label{sec:nis2-istituzioni}
+
+Dalla slide sulle istituzioni (``chi chiamare alle 8:14''):
+\begin{itemize}
+  \item \textbf{risposta operativa}: il CSIRT Italia, dentro l'ACN (``il numero da chiamare''), la rete
+    europea dei CSIRT, i CERT di settore;
+  \item \textbf{vigilanza NIS2}: l'\textbf{ACN} come autorità nazionale competente, affiancata da
+    \textbf{autorità di settore} per soggetti specifici;
+  \item \textbf{livello UE}: \textbf{ENISA} (certificazione, \emph{threat landscape}, piattaforma unica
+    di segnalazione del CRA), il \textbf{NIS Cooperation Group} (strategia e linee guida) ed
+    \textbf{EU-CyCLONe}, la rete per la gestione delle crisi informatiche su larga scala.
+\end{itemize}
+L'ACN è anche autorità nazionale di certificazione della cybersicurezza (lezione del 09/11). Secondo il
+docente l'ACN può arrivare a \textbf{fermare un fornitore} ritenuto pericoloso per un'infrastruttura
+critica, anche se il fornitore non è direttamente soggetto a NIS2 (lezione del 21/09). Due conseguenze
+indicate dalle slide: non si sceglie il proprio interlocutore, e i difetti di coordinamento tra queste
+autorità sono un rischio che gestisce il soggetto, non l'autorità.
+
+\paragraph{ENISA.} Per il ruolo di ENISA (mandato permanente dal Cybersecurity Act, cooperazione
+operativa, verso la centralizzazione delle notifiche) si veda il Capitolo~\ref{cap:csa} e la domanda
+del tema precedente (Capitolo~\ref{cap:tema-precedente}): ENISA \textbf{non} irroga sanzioni e
+\textbf{non} è un CSIRT nazionale.
+
+\paragraph{Appunti A.A.~2025/26.} Ogni Stato adotta una \textbf{strategia nazionale di cybersicurezza}
+(obiettivi, governance, individuazione degli asset critici, preparazione e ripristino, politica sulla
+supply chain, formazione) e designa una o più autorità competenti e almeno un CSIRT. In Italia queste
+funzioni sono accentrate nell'ACN.
+
+\begin{integrazione}[articoli di riferimento]
+\begin{itemize}
+  \item Art.~7 strategia nazionale; art.~8 autorità competenti e \textbf{punto di contatto unico}
+    (in Italia l'ACN); art.~9 autorità di gestione delle crisi informatiche e piano nazionale.
+  \item Artt.~10--11 CSIRT; art.~12 divulgazione coordinata delle vulnerabilità e \textbf{banca dati
+    europea delle vulnerabilità} gestita da ENISA.
+  \item Art.~14 \textbf{Gruppo di cooperazione NIS} (Stati, Commissione, ENISA): livello strategico;
+    art.~15 \textbf{rete dei CSIRT}: livello tecnico-operativo; art.~16 \textbf{EU-CyCLONe}: gestione
+    coordinata, a livello operativo, di incidenti e crisi su vasta scala; art.~19 revisioni tra pari.
+  \item Art.~27: ENISA tiene un registro dei fornitori digitali (DNS, TLD, cloud, data center, CDN,
+    servizi gestiti, piattaforme).
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+Il potere dell'ACN di ``fermare un fornitore'' non soggetto a NIS2 non è stato ricondotto a lezione a
+un articolo preciso: potrebbe riferirsi alle valutazioni coordinate dei rischi della supply chain
+(art.~22), ai poteri nazionali sul perimetro di sicurezza nazionale cibernetica o ad altri strumenti
+nazionali. Da chiarire nella lezione del 13/11.
+\end{verifica}
+
+% =====================================================================
+\section{Vigilanza ed esecuzione: \emph{ex ante} ed \emph{ex post}}
+\label{sec:nis2-vigilanza}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3cm} X X}
+\toprule
+ & \textbf{Soggetti essenziali} & \textbf{Soggetti importanti} \\ \midrule
+Vigilanza & \emph{ex ante}: controlli anche in assenza di indizi di violazione
+  & \emph{ex post}: si interviene a seguito di elementi che indicano una violazione \\
+Sanzione massima & fino a \textbf{10 milioni di euro} o al \textbf{2\%} del fatturato mondiale annuo
+  & fino a \textbf{7 milioni di euro} o all'\textbf{1,4\%} del fatturato mondiale annuo \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent Fonti: glossario del laboratorio~1 (classi, vigilanza, sanzioni) e slide introduttive
+(sanzione per gli essenziali). Gli appunti A.A.~2025/26 aggiungono che le sanzioni tengono conto di
+proporzionalità, gravità e cooperazione del soggetto, e che nel laboratorio dello scorso anno il
+rischio sanzionatorio NIS2 era giudicato basso grazie alla sostanziale conformità, nonostante lacune
+di formazione: la sanzione dipende dall'adeguatezza delle misure e dalla tempestività delle notifiche,
+non dal solo fatto che l'incidente sia avvenuto.
+
+\begin{integrazione}[artt.~32--34]
+\begin{itemize}
+  \item \textbf{Essenziali (art.~32)}: ispezioni in loco e a distanza, audit periodici e mirati anche
+    da organismi indipendenti, audit \emph{ad hoc} dopo un incidente significativo, scansioni di
+    sicurezza, richieste di informazioni e di prove. Misure di esecuzione: avvertimenti, istruzioni
+    vincolanti, ordine di informare i destinatari dei servizi, nomina di un responsabile del
+    monitoraggio e, come \emph{extrema ratio}, sospensione di certificazioni o autorizzazioni e
+    divieto temporaneo di funzioni dirigenziali.
+  \item \textbf{Importanti (art.~33)}: stessi strumenti, ma attivati solo a fronte di prove o indizi
+    di non conformità; niente sospensioni né divieti per i dirigenti.
+  \item \textbf{Sanzioni (art.~34)}: il massimale è ``almeno'' 10 milioni o 2\% (essenziali) e
+    ``almeno'' 7 milioni o 1,4\% (importanti), \textbf{se superiore}: gli Stati possono prevedere
+    importi più alti. Sono possibili anche penalità di mora.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Rapporti con DORA, GDPR e CRA}
+\label{sec:nis2-rapporti}
+
+\paragraph{DORA: \emph{lex specialis}.} Il settore bancario e le infrastrutture dei mercati finanziari
+sono nell'Allegato~I della NIS2, ma per le entità finanziarie il \textbf{DORA} prevale dove le norme
+si sovrappongono (gestione del rischio ICT, notifica degli incidenti): la norma speciale prevale su
+quella generale (glossario del corso; Simulazione~2 nel Capitolo~\ref{cap:simulazioni}). Per il resto
+si veda la Sezione~\ref{sec:dora-lexspecialis}. Viceversa, un ospedale non è soggetto al DORA perché
+non è un'entità finanziaria (tema precedente).
+
+\paragraph{GDPR.} Lo stesso evento può essere incidente significativo NIS2 e data breach GDPR: le
+notifiche al CSIRT e al Garante sono \textbf{separate e parallele} e una non adempie l'altra
+(Capitolo~\ref{cap:scadenze}). Le due definizioni non coincidono (autenticità; dati personali sì o no) e
+gli orologi partono da eventi diversi. Nel tema precedente la risposta modello suggerisce una procedura
+integrata GDPR--NIS2 e registri allineati. Gli appunti A.A.~2025/26 aggiungono che le informazioni
+raccolte per la notifica NIS2 possono essere in gran parte riutilizzate per quella GDPR.
+
+\paragraph{CRA.} NIS2 = organizzazione, CRA = prodotto (lezione del 26/10): il considerando~3 del CRA
+spiega che né il Cybersecurity Act né la NIS2 impongono requisiti obbligatori di sicurezza ai prodotti.
+Un'applicazione può ricadere insieme sotto CRA, NIS2 (che include il settore digitale) e GDPR (lezione
+del 02/11). Nel tema precedente, se l'incidente nasce da una vulnerabilità attivamente sfruttata di un
+prodotto, l'obbligo CRA è del fabbricante, non dell'ospedale.
+
+\begin{integrazione}[coordinamento con le altre norme]
+\begin{itemize}
+  \item \textbf{Art.~4 NIS2}: se un atto settoriale dell'Unione impone misure di gestione del rischio o
+    obblighi di notifica almeno equivalenti, le corrispondenti disposizioni NIS2 non si applicano; il
+    considerando~28 indica espressamente il DORA come tale atto per le entità finanziarie.
+  \item \textbf{Art.~35 NIS2}: se una violazione NIS2 può comportare un data breach, l'autorità NIS
+    informa l'autorità di controllo GDPR; se quest'ultima infligge una sanzione pecuniaria ai sensi
+    dell'art.~58(2)(i) GDPR, l'autorità NIS \textbf{non} può infliggere una sanzione pecuniaria per la
+    stessa condotta (possono restare le altre misure).
+  \item Un fornitore cloud o un MSSP può essere \textbf{contemporaneamente} soggetto NIS2 (infrastrutture
+    digitali o servizi ICT gestiti), responsabile del trattamento GDPR del cliente e fornitore terzo
+    di servizi ICT ai sensi del DORA se il cliente è una banca: tre cornici, tre insiemi di obblighi.
+\end{itemize}
+\end{integrazione}
+
+\dacompletare{Da integrare dopo la lezione del 13/11/2026 con slide e diario: ambito e allegati
+(versione del corso), recepimento italiano e calendario ACN, art.~20, art.~21 e linee guida ACN,
+art.~23 e soglie di significatività, sanzioni, rapporti con DORA e GDPR. Aggiornare poi le schede di
+ripasso (date NIS2) e verificare la coerenza con il Capitolo~\ref{cap:scadenze}.}

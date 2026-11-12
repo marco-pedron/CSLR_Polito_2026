@@ -1,16 +1,931 @@
 \chapter{GDPR}
 \label{cap:gdpr}
 
-\dacompletare{Fonte: slide \emph{02.~Cybersecurity Laws and Regulations -- II Privacy}.
-Scaletta prevista:
+\begin{nota}[Fonti]
+Lezioni del 25/09 e del 28/09/2026 (Capitoli~\ref{lez:2026-09-25} e~\ref{lez:2026-09-28}), parte
+sulla DPIA del 05/10 (Capitolo~\ref{lez:2026-10-05}), caso della persona autorizzata del 09/11
+(Capitolo~\ref{lez:2026-11-09}); slide \emph{02.~Cybersecurity Laws and Regulations -- II Privacy};
+testo ufficiale del Regolamento (UE) 2016/679, usato per verificare articoli e definizioni. Il data
+breach (artt.~33--34) ha un capitolo a sé (Capitolo~\ref{cap:data-breach}).
+\end{nota}
+
+Il GDPR è ``la madre'' delle altre norme del corso: introduce per primo, in forma generale, l'approccio
+basato sul rischio, l'accountability e la notifica delle violazioni, che NIS2, DORA, CRA e AI Act
+riprendono in contesti settoriali.
+
+\begin{esame}
+Le lezioni sul GDPR sono ``molto importanti per l'esame'': contengono molte \textbf{definizioni} che
+possono comparire nelle domande a risposta multipla. Non vanno imparate a memoria, ma bisogna capirne
+esattamente il \textbf{significato giuridico}.
+\end{esame}
+
+% =====================================================================
+\section{Storia e fonti}
+\label{sec:gdpr-storia}
+
+\paragraph{Un diritto fondamentale.} La protezione dei dati è un diritto fondamentale riconosciuto dagli
+artt.~7 (rispetto della vita privata) e 8 (protezione dei dati di carattere personale) della
+\textbf{Carta dei diritti fondamentali dell'UE}. Non è però ``scritto nella pietra'': a differenza del
+diritto alla vita, va spesso \textbf{bilanciato} con altri interessi (libertà di informazione, sicurezza,
+iniziativa economica), e la zona grigia è ampia. Anche la cybersicurezza è un bilanciamento: per
+prevenire gli incidenti bisogna registrare, monitorare e controllare, cioè andare nella direzione opposta
+al diritto di essere lasciati in pace (\emph{right to be let alone}).
+
+\paragraph{Le tappe.}
 \begin{itemize}
-  \item storia: le quattro generazioni della protezione dei dati;
-  \item definizioni: dato personale, dati particolari (art.~9), anonimizzazione e pseudonimizzazione;
-  \item ruoli: titolare, responsabile, sub-responsabile, contitolari, interessato;
-  \item principi (art.~5) e basi giuridiche (art.~6);
-  \item diritti dell'interessato;
-  \item accountability, privacy by design e by default, DPIA, DPO;
-  \item governance esterna: autorità di controllo, EDPB, tribunali;
-  \item trasferimenti extra UE (Capo V) e TIA;
-  \item sanzioni e responsabilità.
-\end{itemize}}
+  \item \textbf{Linee guida OCSE} (1980), soft law, e \textbf{Convenzione 108} del Consiglio d'Europa
+    (1981), primo trattato vincolante sulla protezione dei dati (Capitolo~\ref{cap:introduzione}).
+  \item \textbf{Direttiva 95/46/CE}: prima disciplina europea; essendo una direttiva, ha lasciato
+    regole nazionali diverse da Stato a Stato. È la norma applicata nel caso \emph{Lindqvist}.
+  \item \textbf{Regolamento (UE) 2016/679 (GDPR)}, adottato nel 2016 e applicato dal 2018: il suo
+    merito principale è aver dato a tutti gli Stati membri \textbf{regole uniformi}. Il docente sottolinea
+    che alla stesura hanno contribuito anche ingegneri ed esperti IT: la combinazione giuristi--tecnici è
+    quella giusta.
+\end{itemize}
+
+\paragraph{Europa e Stati Uniti: due culture.} Negli USA si può fare quasi tutto con i dati dei propri
+clienti, tranne venderli, e si teme soprattutto lo Stato; in Europa si accetta più facilmente il
+trattamento pubblico e si teme quello privato. Per il docente entrambe le posizioni sono sbagliate:
+grandi aziende tecnologiche (e ora dell'IA) pesano economicamente più di molti Stati, e l'unica strada è
+la cooperazione pubblico--privato e il bilanciamento.
+
+\begin{integrazione}[date, generazioni e Codice privacy]
+\begin{itemize}
+  \item Il GDPR è entrato in vigore il 24 maggio 2016 e si applica dal \textbf{25 maggio 2018}
+    (art.~99); abroga la Direttiva 95/46/CE (art.~94). La Carta dei diritti fondamentali (proclamata nel
+    2000) è vincolante dal 2009, con il Trattato di Lisbona; la base giuridica del GDPR è l'art.~16 TFUE.
+  \item Gli appunti dell'A.A.~2025/26 descrivono l'evoluzione in ``quattro generazioni'': leggi nate per
+    controllare le grandi banche dati pubbliche (modello autorizzatorio), passaggio al modello della
+    notifica con la diffusione dei personal computer, strumenti di armonizzazione, e infine il GDPR, con
+    approccio basato sul rischio e accountability. Lo schema non è stato ripreso in aula quest'anno.
+  \item In Italia la Direttiva 95/46 fu recepita con la legge 675/1996, poi confluita nel Codice privacy
+    (D.lgs.~196/2003). Il Codice è stato adeguato al GDPR dal D.lgs.~101/2018: oggi contiene le
+    norme nazionali che il GDPR consente (per esempio l'età del consenso digitale e i reati).
+  \item L'articolo da cui si fa risalire il concetto di privacy è \emph{The Right to Privacy} di Warren e
+    Brandeis (1890).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Ambito di applicazione}
+\label{sec:gdpr-ambito}
+
+\subsection{Ambito materiale}
+Il GDPR si applica al trattamento di dati personali \textbf{interamente o parzialmente automatizzato}
+e a quello non automatizzato di dati contenuti (o destinati a figurare) in un archivio (art.~2(1)). Il
+\textbf{trattamento} (art.~4(2)) è qualsiasi operazione su dati personali: raccolta, registrazione,
+organizzazione, conservazione, modifica, estrazione, \textbf{consultazione}, uso, comunicazione,
+diffusione, cancellazione, distruzione e così via. L'elenco non va imparato, ma va ricordato che quasi
+ogni attività è un trattamento, anche solo \emph{guardare} i dati.
+
+L'art.~2(2) esclude alcuni trattamenti: attività fuori dall'ambito del diritto UE, politica estera e di
+sicurezza comune, trattamenti delle autorità a fini di prevenzione e repressione dei reati e, per il
+corso il caso più importante, i trattamenti effettuati da una persona fisica per attività
+\textbf{a carattere esclusivamente personale o domestico} (art.~2(2)(c)).
+
+\subsection{L'esenzione domestica e il caso Lindqvist}
+\label{sec:gdpr-lindqvist}
+L'esenzione domestica si interpreta \textbf{in senso restrittivo}: il GDPR si rivolge a chi agisce come
+titolare o responsabile, non al privato nella sua vita personale, ma solo finché resta davvero nella
+sfera privata.
+
+\paragraph{CGUE, C-101/01, \emph{Lindqvist}.} Una catechista svedese, durante un corso di informatica,
+crea da casa un sito per i parrocchiani con informazioni sui colleghi catechisti (nomi, telefono,
+condizioni di lavoro, hobby), che non ne erano informati. Accusata penalmente di trattamento illecito,
+invoca l'esenzione. La Corte la esclude: l'esenzione riguarda la vita privata o familiare e
+\textbf{mai la pubblicazione su Internet} di dati accessibili a un numero indefinito di persone.
+Nominare e identificare persone su una pagina web è un trattamento automatizzato.
+
+\paragraph{Ricadute pratiche.} Un sito ``per la famiglia'' protetto da password e non indicizzato resta
+nella sfera privata; aperto al pubblico, l'esenzione diventa problematica. Sui social i termini di
+servizio parlano di ``community'', ma una community di miliardi di persone difficilmente è privata:
+decidono il bilanciamento e il giudice.
+
+\begin{integrazione}[data della sentenza]
+La sentenza \emph{Lindqvist} è del 6 novembre 2003 (il numero C-101/01 indica l'anno di iscrizione
+della causa). La sentenza \emph{Google Spain} (C-131/12) è del 13 maggio 2014; in essa la Corte
+qualifica il gestore del motore di ricerca come \emph{titolare} (\emph{controller}) del trattamento che
+svolge indicizzando le pagine.
+\end{integrazione}
+
+\subsection{Ambito territoriale}
+Dal testo dell'art.~3 (tema elencato nell'agenda delle slide, non approfondito in aula):
+\begin{itemize}
+  \item il GDPR si applica ai trattamenti svolti \textbf{nell'ambito delle attività di uno stabilimento}
+    di un titolare o di un responsabile nell'Unione, \textbf{anche se il trattamento avviene fuori
+    dall'UE} (art.~3(1));
+  \item si applica anche a titolari e responsabili \textbf{non stabiliti} nell'UE quando trattano dati di
+    interessati che si trovano nell'Unione e il trattamento riguarda l'\textbf{offerta di beni o servizi}
+    (anche gratuiti) a tali interessati oppure il \textbf{monitoraggio del loro comportamento} nell'UE
+    (art.~3(2)). In questo caso devono designare per iscritto un \textbf{rappresentante} nell'Unione
+    (art.~27), salvo eccezioni.
+\end{itemize}
+
+% =====================================================================
+\section{Definizioni (art.~4)}
+\label{sec:gdpr-definizioni}
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{11.2cm}}
+\toprule
+\textbf{Termine} & \textbf{Significato (art.~4, parafrasato)}\\
+\midrule
+\endhead
+Dato personale (1) & qualsiasi informazione relativa a una persona fisica identificata o
+  identificabile, \textbf{direttamente o indirettamente} (nome, numero di identificazione, dati di
+  ubicazione, identificativo online, elementi fisici, genetici, economici, culturali, sociali\ldots)\\
+Interessato (1) & la persona fisica cui si riferiscono i dati; \textbf{mai una persona giuridica}. ``Siamo
+  tutti interessati.''\\
+Trattamento (2) & qualsiasi operazione su dati personali, automatizzata o no (vedi sopra)\\
+Profilazione (4) & trattamento automatizzato per valutare aspetti personali (rendimento, situazione
+  economica, salute, preferenze, comportamento, spostamenti)\\
+Pseudonimizzazione (5) & dati non più attribuibili all'interessato senza informazioni aggiuntive,
+  conservate separatamente e protette: restano dati personali\\
+Titolare (7) & chi, da solo o insieme ad altri, \textbf{determina le finalità e i mezzi} del trattamento\\
+Responsabile (8) & chi tratta dati \textbf{per conto} del titolare\\
+Destinatario (9) & chi riceve comunicazione di dati, che sia o no un terzo\\
+Terzo (10) & chiunque non sia interessato, titolare, responsabile o persona autorizzata a trattare i dati
+  sotto la loro autorità diretta\\
+Consenso (11) & manifestazione di volontà \textbf{libera, specifica, informata e inequivocabile}, con
+  dichiarazione o azione positiva inequivocabile\\
+Violazione dei dati personali (12) & violazione di sicurezza che comporta, accidentalmente o in modo
+  illecito, distruzione, perdita, modifica, divulgazione non autorizzata o accesso a dati personali
+  (Capitolo~\ref{cap:data-breach})\\
+Dati relativi alla salute (15) & dati sulla salute fisica o mentale, compresa l'assistenza sanitaria, che
+  rivelano informazioni sullo stato di salute\\
+Stabilimento principale (16) & per il titolare, di norma il luogo dell'amministrazione centrale nell'UE,
+  salvo che le decisioni su finalità e mezzi siano prese altrove\\
+Autorità di controllo (21) & autorità pubblica indipendente istituita da uno Stato membro (art.~51)\\
+Trattamento transfrontaliero (23) & trattamento svolto in stabilimenti in più Stati membri, o che incide
+  in modo sostanziale su interessati in più Stati membri\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\begin{integrazione}[anonimo e pseudonimo]
+Il considerando 26 chiarisce che i dati pseudonimizzati, ricollegabili a una persona con informazioni
+aggiuntive, restano dati personali, e che per stabilire se una persona è identificabile si considerano
+tutti i mezzi di cui è ragionevolmente probabile l'uso. Solo i dati resi davvero anonimi escono dal GDPR
+(si veda anche la Sezione~\ref{sec:intro-dati}).
+\end{integrazione}
+
+% =====================================================================
+\section{Categorie di dati}
+\label{sec:gdpr-categorie}
+
+Il docente semplifica in tre categorie, a ciascuna delle quali corrispondono basi giuridiche diverse
+(Sezione~\ref{sec:gdpr-basi}):
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.3cm} X >{\raggedright\arraybackslash}p{2.4cm}}
+\toprule
+\textbf{Categoria} & \textbf{Contenuto} & \textbf{Base giuridica}\\
+\midrule
+Dati comuni & nome, cognome, email, indirizzo, codice fiscale; anche i \textbf{dati finanziari} & art.~6\\
+Categorie particolari & dati che rivelano origine razziale o etnica, opinioni politiche, convinzioni
+  religiose o filosofiche, appartenenza sindacale; dati genetici, biometrici a fini di identificazione
+  univoca, dati relativi alla salute, alla vita sessuale o all'orientamento sessuale. Trattamento
+  \textbf{vietato} salvo le deroghe dell'art.~9(2) & art.~9\\
+Dati giudiziari & condanne penali, reati e connesse misure di sicurezza & art.~10\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Perché i dati giudiziari sono così protetti.} In Europa vale il principio della
+\textbf{funzione rieducativa della pena} (risalente a Cesare Beccaria): chi ha scontato la pena deve
+poter ricominciare. Negli USA l'approccio è opposto (esistono app che collegano una foto ai registri
+penali).
+
+\paragraph{Esempi dal corso.}
+\begin{itemize}
+  \item Un'immagine di videosorveglianza che mostra una caratteristica \emph{visibile} non diventa per
+    questo un dato sanitario; una patologia non visibile sì.
+  \item Le \textbf{intolleranze alimentari} raccolte per la cena aziendale sono dati relativi alla
+    salute (caso del Google Form, Capitolo~\ref{lez:2026-11-09}).
+  \item Buste paga che mostrano quote sindacali, giorni di malattia o permessi per disabilità contengono
+    categorie particolari (Lab~1, Capitolo~\ref{lab:01}).
+  \item I \textbf{dati finanziari} sono dati \emph{comuni} per il GDPR, ma nella metodologia ENISA di
+    severity assessment pesano più dei dati semplici (Capitolo~\ref{cap:data-breach}): due griglie
+    diverse da non confondere.
+\end{itemize}
+
+\begin{esame}
+Ricordare le \textbf{tre categorie}: comuni, particolari, giudiziari. A ciascuna corrispondono basi
+giuridiche diverse.
+\end{esame}
+
+% =====================================================================
+\section{I ruoli}
+\label{sec:gdpr-ruoli}
+
+I ruoli sono, per il docente, ``la Bibbia del GDPR'': tutto il resto, compresi data breach e art.~32,
+si basa su chi è titolare e chi è responsabile.
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{5.3cm} >{\raggedright\arraybackslash}p{6.2cm}}
+\toprule
+\textbf{Ruolo} & \textbf{Che cosa lo caratterizza} & \textbf{Esempi dal corso}\\
+\midrule
+\endhead
+Titolare (\emph{controller}), art.~4(7), 24 & determina \textbf{finalità e mezzi} (\emph{purposes and
+  means}); porta gli obblighi di notifica & il marchio che vende online; l'ospedale; Arvenza per i dati
+  dei dipendenti; il motore di ricerca in \emph{Google Spain}\\
+Responsabile (\emph{processor}), art.~4(8), 28 & tratta dati \textbf{per conto} del titolare, su sua
+  istruzione, sulla base di un contratto & la piattaforma SaaS di e-commerce; Alpha S.r.l.\ per i marchi
+  clienti; il \emph{payroll bureau}; il fornitore di Sylvane; un consulente esterno\\
+Sub-responsabile, art.~28(2), (4) & responsabile ingaggiato da un responsabile, con autorizzazione
+  scritta del titolare & Shopify per Alpha; il fornitore di IA usato dal servizio di misura del piede;
+  il cloud su cui un'agenzia di selezione salva i CV\\
+Contitolari, art.~26 & due o più titolari che determinano \textbf{congiuntamente} finalità e mezzi & la
+  catena di negozi e la fondazione che organizzano insieme una maratona benefica\\
+Persona autorizzata, art.~29 & persona fisica che tratta dati \textbf{sotto l'autorità} del titolare o
+  del responsabile, all'interno della sua organizzazione & il dipendente che crea il Google Form per la
+  cena di Natale\\
+Interessato, art.~4(1) & la persona fisica cui i dati si riferiscono & clienti, pazienti, dipendenti,
+  candidati\\
+DPO, artt.~37--39 & figura di garanzia e consulenza, interna o esterna (Sezione~\ref{sec:gdpr-dpo}) & il
+  ruolo assegnato agli studenti nei laboratori\\
+Rappresentante, art.~27 & designato da titolari o responsabili non stabiliti nell'UE & --\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{La regola: conta la situazione di fatto}
+Il criterio per distinguere titolare e responsabile è il \textbf{potere decisionale} sul trattamento.
+Ciò che conta è come stanno davvero le cose, \textbf{non ciò che le parti scrivono nel contratto}: non si
+diventa contitolari (né titolari) solo perché lo si dichiara in un accordo. Nel dubbio le slide
+rinviano alle \emph{Linee guida EDPB 07/2020} sui concetti di titolare e responsabile.
+
+\paragraph{La piattaforma di e-commerce.} Un'azienda di prodotti per l'igiene vende online tramite una
+piattaforma SaaS, che chiede di avere anch'essa i dati dei clienti e propone un accordo di
+contitolarità. Ma i clienti comprano i prodotti dell'azienda: è l'azienda a decidere le finalità, quindi
+è \textbf{titolare}; la piattaforma tratta moltissimi dati, ma per suo conto, quindi è
+\textbf{responsabile}.
+
+\paragraph{La misura del piede con l'IA.} Un'azienda francese offre ai siti di calzature un servizio che
+indica la taglia giusta da una foto del piede, e sostiene di essere titolare perché vuole usare le foto
+per addestrare la propria IA. Il ragionamento del docente parte dall'\textbf{interessato}: il cliente
+vuole comprare un paio di scarpe, non misurarsi il piede; la finalità è del marchio, che è titolare, e il
+fornitore è responsabile. La contitolarità sarebbe possibile, ma nel bilanciamento non è nell'interesse
+del consumatore cedere a un terzo un database di milioni di immagini del corpo; con un rapporto
+titolare--responsabile il titolare può vietare usi ulteriori e fissare i tempi di conservazione. Una
+decisione sui ruoli può cambiare la sorte dei dati di milioni di persone.
+
+\paragraph{Dipendente o responsabile?} Il dipendente che tratta dati per il datore di lavoro
+\textbf{non} è un responsabile: è una \textbf{persona autorizzata} (art.~29), che agisce sotto
+l'autorità del titolare. Un consulente esterno (per esempio una grande società di consulenza) che svolge
+la stessa attività è invece \textbf{responsabile} (art.~28), perché è un soggetto esterno. Le sanzioni
+GDPR colpiscono il titolare; verso il dipendente l'azienda può agire solo sul piano disciplinare.
+
+\begin{esame}
+\begin{itemize}
+  \item ``Non fate confusione sui ruoli'': è probabilmente l'unico punto su cui il docente dice che sarà
+    davvero severo.
+  \item Conta la \textbf{situazione di fatto}, non il contratto: possibile spunto per la domanda aperta.
+  \item Non confondere \textbf{responsabile del trattamento} (soggetto esterno che tratta per conto del
+    titolare) e \textbf{persona autorizzata} (dipendente del titolare).
+\end{itemize}
+\end{esame}
+
+\subsection{Il contratto con il responsabile e la catena dei sub-responsabili}
+Il titolare deve ricorrere solo a responsabili che presentino \textbf{garanzie sufficienti} su misure
+tecniche e organizzative adeguate (art.~28(1)). Il rapporto è regolato da un contratto o altro atto
+giuridico (il \emph{Data Processing Agreement}, art.~28(3)) che indica almeno oggetto e durata, natura e
+finalità del trattamento, tipo di dati e categorie di interessati, obblighi e diritti del titolare.
+
+Il responsabile può ricorrere a un \textbf{sub-responsabile} solo con autorizzazione scritta, specifica o
+generale, del titolare (art.~28(2)), imponendogli gli stessi obblighi; resta \textbf{pienamente
+responsabile} verso il titolare per l'operato del sub-responsabile (art.~28(4)). Il titolare deve sapere
+quali sub-responsabili esistono e \textbf{dove risiedono i dati}: secondo il docente moltissimi
+incidenti nascono da sub-responsabili di cui il titolare non era consapevole. Il fornitore è oggi ``la
+base di tutti i problemi'' (Capitolo~\ref{cap:data-breach}).
+
+\begin{integrazione}[contenuto minimo dell'art.~28(3) e contitolarità]
+\begin{itemize}
+  \item Oltre agli elementi indicati nelle slide, il contratto deve prevedere che il responsabile:
+    tratti i dati solo su \textbf{istruzione documentata} del titolare (anche per i trasferimenti extra
+    UE); garantisca la riservatezza delle persone autorizzate; adotti le misure dell'art.~32; rispetti le
+    condizioni per i sub-responsabili; assista il titolare nel rispondere ai diritti degli interessati e
+    negli adempimenti degli artt.~32--36 (sicurezza, data breach, DPIA); cancelli o restituisca i dati a
+    fine servizio; metta a disposizione le informazioni e consenta gli \textbf{audit}.
+  \item I contitolari definiscono le rispettive responsabilità con un \textbf{accordo} il cui contenuto
+    essenziale è messo a disposizione degli interessati (art.~26(1)--(2)); l'interessato può comunque
+    esercitare i propri diritti nei confronti di \textbf{ciascuno} di essi (art.~26(3)).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{I principi (art.~5)}
+\label{sec:gdpr-principi}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm} X X}
+\toprule
+\textbf{Principio} & \textbf{Significato} & \textbf{Osservazioni in aula}\\
+\midrule
+Liceità, correttezza, trasparenza (5(1)(a)) & base giuridica; trattamento leale; informazione chiara &
+  nessuno legge le informative, quindi il titolare deve informare in modo chiaro; molte sanzioni colpiscono
+  trattamenti nascosti e \emph{dark pattern} (un clic che spunta tutti i consensi)\\
+Limitazione della finalità (5(1)(b)) & finalità determinate, esplicite e legittime; l'ulteriore
+  trattamento per archiviazione, ricerca o statistica non è incompatibile & --\\
+Minimizzazione (5(1)(c)) & dati adeguati, pertinenti e limitati al necessario & ``meno dati hai, meno
+  danni puoi subire''\\
+Esattezza (5(1)(d)) & dati esatti e aggiornati; quelli inesatti vanno rettificati o cancellati & una
+  biografia con l'università sbagliata; una condanna di primo grado ancora online dopo l'assoluzione\\
+Limitazione della conservazione (5(1)(e)) & conservazione non oltre il necessario & serve una
+  \textbf{retention policy}; i CV oltre il termine nel Lab~1 sono una violazione autonoma\\
+Integrità e riservatezza (5(1)(f)) & sicurezza adeguata con misure tecniche e organizzative & con la
+  disponibilità forma la triade RID/CIA\\
+\bottomrule
+\end{tabularx}
+\end{center}
+A questi sei si aggiunge la \textbf{responsabilizzazione} (art.~5(2)): il titolare è competente per il
+rispetto dei principi e deve \textbf{essere in grado di dimostrarlo} (Sezione~\ref{sec:gdpr-accountability}).
+
+\paragraph{Retention: ``il vero caos del GDPR''.} Un CV si conserva di norma da uno a due anni in
+un'azienda, circa sei mesi in un'agenzia per il lavoro. Si cancella per \textbf{sicurezza} (in caso di
+fuga di dati, ciò che non serviva non doveva esserci) e per \textbf{esattezza} (un CV vecchio non
+riflette le competenze attuali). Ogni categoria di dati ha un tempo diverso, e la retention va coordinata
+con i \textbf{backup}: un backup che conserva dati oltre i termini viola la norma. Per il docente è un
+problema tecnico, quindi degli ingegneri.
+
+\begin{esame}
+Ricordare i \textbf{sei principi} dell'art.~5 (``i sei pilastri dei principi'').
+\end{esame}
+
+% =====================================================================
+\section{Basi giuridiche e consenso}
+\label{sec:gdpr-basi}
+
+\subsection{Le basi giuridiche dipendono dalla categoria di dati}
+\begin{itemize}
+  \item \textbf{Dati comuni} (art.~6(1)): (a) consenso; (b) esecuzione di un contratto o di misure
+    precontrattuali; (c) obbligo legale; (d) interessi vitali; (e) compito di interesse pubblico o
+    esercizio di pubblici poteri; (f) \textbf{legittimo interesse} del titolare o di terzi, purché non
+    prevalgano i diritti e le libertà fondamentali dell'interessato.
+  \item \textbf{Categorie particolari} (art.~9(2)): consenso \emph{esplicito}; obblighi in materia di
+    lavoro e protezione sociale; interessi vitali; attività di fondazioni, associazioni e organismi senza
+    scopo di lucro verso i propri membri; dati resi manifestamente pubblici dall'interessato; difesa in
+    giudizio; interesse pubblico rilevante; medicina preventiva o del lavoro e assistenza sanitaria;
+    sanità pubblica; archiviazione, ricerca e statistica.
+  \item \textbf{Dati giudiziari} (art.~10): solo sotto il controllo dell'autorità pubblica o se il
+    trattamento è autorizzato dal diritto dell'Unione o degli Stati membri con garanzie adeguate.
+\end{itemize}
+Non serve sapere a memoria tutte le basi giuridiche, ma sapere che \textbf{dipendono dalla categoria} di
+dati trattati.
+
+\subsection{Il consenso (artt.~4(11) e 7)}
+\begin{itemize}
+  \item Il titolare deve poter \textbf{dimostrare} che l'interessato ha acconsentito.
+  \item Se il consenso è dato in una dichiarazione scritta che riguarda anche altro, la richiesta deve
+    essere \textbf{chiaramente distinguibile}, comprensibile e in linguaggio semplice.
+  \item Il consenso non è libero se l'interessato non ha una scelta reale o non può rifiutarlo o
+    revocarlo senza pregiudizio (considerando 42), né quando c'è un \textbf{evidente squilibrio} tra
+    interessato e titolare (considerando 43).
+  \item Si può \textbf{revocare} in qualsiasi momento; la revoca non rende illecito il trattamento
+    precedente.
+\end{itemize}
+\textbf{Squilibrio}: tipico del rapporto di lavoro (un datore che chiede informazioni sulla salute come
+condizione per l'assunzione), ma anche dell'università rispetto allo studente; molto meno del cliente
+libero di comprare altrove.
+
+\paragraph{Cookie wall e cookie paywall.} Il \emph{cookie wall} (si accede solo accettando tutti i
+cookie) è vietato secondo l'EDPB: l'accesso a un servizio non può essere condizionato al consenso
+all'archiviazione di informazioni sul dispositivo dell'utente. Il \emph{paywall} offre un'alternativa:
+abbonarsi oppure accettare i cookie di profilazione. Nell'ottobre 2022 i siti del gruppo GEDI lo hanno
+introdotto e il Garante ha aperto un'istruttoria; le autorità austriaca e francese lo ritengono valido se
+l'abbonamento ha un costo moderato, mentre la decisione italiana è, secondo le slide, ancora attesa. È
+una questione di \textbf{consenso libero}: il caso serve a illustrarla, non sono previste domande
+d'esame specifiche.
+
+\begin{integrazione}[consenso dei minori e modelli \emph{consent or pay}]
+\begin{itemize}
+  \item Per i servizi della società dell'informazione offerti direttamente a un minore, il consenso è
+    valido dai 16 anni; gli Stati possono abbassare la soglia fino a 13 (art.~8). In Italia la soglia è
+    \textbf{14 anni} (art.~2-\emph{quinquies} del Codice privacy).
+  \item Nel 2024 l'EDPB ha adottato un parere (Opinion 08/2024) sui modelli \emph{consent or pay} delle
+    grandi piattaforme online, secondo cui offrire solo l'alternativa tra consenso e pagamento non
+    basta, nella maggior parte dei casi, a rendere libero il consenso; le piattaforme dovrebbero valutare
+    di offrire anche un'alternativa gratuita senza pubblicità comportamentale.
+\end{itemize}
+\end{integrazione}
+
+\subsection{Il legittimo interesse (art.~6(1)(f))}
+Il legittimo interesse è \textbf{del titolare} (o di un terzo), non dell'interessato: l'interessato ha
+\emph{diritti fondamentali}, non ``legittimi interessi''. Non è utilizzabile dalle autorità pubbliche
+nell'esecuzione dei loro compiti. Il \textbf{balancing test} delle slide ha tre passaggi:
+\begin{enumerate}
+  \item valutare l'interesse del titolare: lecito, sufficientemente chiaro, reale e attuale;
+  \item valutare l'impatto sull'interessato: natura dei dati, modalità del trattamento,
+    \textbf{ragionevoli aspettative} dell'interessato, rapporto tra le parti;
+  \item prevedere garanzie aggiuntive per evitare un impatto indebito.
+\end{enumerate}
+
+\paragraph{Videosorveglianza.} Chiedere il consenso a ogni persona ripresa è impossibile: la base è il
+legittimo interesse, frutto del bilanciamento tra la privacy di chi passa e l'interesse, per esempio, a
+ricostruire un incidente. Il bilanciamento resta \textbf{obbligatorio} anche nei casi tipici (banche,
+gioiellerie, distributori di benzina).
+
+\paragraph{Marketing ai clienti.} Un negozio che manda offerte a chi ha già comprato bilancia il proprio
+interesse con il diritto del cliente di non essere disturbato: è ragionevole proporre prodotti simili a
+quelli acquistati, non qualsiasi cosa. Quando la base è il legittimo interesse esiste \textbf{sempre} il
+\textbf{diritto di opposizione} (il link ``unsubscribe'').
+
+\paragraph{Mai per le categorie particolari.} Il legittimo interesse non compare tra le basi
+dell'art.~9(2): per i dati particolari non si può usare.
+
+\begin{esame}
+Il legittimo interesse è \textbf{del titolare}, non dell'interessato: errore frequente e possibile
+domanda d'esame.
+\end{esame}
+
+% =====================================================================
+\section{I diritti dell'interessato (artt.~12--22)}
+\label{sec:gdpr-diritti}
+
+\begingroup\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{9.4cm}}
+\toprule
+\textbf{Diritto} & \textbf{Art.} & \textbf{Contenuto e osservazioni}\\
+\midrule
+\endhead
+Informazione & 13--14 & sapere quali dati sono raccolti, per quali finalità, dove sono conservati e chi
+  vi accede (informativa)\\
+Accesso & 15 & conferma del trattamento, finalità, categorie di dati, tempi di conservazione. Riguarda
+  solo i \emph{propri} dati: lo studente accede ai dati che ha fornito all'esame, ma la valutazione del
+  docente non è un suo dato\\
+Rettifica & 16 & correzione senza ritardo dei dati inesatti\\
+Cancellazione (``oblio'') & 17 & cancellare i dati non più necessari o quando il consenso è revocato;
+  richiede un bilanciamento (caso \emph{Google Spain})\\
+Limitazione & 18 & ``congelare'' il trattamento se l'esattezza è contestata o il trattamento è illecito;
+  poco usata e difficile da applicare\\
+Portabilità & 20 & ricevere i propri dati in formato strutturato. Fondamentale in teoria, complessa in
+  pratica: alla prima richiesta di un attivista austriaco, Facebook consegnò migliaia di pagine. Per il
+  docente richiede interoperabilità e open source\\
+Opposizione & 21 & chiedere che cessi un trattamento, salvo motivi prevalenti del titolare; sempre
+  disponibile verso il legittimo interesse e il marketing\\
+Decisioni automatizzate & 22 & non essere sottoposti a decisioni basate unicamente su un trattamento
+  automatizzato che producono effetti giuridici o analoghi (non trattato in aula)\\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{Il diritto all'oblio e il caso Google Spain}
+\paragraph{CGUE, C-131/12, \emph{Google Spain} (2014).} Il sig.\ Costeja González si rivolge
+all'autorità spagnola contro il quotidiano \emph{La Vanguardia} e contro Google: cercando il suo nome
+comparivano due pagine del 1998 con l'annuncio di un'asta immobiliare legata a debiti previdenziali,
+vicenda chiusa da anni. L'autorità (decisione del 30 luglio 2010) \textbf{respinge} il reclamo contro il
+giornale, la cui pubblicazione era legittima (doveva dare la massima pubblicità all'asta), ma lo
+\textbf{accoglie} contro Google: il motore di ricerca svolge un proprio trattamento, di cui risponde come
+titolare. La Corte di giustizia afferma che, alla luce degli artt.~7 e 8 della Carta, i diritti
+dell'interessato prevalgono \emph{di regola} sull'interesse economico del gestore del motore di ricerca e
+sull'interesse del pubblico a trovare l'informazione, \textbf{salvo} ragioni particolari, come il ruolo
+dell'interessato nella vita pubblica.
+
+Per il docente conta l'esempio, non il caso: il diritto all'oblio è il modello del
+\textbf{bilanciamento}, oggi ancora più delicato con l'IA. Dalla sua pratica: per una persona coinvolta
+in un processo di grande rilievo non si poteva rimuovere la vicenda processuale (``un pezzo di storia
+italiana''), ma si potevano rimuovere le immagini inopportune che la ritraevano, perché non manipolavano
+la storia. Una regola di vita del docente: ``ogni volta che risolvi un tuo problema, probabilmente ne crei
+uno a qualcun altro''; anche un piano di remediation va valutato per le sue conseguenze sui diritti.
+
+\begin{integrazione}[modalità di esercizio e tutela]
+Il titolare risponde alle richieste \textbf{senza ingiustificato ritardo e comunque entro un mese},
+prorogabile di due mesi se necessario, informandone l'interessato (art.~12(3)); di regola gratuitamente.
+I diritti possono essere limitati da norme UE o nazionali alle condizioni dell'art.~23. L'interessato
+può proporre \textbf{reclamo} all'autorità di controllo (art.~77) e ricorso giurisdizionale contro
+l'autorità o contro il titolare o il responsabile (artt.~78--79).
+\end{integrazione}
+
+% =====================================================================
+\section{Accountability e sicurezza del trattamento}
+\label{sec:gdpr-accountability}
+
+\subsection{Accountability (artt.~5(2) e 24)}
+Il titolare mette in atto misure tecniche e organizzative adeguate, tenendo conto di natura, ambito,
+contesto, finalità e rischi, ed è \textbf{in grado di dimostrare} che il trattamento è conforme
+(art.~24). Per il docente accountability significa saper sempre spiegare, in modo legale e adeguato,
+\textbf{perché} si è presa una decisione: nella zona grigia bisogna poter dimostrare di stare dalla parte
+bianca. Il GDPR ``si fida'' del titolare: nessuno controlla i compiti prima, ma chi non li ha fatti ne
+risponde dopo. Con l'IA, che decide in modo probabilistico e poco spiegabile, tracciare il processo
+decisionale è ancora più importante.
+
+\begin{esame}
+\begin{itemize}
+  \item In un incidente si decide in pochi minuti e la decisione può rivelarsi sbagliata, ma va
+    \textbf{documentata e resa tracciabile}, scrivendo perché la si prende. ``Non diventate avvocati:
+    serve risolvere il problema, ma documentate le decisioni.''
+  \item Due parole da ricordare: \textbf{accountability} e \textbf{stato dell'arte}.
+\end{itemize}
+\end{esame}
+
+\paragraph{Stato dell'arte.} Con un budget illimitato si proteggerebbe tutto: le misure vanno scelte con
+un budget limitato e devono essere \textbf{economicamente sostenibili}. Lo stato dell'arte cambia:
+quindici anni fa l'autenticazione a più fattori era un'idea innovativa, oggi è di fatto un obbligo per il
+titolare, e senza MFA si rischia la sanzione (l'interessato, come privato, resta libero di non usarla).
+
+\subsection{Protezione dei dati fin dalla progettazione e per impostazione predefinita (art.~25)}
+\begin{itemize}
+  \item \textbf{By design}: fin dall'inizio parte legale e parte tecnica lavorano insieme per integrare
+    nel trattamento le garanzie necessarie, tenendo conto di stato dell'arte, costi, natura, ambito,
+    contesto, finalità e rischi. Valutare la privacy a prodotto finito è ``troppo tardi''.
+  \item \textbf{By default}: per impostazione predefinita si trattano solo i dati necessari a ciascuna
+    finalità, per quantità, portata del trattamento, conservazione e accessibilità. In Europa vale
+    l'\textbf{opt-in} (serve il tuo sì), contro l'\textbf{opt-out} della cultura statunitense (si tratta
+    finché non ti opponi).
+\end{itemize}
+
+\subsection{Sicurezza del trattamento (art.~32)}
+Tenendo conto dello \textbf{stato dell'arte}, dei \textbf{costi di attuazione}, di natura, ambito,
+contesto e finalità del trattamento e del rischio, di probabilità e gravità diverse, per i diritti e le
+libertà delle persone, \textbf{titolare e responsabile} adottano misure tecniche e organizzative
+\textbf{adeguate al rischio}. L'elenco dell'art.~32(1) è \textbf{aperto} (``tra le altre, se del
+caso''):
+\begin{enumerate}[label=(\alph*)]
+  \item pseudonimizzazione e cifratura;
+  \item capacità di assicurare su base permanente riservatezza, integrità, disponibilità e
+    \textbf{resilienza} di sistemi e servizi;
+  \item capacità di ripristinare tempestivamente disponibilità e accesso ai dati dopo un incidente
+    fisico o tecnico;
+  \item procedura per testare, verificare e valutare regolarmente l'efficacia delle misure.
+\end{enumerate}
+Prima del GDPR c'era una lista chiusa di misure minime; con nuove vulnerabilità ogni settimana una lista
+non regge: bisogna decidere ogni volta e saper spiegare perché la soluzione è adeguata. Altri punti:
+\begin{itemize}
+  \item va verificata la sicurezza del \textbf{responsabile}, che materialmente detiene i dati (scelta tra
+    grandi hyperscaler statunitensi o provider europei, caso per caso);
+  \item chiunque agisca sotto l'autorità di titolare o responsabile tratta i dati solo su
+    \textbf{istruzione} (art.~32(4)): servono istruzioni e \textbf{formazione};
+  \item per ruoli e responsabilità in caso di incidente il docente richiama la matrice \textbf{RACI}
+    (\emph{Responsible, Accountable, Consulted, Informed}): come in un'evacuazione antincendio, ognuno deve
+    sapere che cosa fare;
+  \item codici di condotta e certificazioni approvati possono servire come \textbf{elemento} per
+    dimostrare la conformità (art.~32(3)), mai come garanzia.
+\end{itemize}
+
+\begin{integrazione}[la vecchia lista]
+La lista chiusa era l'Allegato~B del D.lgs.~196/2003 nella versione originaria (\emph{Disciplinare
+tecnico in materia di misure minime di sicurezza}), superato dall'approccio basato sul rischio del GDPR.
+\end{integrazione}
+
+\subsection{Misure tecniche e misure organizzative}
+Le slide riprendono un report ENISA del 2021 (gli elenchi sono esempi, non da memorizzare):
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{X X}
+\toprule
+\textbf{Misure tecniche} & \textbf{Misure organizzative}\\
+\midrule
+cultura della cybersicurezza (figura dedicata, consapevolezza, audit, policy); formazione su misura e su
+casi reali; rapporti con terze parti; procedura di data breach formalizzata; accesso sicuro ai sistemi
+(passphrase, niente riuso delle password); sicurezza dei dispositivi (cifratura, aggiornamenti,
+cancellazione remota); sicurezza di rete (firewall, revisione degli accessi remoti); sicurezza fisica;
+backup regolari, automatici, subito utilizzabili e separati; cloud; test sui siti web; condivisione delle
+informazioni &
+modello organizzativo (referenti interni, persone autorizzate, amministratori di sistema, DPO);
+informative (candidati e dipendenti, sito, fornitori, videosorveglianza); policy (conservazione, data
+breach, valutazione dei rischi); privacy by design; consensi (marketing, profilazione, geolocalizzazione);
+documentazione (registro dei trattamenti, contratti con i responsabili)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Le misure organizzative sono ``pezzi di carta'', ma concreti: senza procedure e responsabilità
+definite, anche la migliore tecnologia non viene usata nel momento giusto.
+
+\begin{esame}
+Conoscere la \textbf{differenza tra misure tecniche e misure organizzative}; gli elenchi delle slide
+sono solo esempi.
+\end{esame}
+
+\subsection{I quattro pilastri e la compliance in pratica}
+Le slide riassumono gli obblighi in \textbf{quattro pilastri}:
+\begin{enumerate}
+  \item \textbf{registro delle attività di trattamento} tenuto da ogni titolare (art.~30);
+  \item uso di soli \textbf{responsabili} che offrano garanzie sufficienti (art.~28);
+  \item \textbf{DPIA} prima dei trattamenti probabilmente ad alto rischio (art.~35);
+  \item \textbf{notifica dei data breach} all'autorità senza ingiustificato ritardo e, ove possibile,
+    entro 72 ore (art.~33).
+\end{enumerate}
+E in quattro regole operative (utili, non fondamentali per l'esame): analizzare quali dati si raccolgono
+e dove, seguendone il flusso (\textbf{registro dei trattamenti}); verificare se i tempi di conservazione
+sono giustificati (\textbf{policy di conservazione e cancellazione}); informare i clienti su come
+modificare o cancellare i dati (\textbf{informativa}); \textbf{monitorare} chi accede ai dati.
+
+\begin{integrazione}[registro dei trattamenti]
+Il registro del titolare (art.~30(1)) contiene almeno: dati di contatto del titolare e del DPO, finalità,
+categorie di interessati e di dati, destinatari, trasferimenti extra UE, termini di cancellazione previsti
+e descrizione generale delle misure di sicurezza; anche il responsabile tiene un proprio registro
+(art.~30(2)). L'obbligo non vale per le organizzazioni con meno di 250 dipendenti, \emph{salvo} che il
+trattamento presenti un rischio, non sia occasionale o riguardi categorie particolari o dati giudiziari
+(art.~30(5)): in pratica quasi tutte le imprese devono tenerlo. Non va confuso con il
+\textbf{registro dei data breach} dell'art.~33(5) (Capitolo~\ref{cap:data-breach}).
+\end{integrazione}
+
+% =====================================================================
+\section{Il responsabile della protezione dei dati (DPO)}
+\label{sec:gdpr-dpo}
+
+Il DPO (\emph{Data Protection Officer}) può essere interno o esterno ed è \textbf{obbligatorio}
+(art.~37(1)) per:
+\begin{itemize}
+  \item autorità e organismi pubblici (anche con un DPO unico per più enti);
+  \item titolari o responsabili le cui \textbf{attività principali} consistono in trattamenti che
+    richiedono il \textbf{monitoraggio regolare e sistematico} degli interessati su \textbf{larga scala};
+  \item titolari o responsabili le cui attività principali consistono nel trattamento su larga scala di
+    \textbf{categorie particolari} o di \textbf{dati giudiziari}.
+\end{itemize}
+\paragraph{Qualità professionali (slide).} Conoscenza della normativa e della prassi, comprensione dei
+trattamenti svolti, delle tecnologie e della sicurezza dei dati, del settore e dell'organizzazione;
+capacità di promuovere una cultura della protezione dei dati. Oggi circa il 90\% dei DPO sono avvocati, ma
+per il docente servono anche competenze \textbf{tecniche} (reti, storage, flussi di dati) e il ruolo
+sarebbe adatto agli ingegneri; nel 2026, tra NIS2, DORA, AI Act e \emph{shadow AI}, il DPO dovrebbe
+esserci in ogni azienda.
+
+\paragraph{Indipendenza.} Risorse adeguate e accesso ai dati e ai trattamenti; nessuna istruzione dal
+titolare o dal responsabile sull'esecuzione dei propri compiti; nessuna rimozione o penalizzazione per
+averli svolti; nessun conflitto di interessi con altri incarichi. Il DPO \textbf{non è personalmente
+responsabile} della non conformità: la decisione finale resta del titolare. Nella pratica subisce le
+pressioni del CEO, che vede compliance e sicurezza solo come costi.
+
+\begin{integrazione}[compiti del DPO]
+I compiti minimi sono fissati dall'art.~39: informare e consigliare titolare, responsabile e dipendenti;
+sorvegliare l'osservanza del GDPR e delle policy (compresi formazione e audit); fornire un parere sulla
+DPIA e sorvegliarne lo svolgimento (art.~35(2) impone al titolare di consultarlo); cooperare con
+l'autorità di controllo e fungere da punto di contatto. I dati di contatto del DPO vanno pubblicati e
+comunicati all'autorità (art.~37(7)) e compaiono nella notifica di un data breach (art.~33(3)(b)).
+\end{integrazione}
+
+% =====================================================================
+\section{Valutazione d'impatto (DPIA) e consultazione preventiva}
+\label{sec:gdpr-dpia}
+
+\subsection{Dalla valutazione statica alla compliance anticipatoria}
+La valutazione del rischio è nata nella \textbf{salute e sicurezza sul lavoro} (in Italia il percorso si
+compie con il D.lgs.~81/2008), dove può essere relativamente statica: le macchine fanno sempre la stessa
+cosa. Il ``corpo digitale'' invece cambia a velocità enorme: non si risolve in modo tattico (``mettiamo
+l'antivirus''), serve una strategia; il punto di rottura resta il comportamento umano; e ogni valutazione
+va scritta pensando a come sarà letta tra uno, due, tre anni (\textbf{compliance anticipatoria}).
+
+\subsection{Quando serve}
+Il titolare effettua la DPIA \textbf{prima} del trattamento quando un tipo di trattamento, in particolare
+se usa nuove tecnologie, può presentare un \textbf{rischio elevato} per i diritti e le libertà delle
+persone (art.~35(1)); una sola DPIA può coprire trattamenti simili per natura, ambito, contesto, finalità
+e rischi. È richiesta in particolare (art.~35(3)) per:
+\begin{enumerate}[label=(\alph*)]
+  \item valutazioni sistematiche e globali di aspetti personali basate su trattamenti automatizzati,
+    compresa la profilazione, da cui derivano decisioni con effetti giuridici o analoghi;
+  \item trattamenti su larga scala di categorie particolari o di dati giudiziari;
+  \item sorveglianza sistematica su larga scala di una zona accessibile al pubblico.
+\end{enumerate}
+Le autorità pubblicano elenchi di trattamenti soggetti a DPIA (art.~35(4)). Fuori da questi casi
+stabilire se il rischio è ``probabilmente elevato'' è spesso una \textbf{zona grigia} lasciata al titolare
+(a differenza, per esempio, della NIS2, dove si entra o non si entra in una categoria): per lo stesso
+strumento un'azienda può fare la DPIA e un'altra no. Esempi citati: \textbf{videosorveglianza} e
+\textbf{piattaforme di whistleblowing}.
+
+\subsection{Contenuto e metodo}
+La DPIA contiene almeno (art.~35(7)):
+\begin{enumerate}[label=(\alph*)]
+  \item una descrizione sistematica dei trattamenti previsti e delle finalità, compreso, se del caso, il
+    legittimo interesse perseguito;
+  \item una valutazione di \textbf{necessità e proporzionalità} rispetto alle finalità;
+  \item una valutazione dei rischi per i diritti e le libertà degli interessati;
+  \item le misure previste per affrontarli e per dimostrare la conformità.
+\end{enumerate}
+Il rischio si valuta da due punti di vista: \textbf{giuridico} (impatto sui diritti fondamentali) e
+\textbf{tecnico} (sicurezza del trattamento). Esempio di sproporzione: chiedere a tutti gli studenti
+l'ultimo certificato medico per dividerli in classi può avere una logica sanitaria, ma espone una quantità
+di informazioni sensibili sproporzionata.
+
+\paragraph{Natura e approccio (slide).} Valutazione \textbf{a domande} (checklist, che il docente
+preferisce perché evita dimenticanze), basata sul contesto; team \textbf{interdisciplinare}; analisi fin
+dalla progettazione; verifiche periodiche; approccio by design e by default. La pubblicazione non è
+obbligatoria, ma l'EDPB suggerisce di pubblicarne almeno una sintesi o le conclusioni.
+
+\subsection{Rischio inerente e rischio residuo}
+\begin{gather*}
+\text{rischio inerente} = \text{gravità} \times \text{probabilità}\\
+\text{rischio residuo} = \text{rischio inerente al netto delle mitigazioni}
+\end{gather*}
+\begin{itemize}
+  \item residuo \textbf{alto}: \textbf{consultazione preventiva} dell'autorità (art.~36) oppure rinuncia
+    al trattamento;
+  \item residuo \textbf{medio o basso}: si prosegue, ma il docente raccomanda di ripetere la valutazione
+    \textbf{ogni sei mesi}, perché nel digitale il rischio cambia in fretta. Il GDPR chiede un riesame
+    almeno quando cambia il rischio (art.~35(11)).
+\end{itemize}
+Nella prassi la tentazione è valutare il rischio come ``medio'' per evitare sia la consultazione sia lo
+stop; ma una DPIA scritta per comodità è proprio ciò che l'accountability rende contestabile.
+
+\begin{esame}
+\begin{itemize}
+  \item Non fermarsi a ``rischio = gravità $\times$ probabilità'': quello è solo il \textbf{rischio
+    inerente}. Decide il \textbf{rischio residuo} (dopo le mitigazioni): proseguire, consultare
+    l'autorità o fermarsi.
+  \item La DPIA non è una parte consistente dell'esame e una domanda specifica è ``rara'', ma non si può
+    escludere; proporzionalità, rischio residuo e by design/by default servono comunque per altre
+    domande.
+  \item Una DPIA \textbf{mai aggiornata} vale poco più di una DPIA assente (simulazione Pulse~K,
+    Sezione~\ref{sec:pulsek}): dettagli di questo tipo compaiono nelle tracce d'esame.
+\end{itemize}
+\end{esame}
+
+\subsection{La consultazione preventiva (art.~36)}
+Se la DPIA indica che il trattamento presenterebbe un rischio elevato senza misure adeguate a
+mitigarlo, il titolare consulta l'autorità \textbf{prima} di iniziare. L'autorità, se ritiene che il
+trattamento violerebbe il GDPR, fornisce un parere scritto entro \textbf{otto settimane}, prorogabili di
+\textbf{sei} per trattamenti complessi, e può usare i propri poteri correttivi (art.~36(2)). Esiti
+possibili: ulteriori misure, oppure stop del trattamento per mancanza di mitigazioni disponibili.
+
+\paragraph{L'esempio Immuni.} L'app di contact tracing del periodo COVID fu considerata ad alto rischio:
+dopo la DPIA il rischio residuo restava elevato, quindi si passò dalla consultazione preventiva con il
+Garante, che indicò ulteriori misure prima del via libera. Anche dopo l'approvazione la compliance va
+\textbf{monitorata di continuo}.
+
+\paragraph{Il modello in tre fasi delle slide.} Valutazione generale (artt.~24 e 32) con approccio by
+design/by default (art.~25); valutazione ``formale'' per il rischio elevato (art.~35); consultazione
+preventiva (art.~36); conformità ed enforcement (art.~83(4)(a)). Il docente avverte che la slide è
+``discutibile'': la valutazione generale riguarda in modo continuo tutto l'ambiente IT; quella
+dell'art.~35 riguarda un \textbf{trattamento specifico} (per esempio un nuovo smartwatch) ed è più
+dettagliata, per cui più che ``formale'' andrebbe detta ``specifica''. La definizione di riferimento di
+risk assessment è quella data da Gianluca nella parte ISO (Capitolo~\ref{cap:iso}). Con l'AI Act,
+invece, il livello di rischio dei sistemi ad alto rischio non si autodefinisce: lo fissa la norma.
+
+\begin{integrazione}[elenchi e criteri per la DPIA]
+\begin{itemize}
+  \item Il Garante ha pubblicato l'elenco italiano delle tipologie di trattamento soggette a DPIA
+    (provvedimento n.~467 dell'11 ottobre 2018), che comprende, tra l'altro, trattamenti su larga scala
+    di dati sanitari, dati biometrici e genetici, geolocalizzazione, sistemi di monitoraggio dei
+    dipendenti e uso di tecnologie innovative (IoT, IA).
+  \item Le linee guida del Gruppo Art.~29 (WP248, fatte proprie dall'EDPB) indicano nove criteri
+    (valutazione o \emph{scoring}, decisioni automatizzate, monitoraggio sistematico, dati sensibili,
+    larga scala, combinazione di dataset, interessati vulnerabili, tecnologie innovative, trattamenti che
+    impediscono di esercitare un diritto): di regola, se ne ricorrono \textbf{almeno due}, la DPIA è
+    necessaria.
+  \item Il testo dell'art.~36(1) parla di rischio elevato ``in assenza di misure adottate dal titolare
+    per attenuarlo''; il considerando 84 e la prassi lo leggono come rischio elevato \emph{che il
+    titolare non riesce ad attenuare}, cioè come \textbf{rischio residuo} elevato, in linea con la
+    lettura data in aula.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Trasferimenti di dati extra UE}
+\label{sec:gdpr-trasferimenti}
+
+Il tema è stato toccato in aula a proposito dei sub-responsabili. Poiché la grande maggioranza dei
+fornitori di storage e di servizi di trattamento è statunitense, il titolare deve sapere \textbf{dove
+risiedono i dati} lungo tutta la catena. Il \textbf{Data Privacy Framework} è l'elenco delle aziende
+statunitensi aderenti al quadro UE--USA: se il fornitore è nell'elenco con stato attivo il trasferimento
+è più semplice; se non c'è, servono accordi specifici come le \textbf{clausole contrattuali standard}.
+Non è una domanda d'esame, ma la verifica conta molto nella pratica. Anche la Convenzione di Budapest
+ricorda che ciò che sta nel cloud ha sempre una giurisdizione, e che il sistema dei trasferimenti UE--USA
+è delicato.
+
+\begin{integrazione}[il Capo V del GDPR]
+\begin{itemize}
+  \item \textbf{Principio} (art.~44): un trasferimento verso un Paese terzo o un'organizzazione
+    internazionale è lecito solo se il livello di protezione garantito dal GDPR non viene compromesso.
+  \item \textbf{Decisione di adeguatezza} (art.~45): la Commissione riconosce che il Paese terzo
+    assicura una protezione sostanzialmente equivalente; i dati circolano come dentro l'UE.
+  \item \textbf{Garanzie adeguate} (art.~46): in assenza di adeguatezza, \textbf{clausole contrattuali
+    standard} (SCC) adottate dalla Commissione, \textbf{norme vincolanti d'impresa} (BCR, art.~47,
+    approvate dall'autorità capofila per i trasferimenti infragruppo), codici di condotta e
+    certificazioni, clausole ad hoc autorizzate.
+  \item \textbf{Deroghe} (art.~49): consenso esplicito, esecuzione di un contratto, interessi vitali e
+    altri casi eccezionali, non utilizzabili per trasferimenti sistematici.
+  \item La CGUE ha annullato i due precedenti accordi UE--USA: \emph{Safe Harbor} con la sentenza
+    \emph{Schrems~I} (C-362/14, 2015) e \emph{Privacy Shield} con \emph{Schrems~II} (C-311/18, 2020),
+    per l'accesso sproporzionato delle autorità di intelligence e la mancanza di rimedi effettivi. Dopo
+    \emph{Schrems~II} chi usa SCC o BCR deve svolgere una \textbf{Transfer Impact Assessment} (TIA):
+    valutare se la legge del Paese di destinazione consente di rispettare in concreto le garanzie e,
+    se necessario, adottare misure supplementari (per esempio cifratura con chiavi custodite nell'UE),
+    altrimenti sospendere il trasferimento.
+  \item Il \textbf{Data Privacy Framework} si basa sulla decisione di adeguatezza della Commissione del
+    10 luglio 2023, che vale solo per le aziende statunitensi certificate. Il Tribunale UE ha respinto
+    nel 2025 un ricorso che ne chiedeva l'annullamento (causa \emph{Latombe}, T-553/23); la decisione
+    resta esposta a nuove contestazioni.
+  \item Le violazioni delle regole sui trasferimenti rientrano nella fascia più alta delle sanzioni
+    (art.~83(5)(c)).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Autorità e governance}
+\label{sec:gdpr-autorita}
+
+\begin{itemize}
+  \item \textbf{Autorità di controllo} (art.~51): autorità pubblica \textbf{indipendente} istituita da
+    ciascuno Stato membro; in Italia il \textbf{Garante per la protezione dei dati personali}. Il docente
+    sottolinea la differenza con l'AgID, agenzia governativa e non indipendente.
+  \item \textbf{Comitato europeo per la protezione dei dati} (EDPB, art.~68): riunisce le autorità
+    nazionali e il Garante europeo (EDPS); adotta linee guida (nel corso: 07/2020 su titolare e
+    responsabile, 9/2022 sulla notifica dei data breach) e assicura l'applicazione coerente del GDPR.
+    Ha sostituito il Gruppo di lavoro Articolo~29 della Direttiva 95/46.
+  \item \textbf{EDPS}: vigila sui trattamenti delle istituzioni e degli organi dell'UE.
+  \item \textbf{Corti}: la CGUE interpreta il GDPR in via definitiva (\emph{Google Spain},
+    \emph{Lindqvist}); la CEDU non è un organo dell'UE (Capitolo~\ref{cap:introduzione}).
+\end{itemize}
+
+\paragraph{Lo sportello unico (\emph{one-stop-shop}).} Per i trattamenti transfrontalieri è competente
+come \textbf{autorità capofila} quella dello \textbf{stabilimento principale} del titolare o del
+responsabile (art.~56(1)), che coopera con le altre autorità interessate. Nella simulazione Pulse~K il
+Garante italiano è l'autorità capofila perché lo stabilimento principale è a Torino, anche se gli
+interessati sono in quattro Stati (Sezione~\ref{sec:pulsek}).
+
+\begin{integrazione}[poteri e cooperazione]
+Ogni autorità ha poteri \textbf{di indagine} (ispezioni, accesso ai locali e ai dati), \textbf{correttivi}
+(avvertimenti, ammonimenti, ingiunzioni, limitazione o divieto del trattamento, sospensione dei flussi
+verso Paesi terzi, sanzioni) e \textbf{autorizzativi e consultivi} (art.~58). Nei casi transfrontalieri
+l'autorità capofila prepara il progetto di decisione con le autorità interessate (art.~60); se non c'è
+accordo decide l'EDPB con il meccanismo di risoluzione delle controversie (art.~65). L'interessato può
+comunque presentare reclamo all'autorità del proprio Stato (art.~77).
+\end{integrazione}
+
+% =====================================================================
+\section{Sanzioni, risarcimento e profili penali}
+\label{sec:gdpr-sanzioni}
+
+\subsection{Sanzioni amministrative (art.~83)}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.8cm} X}
+\toprule
+\textbf{Tetto} & \textbf{Violazioni (esempi principali)}\\
+\midrule
+\textbf{10 milioni di euro o 2\%} del fatturato mondiale annuo dell'esercizio precedente (art.~83(4)) &
+  obblighi di titolare e responsabile degli artt.~8, 11, \textbf{25--39} (by design, contratti con i
+  responsabili, registro, \textbf{sicurezza, data breach}, DPIA, DPO), 42 e 43\\
+\textbf{20 milioni di euro o 4\%} (art.~83(5)--(6)) & \textbf{principi} e basi giuridiche, consenso,
+  categorie particolari (artt.~5, 6, 7, 9); \textbf{diritti} degli interessati (artt.~12--22);
+  \textbf{trasferimenti} (artt.~44--49); inosservanza degli ordini dell'autorità\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Per le imprese si applica l'importo \textbf{più alto} tra la cifra fissa e la percentuale: per un grande
+gruppo conta la percentuale. Le sanzioni devono essere effettive, proporzionate e dissuasive
+(art.~83(1)); per graduarle l'autorità considera, tra l'altro, natura, gravità e durata della violazione,
+numero di interessati e danno subito, dolo o colpa, misure adottate per attenuare il danno, grado di
+responsabilità alla luce delle misure degli artt.~25 e 32, precedenti, cooperazione con l'autorità,
+categorie di dati e \textbf{il modo in cui l'autorità è venuta a conoscenza della violazione}, in
+particolare se è stata notificata (art.~83(2)). Per violazioni collegate si applica il tetto della più
+grave (art.~83(3)).
+
+\begin{esame}
+\textbf{Domanda insidiosa}: in generale il tetto è \textbf{20 milioni o 4\%}, ma per le violazioni delle
+\textbf{misure di sicurezza}, e quindi anche per i \textbf{data breach}, è la metà: \textbf{10 milioni o
+2\%}. ``Avrete probabilmente una domanda sul data breach all'esame.''
+\end{esame}
+
+\paragraph{Chi paga.} La sanzione colpisce il \textbf{titolare} (o il responsabile), cioè la persona
+giuridica, non il dipendente che ha sbagliato: l'azienda può agire su quest'ultimo solo sul piano del
+diritto del lavoro (provvedimenti disciplinari), di norma senza potergli chiedere il rimborso della
+sanzione. Per i dirigenti la responsabilità personale è più concreta, e a quel livello si usano polizze
+\textbf{D\&O} (\emph{Directors and Officers}).
+
+\subsection{Risarcimento del danno (art.~82)}
+Chiunque subisca un danno \textbf{materiale o immateriale} per una violazione del GDPR ha diritto al
+risarcimento dal titolare o dal responsabile. Il titolare risponde del danno causato dal trattamento non
+conforme; il responsabile solo se ha violato obblighi specificamente suoi o ha agito fuori dalle
+istruzioni lecite del titolare (art.~82(2)). Ci si libera provando di non essere in alcun modo
+responsabili dell'evento (art.~82(3)). Se più soggetti sono coinvolti, ciascuno risponde
+\textbf{per l'intero} verso l'interessato e può poi rivalersi sugli altri per la loro parte
+(art.~82(4)--(5)). Il docente ricorda che oggi anche l'\textbf{indisponibilità} di un servizio può
+generare contenzioso (il paziente che non riesce a prenotare) e che il titolare può chiedere i danni al
+responsabile inadempiente sul piano contrattuale (Capitolo~\ref{cap:data-breach}).
+
+\subsection{Profili penali}
+Il GDPR non prevede reati: le sanzioni penali sono lasciate agli Stati (art.~84). In Italia il punto
+toccato più volte in aula è l'\textbf{art.~168 del Codice privacy} (D.lgs.~196/2003): chi dichiara o
+attesta il falso al Garante (in una notifica, in un registro, durante un'ispezione) è punito con la
+\textbf{reclusione da sei mesi a tre anni}. Ne risponde chi firma la dichiarazione, ma anche chi ha
+materialmente alterato un documento: obbedire a un ordine del CEO non scusa. Il reato richiede il
+\textbf{dolo}, che va provato; l'errore in buona fede non è punito, ma va spiegato a un pubblico ministero
+spesso poco esperto di tecnica. Da qui la regola dei laboratori: \textbf{non presumere nulla che non si
+possa provare} (Capitolo~\ref{cap:data-breach}).
+
+\begin{integrazione}[gli altri reati del Codice privacy]
+Il Codice privacy, come modificato dal D.lgs.~101/2018, prevede anche: trattamento illecito di dati con
+dolo specifico di profitto o di danno (art.~167); comunicazione e diffusione illecita di dati oggetto di
+trattamento su larga scala (art.~167-\emph{bis}); acquisizione fraudolenta di dati oggetto di trattamento
+su larga scala (art.~167-\emph{ter}); inosservanza dei provvedimenti del Garante (art.~170); violazioni in
+materia di controlli a distanza e indagini sulle opinioni dei lavoratori (art.~171).
+\end{integrazione}
+
+% =====================================================================
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Modello in tre fasi}: il docente ha dichiarato la slide ``discutibile''; la definizione
+    di risk assessment da usare all'esame è quella della parte ISO.
+  \item \textbf{Revisione semestrale della DPIA}: è una raccomandazione del docente, non un termine del
+    GDPR (art.~35(11)).
+  \item \textbf{Cookie paywall}: la decisione del Garante sul caso GEDI era ``ancora attesa'' secondo le
+    slide; verificare lo stato attuale.
+  \item \textbf{Data Privacy Framework}: l'elenco delle aziende aderenti cambia nel tempo; in aula è stato
+    detto che un noto fornitore di IA non vi compare. Verificare sul sito ufficiale.
+  \item \textbf{Ambito territoriale e trasferimenti}: presenti nell'agenda delle slide e citati in
+    aula solo in modo marginale; la parte qui riportata viene dal testo del GDPR e dalle integrazioni.
+\end{itemize}
+\end{verifica}

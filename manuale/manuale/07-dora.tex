@@ -1,13 +1,415 @@
 \chapter{DORA}
 \label{cap:dora}
 
-\dacompletare{Fonte: slide ancora da ricevere. Scaletta prevista:
+\begin{nota}[Stato e fonti]
+\textbf{Stato: non ancora trattato a lezione} (lezione dedicata prevista dopo quella sulla NIS2, data
+non ancora comunicata). Questo capitolo è un \textbf{inquadramento provvisorio}. Fonti usate: slide
+introduttive (\emph{01.~Introductory class}), glossario del laboratorio~1, diario delle lezioni del
+21/09, 05/10, 12/10 e 09/11, laboratorio~2 (Capitolo~\ref{lab:02}), tema d'esame precedente
+(Capitolo~\ref{cap:tema-precedente}); come fonte secondaria gli \textbf{appunti di studenti
+dell'A.A.~2025/26}, sempre indicati come tali. Tutto il resto è nei riquadri viola di integrazione.
+\end{nota}
+
+% =====================================================================
+\section{Natura e ambito}
+\label{sec:dora-ambito}
+
+Il \textbf{Digital Operational Resilience Act} (Regolamento (UE) 2022/2554) è un \textbf{regolamento}:
+si applica direttamente e in modo identico in tutti gli Stati membri. È applicabile dal
+\textbf{17 gennaio 2025}. Protegge la \textbf{resilienza di una funzione finanziaria} (slide
+introduttive) e riguarda \textbf{solo banche, finanza e assicurazioni}: un ospedale, per esempio, non
+vi è soggetto (lezione del 21/09). Le norme successive al GDPR sono ``segmentate'': il DORA vale solo
+per il settore finanziario (lezione del 05/10).
+
+\begin{esame}
+Tipica domanda aperta indicata dal docente: capire \textbf{quale soggetto} deve notificare e \textbf{a
+quale norma} è soggetta l'azienda, per esempio ``è soggetta a DORA o no?'' (lezione del 21/09).
+\end{esame}
+
+\paragraph{Appunti A.A.~2025/26.} Il DORA è descritto come ``applicazione obbligatoria dei principi
+della ISO/IEC~27001'' al settore finanziario: molte aree (gestione del rischio con ciclo PDCA, gestione
+degli incidenti, continuità operativa, fornitori, sviluppo sicuro e gestione delle modifiche)
+ricalcano i controlli ISO, per cui chi è già certificato parte avvantaggiato. Elenco di entità citato:
+enti creditizi e di pagamento, prestatori di servizi di informazione sui conti, istituti di moneta
+elettronica, imprese di assicurazione e riassicurazione, agenzie di rating, imprese di investimento e
+sedi di negoziazione. Secondo gli appunti il docente sottolineava che, se si è fornitori di una banca o
+di un'assicurazione, si deve rispettare il DORA ``non perché la legge lo imponga, ma perché lo imporrà
+il cliente'': gli obblighi si propagano lungo la catena per via contrattuale.
+
+\begin{integrazione}[ambito (art.~2) e proporzionalità (art.~4)]
 \begin{itemize}
-  \item ambito: entità finanziarie e fornitori terzi di servizi ICT;
-  \item quadro di gestione del rischio ICT e strategia di resilienza operativa digitale;
-  \item business continuity, disaster recovery, backup;
-  \item ruolo dell'organo di gestione; principio di proporzionalità;
-  \item incidenti ICT gravi: classificazione e tempistiche di notifica;
-  \item test di resilienza;
-  \item rischio da terze parti ICT e clausole contrattuali.
-\end{itemize}}
+  \item Il DORA è in vigore dal 16 gennaio 2023 e si applica dal 17 gennaio 2025; è accompagnato dalla
+    Direttiva (UE) 2022/2556, che adegua le direttive settoriali, e da numerose norme tecniche di
+    regolamentazione e di attuazione (RTS e ITS) adottate come regolamenti delegati e di esecuzione.
+  \item L'art.~2(1) elenca venti categorie di entità finanziarie: oltre a quelle sopra, depositari
+    centrali di titoli, controparti centrali, repertori di dati sulle negoziazioni, gestori di fondi di
+    investimento alternativi e società di gestione di OICVM, fornitori di servizi di comunicazione dati,
+    intermediari assicurativi, enti pensionistici aziendali o professionali, amministratori di indici
+    di riferimento critici, fornitori di servizi di crowdfunding, repertori di cartolarizzazioni,
+    prestatori di servizi per le cripto-attività ed emittenti di token collegati ad attività.
+  \item Sono soggetti al DORA anche i \textbf{fornitori terzi di servizi ICT}, ma solo per la parte
+    sulla sorveglianza dei fornitori \emph{critici} (Sezione~\ref{sec:dora-oversight}); per il resto
+    gli obblighi li raggiungono tramite i contratti con le entità finanziarie.
+  \item \textbf{Proporzionalità (art.~4)}: le regole si applicano tenendo conto di dimensione, profilo
+    di rischio complessivo, natura, scala e complessità dei servizi. Le entità più piccole (per esempio
+    alcune imprese di investimento piccole e non interconnesse) seguono un \textbf{quadro semplificato}
+    di gestione del rischio ICT (art.~16).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{I cinque pilastri}
+\label{sec:dora-pilastri}
+
+A lezione il DORA è stato finora richiamato per tre aspetti: il quadro di gestione del rischio ICT
+(artt.~5--16), la notifica degli incidenti gravi (art.~19) e il rapporto con i fornitori ICT
+(artt.~28--30, con la sorveglianza diretta dei fornitori critici). La struttura completa del
+regolamento si riassume di solito in cinque pilastri.
+
+\begin{integrazione}[struttura del regolamento]
+\begin{enumerate}
+  \item \textbf{Gestione del rischio ICT} (Capo~II, artt.~5--16): governance e quadro di gestione del
+    rischio.
+  \item \textbf{Gestione, classificazione e segnalazione degli incidenti ICT} (Capo~III,
+    artt.~17--23).
+  \item \textbf{Test di resilienza operativa digitale} (Capo~IV, artt.~24--27), compresi i
+    \emph{threat-led penetration test} (TLPT).
+  \item \textbf{Gestione del rischio ICT derivante da terzi} (Capo~V, artt.~28--44), compreso il
+    quadro di sorveglianza dei fornitori terzi critici (artt.~31--44).
+  \item \textbf{Condivisione delle informazioni} su minacce e vulnerabilità tra entità finanziarie
+    (Capo~VI, art.~45).
+\end{enumerate}
+\end{integrazione}
+
+% =====================================================================
+\section{Governance e quadro di gestione del rischio ICT}
+\label{sec:dora-rischio}
+
+Nella ``grammatica comune'' delle slide introduttive il DORA compare con gli \textbf{artt.~5--16}: un
+\textbf{quadro di gestione del rischio ICT}, di cui è titolare l'\textbf{organo di gestione}, che lo
+approva. È lo stesso metodo basato sul rischio di GDPR, NIS2 e ISO/IEC~27001.
+
+\begin{esame}
+In un appello precedente è uscita la domanda chiusa \emph{DORA strategies (select the WRONG answer)}
+(Capitolo~\ref{cap:tema-precedente}). La \textbf{strategia di resilienza operativa digitale} comprende
+tolleranza al rischio ICT, obiettivi, architettura, rilevazione e test; \textbf{strategia multi-vendor};
+gestione e conformità dell'esternalizzazione ICT; \textbf{strategia di comunicazione} per gli incidenti.
+La definisce e approva l'\textbf{organo di gestione}. Affermazioni errate tipiche: che la approvi il
+fornitore ICT, che coincida con il risk assessment GDPR, che il DORA imponga una checklist fissa.
+\end{esame}
+
+\paragraph{Una policy non basta.} Un'organizzazione ha policy che derivano da GDPR, NIS2, DORA, AI
+Act: chi è ICT risk manager non può gestire solo quelle ``DORA'', deve governarne l'interconnessione
+(lezione del 09/11).
+
+\paragraph{Appunti A.A.~2025/26.} Il quadro di gestione del rischio ICT comprende governance e controlli
+interni, politiche su disponibilità, autenticità, integrità e riservatezza dei dati, ruoli e
+responsabilità chiari per tutte le funzioni ICT e la strategia di resilienza. Altri punti:
+\begin{itemize}
+  \item \textbf{il risk assessment dipende dalla norma}: per il GDPR i dati sanitari dei dipendenti
+    sono ad alto rischio, per il DORA contano soprattutto i dati di pagamento e la disponibilità dei
+    servizi. La prima domanda da fare è quindi ``per quale norma è questo risk assessment?'', e serve
+    una valutazione integrata per evitare risultati incoerenti;
+  \item \textbf{continuità}: una politica di continuità operativa ICT e piani di risposta e ripristino,
+    testati regolarmente; una \textbf{politica di backup} (ambito, frequenza, riservatezza), procedure
+    di ripristino e metodi per verificarne l'efficacia. Molti fornitori ICT non hanno backup e disaster
+    recovery adeguati: il DORA costringe a rivalutarli ed eventualmente a sostituirli;
+  \item \textbf{audit interno ICT} con revisori indipendenti e competenti, frequenza proporzionata al
+    rischio, riesame del quadro almeno annuale o dopo incidenti gravi; un \textbf{processo di
+    follow-up} che verifichi la chiusura delle carenze;
+  \item \textbf{organo di gestione}: definisce e approva il quadro, ne sorveglia l'attuazione,
+    assicura le risorse, monitora rischi ed esiti degli audit;
+  \item emerge la figura dell'\textbf{ICT risk manager}, ruolo molto più tecnico del DPO;
+  \item \textbf{proporzionalità} (art.~4): niente checklist fissa, un quadro da calibrare
+    sull'organizzazione (una startup di cinque persone non è una banca da ventimila dipendenti, ma deve
+    comunque dimostrare una resilienza adeguata).
+\end{itemize}
+
+\begin{integrazione}[artt.~5--16 in sintesi]
+\begin{itemize}
+  \item \textbf{Art.~5}: l'organo di gestione definisce, approva, sorveglia ed è responsabile
+    dell'attuazione del quadro; ha la \textbf{responsabilità ultima} della gestione del rischio ICT,
+    approva la strategia, i piani di continuità e di audit, assegna il budget e deve mantenere
+    conoscenze adeguate (anche con formazione periodica).
+  \item \textbf{Art.~6}: quadro documentato, riesaminato \textbf{almeno una volta l'anno} e dopo
+    incidenti gravi, sottoposto ad audit interno; la gestione del rischio ICT è affidata a una
+    \textbf{funzione di controllo} con adeguata indipendenza (modello delle tre linee di difesa). La
+    strategia di resilienza è prevista dall'art.~6(8), la strategia multi-vendor dall'art.~6(9).
+  \item \textbf{Artt.~7--14}: sistemi e strumenti ICT aggiornati (7); identificazione di funzioni,
+    asset e dipendenze (8); protezione e prevenzione (9); rilevazione (10); risposta e ripristino, con
+    la politica di continuità operativa ICT (11); backup, ripristino e recupero, con sistemi di backup
+    separati (12); apprendimento ed evoluzione dopo gli incidenti (13); comunicazione (14).
+  \item \textbf{Art.~16}: quadro semplificato per le entità minori.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Incidenti ICT gravi: classificazione e notifica}
+\label{sec:dora-incidenti}
+
+L'orologio del DORA parte dalla \textbf{classificazione dell'incidente come grave} (\emph{major}); il
+destinatario è l'\textbf{autorità competente} di settore, nel quadro delle autorità europee di
+vigilanza (ESA). Le slide riassumono la logica: il DORA conta l'\textbf{impatto su una funzione}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.4cm} X}
+\toprule
+\textbf{Fase} & \textbf{Termine (slide introduttive e glossario)} \\ \midrule
+Notifica iniziale & \textbf{4 h dalla classificazione} come grave, e comunque entro \textbf{24 h dalla
+  consapevolezza} \\
+Relazione intermedia & \textbf{72 h} dalla notifica iniziale \\
+Relazione finale & entro \textbf{1 mese} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{esame}
+\begin{itemize}
+  \item Il docente ha sottolineato le sole \textbf{4 ore} del DORA (lezione del 21/09).
+  \item Le \textbf{72 ore} del DORA decorrono dalla \emph{notifica iniziale}, quelle della NIS2 dalla
+    \emph{consapevolezza}: è una delle trappole elencate nel Capitolo~\ref{cap:scadenze}.
+  \item Una notifica DORA non adempie quella GDPR (e viceversa): nel laboratorio~3 il responsabile del
+    trattamento aveva già notificato l'incidente ``ai sensi del DORA'' a un'autorità di settore, ma
+    ``diverse norme, diverse notifiche'' (lezione del 12/10).
+\end{itemize}
+\end{esame}
+
+\paragraph{Nei casi del corso.} Nel laboratorio~2 (Capitolo~\ref{lab:02}) il fondo pensione francese
+classifica l'incidente come grave ai sensi del DORA e lo segnala all'ACPR, mentre la notifica GDPR va
+alla CNIL: due binari distinti. La Simulazione~2 (Capitolo~\ref{cap:simulazioni}) calcola le scadenze
+DORA e GDPR per un istituto di pagamento.
+
+\paragraph{Appunti A.A.~2025/26.} Ogni entità deve avere un \textbf{processo di gestione degli incidenti
+ICT} (rilevazione, gestione, classificazione, notifica), separato o integrato con quelli per GDPR e
+NIS2; per le entità soggette a più obblighi l'integrazione è preferibile. Il DORA non ha una formula di
+gravità come quella ENISA per i data breach, ma una serie di \textbf{criteri di classificazione}: numero
+e rilevanza dei clienti colpiti, numero e importanza delle transazioni, impatto reputazionale, durata e
+tempo di indisponibilità del servizio, diffusione geografica (soprattutto se coinvolge due o più Stati),
+perdite di dati (disponibilità, autenticità, integrità, riservatezza), criticità dei servizi, impatto
+economico. La relazione finale contiene cause di fondo, cronologia, misure di contenimento e ripristino,
+costi e perdite diretti e indiretti, eventuali incidenti ricorrenti. Se l'incidente è anche un data
+breach vanno rispettati tutti i termini di entrambe le norme.
+
+\begin{integrazione}[artt.~17--23 e norme tecniche]
+\begin{itemize}
+  \item \textbf{Art.~17}: processo di gestione degli incidenti (rilevazione, registrazione,
+    classificazione, escalation, comunicazione). \textbf{Art.~18}: criteri di classificazione,
+    precisati con soglie numeriche dal Regolamento delegato (UE) 2024/1772.
+  \item \textbf{Art.~19}: notifica degli incidenti gravi all'autorità competente (iniziale, intermedia,
+    finale); notifica \textbf{volontaria} delle minacce informatiche significative; obbligo di
+    \textbf{informare i clienti} se l'incidente incide sui loro interessi finanziari. L'autorità
+    trasmette le informazioni alle ESA, alla BCE dove pertinente e al punto di contatto unico o CSIRT
+    designati ai sensi della NIS2.
+  \item \textbf{Termini} (Regolamento delegato (UE) 2025/301): notifica iniziale entro 4 ore dalla
+    classificazione e non oltre 24 ore dalla conoscenza; relazione intermedia entro 72 ore dalla
+    notifica iniziale; relazione finale entro \textbf{un mese dall'ultima relazione intermedia
+    aggiornata}. Formulari e procedure nel Regolamento di esecuzione (UE) 2025/302.
+  \item Per gli enti creditizi e di pagamento il DORA assorbe la notifica degli incidenti operativi o
+    di sicurezza legati ai pagamenti prevista prima dalla PSD2.
+  \item \textbf{Art.~21}: le ESA dovevano valutare la fattibilità di un \textbf{hub UE unico} per le
+    segnalazioni: è la stessa direzione di centralizzazione di cui il docente parla per il Digital
+    Omnibus ed ENISA.
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Decorrenza della relazione finale.} Le slide dicono solo ``1 mese''; gli appunti
+    A.A.~2025/26 in un punto dicono ``1 mese dalla relazione intermedia o dal suo ultimo
+    aggiornamento'', in un altro ``1 mese dall'incidente''. Il testo delle norme tecniche (vedi
+    integrazione) è nel primo senso. È la stessa verifica aperta nel Capitolo~\ref{cap:scadenze}: da
+    confermare sulle slide DORA.
+  \item \textbf{Fine settimana.} Le norme tecniche prevedono, per alcune entità, la possibilità di
+    inviare le relazioni con scadenza nel fine settimana o in un giorno festivo entro mezzogiorno del
+    primo giorno lavorativo successivo, con eccezioni per le entità più rilevanti. Il corso insegna che
+    ``le scadenze corrono anche nel weekend'': in assenza di indicazioni del docente, all'esame
+    conviene applicare la regola prudente. Verificare.
+\end{itemize}
+\end{verifica}
+
+% =====================================================================
+\section{Test di resilienza operativa digitale}
+\label{sec:dora-test}
+
+A lezione i test DORA non sono ancora stati trattati; il diario ricorda solo che il
+\emph{penetration test} è un attacco simulato autorizzato, anch'esso soft law con possibili
+conseguenze legali (lezione del 09/11). Gli appunti A.A.~2025/26 citano i test tra le componenti della
+strategia di resilienza.
+
+\begin{integrazione}[artt.~24--27]
+\begin{itemize}
+  \item \textbf{Programma di test} (art.~24) proporzionato e basato sul rischio, eseguito da parti
+    indipendenti (interne o esterne); i sistemi che supportano funzioni critiche o importanti vanno
+    testati \textbf{almeno una volta l'anno}.
+  \item \textbf{Tipi di test} (art.~25): valutazioni e scansioni delle vulnerabilità, analisi open
+    source, valutazioni della sicurezza delle reti, gap analysis, verifiche della sicurezza fisica,
+    questionari, revisioni del codice sorgente dove possibile, test basati su scenari, test di
+    compatibilità, di prestazione, end-to-end, penetration test.
+  \item \textbf{TLPT} (art.~26): test di penetrazione guidati dalla minaccia, \textbf{almeno ogni tre
+    anni}, per le entità individuate dalle autorità competenti; riguardano funzioni critiche o
+    importanti su sistemi di produzione reali, possono coinvolgere i fornitori ICT e si ispirano al
+    quadro TIBER-EU. Dettagli nel Regolamento delegato (UE) 2025/1190.
+  \item \textbf{Tester} (art.~27): requisiti di idoneità, reputazione, competenza, certificazioni e
+    assicurazione; l'uso di tester interni è ammesso a condizioni (tra cui ricorrere a tester esterni
+    almeno ogni tre test), mentre gli enti creditizi significativi devono usare solo tester esterni.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Rischio ICT da terze parti e contratti}
+\label{sec:dora-terze-parti}
+
+Secondo le slide sul perimetro (``si risponde anche per chi non si impiega''), il DORA agli
+\textbf{artt.~28--30} impone un \textbf{contenuto contrattuale obbligatorio}, un \textbf{registro degli
+accordi} con i fornitori ICT e la \textbf{sorveglianza diretta a livello UE dei fornitori ICT critici}.
+Le slide annunciano che più avanti nel corso si negozierà un \textbf{contratto ICT clausola per
+clausola} ai sensi del DORA: cosa chiede l'entità finanziaria, perché il fornitore non può accettarlo
+così com'è, quale versione è difendibile. ``La compliance, a quel punto, è redazione.''
+
+\paragraph{Appunti A.A.~2025/26: le clausole negoziate l'anno scorso.} Il DORA non regola direttamente
+i fornitori ma li vincola attraverso le clausole che l'entità finanziaria deve imporre. Clausole
+analizzate, con i rischi per il fornitore e le controproposte suggerite:
+\begin{itemize}
+  \item \textbf{requisiti di sicurezza} (``standard più aggiornati e di massima qualità''): formula
+    vaga, costi illimitati; meglio un riferimento fisso (es.\ ISO/IEC~27001), misure definite, riesame
+    periodico e adeguamento del prezzo;
+  \item \textbf{recesso dell'entità finanziaria} (violazioni ``significative'', carenze nella gestione
+    del rischio, impossibilità per l'autorità di vigilare): limitarlo a violazioni rilevanti e
+    dimostrabili, con un periodo di rimedio (30--90 giorni) ed escludendo eventi fuori dal controllo del
+    fornitore;
+  \item \textbf{audit e ispezioni}: limitarli (es.\ una volta l'anno salvo incidenti gravi), con
+    preavviso, possibilità di usare report di terza parte (ISO/IEC~27001, SOC~2) e tutela dei dati
+    degli altri clienti;
+  \item \textbf{subappalto}: lista di subfornitori pre-approvati, finestra di opposizione di 15--30
+    giorni invece del consenso preventivo, sostituzione d'urgenza;
+  \item \textbf{assistenza e cooperazione negli incidenti}: perimetro limitato ai sistemi del
+    fornitore, tempi di risposta allineati alle scadenze DORA, ripartizione dei costi per l'assistenza
+    straordinaria;
+  \item \textbf{responsabilità e manleva}: massimali, esclusione dei danni indiretti, manleva legata
+    solo alla colpa del fornitore.
+\end{itemize}
+Nella Simulazione~2 (Capitolo~\ref{cap:simulazioni}) le misure verso i fornitori comprendono registro
+delle informazioni, valutazione del rischio prima e durante il rapporto, strategia multi-vendor,
+\emph{exit strategy} e clausole obbligatorie.
+
+\begin{integrazione}[artt.~28--30]
+\begin{itemize}
+  \item \textbf{Art.~28}: l'entità finanziaria resta \textbf{pienamente responsabile} del rispetto
+    del DORA anche quando esternalizza. Deve adottare una strategia sul rischio da terzi, tenere un
+    \textbf{registro delle informazioni} su tutti gli accordi contrattuali con fornitori ICT
+    (modello nel Regolamento di esecuzione (UE) 2024/2956) e comunicarlo all'autorità, valutare il
+    fornitore prima del contratto, prevedere \textbf{strategie di uscita} per le funzioni critiche o
+    importanti e disporre di diritti di recesso in casi specifici (art.~28(7)).
+  \item \textbf{Art.~29}: valutazione del \textbf{rischio di concentrazione} e delle catene di
+    subappalto.
+  \item \textbf{Art.~30(2)}, contenuto minimo di ogni contratto: descrizione dei servizi, luoghi di
+    prestazione e di trattamento dei dati, tutela di disponibilità, autenticità, integrità e
+    riservatezza, accesso e restituzione dei dati anche in caso di insolvenza, livelli di servizio,
+    \textbf{assistenza in caso di incidente} senza costi aggiuntivi o a costi predeterminati,
+    cooperazione con le autorità, diritti di recesso, partecipazione ai programmi di formazione.
+  \item \textbf{Art.~30(3)}, in più per le \textbf{funzioni critiche o importanti}: SLA completi con
+    obiettivi quantitativi, obblighi di preavviso e di segnalazione, piani di emergenza, misure di
+    sicurezza, partecipazione ai TLPT, \textbf{diritti illimitati di accesso, ispezione e audit},
+    strategie di uscita con periodo di transizione obbligatorio.
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+Gli appunti A.A.~2025/26 indicano come basi delle clausole contrattuali l'``art.~13'' e l'art.~28. Nel
+testo del DORA l'art.~13 riguarda l'apprendimento dopo gli incidenti; il contenuto contrattuale
+obbligatorio è all'\textbf{art.~30}, come indicano anche le slide (artt.~28--30). Probabile refuso negli
+appunti; verificare sulle slide DORA. Anche la numerazione delle clausole (6, 7, 11, 13--16) si
+riferisce al modello di contratto usato l'anno scorso, non agli articoli del regolamento.
+\end{verifica}
+
+% =====================================================================
+\section{Sorveglianza sui fornitori ICT terzi critici}
+\label{sec:dora-oversight}
+
+Dalle slide sulle istituzioni: nel settore finanziario operano \textbf{EBA, ESMA, EIOPA} e le autorità
+nazionali ai sensi del DORA, con la \textbf{sorveglianza dei fornitori ICT terzi critici}: ``il
+regolatore raggiunge direttamente il tuo fornitore''. Il glossario indica le ESA (EBA per le banche,
+ESMA per i mercati, EIOPA per le assicurazioni) come titolari di questa sorveglianza.
+
+\begin{integrazione}[artt.~31--44]
+\begin{itemize}
+  \item \textbf{Designazione} (art.~31): le ESA, tramite il comitato congiunto, designano come
+    \textbf{critici} i fornitori ICT in base all'impatto sistemico di un loro guasto, all'importanza
+    sistemica delle entità che ne dipendono, alla dipendenza per funzioni critiche e alla difficoltà di
+    sostituirli. Un fornitore critico di un Paese terzo deve costituire una società nell'Unione entro
+    dodici mesi dalla designazione.
+  \item \textbf{Lead Overseer}: per ciascun fornitore critico una delle tre ESA guida la sorveglianza,
+    con un forum congiunto di coordinamento.
+  \item \textbf{Poteri} (art.~35): richieste di informazioni, indagini generali, ispezioni,
+    raccomandazioni (anche su sicurezza, subappalto e qualità dei servizi); \textbf{penalità di mora}
+    giornaliere fino all'\textbf{1\% del fatturato medio giornaliero mondiale} del fornitore, per un
+    massimo di sei mesi.
+  \item Se il fornitore non segue le raccomandazioni, le autorità possono chiedere alle entità
+    finanziarie di sospendere o cessare l'uso del servizio (art.~42).
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+Le ESA hanno pubblicato a fine 2025 il primo elenco dei fornitori ICT critici designati: numero e nomi
+non sono stati citati a lezione. Da verificare se il corso ne parla.
+\end{verifica}
+
+% =====================================================================
+\section{Autorità e sanzioni}
+\label{sec:dora-autorita}
+
+Il destinatario delle notifiche è l'\textbf{autorità competente} del singolo settore: gli appunti
+A.A.~2025/26 osservano che varia (banche, assicurazioni, investimenti) ma ogni entità conosce la propria.
+Nei materiali del corso compaiono l'\textbf{ACPR} francese (laboratorio~2) e, nella Simulazione~2, la
+Banca d'Italia per un istituto di pagamento italiano (punto già segnalato da verificare in quel
+capitolo).
+
+\begin{integrazione}[autorità e sanzioni]
+\begin{itemize}
+  \item \textbf{Autorità competenti} (art.~46): quelle già previste dalla normativa di settore di
+    ciascuna entità. In Italia, indicativamente, Banca d'Italia (banche, istituti di pagamento e di
+    moneta elettronica, intermediari), CONSOB (mercati e servizi di investimento), IVASS
+    (assicurazioni), COVIP (fondi pensione); per gli enti creditizi significativi anche la BCE.
+  \item \textbf{Sanzioni} (artt.~50--54): il DORA non fissa massimali europei per le entità
+    finanziarie; sono gli Stati a stabilire sanzioni e misure amministrative (ed eventualmente penali),
+    con pubblicazione delle sanzioni. Per i fornitori critici valgono le penalità di mora del Lead
+    Overseer (Sezione~\ref{sec:dora-oversight}).
+  \item \textbf{Condivisione delle informazioni} (art.~45): accordi volontari tra entità finanziarie
+    per scambiare informazioni su minacce, vulnerabilità e indicatori di compromissione.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{DORA come \emph{lex specialis} rispetto a NIS2}
+\label{sec:dora-lexspecialis}
+
+Il glossario del corso definisce la \textbf{lex specialis} come la regola speciale che prevale su quella
+generale, con l'esempio del \textbf{DORA rispetto alla NIS2 per le entità finanziarie} (e del
+regolamento sui dispositivi medici rispetto al CRA). Il settore bancario e le infrastrutture dei mercati
+finanziari sono nell'Allegato~I della NIS2, ma dove le norme si sovrappongono (gestione del rischio
+ICT, notifica degli incidenti) si applica il DORA (Simulazione~2). Gli appunti A.A.~2025/26 lo
+riassumono così: NIS2 e DORA condividono gestione del rischio e notifica degli incidenti, ma il DORA è
+specifico per la finanza e, dove si applicano entrambe, le entità finanziarie seguono il DORA; per la
+differenza di logica (prevenzione contro resilienza) si veda la nota nella Sezione~\ref{sec:nis2-misure}.
+
+\begin{integrazione}[come funziona la prevalenza]
+\begin{itemize}
+  \item Il DORA si qualifica come atto settoriale ai fini dell'art.~4 NIS2 (art.~1(2) DORA;
+    considerando~28 NIS2): per le entità finanziarie non si applicano le misure dell'art.~21, gli
+    obblighi di notifica dell'art.~23 e le relative norme di vigilanza della NIS2.
+  \item Restano i ponti informativi: le notifiche DORA arrivano anche al punto di contatto unico o al
+    CSIRT NIS2 (Sezione~\ref{sec:dora-incidenti}) e le entità finanziarie possono partecipare alla
+    cooperazione NIS2.
+  \item La prevalenza riguarda l'entità finanziaria, \textbf{non i suoi fornitori}: un cloud provider
+    resta soggetto NIS2 (infrastrutture digitali) per i propri obblighi, ed è al tempo stesso fornitore
+    terzo di servizi ICT ai sensi del DORA verso la banca.
+  \item Il DORA non tocca il GDPR: un incidente ICT grave con dati personali comporta anche gli
+    obblighi degli artt.~33--34 GDPR, con autorità e orologi propri.
+\end{itemize}
+\end{integrazione}
+
+\dacompletare{Da integrare dopo la lezione dedicata al DORA (data da comunicare) con slide e diario:
+ambito ed esclusioni, pilastri, quadro di gestione del rischio, criteri di classificazione e decorrenza
+della relazione finale, test e TLPT, esercitazione sul contratto ICT clausola per clausola, sorveglianza
+dei fornitori critici, autorità italiane.}

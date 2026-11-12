@@ -1,0 +1,229 @@
+% =====================================================================
+\lezione{02/10/2026}{Simulazione di laboratorio: severity assessment di un ransomware}
+  {Prof.~Giuseppe Vaciago}
+  {organizzazione dei laboratori e punti extra; caso Alpha S.r.l.\ (ransomware su piattaforma
+   e-commerce B2B); ruoli e obblighi del responsabile; autovalutazione sul sito del Garante; modulo di
+   notifica; metodologia ENISA di severity assessment ($SE = DPC \times EI + CB$); decisione sulla notifica}
+\label{lez:2026-10-02}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata. Lezione \textbf{online}, svolta come
+\textbf{simulazione} di laboratorio, con interazione via chat. Scale e soglie della metodologia sono
+riprese dal documento \emph{03.~Data breach severity methodology} (ENISA, \emph{Recommendations for a
+methodology of the assessment of severity of personal data breaches}, v1.0, dicembre 2013). In aula
+si è usato anche lo strumento di autovalutazione sul sito del Garante (tradotto con il traduttore del
+browser). I nomi delle aziende citate nel caso sono esempi di fantasia.
+\end{nota}
+
+\section{Sintesi}
+Invece del laboratorio vero e proprio, il docente svolge una simulazione guidata su un caso
+volutamente semplice: un ransomware blocca per 24 ore una piattaforma di e-commerce B2B che lavora per
+conto di grandi marchi. Si ragiona su ruoli (la piattaforma è \textbf{responsabile}, i marchi sono
+\textbf{titolari}), sul modulo di notifica al Garante e soprattutto sulla \textbf{metodologia ENISA di
+severity assessment}, applicata passo per passo. Il risultato ($SE = 2$, rischio medio) porta alla
+notifica al Garante; il docente consiglia di informare comunque gli utenti. Messaggio centrale: ogni
+scelta nella formula pesa molto e va \textbf{motivata} (accountability); il CEO chiederà quasi sempre
+di abbassare il punteggio.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Calendario}: lunedì 5/10 lezione (in presenza) che chiude la parte di protezione dei
+    dati con riferimento alla cybersicurezza; a fine lezione viene presentato il caso del primo
+    \textbf{laboratorio ufficiale}, che si svolge \textbf{venerdì 9/10} online.
+  \item \textbf{Punti extra}: \textbf{0,25 punti} sul voto d'esame per ogni laboratorio, per le
+    elaborazioni migliori; non è garantito che tutti li ricevano. Le regole definitive saranno pubblicate
+    dopo il primo laboratorio ufficiale, su una pagina dedicata.
+  \item \textbf{Gruppi}: massimo 5 persone (6 tollerato, non 8--10), formati dagli studenti; il docente
+    può aiutare chi non trova un gruppo. Si può lavorare anche da soli, ma il docente consiglia
+    fortemente il gruppo.
+  \item \textbf{Modalità}: il lab si svolge nell'ora e mezza del venerdì. I gruppi possono usare una
+    propria call (Zoom, Meet) o trovarsi al Politecnico; per le domande il docente apre una stanza
+    separata con il gruppo. Più tempo solo in casi eccezionali.
+  \item Il documento ENISA viene caricato sulla piattaforma: \textbf{non è materia d'esame}, ma è ``la
+    Bibbia'' per il laboratorio.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Il caso: Alpha S.r.l.}
+\begin{itemize}
+  \item \textbf{Alpha S.r.l.} gestisce in modalità SaaS l'e-commerce di circa \textbf{20 grandi
+    clienti} (marchi di moda, bricolage\ldots): chi compra sul sito del marchio viene in realtà servito
+    dalla piattaforma di Alpha, basata a sua volta su Shopify (un \textbf{sub-responsabile}). Alpha
+    gestisce anche la logistica delle consegne e trattiene una percentuale sulle vendite.
+  \item Un \textbf{ransomware} blocca tutte le transazioni per \textbf{24 ore}. Il team di risposta
+    (DPO, legale, IT, CISO) verifica che i backup sono integri e, con i piani di \textbf{business
+    continuity} e \textbf{disaster recovery}, ripristina tutto in 24 ore.
+  \item Domanda: che cosa deve fare il DPO dal punto di vista della protezione dei dati? Per decidere se
+    la notifica al Garante è obbligatoria serve un \textbf{severity assessment}.
+\end{itemize}
+
+\subsection{Primi passi}
+\paragraph{Autovalutazione sul sito del Garante.} Lo strumento chiede: c'è stato un incidente di
+sicurezza con perdita di riservatezza, integrità o disponibilità? Sì: almeno la
+\textbf{disponibilità} è certa. Riguarda dati personali? Sì: i clienti di Alpha sono persone giuridiche,
+ma ci sono i dati dei loro dipendenti e soprattutto quelli degli \textbf{utenti finali} che comprano
+online. È quindi una violazione di dati personali. La pagina del Garante rimanda alla metodologia ENISA.
+
+\paragraph{Chi notifica.} Alpha è \textbf{responsabile}: deve informare \textbf{senza ingiustificato
+ritardo} ogni titolare, cioè ciascuno dei suoi clienti. Il paradosso tipico degli incidenti: notifica il
+titolare, ma tutte le informazioni le ha il responsabile, che deve collaborare.
+\begin{itemize}
+  \item Con 20 clienti, \textbf{ogni titolare} fa la propria notifica (e l'autorità dovrà poi riunire
+    20 pratiche sullo stesso caso).
+  \item Eccezione pratica raccontata dal docente: in un breach di un'app di pagamento usata da moltissimi
+    servizi, il Garante chiese al responsabile un'unica notifica per conto di tutti i titolari, per non
+    riceverne un numero enorme. È una soluzione eccezionale, non la regola.
+\end{itemize}
+
+\begin{esame}
+Ricordare ruoli e flusso: il \textbf{responsabile} informa il \textbf{titolare}; il \textbf{titolare}
+notifica all'autorità. Nel caso, il titolare è il marchio, non la piattaforma.
+\end{esame}
+
+\subsection{Il modulo di notifica}
+\begin{itemize}
+  \item \textbf{Titolare}: il marchio cliente (si ipotizza che Alpha gli abbia girato tutte le
+    informazioni).
+  \item \textbf{Date}: data della violazione e data in cui il titolare ne ha avuto ragionevole certezza.
+    È decisiva per le 72 ore. Nel caso: attacco il 30 settembre, consapevolezza il 1° ottobre. Spesso
+    l'esfiltrazione precede di molto il ransomware ed è difficile datarla.
+  \item \textbf{Natura}: disponibilità certa; la \textbf{riservatezza} è il vero nodo. Con la doppia
+    estorsione l'attaccante chiede un riscatto e pubblica un campione dei dati esfiltrati sul dark web:
+    a quel punto c'è una presunzione di perdita di riservatezza. A volte la causa si chiarisce solo dopo
+    lunghe analisi.
+  \item \textbf{Causa}: se non è nota, si dichiara che al momento non è nota.
+  \item \textbf{Numero di interessati}: qualche centinaio di dipendenti dei clienti e, soprattutto, gli
+    utenti: per la simulazione \textbf{50.000}.
+  \item \textbf{Contatti del DPO}.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{La metodologia ENISA}
+\[
+SE = DPC \times EI + CB
+\]
+\begin{itemize}
+  \item \textbf{DPC} (\emph{Data Processing Context}): tipo di dati e contesto del trattamento.
+  \item \textbf{EI} (\emph{Ease of Identification}): quanto è facile risalire alla persona.
+  \item \textbf{CB} (\emph{Circumstances of the Breach}): perdita di riservatezza, integrità,
+    disponibilità e intento malevolo; i punteggi si \textbf{sommano}.
+\end{itemize}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Fattore} & \textbf{Valori (punteggio di base)}\\ \midrule
+DPC & dati semplici 1; comportamentali 2; finanziari 3; sensibili (artt.~9--10) 4\\
+EI  & trascurabile 0,25; limitata 0,5; significativa 0,75; massima 1\\
+CB -- riservatezza & 0 nessuna evidenza di trattamento illecito; +0,25 destinatari noti;
+  +0,5 numero indeterminato di destinatari\\
+CB -- integrità & 0; +0,25 alterazione recuperabile; +0,5 non recuperabile\\
+CB -- disponibilità & 0 recupero senza difficoltà; +0,25 indisponibilità temporanea;
+  +0,5 indisponibilità totale\\
+CB -- intento malevolo & +0,5\\ \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Punteggio} & \textbf{Severità}\\ \midrule
+$SE < 2$ & bassa\\
+$2 \le SE < 3$ & media\\
+$3 \le SE < 4$ & alta\\
+$SE \ge 4$ & molto alta\\ \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{esame}
+La formula $SE = DPC \times EI + CB$ è ``la regola d'oro'': va \textbf{ricordata a memoria} e descritta
+con chiarezza all'esame. È una ``formula stupida'' ma con conseguenze molto concrete.
+\end{esame}
+
+\subsection{Applicazione al caso}
+\paragraph{DPC: quali dati?} Discussione con la classe:
+\begin{itemize}
+  \item \textbf{semplici} (nome, cognome, email, codice fiscale, telefono): base 1;
+  \item \textbf{comportamentali}? Lo storico degli acquisti su più marchi permette di ricostruire un
+    profilo (gusti, capacità di spesa). Il CEO direbbe di no, il DPO potrebbe dire di sì: è un punto su
+    cui ``si può litigare'' a lungo;
+  \item \textbf{finanziari}? Probabilmente no: i pagamenti passano spesso da servizi esterni (es.\
+    Stripe) e il CEO afferma che i dati delle carte non sono conservati. Attenzione: per il GDPR i dati
+    finanziari sono dati \emph{comuni}; è ENISA, con la sua logica di cybersicurezza, a pesarli 3;
+  \item \textbf{sensibili}? Il data center potrebbe contenere dati sanitari dei dipendenti di Alpha, ma
+    il titolare qui è il marchio, che non tratta dati di quel tipo.
+\end{itemize}
+Scelta del docente: \textbf{DPC = 1} (dati semplici), pur senza escludere i comportamentali, purché la
+scelta sia motivata. ``Non ho una risposta: è la vostra scelta, il vostro livello di accountability.''
+
+\paragraph{EI.} Nome, cognome, data di nascita, telefono insieme: \textbf{EI = 1}. Esempio opposto: un
+solo indirizzo email composto da un numero di matricola renderebbe l'identificazione difficile
+(0,25), mentre \texttt{nome.cognome@polito.it} no.
+
+\paragraph{CB.}
+\begin{itemize}
+  \item \textbf{Riservatezza +0,25}: per ora i dati sono nelle mani dell'attaccante e forse sul dark
+    web, ma non c'è certezza di una pubblicazione aperta. Per il docente il ``numero indeterminato di
+    destinatari'' (+0,5) corrisponde a una pubblicazione accessibile a tutti; si potrebbe sostenere
+    anche +0,5.
+  \item \textbf{Integrità 0}: nessuna alterazione.
+  \item \textbf{Disponibilità +0,25}: indisponibilità temporanea (24 ore).
+  \item \textbf{Intento malevolo +0,5}: certamente sì.
+\end{itemize}
+\[
+SE = 1 \times 1 + (0{,}25 + 0 + 0{,}25 + 0{,}5) = 2 \quad\Rightarrow\quad \text{media (``medio-bassa'')}
+\]
+Nella sezione sulle misure adottate conviene descrivere il ripristino in 24 ore: aiuta a giustificare
+un punteggio contenuto.
+
+\subsection{Dal punteggio alla decisione}
+Lettura data in aula:
+\begin{itemize}
+  \item rischio \textbf{basso}: nessuna notifica al Garante;
+  \item rischio \textbf{medio}: \textbf{notifica al Garante};
+  \item rischio \textbf{alto o molto alto}: notifica al Garante e \textbf{comunicazione agli
+    interessati}.
+\end{itemize}
+Con $SE = 2$ si è al confine: in teoria si potrebbe discutere se evitare la notifica, ma con tante
+ipotesi incerte la strada sicura è notificare. Il docente consiglia anche di \textbf{avvisare gli
+utenti}, pur non essendo obbligatorio, per creare un rapporto di fiducia e perché i dati potrebbero
+essere usati per frodi. Se fossero stati coinvolti dati delle carte (DPC 3), il risultato sarebbe stato
+alto o molto alto e la comunicazione agli interessati immediata.
+
+\begin{integrazione}[le soglie del GDPR]
+Nel GDPR la notifica al Garante (art.~33(1)) è dovuta salvo che sia \emph{improbabile} che la violazione
+presenti un rischio per i diritti e le libertà delle persone; la comunicazione agli interessati
+(art.~34(1)) è dovuta quando il rischio è \emph{elevato}. Le fasce ENISA sono uno strumento per
+motivare queste due valutazioni, non la norma stessa.
+\end{integrazione}
+
+\subsection{Il dilemma del consulente}
+Uno studente osserva che nessuno ha interesse a dare una valutazione peggiore del necessario, e che
+quindi il punteggio verrà sempre abbassato. Il docente conferma: nel 95\% dei casi il CEO chiederà di
+``ammorbidire'' la valutazione. Abbassare i punteggi è legittimo quando ha senso ed è motivato; farlo in
+modo malevolo, nascondendo o falsando informazioni, espone alla sanzione (10 milioni o 2\% del
+fatturato) e al rischio penale per false dichiarazioni al Garante (reclusione da sei mesi a tre anni),
+che colpisce chi firma la dichiarazione. Sulla riservatezza: dati finiti sul dark web sono in generale
+da considerare \textbf{persi}, anche se poi rimossi, ma la risposta va data caso per caso.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Soglia di notifica}: nella parte finale la trascrizione è confusa (``obbligati con 2,5''?
+    ``con 3''?). Qui si è usata la lettura esplicita data poco prima: basso $\rightarrow$ nessuna
+    notifica; medio $\rightarrow$ Garante; alto/molto alto $\rightarrow$ anche interessati. Confrontare
+    con la spiegazione teorica della lezione del 05/10.
+  \item \textbf{Riservatezza +0,25 o +0,5}: nella metodologia ENISA +0,25 indica dati esposti a
+    destinatari \emph{noti}; un attaccante che potrebbe rivendere i dati è difficilmente un destinatario
+    noto. La scelta del docente è dichiaratamente discutibile.
+  \item \textbf{Date del caso} (attacco il 30/09, consapevolezza il 1/10) e numero di utenti (50.000):
+    ipotesi della simulazione, dette a voce.
+  \item Il docente ha anche detto che la metodologia ENISA risale al 2014 (lezione del 28/09); il
+    documento è datato dicembre 2013.
+\end{itemize}
+\end{verifica}

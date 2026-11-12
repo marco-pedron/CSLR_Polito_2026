@@ -1,0 +1,349 @@
+% =====================================================================
+\chapter{Lab 1 -- Arvenza Industrie: la mailbox delle paghe}
+\label{lab:01}
+% =====================================================================
+
+\begin{nota}[Fonti e date]
+Caso presentato il 05/10/2026 (Capitolo~\ref{lez:2026-10-05}), svolto venerdì 09/10/2026
+(Capitolo~\ref{lez:2026-10-09}), discusso il 12/10/2026 (Capitolo~\ref{lez:2026-10-12}). Materiale:
+\emph{Arvenza Breach Case Study} (testo del caso), \emph{Arvenza Case Solution} (soluzione modello,
+Parte~A), metodologia ENISA v1.0 (2013, slide \emph{03}). Caso di fantasia.
+\end{nota}
+
+\section{Il caso in sintesi}
+
+\paragraph{Contesto.} Arvenza Industrie (Italia) gestisce le paghe tramite una mailbox condivisa
+usata per scambiare documenti con un \emph{payroll bureau} esterno. Gli studenti sono il
+\textbf{DPO}, che giovedì 1 ottobre alle 09:00 deve consigliare CEO, HR Director e IT Manager.
+
+\paragraph{Cronologia (2026).}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{p{2.3cm} X}
+\toprule
+\textbf{Quando} & \textbf{Evento} \\ \midrule
+Mar 15/9 & Falsa email DocuSign: un proxy di phishing (\emph{adversary-in-the-middle}) ruba password e
+  cookie di sessione, aggirando l'MFA. \\
+15--20/9 & L'attaccante legge la mailbox; una regola nasconde tutta la posta del payroll bureau. \\
+Gio 17/9 & Richieste contraffatte di cambio IBAN dello stipendio per tre dipendenti. \\
+Ven 18/9 & Il bureau telefona ai tre e respinge le richieste; la sua risposta email è nascosta
+  dalla regola. \\
+18--19/9 & Il log di audit smette di registrare le letture per 24 ore; l'attaccante è attivo 14
+  minuti. \\
+Dom 20/9 & Alert di sicurezza: sessioni revocate, ticket chiuso. Nessuno guarda dentro la mailbox. \\
+25--28/9 & Stipendi pagati regolarmente. Lun 28/9 ore 15:00: il bureau cita le richieste respinte;
+  il DPO viene allertato. \\
+Gio 1/10, 09:00 & Riunione: il DPO dà il suo parere. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{I dati nella mailbox.} I log registrano \textbf{214 elementi letti}, trovati soprattutto con
+ricerche su IBAN, bonifici, stipendi e buste paga; nessun export, sincronizzazione o inoltro.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l l X l}
+\toprule
+\textbf{Gruppo} & \textbf{Interessati} & \textbf{Contenuto} & \textbf{Stato} \\ \midrule
+G1 & 50 dipendenti & nome, codice fiscale, IBAN (email di cambio IBAN, moduli di onboarding) & letto \\
+G2 & 3 dei 50 & usati per le richieste IBAN contraffatte & letto \\
+G3 & $\approx$640 & buste paga 2024--26 in ZIP AES-256, password solo via SMS; mostrano quote
+  sindacali, giorni di malattia, permessi Legge~104 & letto, cifrato \\
+G4 & $\approx$600 & buste paga 2023, stesso contenuto; password di gennaio--aprile inviate via email alla
+  stessa mailbox & non nei log \\
+G5 & $\approx$520 + 53 & attestati di malattia senza diagnosi; 31 diagnosi; 22 pratiche Legge~104 &
+  non nei log \\
+G6 & $\approx$900 candidati & CV, di cui 60 per posizioni riservate a categorie protette (disabilità);
+  molti oltre il periodo di conservazione & non nei log \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Le tre posizioni.}
+\begin{itemize}
+  \item \textbf{CEO}: nessuna notifica, solo registro interno (``frode fallita, nessun euro perso,
+    volevano i nostri soldi, non i dati'').
+  \item \textbf{IT Manager}: notificare solo il Garante (``i log dicono cosa è stato letto, le buste
+    paga sono cifrate, non allarmiamo 640 persone'').
+  \item \textbf{HR Director}: Garante e tutti i dipendenti (``non possiamo provare cosa è successo in
+    quelle 24 ore; diagnosi e quote sindacali sono lì; i sindacati lo verranno a sapere'').
+\end{itemize}
+Il DPO può adottarne una, combinarle o respingerle tutte: conta che l'opzione poggi sui fatti e su un
+uso coerente del metodo.
+
+\section{Consegna}
+Parte~A (giovedì 1/10, ore 09:00):
+\begin{enumerate}
+  \item due perimetri: solo ciò che è stato letto o l'intera mailbox;
+  \item punteggio ENISA di G1--G6 (DPC, EI, CB, flag);
+  \item la severità non è il rischio: pesare anche la probabilità;
+  \item scegliere un'opzione e dire chi viene informato;
+  \item scadenza: da quando decorrono le 72 ore?
+\end{enumerate}
+In aula: formato libero (nessun modello fornito), consegna via email entro la fine del lab.
+
+\section{Metodologia: ENISA 2013}
+\[
+SE = DPC \times EI + CB
+\]
+\begin{itemize}
+  \item \textbf{DPC} (\emph{Data Processing Context}): valore di base per categoria -- dati semplici
+    1, comportamentali 2, finanziari 3, sensibili 4 -- corretto in su o in giù (da 1 a 4) per fattori
+    di contesto: volume, caratteristiche del titolare o degli interessati, inesattezza, disponibilità
+    pubblica, natura del dato. Se ci sono più categorie vale il \textbf{valore più alto}. Ogni
+    scostamento dal valore di base va motivato.
+  \item \textbf{EI} (\emph{Ease of Identification}): 0,25 trascurabile, 0,5 limitata, 0,75
+    significativa, 1 massima (identificazione diretta).
+  \item \textbf{CB} (\emph{Circumstances of the Breach}): \textbf{somma} di perdita di riservatezza
+    (0 / +0,25 destinatari noti / +0,5 destinatari indeterminati), integrità (0 / +0,25 recuperabile /
+    +0,5 non recuperabile), disponibilità (0 / +0,25 temporanea / +0,5 totale), intento malevolo
+    (+0,5).
+  \item \textbf{Livelli}: $SE<2$ basso; $2 \le SE < 3$ medio; $3 \le SE < 4$ alto; $SE \ge 4$ molto
+    alto.
+  \item \textbf{Flag}: più di 100 interessati; dati resi incomprensibili (es.\ cifratura forte con
+    chiave non compromessa).
+\end{itemize}
+
+\paragraph{Mappatura di lavoro (dal caso).} $SE<2$: solo registro (art.~33(5)); $2 \le SE <3$:
+notifica al Garante (art.~33); $SE \ge 3$: Garante e interessati (art.~34, salvo 34(3)). È un punto
+di partenza, non una regola: ci si può discostare spiegando perché.
+
+\section{Svolgimento (soluzione modello, Parte~A)}
+
+\subsection{Qualificazione}
+\begin{itemize}
+  \item È un \textbf{data breach} ai sensi dell'art.~4(12): accesso non autorizzato a dati personali
+    (riservatezza), con un tentativo di violazione dell'integrità (cambio IBAN) non riuscito. ``Nessun
+    euro perso'' è irrilevante: la violazione è l'accesso illecito.
+  \item \textbf{Ruoli}: Arvenza è titolare; il payroll bureau è responsabile (art.~28) e si è comportato
+    bene (la verifica telefonica ha impedito la frode); anche il provider della posta è responsabile e
+    va interpellato per la telemetria sulle 24 ore mancanti.
+  \item \textbf{Interessati}: dipendenti, ex dipendenti (buste 2023), familiari (pratiche Legge~104),
+    candidati mai assunti.
+  \item \textbf{Dati art.~9}: appartenenza sindacale (quote), salute (malattia, diagnosi), disabilità
+    (Legge~104, categorie protette).
+\end{itemize}
+
+\subsection{Due perimetri}
+\begin{itemize}
+  \item \textbf{Perimetro A} (ciò che risulta letto): G1--G3, accesso certo. Lo sostiene l'IT Manager.
+  \item \textbf{Perimetro B} (l'intera mailbox): G1--G6, accesso possibile ma non provato. Lo sostiene
+    l'HR Director.
+\end{itemize}
+Entrambi vanno nell'analisi e nella notifica. Per l'\emph{accountability} l'onere della prova è del
+titolare: l'assenza di prove causata dal proprio buco nei log non è prova di assenza. Il perimetro~B
+però non va trattato come provato: per questo serve il passaggio sulla probabilità. A favore di una
+probabilità bassa: obiettivo chiaramente finanziario, solo 14 minuti di attività nel buco, nessun
+export. A sfavore: la ricerca ``payslips'' avrebbe fatto emergere anche le buste 2023 e le email con
+le password.
+
+\subsection{Punteggio}
+Regole applicate in modo coerente:
+\begin{itemize}
+  \item \textbf{EI = 1} ovunque (nome + codice fiscale + datore di lavoro). Gli identificativi
+    contano solo nell'EI: \textbf{niente doppio conteggio} nel DPC.
+  \item Riservatezza \textbf{+0,5} per i gruppi letti (attore criminale, divulgazione non
+    delimitabile); \textbf{0} per quelli non nei log (esposti senza prova di trattamento illecito,
+    come nell'esempio ENISA).
+  \item Intento malevolo \textbf{+0,5} per tutti: caratterizza la violazione, non il singolo dato.
+  \item Integrità \textbf{+0,25} solo per G2 (identità usata, alterazione recuperabile). Disponibilità 0.
+  \item Gruppi misti divisi in sottogruppi; per ogni gruppo vale il DPC più alto.
+\end{itemize}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l c X c c c l}
+\toprule
+\textbf{Gruppo} & \textbf{N.} & \textbf{DPC (motivo)} & \textbf{EI} & \textbf{CB} & \textbf{SE} &
+  \textbf{Livello} \\ \midrule
+G1 & 50 & 2: finanziari (3) ridotti di 1, solo IBAN senza saldi & 1 & 1,0 & 3,0 & alto \\
+G2 & 3 & 2: come G1 & 1 & 1,25 & 3,25 & alto \\
+G3 & $\approx$640 & 4: quote sindacali, malattia, L.~104 & 1 & 1,0 & 5,0 & molto alto$^{*}$ \\
+G4 & $\approx$600 & 4: come G3 & 1 & 0,5 & 4,5 & molto alto \\
+G5a & $\approx$520 & 2: sensibili ridotti, solo ``malato nei giorni X'' & 1 & 0,5 & 2,5 & medio \\
+G5b & 31 & 4: diagnosi & 1 & 0,5 & 4,5 & molto alto \\
+G5c & 22 & 4: disabilità, spesso di un familiare & 1 & 0,5 & 4,5 & molto alto \\
+G6a & $\approx$840 & 1: CV ordinari & 1 & 0,5 & 1,5 & basso \\
+G6b & 60 & 3: la posizione riservata rivela una disabilità (4 sostenibile) & 1 & 0,5 & 3,5 & alto \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent{\small $^{*}$ punteggio grezzo, prima del flag ``dati incomprensibili''. Flag ``più di 100''
+per G3, G4, G5a, G6a.}
+
+\paragraph{Scelte al limite.}
+\begin{itemize}
+  \item \textbf{G1 cade esattamente su 3,0}: con riservatezza +0,25 scenderebbe a 2,75 (medio). Si
+    tiene +0,5 perché il destinatario è un criminale non identificato e i danni possibili
+    (sottrazione di fondi, frodi su addebiti SEPA, vishing mirato) sono quelli del livello ``alto''. La
+    decisione non cambia comunque, perché la probabilità è certa.
+  \item \textbf{G3}: cifratura forte con chiave mai transitata nella mailbox $\rightarrow$ flag. Due
+    verifiche: robustezza delle password (uno ZIP si può attaccare offline se la password è corta o
+    derivata dal codice fiscale) e metadati in chiaro (nomi dei file, oggetti delle email).
+  \item \textbf{G4 gennaio--aprile} è il punto debole: file cifrati e password nella stessa mailbox,
+    quindi il flag non regge per quei mesi.
+  \item \textbf{G6}: CV oltre la conservazione $\rightarrow$ violazione autonoma dell'art.~5(1)(e); non
+    cambia SE ma aggrava la posizione del titolare.
+\end{itemize}
+
+\subsection{La severità non è il rischio}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l c X l}
+\toprule
+\textbf{Gruppo} & \textbf{SE} & \textbf{Probabilità di accesso/abuso} & \textbf{Rischio / obbligo} \\ \midrule
+G1 & 3,0 & certa: letti e usati per la frode & alto: art.~33 + 34 \\
+G2 & 3,25 & già materializzata & alto: art.~33 + 34 (priorità, al telefono) \\
+G3 & 5,0* & letti ma incomprensibili & basso se password robuste: 33 + esenzione 34(3)(a) \\
+G4 & 4,5 & possibile per gen.--apr., remota per il resto & medio: 33, rivalutare \\
+G5a & 2,5 & bassa & basso: 33 \\
+G5b/c & 4,5 & bassa (non nei log, 14 minuti, nessun export) & medio: 33, rivalutare \\
+G6a & 1,5 & bassa & basso: registro \\
+G6b & 3,5 & bassa & medio: 33, rivalutare \\
+\bottomrule
+\end{tabularx}
+\end{center}
+L'art.~34 richiede un rischio \emph{elevato}, cioè severità \emph{e} probabilità. Mandare centinaia di
+comunicazioni per qualcosa che probabilmente non è avvenuto genererebbe paura e stress (danni che
+la stessa ENISA elenca) e diluirebbe il messaggio ai 50 davvero esposti. Il Garante, informato
+dell'intero perimetro, può comunque ordinare la comunicazione (art.~34(4)).
+
+\subsection{Decisione}
+\begin{soluzione}[Parere del DPO (soluzione modello)]
+\begin{itemize}
+  \item \textbf{Garante}: notifica \textbf{preliminare oggi entro le 15:00} (art.~33(4)),
+    sull'intero perimetro A+B, con tabella di severità, ragionamento sulla probabilità e motivi del
+    ritardo; notifica completa dopo la forensics.
+  \item \textbf{G2}: telefonata oggi (HR + DPO), poi comunicazione scritta.
+  \item \textbf{G1}: comunicazione scritta individuale oggi o domani, in linguaggio semplice e con
+    consigli pratici (art.~34(2)).
+  \item \textbf{G3}: nessuna comunicazione individuale, una volta verificata la robustezza delle
+    password; esenzione documentata (art.~34(3)(a)).
+  \item \textbf{G4--G6}: nessuna comunicazione per ora, con \textbf{trigger di rivalutazione}
+    documentati.
+  \item \textbf{Tutto il personale e RSU}: breve nota interna fattuale (trasparenza, non notifica
+    ex art.~34).
+  \item \textbf{Polizia Postale}: denuncia (accesso abusivo, sostituzione di persona, tentata truffa):
+    non obbligatoria ma apprezzata dal Garante.
+  \item \textbf{Responsabili}: dichiarazione scritta del bureau; log e telemetria dal provider di
+    posta.
+  \item \textbf{Registro} (art.~33(5)): voce completa con la motivazione di ogni scelta.
+\end{itemize}
+Posizione: si combina l'IT Manager (Garante) con parte dell'HR Director (interessati, ma solo dove il
+rischio è alto) e si \textbf{respinge il CEO}.
+\end{soluzione}
+
+\paragraph{Perché non le tre posizioni così come sono.}
+\begin{itemize}
+  \item \textbf{CEO}: l'art.~33(1) esonera dalla notifica (lasciando solo la documentazione nel registro
+    dell'art.~33(5)) se è \emph{improbabile} che la violazione presenti un rischio. Qui un attaccante ha letto 214 elementi e usato i dati per impersonare
+    dipendenti: ``volevano i nostri soldi'' è proprio la ragione per cui il rischio è alto. Non
+    notificare trasformerebbe una notifica tardiva in una violazione occultata.
+  \item \textbf{IT Manager}: giusto sul Garante, sbagliato su due punti: i log con un buco di 24 ore
+    non possono definire il perimetro; la cifratura protegge G3, non G1.
+  \item \textbf{HR Director}: giusta sul buco nei log e sulle categorie particolari, ma troppo ampia:
+    per G4--G6 la probabilità è bassa e per G3 c'è un'esenzione esplicita. La preoccupazione per i
+    sindacati si gestisce con la nota interna.
+\end{itemize}
+
+\subsection{Da quando decorrono le 72 ore}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X l l}
+\toprule
+\textbf{Candidato} & \textbf{Argomento} & \textbf{Scadenza} & \textbf{Esito} \\ \midrule
+Mar 15/9 & solo l'attaccante sapeva; conta la consapevolezza del titolare & -- & no \\
+Dom 20/9 & Arvenza sapeva che un attaccante aveva avuto una sessione nella mailbox paghe; chiudere il
+  ticket senza guardare non sposta la consapevolezza (EDPB 9/2022) & Mer 23/9 & la più credibile \\
+Lun 28/9 15:00 & primo collegamento esplicito tra alert e dati personali & Gio 1/10 15:00 &
+  difendibile al massimo \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Si notifica \textbf{oggi prima delle 15:00}, così da rispettare anche la lettura più favorevole, e
+nella notifica si dichiara l'alert del 20/9 spiegando il ritardo (art.~33(1)): l'alert è stato gestito
+come ticket IT e mai portato al DPO. Ammetterlo è meglio che farlo scoprire al Garante; la mancata
+escalation diventa una voce del remediation plan. L'art.~34 non ha un termine in ore, ma dopo 11
+giorni di ritardo ``senza ingiustificato ritardo'' significa: i tre oggi, i 50 entro 24 ore.
+
+\subsection{Contenuto delle comunicazioni}
+\begin{itemize}
+  \item \textbf{Notifica preliminare al Garante} (art.~33(3)): natura (violazione di riservatezza via
+    phishing AiTM, accesso 15--20/9, tre richieste IBAN respinte), interessati e registrazioni (letti
+    ed esposti, distinti), categorie (incluse quelle dell'art.~9), cronologia e motivi del ritardo,
+    conseguenze probabili (frodi sugli stipendi o SEPA, phishing e vishing mirati, discriminazione
+    se toccate le categorie particolari), severità e probabilità, misure, contatti del DPO, fase
+    preliminare.
+  \item \textbf{Comunicazione ai 50} (art.~34(2)): cosa è successo in parole semplici (lo stipendio è
+    stato pagato correttamente); cosa può accadere; cosa ha fatto l'azienda; cosa può fare
+    l'interessato (non confermare mai dati bancari via email, controllare gli addebiti); contatto del
+    DPO. Per i tre impersonati, una frase esplicita sulle richieste inviate a loro nome.
+\end{itemize}
+
+\subsection{Remediation (lacune ex artt.~32 e 5)}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{X X}
+\toprule
+\textbf{Lacuna emersa} & \textbf{Misura} \\ \midrule
+MFA aggirata con furto del token di sessione & MFA resistente al phishing (FIDO2/passkey), accesso
+  condizionale, sessioni brevi \\
+Regola malevola non rilevata & alert sulle nuove regole di inoltro/occultamento, revisione periodica \\
+Alert chiuso senza valutare l'impatto sui dati & procedura: ogni compromissione di un sistema con
+  dati personali va al DPO entro poche ore \\
+Buco di 24 ore nei log & log estesi, conservazione $\ge$ 6 mesi, SIEM, impegno contrattuale del
+  provider \\
+Dati art.~9 e password nella mailbox condivisa & spostare i documenti sanitari nel sistema HR con
+  accessi per ruolo, eliminare le email con password, minimizzazione (artt.~5(1)(c), 25) \\
+CV oltre la conservazione & applicare il piano di conservazione (art.~5(1)(e)) \\
+Cambi IBAN richiesti via email & rendere obbligatoria la verifica telefonica del bureau \\
+Fattore umano & formazione mirata anti-phishing per HR e paghe \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Fatti che cambierebbero la decisione (preparazione alla Parte~B).} Letture recuperate nel
+buco su G5b, G5c o G6b $\rightarrow$ art.~34 per quelle persone; letture delle buste 2023 e delle
+email con password $\rightarrow$ art.~34 per G4; password di G3 deboli $\rightarrow$ cade l'esenzione;
+dati su un leak site o richiesta di estorsione $\rightarrow$ riservatezza +0,5 per tutti e art.~34
+ampio; un dipendente segnala un addebito sconosciuto $\rightarrow$ conferma dell'abuso; log che
+escludono l'accesso nel buco $\rightarrow$ il perimetro~B si riduce, ma resta nel registro.
+
+\section{Errori tipici emersi nel debrief}
+\begin{itemize}
+  \item \textbf{Abbassare il DPC dei dati sanitari senza motivare}: gli attestati di malattia sono
+    dati relativi alla salute (art.~9) e partono da DPC~4; scendere a 2 è sostenibile solo
+    argomentando (Gianluca, 12/10).
+  \item \textbf{Data di consapevolezza troppo tardiva} senza evidenze: un ispettore la contesterebbe;
+    chi la sostiene deve spiegare perché la conoscenza effettiva è arrivata dopo.
+  \item \textbf{Confondere severità e rischio}: il punteggio ENISA misura l'impatto, non la
+    probabilità.
+  \item \textbf{Sovrastimare il CB}: aggiungere integrità e disponibilità ``per prudenza'' quando
+    nessun dato è stato alterato o perso.
+  \item \textbf{Doppio conteggio} degli identificativi (codice fiscale nell'EI e di nuovo nel DPC).
+  \item Trattare il perimetro~B come provato, oppure ignorarlo perché ``non è nei log''.
+  \item Dimenticare categorie di interessati (es.\ gli $\approx$900 candidati, i familiari nelle pratiche
+    Legge~104).
+  \item Errori formali: lavoro consegnato senza allegato o senza nomi dei componenti.
+\end{itemize}
+
+\section{Collegamenti}
+\begin{itemize}
+  \item GDPR: artt.~4(12), 5(1)(c),(e),(f), 5(2), 9, 25, 28, 32, 33, 34 (Capitolo~\ref{cap:gdpr} e
+    Capitolo~\ref{cap:data-breach}).
+  \item Lezione del 05/10: consapevolezza del titolare, registro, carenza organizzativa
+    (Capitolo~\ref{lez:2026-10-05}).
+  \item Lab~2: stessa metodologia, ma con violazione comunicata dal responsabile e doppio binario
+    GDPR/DORA (Capitolo~\ref{lab:02}).
+\end{itemize}
+
+\begin{verifica}
+\begin{itemize}
+  \item La soluzione modello richiama le \textbf{Linee guida EDPB 9/2022} per la nozione di
+    consapevolezza: riferimento contenuto nella soluzione, non commentato in aula.
+  \item La \textbf{Parte~B} (aggiornamento dell'8 ottobre) annunciata nel caso non è nel materiale
+    disponibile.
+  \item Gli articoli del codice penale citati dalla soluzione per la denuncia (615-ter, 494, 56 e
+    640~c.p.) non sono stati discussi in aula.
+\end{itemize}
+\end{verifica}

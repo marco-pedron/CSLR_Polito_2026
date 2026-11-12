@@ -2,14 +2,60 @@
 \label{cap:quiz}
 
 \begin{nota}
-Domande in inglese, come all'esame; spiegazioni in italiano. Le domande 1--4 ricostruiscono le domande
-chiuse dell'appello precedente (Capitolo~\ref{cap:tema-precedente}); le opzioni sono nostre. Soluzioni
-in fondo al capitolo.
+Domande in inglese, come all'esame; spiegazioni in italiano. Le domande sono raggruppate per argomento
+e ognuna rimanda alla lezione in cui il tema è stato trattato (link cliccabile). Le domande su ENISA,
+NIS2 e DORA (strategia) ricostruiscono le domande chiuse dell'appello precedente
+(Capitolo~\ref{cap:tema-precedente}); le opzioni sono nostre. Tutte le domande sono scritte dai
+redattori, non dal docente. Soluzioni in fondo al capitolo.
 \end{nota}
 
-\section{Domande}
+% =====================================================================
+\section{Fondamenti}
 
-\begin{domanda}[GDPR]\label{q:gdpr-basi}
+\begin{domanda}[Fonti del diritto UE -- \rif{2026-09-21}{21/09}]\label{q:regolamento}
+An EU \emph{regulation}, unlike a directive:
+\begin{opzioni}
+  \item must be transposed into national law before it applies;
+  \item is directly applicable in all Member States;
+  \item binds only EU institutions;
+  \item is a form of soft law.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Hard e soft law -- \rif{2026-11-09}{09/11}]\label{q:softlaw}
+Which of the following is \textbf{soft law}?
+\begin{opzioni}
+  \item the Cyber Resilience Act;
+  \item the GDPR;
+  \item ISO/IEC 27001;
+  \item the NIS2 Directive as transposed by D.lgs.~138/2024.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Acronimi -- \rif{2026-09-21}{21/09}]\label{q:dpa}
+In a contract between a controller and a cloud provider, the acronym ``DPA'' most likely refers to:
+\begin{opzioni}
+  \item the Data Protection Authority;
+  \item the Data Processing Agreement under Art.~28 GDPR;
+  \item the Data Protection Act of the provider's country;
+  \item the Digital Product Assessment under the CRA.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Dati personali -- \rif{2026-09-21}{21/09}]\label{q:anonimi}
+Which statement about anonymisation is \textbf{correct}?
+\begin{opzioni}
+  \item Removing name and surname is enough to make data anonymous.
+  \item Pseudonymised data are no longer personal data.
+  \item Data that are truly anonymous fall outside the scope of the GDPR.
+  \item Anonymisation is a legal basis under Art.~6 GDPR.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{GDPR}
+
+\begin{domanda}[GDPR, basi giuridiche -- \rif{2026-09-25}{25/09}]\label{q:gdpr-basi}
 Legal bases for processing under Art.~6 GDPR. \textbf{Select the WRONG statement.}
 \begin{opzioni}
   \item Consent must be freely given, specific, informed and unambiguous.
@@ -19,6 +65,393 @@ Legal bases for processing under Art.~6 GDPR. \textbf{Select the WRONG statement
   \item Different legal bases may apply to different purposes within the same service.
 \end{opzioni}
 \end{domanda}
+
+\begin{domanda}[GDPR, ruoli -- \rif{2026-09-25}{25/09}]\label{q:ruoli-fatto}
+Two companies sign an agreement stating that each is an independent controller, but in practice they
+jointly decide why and how the data are processed. Under the GDPR they are:
+\begin{opzioni}
+  \item independent controllers, because the contract says so;
+  \item joint controllers, because the factual situation prevails over the contract;
+  \item controller and processor, depending on who pays;
+  \item outside the GDPR, since the roles are disputed.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, ruoli -- \rif{2026-11-09}{09/11}]\label{q:autorizzato}
+An employee of the controller who processes personal data following the controller's instructions is:
+\begin{opzioni}
+  \item a processor (Art.~28);
+  \item a sub-processor;
+  \item a person authorised to process the data under the authority of the controller;
+  \item a joint controller.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, legittimo interesse -- \rif{2026-09-28}{28/09}]\label{q:legittimo}
+About legitimate interest (Art.~6(1)(f)). \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item It requires a balancing test against the data subject's interests and fundamental rights.
+  \item The legitimate interest invoked is the one of the data subject.
+  \item It can be relied upon, for example, for some forms of video surveillance.
+  \item The data subject has the right to object to processing based on it.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, principi -- \rif{2026-09-25}{25/09}]\label{q:principi}
+Which of the following is \textbf{not} a principle listed in Art.~5 GDPR?
+\begin{opzioni}
+  \item purpose limitation;
+  \item data minimisation;
+  \item storage limitation;
+  \item freedom of contract.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, ambito -- \rif{2026-09-25}{25/09}]\label{q:domestica}
+A private individual publishes on a public website information about named colleagues of a
+volunteer group. The household exemption:
+\begin{opzioni}
+  \item applies, because the individual acts for non-commercial purposes;
+  \item does not apply, because the data are made accessible to an indefinite number of people;
+  \item applies only if the data are not sensitive;
+  \item applies only outside working hours.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, sanzioni -- \rif{2026-09-28}{28/09}]\label{q:sanzioni}
+For infringements of the security obligations (including data breach notification duties), the GDPR
+administrative fines can reach:
+\begin{opzioni}
+  \item EUR 20 million or 4\% of total worldwide annual turnover;
+  \item EUR 10 million or 2\% of total worldwide annual turnover;
+  \item EUR 35 million or 7\% of total worldwide annual turnover;
+  \item EUR 15 million or 2.5\% of total worldwide annual turnover.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, categorie di dati -- \rif{2026-10-12}{12/10}]\label{q:malattia}
+Sick-leave certificates of employees are:
+\begin{opzioni}
+  \item common personal data, because they do not state the diagnosis;
+  \item data concerning health, a special category under Art.~9;
+  \item judicial data under Art.~10;
+  \item not personal data, because they are produced by a doctor.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, DPIA -- \rif{2026-10-05}{05/10}]\label{q:dpia}
+After a DPIA, the residual risk of a new processing remains high despite the planned measures. The
+controller must:
+\begin{opzioni}
+  \item start the processing and record the decision;
+  \item consult the supervisory authority before starting the processing (Art.~36);
+  \item notify a data breach;
+  \item ask the data subjects for their consent, which removes the risk.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{Data breach e severità ENISA}
+
+\begin{domanda}[Data breach, definizione -- \rif{2026-10-05}{05/10}]\label{q:def-breach}
+Which of the following is \textbf{not} a personal data breach?
+\begin{opzioni}
+  \item an unencrypted laptop with customer data is lost on a train;
+  \item ransomware makes the HR database unavailable for a day;
+  \item a phishing email reaches an employee, who deletes it without clicking;
+  \item an employee browses customer records without any business need.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Data breach, riservatezza -- \rif{2026-10-19}{19/10}]\label{q:accesso}
+An attacker accessed a file server containing personal data; logs show no evidence of exfiltration.
+Under the GDPR:
+\begin{opzioni}
+  \item there is no breach until exfiltration is proven;
+  \item there is a confidentiality breach, because unauthorised access is enough;
+  \item there is only an availability breach;
+  \item the event is relevant only under NIS2.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Data breach, 72 ore -- \rif{2026-10-05}{05/10}]\label{q:decorrenza}
+The 72-hour deadline of Art.~33 GDPR runs from:
+\begin{opzioni}
+  \item the moment the breach occurred;
+  \item the moment the controller became aware of the breach;
+  \item the end of the forensic investigation;
+  \item the first business day after the breach.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Data breach, responsabile -- \rif{2026-10-02}{02/10}]\label{q:responsabile}
+A cloud provider acting as processor suffers a personal data breach. Who notifies the supervisory
+authority?
+\begin{opzioni}
+  \item The processor, directly and instead of the controller.
+  \item The controller, after the processor has informed it without undue delay.
+  \item Both, independently and with the same deadline.
+  \item ENISA, through the Single Reporting Platform.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Data breach, registro -- \rif{2026-10-05}{05/10}]\label{q:registro}
+About the internal breach register (Art.~33(5)). \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item It must document the facts, the effects and the remedial action taken.
+  \item Breaches assessed as low risk and not notified need not be recorded.
+  \item It allows the supervisory authority to verify compliance with Art.~33.
+  \item A temporary loss of availability is recorded even if no notification is required.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Data breach, disponibilità -- \rif{2026-10-12}{12/10}]\label{q:disponibilita}
+A ransomware attack makes personal data unavailable for six hours; the data are fully restored from
+backup and there is no exfiltration. Under the GDPR this is:
+\begin{opzioni}
+  \item not a personal data breach, because the data were restored;
+  \item a personal data breach (loss of availability), to be at least recorded in the breach register;
+  \item a breach only if the ransom was paid;
+  \item a NIS2 matter only.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Severità ENISA -- \rif{2026-10-02}{02/10}]\label{q:formula}
+In the ENISA methodology the severity of a personal data breach is computed as:
+\begin{opzioni}
+  \item $SE = DPC + EI + CB$
+  \item $SE = DPC \times EI + CB$
+  \item $SE = (DPC + CB) \times EI$
+  \item $SE = \max(DPC, EI, CB)$
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Severità ENISA -- \rif{2026-11-02}{02/11}]\label{q:severita}
+A breach exposes live location data (behavioural data, DPC~=~2) of fully identifiable users (EI~=~1),
+with loss of confidentiality (0.5) and malicious intent (+0.5). Severity?
+\begin{opzioni}
+  \item 2, medium
+  \item 2.5, medium
+  \item 3, high
+  \item 4, very high
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Severità ENISA -- \rif{2026-10-12}{12/10}]\label{q:severita-salute}
+Medical certificates (DPC~=~4) of employees are sent by mistake to the wrong internal mailing list;
+identification is significant (EI~=~0.75); only confidentiality is affected (0.5), no malicious intent.
+Severity?
+\begin{opzioni}
+  \item 2.5, medium
+  \item 3, high
+  \item 3.5, high
+  \item 4.5, very high
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[GDPR, art.~34 -- \rif{2026-11-02}{02/11}]\label{q:minori}
+A high-risk breach concerns personal data of children aged 5--12. The Art.~34 communication must be
+addressed to:
+\begin{opzioni}
+  \item the children directly;
+  \item the holders of parental responsibility (the parents);
+  \item the children's schools;
+  \item no one: communication is not required for minors, only notification to the authority.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{ISO/IEC 27001 e risk management}
+
+\begin{domanda}[ISO 27001 -- \rif{2026-10-19}{19/10}]\label{q:annexa}
+ISO/IEC 27001:2022 Annex~A contains:
+\begin{opzioni}
+  \item 114 controls in 14 domains;
+  \item 93 controls in 4 themes (organisational, people, physical, technological);
+  \item 10 mandatory clauses and no controls;
+  \item 34 technological controls only.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[ISO 27001 -- \rif{2026-10-19}{19/10}]\label{q:certificazione}
+About ISO/IEC 27001 certification. \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item Clauses 4--10 are mandatory requirements of the ISMS.
+  \item The certificate follows a three-year cycle with surveillance audits.
+  \item The certificate guarantees that the organisation will not suffer security incidents.
+  \item Certification concerns the organisation and its ISMS, not a single product.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Risk management -- \rif{2026-10-26}{26/10}]\label{q:max-cia}
+In the course's risk register a risk is scored C~=~1, I~=~1, A~=~3 (scale 1--3). Its level is:
+\begin{opzioni}
+  \item 1, the minimum;
+  \item about 1.7, the average;
+  \item 3, the maximum of the three;
+  \item 5, the sum.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Risk management -- \rif{2026-10-26}{26/10}]\label{q:trattamento}
+Which of the following is \textbf{not} a risk treatment option?
+\begin{opzioni}
+  \item mitigate (modify) the risk with controls;
+  \item transfer or share the risk;
+  \item avoid the risk by stopping the activity;
+  \item ignore the risk without documenting it.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Risk management -- \rif{2026-10-26}{26/10}]\label{q:soa}
+The Statement of Applicability (SoA):
+\begin{opzioni}
+  \item lists the Annex~A controls, states whether each is applied and justifies inclusions and
+    exclusions;
+  \item is the certificate issued by the certification body;
+  \item is the GDPR record of processing activities;
+  \item is required only for organisations subject to NIS2.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[ISO vs GDPR -- \rif{2026-10-23}{23/10}]\label{q:impatto}
+Which statement about \emph{impact} is \textbf{correct}?
+\begin{opzioni}
+  \item ISO/IEC 27001 and the ENISA severity methodology measure impact on the same object.
+  \item In ISO/IEC 27001 impact is assessed on the organisation; in the GDPR/ENISA approach on the
+    rights and freedoms of data subjects.
+  \item In ISO/IEC 27001 impact is assessed only on data subjects.
+  \item The GDPR does not consider impact.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Rischio -- \rif{2026-10-05}{05/10}]\label{q:residuo}
+Residual risk is:
+\begin{opzioni}
+  \item the risk before any control is applied;
+  \item the risk remaining after the mitigation measures have been applied;
+  \item the risk transferred to an insurer;
+  \item the risk that the authority accepts on behalf of the controller.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[ISO e conformità -- \rif{2026-11-02}{02/11}]\label{q:iso}
+A company holds an ISO/IEC 27001 certificate. \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item The certificate can support the demonstration of accountability.
+  \item The certificate proves that the company is GDPR and CRA compliant.
+  \item The certificate does not exempt the company from data breach notification duties.
+  \item Auditors refer to ISO/IEC 27002 to assess how the controls are implemented.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{Cyber Resilience Act}
+
+\begin{domanda}[CRA, ambito -- \rif{2026-10-26}{26/10}]\label{q:cra-ambito}
+Which of the following is \textbf{not} within the scope of the CRA?
+\begin{opzioni}
+  \item a GPS smartwatch for children connected to a cloud backend;
+  \item an installable mobile app connected to a remote server;
+  \item a medical device certified under the MDR;
+  \item a home Wi-Fi router.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CRA, transizione -- \rif{2026-11-02}{02/11}]\label{q:cra-unita}
+For CRA applicability, the cut-off date of 11 December 2027 is assessed with reference to:
+\begin{opzioni}
+  \item the date the product model was first launched;
+  \item each individual unit placed on the market;
+  \item the manufacturer's date of incorporation;
+  \item the date of the last firmware update.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CRA, segnalazioni -- \rif{2026-11-02}{02/11}]\label{q:cra-final}
+Under the CRA, the final report on an actively exploited vulnerability is due:
+\begin{opzioni}
+  \item within 72 hours of becoming aware of the vulnerability;
+  \item within one month of becoming aware of the vulnerability;
+  \item no later than 14 days after a corrective or mitigating measure is available;
+  \item there is no deadline for the final report.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CRA e GDPR -- \rif{2026-11-02}{02/11}]\label{q:cra-gdpr}
+The same incident is both a severe incident affecting a product (CRA) and a personal data breach
+(GDPR). \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item The CRA early warning is due within 24 hours of awareness.
+  \item The GDPR notification is due within 72 hours of awareness.
+  \item Sending the CRA early warning to the CSIRT also fulfils the GDPR notification duty.
+  \item The two notifications run in parallel, towards different authorities.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CRA e AI Act -- \rif{2026-11-02}{02/11}]\label{q:cra-ai}
+A product with digital elements that is also a high-risk AI system:
+\begin{opzioni}
+  \item is outside the CRA, since the AI Act prevails;
+  \item is presumed compliant with the AI Act cybersecurity requirements (Art.~15) if it meets CRA
+    Annex~I (Parts I and II) and this is shown in the CRA EU declaration of conformity;
+  \item must obtain two separate CE markings, one per regulation;
+  \item is automatically classified as a critical product under the CRA.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[Metodo di audit -- \rif{2026-11-06}{06/11}]\label{q:fonti}
+In the conformity audit method used in the course, a statement confirmed by two independent and
+concordant sources is treated as:
+\begin{opzioni}
+  \item an assertion, to be taken with caution;
+  \item an established fact (evidence);
+  \item a finding of non-conformity;
+  \item irrelevant, unless signed by the CEO.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{Cybersecurity Act}
+
+\begin{domanda}[ENISA -- \rif{2026-11-09}{09/11}]\label{q:enisa}
+Which statement about ENISA is \textbf{correct}?
+\begin{opzioni}
+  \item ENISA imposes administrative fines on essential entities that fail to report incidents.
+  \item ENISA received a permanent mandate with the Cybersecurity Act and supports Member States and EU
+    institutions, e.g.\ through the CRA Single Reporting Platform.
+  \item ENISA directly issues ISO/IEC 27001 certificates to companies.
+  \item ENISA is the national CSIRT of Italy.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CSA, certificazione -- \rif{2026-11-09}{09/11}]\label{q:livelli}
+The assurance levels of European cybersecurity certificates under the CSA are:
+\begin{opzioni}
+  \item low, medium, high, very high;
+  \item basic, substantial, high;
+  \item bronze, silver, gold;
+  \item self-assessed, audited, certified.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CSA -- \rif{2026-11-09}{09/11}]\label{q:csa-cra}
+About the relationship between CSA and CRA. \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item The CSA creates a European framework of certification schemes.
+  \item A CSA certificate can help demonstrate conformity with the CRA.
+  \item The CSA replaces the CRA for certified products.
+  \item EUCC is the first scheme adopted under the CSA and is based on the Common Criteria.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
+\section{NIS2, DORA e AI Act}
+
+\begin{nota}
+Norme non ancora trattate a lezione (al 11/11/2026): domande basate sull'appello precedente e
+sull'inquadramento dei Capitoli~\ref{cap:nis2}--\ref{cap:aiact}.
+\end{nota}
 
 \begin{domanda}[NIS2]\label{q:nis2-incidente}
 Under NIS2, an \emph{incident} is:
@@ -33,17 +466,6 @@ Under NIS2, an \emph{incident} is:
 \end{opzioni}
 \end{domanda}
 
-\begin{domanda}[ENISA]\label{q:enisa}
-Which statement about ENISA is \textbf{correct}?
-\begin{opzioni}
-  \item ENISA imposes administrative fines on essential entities that fail to report incidents.
-  \item ENISA received a permanent mandate with the Cybersecurity Act and supports Member States and EU
-    institutions, e.g.\ through the CRA Single Reporting Platform.
-  \item ENISA directly issues ISO/IEC 27001 certificates to companies.
-  \item ENISA is the national CSIRT of Italy.
-\end{opzioni}
-\end{domanda}
-
 \begin{domanda}[DORA]\label{q:dora-strategie}
 Digital operational resilience strategy under DORA. \textbf{Select the WRONG statement.}
 \begin{opzioni}
@@ -51,16 +473,6 @@ Digital operational resilience strategy under DORA. \textbf{Select the WRONG sta
   \item It may include a multi-vendor strategy for ICT third-party service providers.
   \item It includes a communication strategy for ICT-related incidents.
   \item It must be approved by the main ICT third-party service provider before adoption.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[CRA]\label{q:cra-final}
-Under the CRA, the final report on an actively exploited vulnerability is due:
-\begin{opzioni}
-  \item within 72 hours of becoming aware of the vulnerability;
-  \item within one month of becoming aware of the vulnerability;
-  \item no later than 14 days after a corrective or mitigating measure is available;
-  \item there is no deadline for the final report.
 \end{opzioni}
 \end{domanda}
 
@@ -74,101 +486,6 @@ Under DORA, the initial notification of a major ICT-related incident must be sub
 \end{opzioni}
 \end{domanda}
 
-\begin{domanda}[Tempistiche]\label{q:72h}
-About ``72 hours'' in EU law. \textbf{Select the WRONG statement.}
-\begin{opzioni}
-  \item GDPR: notification to the supervisory authority within 72 hours of awareness of the breach.
-  \item NIS2: incident notification within 72 hours of awareness of the significant incident.
-  \item DORA: intermediate report within 72 hours of awareness of the incident.
-  \item CRA: vulnerability notification within 72 hours of awareness.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[ENISA severity]\label{q:severita}
-A breach exposes live location data (behavioural data, DPC~=~2) of fully identifiable users (EI~=~1),
-with loss of confidentiality (0.5) and malicious intent (+0.5). Severity?
-\begin{opzioni}
-  \item 2, medium
-  \item 2.5, medium
-  \item 3, high
-  \item 4, very high
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[GDPR]\label{q:minori}
-A high-risk breach concerns personal data of children aged 5--12. The Art.~34 communication must be
-addressed to:
-\begin{opzioni}
-  \item the children directly;
-  \item the holders of parental responsibility (the parents);
-  \item the children's schools;
-  \item no one: communication is not required for minors, only notification to the authority.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[GDPR]\label{q:responsabile}
-A cloud provider acting as processor suffers a personal data breach. Who notifies the supervisory
-authority?
-\begin{opzioni}
-  \item The processor, directly and instead of the controller.
-  \item The controller, after the processor has informed it without undue delay.
-  \item Both, independently and with the same deadline.
-  \item ENISA, through the Single Reporting Platform.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[CRA e AI Act]\label{q:cra-ai}
-A product with digital elements that is also a high-risk AI system:
-\begin{opzioni}
-  \item is outside the CRA, since the AI Act prevails;
-  \item is presumed compliant with the AI Act cybersecurity requirements (Art.~15) if it meets CRA
-    Annex~I (Parts I and II) and this is shown in the CRA EU declaration of conformity;
-  \item must obtain two separate CE markings, one per regulation;
-  \item is automatically classified as a critical product under the CRA.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[ISO e conformità]\label{q:iso}
-A company holds an ISO/IEC 27001 certificate. \textbf{Select the WRONG statement.}
-\begin{opzioni}
-  \item The certificate can support the demonstration of accountability.
-  \item The certificate proves that the company is GDPR and CRA compliant.
-  \item The certificate does not exempt the company from data breach notification duties.
-  \item Auditors refer to ISO/IEC 27002 to assess how the controls are implemented.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[CRA]\label{q:cra-unita}
-For CRA applicability, the cut-off date of 11 December 2027 is assessed with reference to:
-\begin{opzioni}
-  \item the date the product model was first launched;
-  \item each individual unit placed on the market;
-  \item the manufacturer's date of incorporation;
-  \item the date of the last firmware update.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[CRA]\label{q:cra-ambito}
-Which of the following is \textbf{not} within the scope of the CRA?
-\begin{opzioni}
-  \item a GPS smartwatch for children connected to a cloud backend;
-  \item an installable mobile app connected to a remote server;
-  \item a medical device certified under the MDR;
-  \item a home Wi-Fi router.
-\end{opzioni}
-\end{domanda}
-
-\begin{domanda}[GDPR]\label{q:disponibilita}
-A ransomware attack makes personal data unavailable for six hours; the data are fully restored from
-backup and there is no exfiltration. Under the GDPR this is:
-\begin{opzioni}
-  \item not a personal data breach, because the data were restored;
-  \item a personal data breach (loss of availability), to be at least recorded in the breach register;
-  \item a breach only if the ransom was paid;
-  \item a NIS2 matter only.
-\end{opzioni}
-\end{domanda}
-
 \begin{domanda}[NIS2 e DORA]\label{q:lex-specialis}
 A bank is in a sector covered by both NIS2 and DORA. For ICT incident reporting:
 \begin{opzioni}
@@ -179,40 +496,103 @@ A bank is in a sector covered by both NIS2 and DORA. For ICT incident reporting:
 \end{opzioni}
 \end{domanda}
 
-% ---------------------------------------------------------------------
+% =====================================================================
+\section{Tempistiche trasversali}
+
+\begin{domanda}[Tempistiche -- \rif{2026-11-02}{02/11}]\label{q:72h}
+About ``72 hours'' in EU law. \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item GDPR: notification to the supervisory authority within 72 hours of awareness of the breach.
+  \item NIS2: incident notification within 72 hours of awareness of the significant incident.
+  \item DORA: intermediate report within 72 hours of awareness of the incident.
+  \item CRA: vulnerability notification within 72 hours of awareness.
+\end{opzioni}
+\end{domanda}
+
+% =====================================================================
 \section{Soluzioni}
 
-\begin{enumerate}[label=\textbf{\arabic*.},leftmargin=2em]
-  \item \textbf{(c)}. L'art.~6(1) esclude il legittimo interesse per i trattamenti delle autorità
+\newcommand{\sol}[2]{\item[\ref{#1}.] \textbf{(#2)}.}
+\begin{description}[leftmargin=2.5em,labelwidth=2em,font=\normalfont\bfseries]
+  \sol{q:regolamento}{b} Il regolamento si applica direttamente; la direttiva vincola sul risultato e va
+    recepita (es.\ NIS2 con il D.lgs.~138/2024).
+  \sol{q:softlaw}{c} Gli standard ISO sono volontari: diventano rilevanti perché aiutano a dimostrare
+    il rispetto della hard law.
+  \sol{q:dpa}{b} Trappola segnalata dal docente: nei contratti ``DPA'' è il \emph{Data Processing
+    Agreement}; l'autorità è la \emph{data protection authority}.
+  \sol{q:anonimi}{c} Togliere nome e cognome non basta e i dati pseudonimizzati restano personali; solo
+    i dati davvero anonimi escono dal GDPR.
+  \sol{q:gdpr-basi}{c} L'art.~6(1) esclude il legittimo interesse per i trattamenti delle autorità
     pubbliche nell'esecuzione dei loro compiti: per quelli si usa l'interesse pubblico o l'obbligo legale.
-  \item \textbf{(a)}. (b) è la definizione GDPR di data breach; (c) è la vulnerabilità attivamente
-    sfruttata del CRA; (d) è falsa: rileva anche il danno potenziale (``capable of causing'') e nella
-    definizione non c'è alcuna soglia.
-  \item \textbf{(b)}. Le sanzioni NIS2 sono irrogate dalle autorità nazionali; i certificati sono
+  \sol{q:ruoli-fatto}{b} Conta la situazione di fatto, non ciò che dice il contratto: punto su cui il
+    docente ha detto che sarà severo.
+  \sol{q:autorizzato}{c} Il dipendente è una persona autorizzata che agisce sotto l'autorità del
+    titolare; il responsabile è un soggetto esterno.
+  \sol{q:legittimo}{b} Il legittimo interesse è del titolare (o di terzi); l'interessato ha diritti
+    fondamentali.
+  \sol{q:principi}{d} I principi dell'art.~5 sono liceità, correttezza e trasparenza; limitazione della
+    finalità; minimizzazione; esattezza; limitazione della conservazione; integrità e riservatezza (più
+    l'accountability).
+  \sol{q:domestica}{b} È il principio del caso Lindqvist: la pubblicazione su Internet rende i dati
+    accessibili a un numero indefinito di persone ed esclude l'esenzione domestica.
+  \sol{q:sanzioni}{b} ``Domanda insidiosa'': per sicurezza e data breach il tetto è la metà di quello
+    generale (art.~83(4) contro art.~83(5)).
+  \sol{q:malattia}{b} Ogni dato relativo alla salute ricade nell'art.~9: nel modello ENISA è DPC~4,
+    che si può abbassare solo motivando.
+  \sol{q:dpia}{b} Se il rischio residuo resta elevato si consulta preventivamente l'autorità
+    (art.~36). Conta il residuo, non l'inerente.
+  \sol{q:def-breach}{c} Senza compromissione dei dati personali non c'è violazione: l'email di
+    phishing cancellata è al più un evento di sicurezza.
+  \sol{q:accesso}{b} La riservatezza è violata con il solo accesso non autorizzato; non presumere
+    l'assenza di esfiltrazione se non la si può provare.
+  \sol{q:decorrenza}{b} Dalla consapevolezza del titolare, che va però dimostrata: una data di
+    consapevolezza tardiva va giustificata con evidenze.
+  \sol{q:responsabile}{b} Solo il titolare notifica all'autorità; il responsabile informa il titolare
+    senza ingiustificato ritardo (art.~33(2)).
+  \sol{q:registro}{b} Il registro documenta \emph{ogni} violazione, anche se non notificata: è la
+    prova dell'accountability.
+  \sol{q:disponibilita}{b} Anche l'indisponibilità temporanea è un data breach. Se il rischio è basso
+    può bastare la registrazione interna.
+  \sol{q:formula}{b} È la ``regola d'oro'' da ricordare a memoria.
+  \sol{q:severita}{c} $SE = 2 \times 1 + 0{,}5 + 0{,}5 = 3$: alta (è il Gruppo~B del caso Pulse K).
+  \sol{q:severita-salute}{c} $SE = 4 \times 0{,}75 + 0{,}5 = 3{,}5$: alta ($3 \le SE < 4$).
+  \sol{q:minori}{b} Giuridicamente gli interlocutori sono i titolari della responsabilità genitoriale.
+  \sol{q:annexa}{b} 93 controlli in 4 temi (37 organizzativi, 8 persone, 14 fisici, 34 tecnologici).
+    La (a) descrive la vecchia versione 2013.
+  \sol{q:certificazione}{c} La certificazione attesta il sistema di gestione, non l'assenza di
+    incidenti.
+  \sol{q:max-cia}{c} Il livello è il massimo di C, I, A: fare la media è un errore tipico.
+  \sol{q:trattamento}{d} Accettare un rischio è legittimo, ma va deciso e documentato; ignorarlo no.
+  \sol{q:soa}{a} La SoA documenta le decisioni sui controlli ed è il punto in cui si rende conto delle
+    esclusioni.
+  \sol{q:impatto}{b} Non confondere i due piani: organizzazione (ISO) contro interessati (GDPR/ENISA).
+  \sol{q:residuo}{b} Inerente meno mitigazioni: è il residuo che guida la decisione.
+  \sol{q:iso}{b} La ISO è uno standard tecnico e non prova la conformità legale: è il suggerimento
+    dato da Gianluca per il laboratorio di audit.
+  \sol{q:cra-ambito}{c} I dispositivi medici sono soggetti all'MDR, regime verticale che esclude il CRA.
+    Le app connesse e commercializzate rientrano: il software è un prodotto.
+  \sol{q:cra-unita}{b} Le date di cut-off si valutano per singola unità: unità dello stesso modello
+    possono avere obblighi diversi.
+  \sol{q:cra-final}{c} Il termine di 14 giorni decorre dalla disponibilità del fix, non dalla
+    consapevolezza. Per gli incidenti gravi, invece, il final report è dovuto entro un mese.
+  \sol{q:cra-gdpr}{c} Una notifica a un'autorità non adempie gli obblighi verso un'altra: l'early
+    warning CRA non è la notifica preliminare GDPR.
+  \sol{q:cra-ai}{b} È la presunzione di conformità vista il 02/11, che collega l'art.~15 AI Act e
+    l'Allegato~I del CRA.
+  \sol{q:fonti}{b} Una fonte è un'asserzione; due fonti concordanti sono un fatto accertato.
+  \sol{q:enisa}{b} Le sanzioni NIS2 sono irrogate dalle autorità nazionali; i certificati sono
     rilasciati da organismi di valutazione o autorità nazionali (e ISO non è uno schema UE); il CSIRT
     italiano è presso l'ACN.
-  \item \textbf{(d)}. La strategia è definita e approvata dall'organo di gestione dell'entità
+  \sol{q:livelli}{b} Base, sostanziale, elevato (\emph{basic, substantial, high}).
+  \sol{q:csa-cra}{c} Il CSA è soft law e aiuta a dimostrare la conformità al CRA (hard law), ma non lo
+    sostituisce.
+  \sol{q:nis2-incidente}{a} (b) è la definizione GDPR di data breach; (c) è la vulnerabilità
+    attivamente sfruttata del CRA; (d) è falsa: rileva anche il danno potenziale e nella definizione non
+    c'è alcuna soglia.
+  \sol{q:dora-strategie}{d} La strategia è definita e approvata dall'organo di gestione dell'entità
     finanziaria; ai fornitori ICT gli obblighi arrivano per via contrattuale.
-  \item \textbf{(c)}. Il termine di 14 giorni decorre dalla disponibilità del fix, non dalla
-    consapevolezza. Per gli incidenti gravi, invece, il final report è dovuto entro un mese.
-  \item \textbf{(b)}. Doppio limite: 4 ore dalla classificazione come grave e comunque non oltre 24 ore
-    dalla conoscenza. Le 72 ore di DORA riguardano invece la relazione intermedia.
-  \item \textbf{(c)}. Le 72 ore di DORA decorrono dalla notifica iniziale, non dalla consapevolezza.
-  \item \textbf{(c)}. $SE = 2 \times 1 + 0{,}5 + 0{,}5 = 3$: alta (è il Gruppo~B del caso Pulse K).
-  \item \textbf{(b)}. Giuridicamente gli interlocutori sono i titolari della responsabilità genitoriale.
-  \item \textbf{(b)}. Solo il titolare notifica all'autorità; il responsabile informa il titolare senza
-    ingiustificato ritardo (art.~33(2)).
-  \item \textbf{(b)}. È la presunzione di conformità vista il 02/11, che collega l'art.~15 AI Act e
-    l'Allegato~I del CRA.
-  \item \textbf{(b)}. La ISO è uno standard tecnico e non prova la conformità legale: è il suggerimento
-    dato da Gianluca per il laboratorio di audit.
-  \item \textbf{(b)}. Le date di cut-off si valutano per singola unità: unità dello stesso modello
-    possono avere obblighi diversi.
-  \item \textbf{(c)}. I dispositivi medici sono soggetti all'MDR, regime verticale che esclude il CRA.
-  \item \textbf{(b)}. Anche l'indisponibilità temporanea è un data breach. Se il rischio è basso può
-    bastare la registrazione interna, come nell'esempio EDPB del ransomware con backup.
-  \item \textbf{(c)}. DORA è lex specialis rispetto a NIS2 per le entità finanziarie.
-\end{enumerate}
-
-\dacompletare{Aggiungere domande dopo ogni lezione (almeno 3 per lezione, includendo una
-``select the WRONG answer'').}
+  \sol{q:dora-iniziale}{b} Doppio limite: 4 ore dalla classificazione come grave e comunque non oltre
+    24 ore dalla conoscenza. Le 72 ore di DORA riguardano invece la relazione intermedia.
+  \sol{q:lex-specialis}{c} DORA è lex specialis rispetto a NIS2 per le entità finanziarie.
+  \sol{q:72h}{c} Le 72 ore di DORA decorrono dalla notifica iniziale, non dalla consapevolezza.
+\end{description}

@@ -1,0 +1,4 @@
+# latexmk -- compila main.tex con pdfLaTeX; file ausiliari e PDF in build/
+$pdf_mode = 1;
+$out_dir = 'build';
+@default_files = ('main.tex');

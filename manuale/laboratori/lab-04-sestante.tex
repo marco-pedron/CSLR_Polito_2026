@@ -1,0 +1,700 @@
+% =====================================================================
+\chapter{Lab 4 -- Conformity audit CRA--GDPR: Sestante Mobility}
+\label{lab:04}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Laboratorio del 06/11/2026 (Capitolo~\ref{lez:2026-11-06}), presentato a fine lezione il 02/11
+(Capitolo~\ref{lez:2026-11-02}). Fonti: il \emph{Conformity Audit Playbook} (guida dell'auditor
+esterno, con evidence room, interviste, checklist e template) e le slide \emph{Conformity Audit
+Exercise -- Briefing}. Per i richiami teorici: slide \emph{05.~PoliTO\_CRA}. Il caso è inventato,
+mentre il quadro normativo e le date sono reali; la data fittizia dell'audit è gennaio 2028.
+Lo svolgimento ragionato non è una soluzione ufficiale: è nei riquadri \emph{Integrazione}.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Dall'incidente all'audit}
+
+Nella simulazione Pulse K (Sezione~\ref{sec:pulsek}) gli studenti erano il team di crisi interno al
+fabbricante e correvano contro gli orologi dell'art.~14 CRA e degli artt.~33--34 GDPR. In questo
+laboratorio il ruolo si rovescia: si è un \textbf{auditor esterno indipendente}, nominato dal consiglio
+di amministrazione. Non c'è un orologio che corre: gli incidenti del 2027 sono chiusi (male) e il
+compito è ricostruire cosa dicono dell'organizzazione e se questa può legittimamente
+\textbf{dichiarare la conformità} nel 2028.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+ & \textbf{Simulazione di incidente} & \textbf{Audit esterno (questo lab)} \\ \midrule
+Posizione   & team di crisi del fabbricante & auditor indipendente nominato dal CdA \\
+Materiale   & \emph{inject} che arrivano in sequenza & 16 documenti e due interviste, quattro anni di storia \\
+Nucleo giuridico & art.~14 CRA, artt.~33--34 GDPR & Allegati I, VII, VIII CRA; artt.~25, 28, 32, 33(5), 35, 44 GDPR \\
+Prodotto finale  & decision sheet con le scadenze & registro dei finding, opinione, management letter \\
+Errore tipico & mancare una scadenza & finding non supportato dalle evidenze, o opinione contraddetta dal registro \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+% ---------------------------------------------------------------------
+\section{Il caso Sestante Mobility}
+
+\subsection{L'azienda e il prodotto}
+\begin{itemize}
+  \item \textbf{Sestante Mobility S.p.A.}, Bologna (stabilimento principale in Italia): 120 dipendenti,
+    fatturato 2027 di 31 milioni di euro. È una \textbf{media impresa}, quindi non beneficia delle
+    agevolazioni sanzionatorie previste per le piccole imprese (art.~64(10) CRA).
+  \item Circa 1.100 clienti \emph{fleet operator} (PMI) in Italia, Spagna e Polonia; un distributore,
+    Iberia Telematics (Madrid), che rivende, installa e gestisce le sostituzioni in garanzia.
+  \item \textbf{46.000 box installati}: Italia 27.000, Spagna 12.000 (di cui circa 1.500 immessi dal
+    12/12/2027), Polonia 7.000.
+\end{itemize}
+
+\paragraph{Tre componenti, un solo prodotto (il B2).}
+\begin{itemize}
+  \item \textbf{box B2}: si collega alla porta OBD-II del veicolo, ha GNSS e modem propri, firmware
+    aggiornato \emph{over the air} (OTA), invia la posizione ogni 30 secondi;
+  \item \textbf{Sestante Cloud}: gestito da Sestante su server UE in affitto (Francoforte);
+  \item \textbf{Fleet app}: mappa dei veicoli, geofence, report e \emph{driver score}.
+\end{itemize}
+Dati in gioco: posizione e storico dei viaggi (90 giorni), eventi di guida e orari di lavoro
+(24 mesi), driver score condiviso di default con l'HR del cliente, contatti aziendali e fatturazione.
+Il conducente è un dipendente con nome e cognome: si tratta di \textbf{dati personali}, non di
+``dati del veicolo'', qualunque cosa sostenga il CTO nell'intervista.
+
+\paragraph{Fornitori.}
+\begin{itemize}
+  \item \textbf{Vistula EMS} (Katowice) costruisce il box su progetto Sestante, senza clausole di
+    sicurezza, elenco dei componenti né diritto di audit;
+  \item \textbf{Updato 2.3.1}, libreria di aggiornamento di terze parti, bloccata a quella versione dal
+    2022: supporta la verifica della firma, ma la funzione è disattivata nella configurazione di build;
+  \item \textbf{MetricLoop Inc.} (USA) svolge analytics, scoring dei conducenti e un dataset di
+    \emph{benchmarking} venduto in forma aggregata ad assicuratori: clausole contrattuali standard
+    firmate, nessuna \emph{transfer impact assessment}.
+\end{itemize}
+Sestante appone il proprio marchio sul box: è il \textbf{fabbricante}, anche per i componenti
+acquistati e per il codice open source che distribuisce.
+
+\subsection{L'incarico e le domande del CdA}
+Il comitato di audit nomina gli auditor il 12/01/2028; settimana di fieldwork 24--28/01/2028; report
+al CdA il 22/02/2028. Tre eventi del 2027 hanno spinto il comitato ad agire:
+\begin{itemize}
+  \item \textbf{agosto 2027}: un ricercatore segnala che i box accettano un pacchetto firmware non
+    firmato; il PSIRT chiude la segnalazione in quattro giorni (``serve l'accesso fisico, non è una
+    vulnerabilità''), senza fix né voce di backlog;
+  \item \textbf{settembre 2027}: un box reso in garanzia viene ricondizionato e rivenduto, con i dati
+    della flotta precedente ancora raggiungibili;
+  \item \textbf{novembre 2027}: un conducente scopre di essere tracciato anche fuori orario, con un
+    punteggio di guida che arriva alla dashboard HR del datore di lavoro.
+\end{itemize}
+Nessuno dei tre è un incidente aperto. La domanda non è cosa si doveva fare nel 2027, ma
+\textbf{che cosa l'azienda ha diritto di dichiarare di sé oggi}. Le domande sono tre:
+\begin{enumerate}
+  \item il fascicolo consente di tenere il B2 sul mercato, in particolare le circa 8.000 unità
+    immesse dal 12/12/2027?
+  \item che cosa si può confermare a \textbf{Iberia Lease}, il principale cliente spagnolo, che
+    rinnoverà 12.000 box entro il \textbf{24/04/2028} solo se c'è evidenza di conformità al CRA?
+  \item il \textbf{T3}, successore del B2, sarà immesso sul mercato il \textbf{15/06/2028}, ma il suo
+    fascicolo non è nella evidence room: va dichiarata la \textbf{limitazione di scope} e va detto che
+    cosa deve esistere prima che qualcuno firmi una dichiarazione.
+\end{enumerate}
+
+\subsection{Perimetro e regole del gioco}
+\begin{itemize}
+  \item Nel perimetro: Sestante come fabbricante e, per alcuni flussi, come titolare o responsabile
+    del trattamento; box, cloud e app; i fatti del 2027.
+  \item Fuori perimetro: la condotta dei fleet operator verso i propri conducenti e le norme nazionali
+    di diritto del lavoro; il trattamento proprio del distributore; il T3 come prodotto.
+  \item La evidence room (E-01\ldots E-16) è l'unica fonte di fatti: niente visite, accessi ai sistemi
+    o contatti esterni. \textbf{Senza riferimento a un'evidenza, nessun finding.}
+  \item I finding si scrivono contro l'azienda e il suo prodotto, mai contro i clienti.
+  \item L'auditor tratta a sua volta dati personali: campiona, non copia, chiede il minimo.
+  \item Dove la legge ammette due risposte difendibili si sceglie e si motiva per iscritto
+    (\emph{decide and defend}).
+\end{itemize}
+
+\subsection{La evidence room}
+{\small
+\begin{longtable}{@{}l p{4.2cm} p{8.3cm}@{}}
+\toprule
+\textbf{Rif.} & \textbf{Documento} & \textbf{Che cosa contiene (in sintesi)} \\ \midrule
+\endhead
+E-01 & Indice della documentazione tecnica e bozza di dichiarazione & 11 dei 18 documenti del
+  fascicolo; la bozza di dichiarazione per il T3 indica il modulo~A e non cita norme, specifiche o
+  report di test. \\
+E-02 & Risk assessment (rev.~2, ottobre 2025) & Afferma che gli aggiornamenti sono firmati e
+  verificati dal boot loader; raccomanda un interruttore ``viaggio privato'' in una release futura. \\
+E-03 & Periodo di supporto, sito e app store & La policy non indica alcun numero; il sito promette
+  ``cinque anni di aggiornamenti di sicurezza''; l'app store non riporta né periodo di supporto né
+  contatto per le vulnerabilità. \\
+E-04 & Thread con il ricercatore (agosto 2027) & Firmware arbitrario installato, nessun controllo di
+  firma né protezione dal rollback; il PSIRT risponde ``CVSS 4.2, non è una vulnerabilità''. \\
+E-05 & Pagina ``Security'' del sito & Unico contatto pubblicato: l'indirizzo del supporto; l'indirizzo
+  PSIRT esiste ma non è pubblicato. \\
+E-06 & Wiki di supporto (2025) & Credenziale di manutenzione remota identica su tutti i box,
+  riportata in chiaro. \\
+E-07 & Configurazione di build, firmware 4.x & \texttt{OTA\_VERIFY\_SIGNATURE=false},
+  \texttt{OTA\_ALLOW\_ROLLBACK=true}, \texttt{MAINT\_SHELL\_ENABLED=true},
+  \texttt{LOG\_LEVEL=debug}. \\
+E-08 & Foglio componenti e nota sulle dipendenze & 8 moduli su 11, senza versione, licenza né
+  colonna CVE; Updato 2.3.1 ha una CVE corretta nella release successiva, aggiornamento rinviato. \\
+E-09 & Penetration test (giugno 2026) & 27 finding, 9 ancora aperti: console admin senza MFA,
+  endpoint di debug in produzione, token di sessione validi 30 giorni, due API key nel codice
+  dell'app. \\
+E-10 & Impostazioni di default e pack di onboarding & Posizione ogni 30~s anche fuori orario;
+  modalità viaggio privato assente; score condiviso con l'HR di default; nessun modello di
+  informativa per i conducenti. \\
+E-11 & Informativa privacy e DPIA (2025) & DPIA centrata su app e cloud, telemetria del box liquidata
+  come rischio ``basso''; nessun parere del DPO; l'informativa non cita USA né benchmarking. \\
+E-12 & Template di accordo con i (sub)responsabili e relativo elenco & Ruoli invertiti (Sestante
+  ``titolare'', l'operatore ``responsabile''); breach comunicato all'operatore ``entro 30 giorni'';
+  elenco fornitori non aggiornato. \\
+E-13 & Configurazione cloud e accessi & AES-256 a riposo con KMS, TLS~1.3 e HSTS; ma MFA disattivata
+  sulla console admin, 14 account con accesso al DB di produzione, sessioni di 30 giorni, nessuna
+  registrazione delle sessioni privilegiate; allarmi disattivati per un cliente. \\
+E-14 & Procedura RMA e scambio successivo (settembre 2027) & Il distributore azzera il box ma
+  l'account cloud precedente resta attivo sei giorni: 340 conducenti, 90 giorni di viaggi. Due
+  ingegneri chiudono il caso: ``rischio basso, veicoli non persone'', nessuna notifica. \\
+E-15 & Contratto MetricLoop & Clausole standard (moduli 2021) senza transfer impact assessment;
+  scoring dei conducenti e dataset di benchmarking venduto ad assicuratori. \\
+E-16 & Certificato ISO/IEC 27001 & Valido 2026--2029, ma lo scope copre solo la piattaforma cloud:
+  sviluppo firmware e supporto sul campo sono esclusi. \\
+\bottomrule
+\end{longtable}}
+
+\noindent Il playbook suggerisce di partire da \textbf{E-04, E-06, E-07, E-10, E-12, E-14}: contengono
+i finding attesi, mentre il resto della room spiega perché nessuno se n'è accorto. Le due interviste
+(CTO e DPO esterno) vanno lette come \textbf{evidenza debole}, cioè come prova di ciò che una persona
+crede, da confrontare con i documenti. Esempi di contraddizioni:
+\begin{itemize}
+  \item il CTO dice che le password di manutenzione ``ruotano ogni trimestre'', ma la wiki (E-06) è
+    ferma al 2025 e la credenziale è unica;
+  \item il CTO dice che ``il distributore resetta il box'', ma la procedura (E-14) azzera il
+    dispositivo e non l'account cloud;
+  \item il DPO dichiara di aver chiesto nel 2026 di rifare la DPIA dopo l'aggiunta della dashboard HR,
+    richiesta chiusa dal product manager; di essere stato informato del caso RMA dall'operatore e non
+    dall'azienda; di lavorare quattro ore al mese e di non essere nel percorso di escalation degli
+    incidenti.
+\end{itemize}
+
+\begin{esame}
+\textbf{Il brief è incompleto.} La lettera d'incarico cita tre eventi, ma la room ne contiene di più:
+ciò che conta spesso non è mai stato segnalato né verbalizzato (per esempio la credenziale di
+manutenzione condivisa di E-06). Per ogni documento la domanda è: \emph{contraddice qualcosa che ho già
+letto?} Una fonte è un'asserzione, due fonti concordanti sono un fatto.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Consegna}
+
+Un file di testo per gruppo, prodotto dal workbench online e organizzato in tre blocchi.
+\begin{description}[style=nextline,leftmargin=1.5em]
+  \item[A -- Risposte di scope] Quali obblighi CRA vincolano ciascuna delle tre popolazioni (B2 fino
+    all'11/12/2027, circa 38.000 unità; B2 dal 12/12/2027, circa 8.000 unità; T3) e che ruolo GDPR ha
+    Sestante per tre flussi: (a)~posizione e viaggi dei veicoli del cliente; (b)~supporto, garanzia e
+    RMA; (c)~account e fatturazione dei clienti.
+  \item[B -- Registro dei finding] Almeno quattro finding di livello Medium o superiore, ciascuno con
+    condizione, criterio, riferimento all'evidenza, causa, effetto, severità, raccomandazione,
+    responsabile e data. In più: \textbf{un controllo che funziona} e almeno un criterio esaminato e
+    scartato (\emph{Tested, no finding}) con il motivo.
+  \item[C -- Opinione e management letter] Tipo di opinione con le limitazioni, decisione sul breach
+    di settembre 2027, tre azioni prioritarie con responsabile e data, almeno un'azione formativa
+    misurabile per ogni errore umano.
+  \item[Bonus] Per ogni finding, il controllo più vicino dell'Annex~A.8 della ISO/IEC~27001, oppure
+    ``nessun controllo A.8 è applicabile'' con il motivo.
+\end{description}
+
+\noindent\textbf{Criteri di valutazione} (slide di briefing): accuratezza giuridica 30\%; evidenze e
+finding 25\%; severità 15\%; opinione e redazione 15\%; remediation 15\%. Si valuta il ragionamento e
+l'evidenza citata, non la corrispondenza con un numero.
+
+% ---------------------------------------------------------------------
+\section{Metodologia dell'audit esterno}
+
+\subsection{Le cinque fasi}
+\begin{enumerate}
+  \item \textbf{Plan}: scope, criteri, periodo, popolazione, rischi; che cosa potrebbe rendere
+    sbagliata la risposta?
+  \item \textbf{Request}: chiedere le evidenze che proverebbero o smentirebbero ogni rischio (qui la
+    room è fissa: si valuta se basterebbe a una richiesta reale).
+  \item \textbf{Walk through}: seguire una transazione dall'inizio alla fine (qui: un box reso in
+    garanzia, E-14 contro E-01).
+  \item \textbf{Test}: rieseguire, ispezionare, osservare; confrontare le configurazioni (E-07, E-10,
+    E-13) con quanto affermato in E-02 ed E-03.
+  \item \textbf{Report}: registro, opinione con limitazioni, management letter.
+\end{enumerate}
+Come riferimenti di metodo il playbook cita ISO~19011 e ISAE~3000. L'auditor non certifica nulla: dà
+al CdA una \emph{ragionevole garanzia} rispetto a criteri definiti.
+
+\subsection{I criteri: tre famiglie da non mescolare}
+\begin{itemize}
+  \item \textbf{diritto UE, lato prodotto}: CRA (ambito, obblighi del fabbricante, Allegato~I,
+    documentazione tecnica, valutazione della conformità, segnalazione, transizione, sanzioni). Si
+    cita prima l'articolo e poi l'allegato, dicendo a quali unità e a quale versione si riferisce;
+  \item \textbf{diritto UE, lato dati}: GDPR. Si cita il paragrafo quando conta: l'art.~33(5)
+    (registro delle violazioni) non è l'art.~33(1) (notifica);
+  \item \textbf{standard volontari e policy interne}: ISO/IEC~27001 e procedure dell'azienda. Uno
+    standard non è legge: va usato come benchmark o come criterio interno a cui l'azienda si è
+    impegnata, dicendo quale dei due.
+\end{itemize}
+
+\begin{esame}
+\textbf{Tre avvertenze del playbook.}
+\begin{enumerate}
+  \item \textbf{Un certificato non è conformità.} Il certificato ISO/IEC~27001 di Sestante (E-16)
+    copre solo il cloud, non il firmware, e nessuna norma del CRA lo richiede: è un'affermazione su
+    un sistema di gestione, non un criterio giuridico.
+  \item \textbf{L'assenza di evidenza è un finding.} ``Non evidenziato'' è una condizione legittima,
+    da valutare.
+  \item Dove la risposta dipende dallo stato del diritto (per esempio la voce dell'Allegato~III o le
+    norme armonizzate effettivamente pubblicate), si decide, si motiva e si indica la verifica che si
+    farebbe in un incarico reale.
+\end{enumerate}
+\end{esame}
+
+\subsection{Le evidenze}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l l X}
+\toprule
+\textbf{Forza} & \textbf{Tipo} & \textbf{Esempi e limiti} \\ \midrule
+Massima & Configurazioni e record di sistema & E-07, E-10, E-13: mostrano lo stato in un dato
+  momento, non l'intenzione \\
+Alta & Documenti scritti contemporanei ai fatti & E-04, E-14: mostrano ciò che si è scritto, non ciò
+  che si è fatto \\
+Media & Policy, procedure, contratti & E-03, E-12, procedura RMA: riguardano il disegno, non
+  l'efficacia operativa \\
+Bassa & Dichiarazioni e interviste & CTO e DPO: prova di ciò che si crede, da corroborare \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{itemize}
+  \item Un conflitto non si risolve mai in silenzio: si mostrano i due documenti e si dice quale
+    descrive lo stato del sistema (un flag di build prevale su una policy; un'email dell'epoca prevale
+    su un ricordo).
+  \item \textbf{Si dichiara sempre la popolazione}: 46.000 box non sono lo stesso finding di 8.000
+    box immessi dopo l'11/12/2027. Un template firmato da tutti i clienti (E-12) è un difetto
+    sistemico anche se lo si esamina una sola volta.
+  \item Ciò che non si è potuto testare va scritto come limitazione.
+\end{itemize}
+
+\subsection{Il finding e la sua severità}
+Un finding ha cinque parti: \textbf{condizione} (i fatti, con riferimento E-xx), \textbf{criterio}
+(uno solo, citato con precisione), \textbf{causa} (il controllo mancante o fallito, non un generico
+``errore umano''), \textbf{effetto} (esposizione per persone, clienti, autorità, accesso al mercato),
+\textbf{raccomandazione} (azione, responsabile, data).
+
+La severità di audit non si sceglie: si calcola come \textbf{esposizione $\times$ ampiezza}.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{c X X}
+\toprule
+\textbf{Valore} & \textbf{Esposizione} & \textbf{Ampiezza} \\ \midrule
+1 & lacuna documentale: il requisito è rispettato in pratica, ma la prova manca &
+  popolazione limitata (un'unità, una persona, un fornitore, un processo) \\
+2 & requisito non rispettato, senza misure compensative & popolazione significativa (un reparto, un
+  segmento di clienti, i conducenti di un operatore) \\
+3 & norma violata, o dichiarazione di conformità non firmabile & tutta la flotta o tutti i clienti \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Prodotto: \textbf{1--2 Low; 3 Medium; 4--6 High; 8--9 Critical}. Un Critical aperto rende impossibile
+un'opinione senza rilievi; i High portano a un'opinione con rilievi e condizioni.
+
+\begin{esame}
+\textbf{Due scale, mai mescolate.} La severità di audit valuta un finding per il CdA. La severità
+ENISA ($SE = DPC \times EI + CB$, Capitolo~\ref{cap:schede}) misura il rischio di un data breach per
+le persone e serve alla decisione di notifica. Nel caso Sestante l'ENISA si usa solo per verificare
+se la conclusione ``rischio basso'' sul breach di settembre 2027 era difendibile; il finding sul
+processo che l'ha prodotta si valuta con la scala di audit. Mescolarle è ``l'errore classico'' del
+laboratorio.
+\end{esame}
+
+\subsection{Il controllo che funziona}
+Un controllo non è il requisito: è la misura con cui l'organizzazione lo soddisfa (tecnica,
+organizzativa o contrattuale). Per dichiararlo funzionante il playbook propone sei domande: esiste
+(è progettato e scritto)? è implementato dove sta il rischio? opera (ci sono evidenze nel periodo)?
+è efficace e non contraddetto da altre evidenze? ha un responsabile e un'escalation che funziona?
+copre tutta la popolazione in scope? Se una delle sei fallisce si ha un finding, e la condizione
+mancata ne è la causa. Un controllo che funziona non riceve un punteggio: va riportato perché
+un'opinione che elenca solo carenze non è credibile.
+
+\subsection{L'opinione}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Opinione} & \textbf{Quando} & \textbf{Nel caso Sestante (playbook)} \\ \midrule
+\emph{Unqualified} (senza rilievi) & criteri soddisfatti; finding Low o Medium con piani accettati &
+  solo se il registro non ha Critical o High aperti \\
+\emph{Qualified} (con rilievi) & criteri soddisfatti salvo questioni specifiche e identificate &
+  probabile approdo: il fascicolo è riparabile, ma non così com'è \\
+\emph{Adverse} (negativa) & criteri non soddisfatti; scostamento rilevante e pervasivo & difendibile
+  sul lato prodotto, se il registro è pesante \\
+\emph{Disclaimer} (impossibilità di esprimersi) & evidenze insufficienti & possibile per le unità
+  immesse prima dell'11/12/2027, dove il perimetro è più sottile \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent ``Dipende'' non è un'opinione, e non lo è nemmeno un'opinione contraddetta dal proprio
+registro. L'opinione deve contenere: la risposta alle due domande del CdA, criteri e fonti, perimetro
+e limitazioni, il T3 come limitazione dichiarata, periodo e popolazione per categoria di unità, i
+finding che la motivano, le azioni richieste al CdA e la decisione sul breach di settembre 2027.
+
+% ---------------------------------------------------------------------
+\section{Il CRA applicato all'audit}
+
+\subsection{Ambito e ruoli}
+\begin{itemize}
+  \item Il B2 è un \textbf{prodotto con elementi digitali}: hardware con software, connesso alla rete
+    cellulare e al veicolo. Il cloud rientra come \textbf{soluzione di elaborazione dati da remoto}
+    del prodotto (artt.~2 e~3(1)--(2)), come già visto per Pulse Cloud.
+  \item \textbf{Fabbricante} è Sestante, perché commercializza il box con il proprio marchio
+    (art.~3(13); il playbook richiama anche l'art.~21). Vistula EMS produce su commessa; Iberia
+    Telematics è un \textbf{distributore} (artt.~19--20), con obblighi propri di verifica, ma i
+    finding si scrivono contro il fabbricante.
+  \item Il fabbricante risponde anche dei componenti di terze parti (dovere di diligenza
+    sull'integrazione dei componenti, slide CRA ``Security by design \& by default'').
+\end{itemize}
+
+\subsection{Tempistica: la transizione vale per unità}
+Il CRA applica gli obblighi di segnalazione (art.~14) dall'\textbf{11/09/2026} a tutti i prodotti,
+anche quelli già sul mercato; tutto il resto (Allegato~I, art.~13, artt.~19--21) dall'\textbf{11/12/2027}
+(artt.~69(2)--(3) e~71(2), secondo il playbook). La data si applica alla \textbf{singola unità}
+immessa sul mercato, non al modello.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{Popolazione} & \textbf{Obblighi CRA (lettura del materiale)} \\ \midrule
+B2 immessi fino all'11/12/2027 (circa 38.000) & solo segnalazione ex art.~14 (dall'11/09/2026);
+  l'Allegato~I non si applica a queste unità \\
+B2 immessi dal 12/12/2027 (circa 8.000) & regime completo: Allegato~I Parti I e II, art.~13,
+  documentazione tecnica, valutazione della conformità, dichiarazione UE, marcatura CE, art.~14 \\
+T3 (dal 15/06/2028) & regime completo; nessuna opinione possibile perché il fascicolo non è nella
+  room: è una limitazione di scope \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent Conseguenza pratica: la flotta di Iberia Lease è \textbf{mista} (circa 1.500 box spagnoli
+sono stati immessi dopo il 12/12/2027). Un finding sul fascicolo deve dire a quale popolazione si
+riferisce: ``l'azienda non è conforme al CRA'', senza indicare le unità, è la frase che fa contestare
+un audit.
+
+\begin{integrazione}[Prodotti già sul mercato e modifiche sostanziali]
+Nel testo del regolamento i prodotti immessi prima dell'11/12/2027 ricadono negli obblighi del CRA
+solo se, da quella data, subiscono una \emph{modifica sostanziale}. Un aggiornamento firmware che
+cambia in modo rilevante la funzione o il profilo di rischio potrebbe quindi trascinare anche le
+unità ``vecchie'' nel regime completo. È un punto da tenere presente quando si raccomanda di
+correggere il firmware via OTA su tutta la flotta.
+\end{integrazione}
+
+\subsection{Requisiti essenziali: Allegato~I, Parte~I}
+Le slide del corso elencano i requisiti di prodotto; ecco quelli che il caso permette di testare.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{p{5.2cm} X}
+\toprule
+\textbf{Requisito (Allegato I, Parte I)} & \textbf{Che cosa mostra la room} \\ \midrule
+nessuna vulnerabilità sfruttabile nota all'immissione & firmware senza verifica della firma, già
+  dimostrato da un ricercatore (E-04, E-07); CVE nota in Updato (E-08) \\
+configurazione \emph{secure by default} & shell di manutenzione attiva e log in debug (E-07);
+  tracciamento fuori orario e score all'HR attivi di default (E-10) \\
+vulnerabilità correggibili con aggiornamenti di sicurezza & l'OTA esiste, ma accetta pacchetti non
+  firmati e consente il rollback (E-07) \\
+protezione da accessi non autorizzati & credenziale identica su tutti i box (E-06); console admin
+  senza MFA (E-09, E-13) \\
+riservatezza e integrità dei dati & cifratura a riposo e in transito nel cloud (E-13): è il
+  controllo che funziona \\
+minimizzazione dei dati & posizione ogni 30~s anche fuori orario, nessuna modalità privata (E-10) \\
+riduzione della superficie d'attacco & endpoint di debug in produzione (E-09), shell di manutenzione
+  (E-07) \\
+registrazione e monitoraggio delle attività & log di 90 giorni, nessuna registrazione delle sessioni
+  privilegiate, allarmi disattivati per un cliente (E-13) \\
+cancellazione sicura e permanente di dati e impostazioni & il ricondizionamento azzera il box ma non
+  l'account cloud (E-14) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Gestione delle vulnerabilità: Allegato~I, Parte~II}
+\begin{itemize}
+  \item \textbf{identificare e documentare componenti e vulnerabilità}: il foglio componenti (E-08)
+    copre 8 moduli su 11, senza versioni né CVE; non c'è una SBOM;
+  \item \textbf{correggere senza ritardo}: l'aggiornamento di Updato è rinviato ``a quando si
+    toccherà la pipeline'' (E-08); 9 finding del pentest restano aperti (E-09);
+  \item \textbf{test regolari}: il pentest esiste, ma senza seguito;
+  \item \textbf{policy di divulgazione coordinata} e \textbf{canale di segnalazione}: il PSIRT ha
+    respinto la segnalazione senza triage motivato (E-04) e il suo indirizzo non è pubblicato (E-05);
+    il playbook collega questo punto anche al punto di contatto unico dell'art.~13(17);
+  \item \textbf{distribuzione sicura degli aggiornamenti}: firma disattivata nella build (E-07),
+    contro quanto afferma il risk assessment (E-02);
+  \item \textbf{aggiornamenti per il periodo di supporto}: la policy non fissa la durata, il sito
+    promette cinque anni, l'app store tace (E-03).
+\end{itemize}
+
+\begin{integrazione}[SBOM e periodo di supporto nel testo del CRA]
+L'Allegato~I, Parte~II chiede di documentare i componenti anche redigendo una \emph{software bill of
+materials} in formato leggibile da macchina, almeno per le dipendenze di primo livello. Il periodo di
+supporto (art.~13) deve riflettere il tempo d'uso atteso del prodotto ed essere, di regola, di almeno
+cinque anni, salvo prodotti destinati a un uso più breve; va indicato al momento dell'acquisto. Nel
+caso Sestante la promessa commerciale di cinque anni (E-03) non è sostenuta da alcuna decisione
+documentata.
+\end{integrazione}
+
+\subsection{Documentazione tecnica e valutazione della conformità}
+\begin{itemize}
+  \item La \textbf{documentazione tecnica} (Allegato~VII) è l'oggetto stesso dell'audit: l'indice
+    (E-01) elenca 11 dei 18 documenti previsti e il risk assessment (E-02) è fermo al 2025, prima
+    dei cambiamenti di architettura. Il risk assessment va tenuto aggiornato per la versione immessa
+    sul mercato.
+  \item \textbf{Classificazione}: dalle slide, i \textbf{prodotti importanti} sono le categorie
+    dell'Allegato~III (Classi I e II) e richiedono procedure di valutazione più rigorose; i
+    \textbf{prodotti critici} (Allegato~IV) richiedono un certificato europeo di cybersicurezza almeno
+    di livello ``sostanziale''. Tutti gli altri sono prodotti ``di default''.
+  \item Se il B2 rientri in una voce dell'Allegato~III decide se l'\textbf{autovalutazione}
+    (modulo~A, controllo interno) fosse disponibile: è una questione \emph{decide and defend}
+    (art.~32, Allegato~VIII). La bozza di dichiarazione (E-01, riferita al T3) usa il modulo~A ma
+    non cita né norme né report di test.
+\end{itemize}
+
+\begin{integrazione}[I moduli di valutazione della conformità]
+Il CRA riprende i moduli del ``nuovo quadro legislativo'' UE (Allegato~VIII):
+\begin{itemize}
+  \item \textbf{modulo A} -- controllo interno: il fabbricante valuta da sé, redige la documentazione
+    tecnica, firma la dichiarazione UE e appone la marcatura CE;
+  \item \textbf{modulo B + C} -- esame UE del tipo da parte di un organismo notificato, seguito dalla
+    conformità al tipo basata sul controllo interno della produzione;
+  \item \textbf{modulo H} -- garanzia di qualità totale, valutata da un organismo notificato;
+  \item in alternativa, un \textbf{certificato europeo di cybersicurezza} rilasciato nell'ambito di uno
+    schema del Cybersecurity Act (Capitolo~\ref{lez:2026-11-09}), dove disponibile.
+\end{itemize}
+Schema generale: prodotti di default $\to$ modulo~A; Classe~I $\to$ modulo~A solo se si applicano
+integralmente norme armonizzate, specifiche comuni o certificazioni pertinenti, altrimenti B+C o H;
+Classe~II $\to$ B+C, H o certificazione; prodotti critici $\to$ certificazione, se richiesta da atto
+della Commissione. Nel caso Sestante l'Allegato~III non contiene una voce per la ``telematica di
+flotta'': la scelta più difendibile è trattare il B2 come prodotto di default (modulo~A disponibile),
+segnalando la verifica da fare sugli atti di esecuzione che descrivono le categorie. Anche in questa
+lettura il vero problema della dichiarazione è il \emph{contenuto} (fascicolo incompleto, requisiti
+non rispettati), non il percorso scelto.
+\end{integrazione}
+
+\subsection{Obblighi di segnalazione (art.~14)}
+Il playbook pone la domanda in modo preciso: per la segnalazione di agosto 2027 e per la credenziale
+condivisa nota dal 2025 non conta se fosse cattiva prassi, ma \textbf{se fosse da segnalare, e da
+quando}. Ricordiamo i due binari (Capitolo~\ref{lez:2026-11-02}): vulnerabilità attivamente sfruttata
+(24~ore, 72~ore, final report entro 14 giorni dalla disponibilità della correzione) e incidente grave
+(24~ore, 72~ore, final report entro un mese). L'art.~14 si applica dall'11/09/2026 a tutte le unità,
+comprese le 38.000 ``vecchie''.
+
+\begin{integrazione}[Era da notificare?]
+Una prova di concetto mostrata da un ricercatore nell'ambito di una divulgazione responsabile non è,
+di per sé, evidenza affidabile che un \emph{attore malevolo} abbia sfruttato la vulnerabilità: sui
+fatti della room la segnalazione di agosto 2027 non fa scattare l'obbligo dell'art.~14. Il difetto va
+quindi valutato soprattutto rispetto all'Allegato~I (Parte~II per la gestione della segnalazione,
+Parte~I per la vulnerabilità sfruttabile nota). La conclusione cambierebbe se emergessero indizi di
+sfruttamento reale, per esempio box flashati sul campo o la credenziale condivisa usata da terzi: in
+quel caso decorrerebbero subito le 24~ore. È una scelta \emph{decide and defend}: va scritta e
+motivata, e la lettura opposta (prudente) è legittima se argomentata.
+\end{integrazione}
+
+\subsection{Azioni correttive e sanzioni}
+Il fabbricante che sa che un prodotto non è conforme deve adottare misure correttive, fino al ritiro o
+al richiamo (art.~13(21)), e cooperare con le autorità di vigilanza del mercato, che possono ordinare
+le stesse misure. Le sanzioni per la violazione dei requisiti essenziali e degli obblighi del
+fabbricante arrivano fino a 15 milioni di euro o al 2,5\% del fatturato mondiale annuo
+(art.~64(2)). È questa l'esposizione che interessa davvero al CdA: un'autorità può ordinare di
+togliere dal mercato i box installati?
+
+% ---------------------------------------------------------------------
+\section{Il lato GDPR in sintesi}
+
+\begin{itemize}
+  \item \textbf{Ruoli per flusso}: il ruolo decide chi doveva notificare cosa a settembre 2027, e il
+    template di E-12 dice il contrario di ciò che emerge dai fatti.
+  \item \textbf{Art.~25} (by design e by default): il box non permette di sospendere il tracciamento
+    fuori orario; la conformità del titolare (l'operatore) dipende da come il fabbricante ha costruito
+    il prodotto. Ciò che Sestante deve all'operatore è un prodotto che gli consenta di restare
+    proporzionato.
+  \item \textbf{Art.~28} e \textbf{artt.~44--46}: template con ruoli invertiti e un termine di 30
+    giorni per comunicare i breach; trasferimento verso gli USA senza transfer impact assessment.
+  \item \textbf{Art.~32}: cifratura presente; controllo degli accessi carente (MFA, 14 account,
+    sessioni di 30 giorni).
+  \item \textbf{Art.~33(1) e~33(5)}, \textbf{art.~34}: breach di settembre 2027 non notificato e
+    registro delle violazioni vuoto.
+  \item \textbf{Art.~35} e \textbf{artt.~12--14}: DPIA del 2025 non rifatta dopo l'arrivo della
+    dashboard HR; il conducente non sa a che cosa serve il suo punteggio.
+  \item \textbf{Artt.~37--39}: DPO con risorse minime e fuori dal percorso di escalation.
+\end{itemize}
+
+\begin{integrazione}[Ruolo di Sestante per i tre flussi]
+\begin{itemize}
+  \item \textbf{Flusso (a) -- posizione e viaggi}: per il servizio di tracciamento reso all'operatore
+    Sestante è \textbf{responsabile} (art.~28), perché l'operatore decide le finalità verso i propri
+    conducenti. Per lo scoring e il benchmarking venduto ad assicuratori tramite MetricLoop (E-15) le
+    finalità le decide Sestante, che diventa \textbf{titolare} per quella parte: quindi
+    \emph{entrambi}, distinguendo le finalità.
+  \item \textbf{Flusso (b) -- supporto, garanzia, RMA}: \textbf{titolare} dei propri registri e del
+    processo RMA che ha causato l'esposizione. Per i dati di viaggio trattati per conto dell'operatore,
+    però, la violazione andava comunicata al titolare senza ingiustificato ritardo (art.~33(2)),
+    non ``entro 30 giorni'' come nel template.
+  \item \textbf{Flusso (c) -- account e fatturazione}: \textbf{titolare}.
+\end{itemize}
+\end{integrazione}
+
+% ---------------------------------------------------------------------
+\section{Svolgimento ragionato}
+
+\begin{integrazione}[Registro dei finding candidati]
+Una proposta, con severità calcolata come esposizione $\times$ ampiezza. Bastano quattro finding
+solidi; gli altri possono finire tra le limitazioni o nella management letter.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X l l c}
+\toprule
+\textbf{\#} & \textbf{Condizione} & \textbf{Criterio} & \textbf{Evidenze} & \textbf{E$\times$A} \\ \midrule
+1 & Aggiornamenti OTA accettati senza verifica della firma e con rollback, contro quanto dichiara il
+  risk assessment; segnalazione respinta; libreria con CVE nota; nessuna SBOM &
+  CRA All.~I, Parte~II & E-02, 04, 07, 08 & 3$\times$3 Critical \\
+2 & Credenziale di manutenzione identica su tutti i box e shell attiva in produzione &
+  CRA All.~I, Parte~I & E-06, 07, 09 & 3$\times$3 Critical \\
+3 & Breach di settembre 2027 non notificato né registrato; RMA che non disattiva l'account cloud &
+  GDPR art.~33(1)--(5) & E-14, E-12 & 3$\times$2 High \\
+4 & Tracciamento fuori orario e score all'HR attivi di default; modalità privata mai realizzata &
+  GDPR art.~25 & E-10, 02, 11 & 2$\times$3 High \\
+5 & Template di accordo con ruoli invertiti e termine di 30 giorni, firmato da tutti i clienti &
+  GDPR art.~28(3)--(4) & E-12 & 2$\times$3 High \\
+6 & Fascicolo tecnico incompleto (11/18) e risk assessment non aggiornato & CRA All.~VII &
+  E-01, 02 & 2$\times$3 High \\
+7 & Trasferimento negli USA senza transfer impact assessment; informativa che non lo cita &
+  GDPR artt.~44--46 & E-15, 11 & 2$\times$3 High \\
+8 & Periodo di supporto non definito ma promesso (5 anni) sul sito; contatto PSIRT non pubblicato &
+  CRA art.~13 / All.~I, Parte~II & E-03, 05 & 2$\times$3 High \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Per l'esposizione dei finding~1 e~2 conta che, con questi difetti, la dichiarazione per le 8.000
+unità post-12/12/2027 \textbf{non è firmabile}; l'ampiezza è massima perché la stessa build e la
+stessa credenziale sono su ogni unità. Il finding~3 riguarda i conducenti di un solo operatore
+(ampiezza~2), ma il difetto RMA è sistemico e può ripetersi a ogni reso.
+
+\medskip\noindent\textbf{Mappatura A.8 (bonus).} 1 $\to$ A.8.24 (crittografia: firme) o A.8.8
+(vulnerabilità); 2 $\to$ A.8.5 (autenticazione sicura); 3 $\to$ nessun controllo A.8 (notifica e
+registro sono obblighi giuridici e organizzativi; la gestione degli incidenti sta nei controlli
+organizzativi A.5), ma il difetto RMA è vicino ad A.8.10 (cancellazione delle informazioni); 4, 5,
+7 $\to$ nessun controllo A.8 (scelte di finalità, di disegno o contrattuali); 6 $\to$ A.8.32 (gestione
+dei cambiamenti) in senso lato.
+\end{integrazione}
+
+\begin{integrazione}[Tested, no finding e controllo che funziona]
+\begin{itemize}
+  \item \textbf{Art.~14 CRA sulla segnalazione di agosto 2027}: esaminato e scartato sui fatti
+    disponibili (nessuna evidenza di sfruttamento malevolo), con il difetto valutato nel finding~1.
+  \item \textbf{Certificato ISO/IEC~27001 (E-16)}: esaminato come prova di conformità e scartato:
+    scope limitato al cloud, nessun valore come criterio CRA.
+  \item \textbf{Allegato~III e modulo~A (E-01)}: esaminato; scelta motivata di considerare il B2
+    prodotto di default, quindi il modulo~A non è di per sé un finding.
+  \item \textbf{Distributore (E-14)}: il reset e la rivendita li fa Iberia Telematics, ma la procedura
+    è di Sestante: il finding si scrive contro il fabbricante.
+  \item \textbf{Controllo che funziona}: cifratura a riposo (AES-256 con KMS) e in transito (TLS~1.3,
+    HSTS) nel cloud (E-13). Esiste, è implementata nella configurazione, era attiva all'esportazione
+    e copre tutti gli account. Il limite (controllo degli accessi carente) è un tema diverso.
+\end{itemize}
+\end{integrazione}
+
+\begin{integrazione}[Opinione e management letter]
+\begin{itemize}
+  \item \textbf{Opinione}: con due Critical aperti l'opinione senza rilievi è esclusa. La più
+    coerente con il playbook è \textbf{con rilievi} (\emph{qualified}): il fascicolo è riparabile, a
+    condizione di chiudere i finding~1 e~2 prima di firmare la dichiarazione. Un'opinione
+    \textbf{negativa} (\emph{adverse}) limitata alle 8.000 unità post-12/12/2027 è difendibile se il
+    registro è più pesante; va comunque distinta la posizione delle 38.000 unità precedenti, vincolate
+    solo all'art.~14.
+  \item \textbf{CdA}: oggi il fascicolo non sostiene la dichiarazione per le unità post-12/12/2027;
+    le azioni correttive (fino a ritiro o richiamo) sono un rischio concreto.
+  \item \textbf{Iberia Lease}: entro il 24/04/2028 si può confermare la conformità solo per unità
+    coperte da evidenze nuove (build con firma attiva, credenziali per dispositivo, SBOM, periodo di
+    supporto deciso, dichiarazione firmata), distinguendo i box della flotta mista per data di
+    immissione.
+  \item \textbf{T3}: nessuna opinione possibile. Prima di firmare servono il fascicolo completo
+    (Allegato~VII), un risk assessment sulla nuova architettura, la SBOM, la verifica della firma
+    attiva, le credenziali per dispositivo, il periodo di supporto e la scelta motivata del percorso
+    di valutazione (Allegato~III o modulo~A).
+  \item \textbf{Breach di settembre 2027}: rivalutarlo con la metodologia ENISA. A titolo indicativo:
+    90 giorni di viaggi di conducenti identificati sono dati comportamentali (DPC~2, o~3 se consentono
+    un profilo della vita quotidiana), con identificabilità piena (EI~1) e destinatario noto (CB tra
+    0 e 0,25): $SE \geq 2$, cioè almeno ``medio''. La conclusione ``rischio basso, veicoli non persone''
+    non regge. Quindi: notifica tardiva al Garante con i motivi del ritardo (art.~33(1)), iscrizione
+    nel registro (art.~33(5)), valutazione dell'art.~34, comunicazione all'operatore. Se si decide di
+    non notificare, la scelta va scritta e motivata con una valutazione, non con una frase in un'email.
+  \item \textbf{Tre azioni prioritarie}: firma OTA e anti-rollback, poi revoca della credenziale
+    condivisa via OTA (CTO); procedura breach con il DPO nell'escalation e RMA che disattiva l'account
+    (DPO e direzione); fascicolo, SBOM e periodo di supporto (responsabile prodotto). Formazione
+    misurabile: triage delle vulnerabilità per PSIRT e firmware; escalation dei breach per supporto e
+    ingegneria, verificata con un'esercitazione su un caso RMA.
+\end{itemize}
+\end{integrazione}
+
+% ---------------------------------------------------------------------
+\section{Errori tipici}
+
+Dal playbook e dalle slide di briefing:
+\begin{itemize}
+  \item frasi generiche come ``Sestante non è conforme'' o ``l'azienda non rispetta il GDPR'': conforme
+    a che cosa, per quali unità, da quando, per quali dati e quali persone?
+  \item ``Non c'è una SBOM'' o ``l'OTA è insicuro'' senza evidenza. Meglio: ``la verifica della firma
+    è presente nella libreria e disattivata nella build (E-07), mentre il risk assessment afferma che
+    gli aggiornamenti sono firmati (E-02)'';
+  \item mescolare la severità di audit con quella ENISA;
+  \item scrivere finding contro i clienti (gli operatori sono titolari dei dati dei propri
+    conducenti) o valutare il diritto del lavoro, che è fuori perimetro;
+  \item trattare il certificato ISO/IEC~27001 come prova di conformità;
+  \item prendere un'intervista per un fatto senza un documento che la confermi;
+  \item opinione senza rilievi accanto a un Critical aperto, o opinione ``dipende'';
+  \item più criteri nello stesso finding, o citazioni imprecise (un paragrafo dell'art.~33 non vale
+    l'altro);
+  \item dimenticare la limitazione sul T3 o ciò che non si è potuto testare;
+  \item forzare una mappatura A.8: ``nessun controllo A.8 è applicabile'' è spesso la risposta
+    corretta, perché metà dei problemi non sono controlli tecnici.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Collegamenti}
+\begin{itemize}
+  \item \textbf{Teoria CRA}: lezione del 02/11 (Capitolo~\ref{lez:2026-11-02}) e capitolo tematico
+    (Capitolo~\ref{cap:cra}): Allegato~I, prodotti importanti e critici, obblighi lungo la catena,
+    art.~14.
+  \item \textbf{Simulazione Pulse K} (Sezione~\ref{sec:pulsek}): stessi binari CRA--GDPR visti
+    dall'interno durante l'incidente; anche lì una DPIA mai aggiornata e una libreria obsoleta.
+  \item \textbf{Metodologia ENISA}: scheda di ripasso (Capitolo~\ref{cap:schede}).
+  \item \textbf{Cybersecurity Act} (Capitolo~\ref{lez:2026-11-09}): i certificati europei come via per
+    dimostrare la conformità dei prodotti critici e, in parte, di quelli importanti.
+  \item \textbf{Lab~3} (risk register ISO/IEC~27001): i controlli dell'Annex~A, qui usati solo per il
+    bonus.
+  \item \textbf{Scadenze}: tabella riassuntiva (Capitolo~\ref{cap:scadenze}).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Riferimenti agli allegati nel playbook}: in un punto l'Allegato~VIII è indicato come
+    ``dichiarazione di conformità'' e il modulo~A come ``Allegato~II''; altrove l'Allegato~VIII è
+    correttamente quello dei moduli. Nel testo del CRA il modello di dichiarazione UE dovrebbe essere
+    l'Allegato~V e l'Allegato~II riguardare le informazioni per l'utente: verificare sul testo
+    ufficiale.
+  \item \textbf{Numerazione degli articoli} citati dal playbook: art.~13(17) (punto di contatto),
+    art.~13(21) (azioni correttive), art.~21 (casi in cui gli obblighi del fabbricante si applicano ad
+    altri operatori), artt.~53--54 (poteri di vigilanza), art.~64(10). Verificare sul Reg.~(UE)
+    2024/2847.
+  \item \textbf{Modifica sostanziale} delle unità già immesse e \textbf{moduli di valutazione} per
+    classe di prodotto: contenuti di integrazione, non spiegati in aula.
+  \item \textbf{Calcolo ENISA} del breach di settembre 2027: valori indicativi, non discussi in aula.
+  \item Nel playbook un esempio sulla SBOM rimanda a E-09, mentre il foglio componenti è E-08:
+    probabile refuso.
+  \item La griglia di severità non può produrre il valore 8 (i fattori vanno da 1 a 3): la fascia
+    ``8--9 Critical'' coincide in pratica con 9.
+  \item Debrief del laboratorio (cinque domande delle slide): non ancora svolto in aula.
+\end{itemize}
+\end{verifica}

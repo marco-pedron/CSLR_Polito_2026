@@ -1,0 +1,325 @@
+% =====================================================================
+\lezione{28/09/2026}{GDPR (II): legittimo interesse, diritti, responsabili, accountability, art.~32 e DPIA}
+  {Prof.~Giuseppe Vaciago}
+  {interessato; legittimo interesse e videosorveglianza; diritti dell'interessato; sanzioni; data
+   retention; DPO; responsabile e sub-responsabile, Data Privacy Framework; accountability e stato
+   dell'arte; art.~32 e misure tecniche e organizzative; risk assessment, privacy by design e by default,
+   DPIA e consultazione preventiva}
+\label{lez:2026-09-28}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata. Durante la pausa la registrazione contiene
+conversazioni in italiano non pertinenti, ignorate. Slide di riferimento: \emph{02.~Cybersecurity Laws
+and Regulations -- II Privacy}, dal legittimo interesse fino al \emph{risk assessment} (la parte sul
+data breach, moduli M4--M5, è rinviata). In coda, uno scambio in italiano con uno studente collegato
+da remoto sul significato di \emph{formal assessment}.
+\end{nota}
+
+\section{Sintesi}
+Seconda parte del GDPR. Dopo un riepilogo e la definizione di \textbf{interessato}, il docente chiarisce
+che il \textbf{legittimo interesse} è del titolare, non dell'interessato, e passa ai diritti, alle
+\textbf{sanzioni} (con la distinzione 20M/4\% e 10M/2\%), alla conservazione dei dati e alla figura del
+DPO. Ampio spazio al \textbf{responsabile} e al \textbf{sub-responsabile} (con un caso reale di
+misurazione del piede con IA e il Data Privacy Framework UE--USA) e all'\textbf{accountability},
+legata allo \textbf{stato dell'arte}. Chiudono l'art.~32, le misure tecniche e organizzative e una
+prima introduzione al risk assessment (probabilità e gravità), alla privacy by design e by default e
+alla DPIA con consultazione preventiva (esempio dell'app Immuni).
+
+% ---------------------------------------------------------------------
+\section{Organizzazione: i laboratori}
+\begin{itemize}
+  \item Funzionamento: il docente presenta un caso (il primo sarà un \textbf{data breach}), gli studenti
+    lavorano in piccoli gruppi e poi presentano. I migliori gruppi (3--5, a seconda dei numeri)
+    ottengono \textbf{punti extra} per l'esame.
+  \item Due obiettivi: imparare un \textbf{ragionamento giuridico} semplice, diverso da quello tecnico,
+    e \textbf{parlare in pubblico}.
+  \item La grande maggioranza dei presenti è interessata. Decisione annunciata dopo la pausa: i
+    \textbf{prossimi due laboratori} si fanno \textbf{da remoto}, poi \textbf{dal 16 ottobre in
+    presenza}. Niente modalità ibrida: chi è collegato resta escluso dal lavoro di gruppo.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Riepilogo e definizione di interessato}
+Riepilogo della lezione del 25/09: ruoli, bilanciamento, Google Spain (``importante l'esempio, non il
+caso''), principi, trattamento (``ogni attività può essere un trattamento''), esenzione domestica,
+quattro pilastri, tre categorie di dati, consenso.
+
+L'\textbf{interessato} (\emph{data subject}) è la \textbf{persona fisica} a cui si riferiscono i dati,
+mai una persona giuridica. Il GDPR va rispettato da chi tratta i dati (titolare, responsabile); la
+persona fisica è chi il GDPR protegge. Siamo tutti interessati.
+
+% ---------------------------------------------------------------------
+\section{Il legittimo interesse}
+\begin{esame}
+Il legittimo interesse è \textbf{del titolare}, non dell'interessato: l'interessato ha
+\emph{diritti fondamentali}, non ``legittimi interessi''. È un errore frequente e una possibile domanda
+d'esame.
+\end{esame}
+
+\paragraph{Videosorveglianza.} Chiedere il consenso a ogni persona ripresa è impossibile (e in alcuni
+luoghi, come stadi e concerti, le telecamere sono imposte dalla legge). La base giuridica è il
+legittimo interesse, frutto di un bilanciamento tra la privacy di chi passa e l'interesse a
+ricostruire, ad esempio, un incidente stradale. Le slide ricordano che il bilanciamento resta
+obbligatorio anche nei casi tipici (banche, gioiellerie, distributori di benzina).
+
+\paragraph{Marketing ai clienti.} Un negozio di abbigliamento manda offerte a chi ha già comprato: da un
+lato il suo legittimo interesse verso un cliente, dall'altro il diritto di non essere disturbati. Serve
+il \textbf{balancing test}, caso per caso: è ragionevole proporre prodotti simili a quelli acquistati,
+non qualsiasi cosa (altrimenti è spam). Quando la base è il legittimo interesse esiste \textbf{sempre}
+il \textbf{diritto di opposizione} (il link ``unsubscribe'').
+
+\paragraph{Il legittimo interesse non vale per le categorie particolari.} Su domanda di uno studente:
+per i dati dell'art.~9 non si può usare il legittimo interesse (si veda l'elenco delle basi dell'art.~9
+nelle slide). Un'immagine di videosorveglianza che mostra una caratteristica visibile non è per questo
+un dato sanitario; una patologia non visibile sì.
+
+\subsection{Europa e Stati Uniti: due culture}
+Negli USA si può fare quasi tutto con i dati dei propri clienti, tranne venderli; si ha invece paura
+dello Stato (``Big Brother''). In Europa è il contrario: si accetta il trattamento pubblico e si teme
+quello privato. Per il docente entrambe le posizioni sono sbagliate: grandi aziende tecnologiche (e ora
+quelle dell'IA) hanno un peso economico superiore a molti Stati, e l'unica strada è la
+\textbf{cooperazione pubblico--privato} e il bilanciamento. Esempio: i dati sanitari dei wearable
+potrebbero alimentare la prevenzione, ma il quadro privacy lo rende difficilissimo, mentre molti
+dispositivi a basso costo cedono comunque i dati a Paesi non democratici.
+
+% ---------------------------------------------------------------------
+\section{I diritti dell'interessato}
+\begin{itemize}
+  \item \textbf{Accesso}: riguarda solo i \emph{propri} dati. Esempio del docente: lo studente può
+    accedere ai dati che ha fornito all'esame, ma la valutazione del docente non è un suo dato.
+  \item \textbf{Rettifica} dei dati inesatti.
+  \item \textbf{Cancellazione} (diritto all'oblio).
+  \item \textbf{Limitazione del trattamento}: poco usata e difficile da applicare.
+  \item \textbf{Portabilità}: ricevere i dati in formato strutturato. Fondamentale in teoria, molto
+    complessa in pratica: alla prima richiesta di un attivista austriaco, Facebook consegnò i dati su
+    migliaia di pagine stampate. Per il docente la portabilità richiede interoperabilità e open
+    source.
+  \item \textbf{Opposizione}: chiedere che cessi un trattamento, salvo motivi prevalenti del titolare.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Sanzioni}
+In generale fino a \textbf{20 milioni di euro o il 4\%} del fatturato mondiale annuo; l'autorità
+usa il criterio che dà l'importo più alto (per un gruppo come Google, il 4\%).
+
+\begin{esame}
+\textbf{Domanda insidiosa}: per le violazioni delle \textbf{misure di sicurezza}, quindi anche per i
+\textbf{data breach}, il tetto è la metà: \textbf{10 milioni di euro o il 2\%} del fatturato. ``Avrete
+probabilmente una domanda sul data breach all'esame.''
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Compliance in quattro regole e data retention}
+Le quattro regole operative delle slide (non fondamentali per l'esame, ma utili): analizzare quali dati
+si raccolgono e dove (\textbf{registro dei trattamenti}, seguendo il flusso dei dati); verificare se il
+tempo di conservazione è giustificato (\textbf{policy di conservazione e cancellazione}); informare i
+clienti su come modificare o cancellare i dati (informativa); monitorare chi accede ai dati.
+
+\paragraph{Per quanto tempo si conserva un CV?} Di norma \textbf{da uno a due anni} per un'azienda;
+circa \textbf{sei mesi} per le agenzie per il lavoro, che ne ricevono moltissimi. Perché cancellare?
+\begin{itemize}
+  \item \textbf{sicurezza}: in caso di fuga di dati, ciò che non serviva non doveva esserci;
+  \item \textbf{esattezza}: un CV vecchio non riflette le competenze attuali e può danneggiare la
+    persona.
+\end{itemize}
+Ogni categoria di dati ha un tempo diverso (in Italia, ad esempio, gli attestati di formazione possono
+servire al lavoratore per decenni a fini previdenziali). E la retention va coordinata con i
+\textbf{backup}: un backup che conserva dati oltre i termini viola la norma. Per il docente la
+retention è ``il vero caos del GDPR'' ed è un problema tecnico, quindi degli ingegneri.
+
+% ---------------------------------------------------------------------
+\section{I soggetti del GDPR e il DPO}
+Interessato, titolare, responsabile, \textbf{DPO} (\emph{Data Protection Officer}), autorità di
+controllo. Il DPO (art.~37) può essere interno o esterno ed è \textbf{obbligatorio} per:
+\begin{itemize}
+  \item autorità e organismi pubblici;
+  \item titolari o responsabili le cui attività principali richiedono il \textbf{monitoraggio regolare
+    e sistematico} degli interessati su larga scala;
+  \item titolari o responsabili le cui attività principali consistono nel trattamento \textbf{su larga
+    scala} di categorie particolari o di dati giudiziari.
+\end{itemize}
+Per il docente, nel 2026, con NIS2, DORA, Cybersecurity Act, AI Act e la \emph{shadow AI}, il DPO
+dovrebbe esserci in ogni azienda. Servono competenze giuridiche ma anche \textbf{tecniche} (reti,
+storage, flussi di dati): oggi il 90\% dei DPO sono avvocati, ma il ruolo sarebbe adatto agli
+ingegneri. Il DPO deve essere \textbf{indipendente}: risorse adeguate, nessuna istruzione dal titolare
+sui propri compiti, nessuna penalizzazione per averli svolti, nessun conflitto di interessi; non è
+personalmente responsabile della non conformità. Nella pratica subisce le pressioni del CEO, che vede
+compliance e sicurezza solo come costi. Il docente cita una truffa da decine di milioni di euro ai
+danni di Fideuram con la voce di un avvocato clonata dall'IA: episodi così stanno cambiando la
+percezione. La decisione finale resta comunque del titolare.
+
+% ---------------------------------------------------------------------
+\section{Responsabile e sub-responsabile}
+\paragraph{Responsabile (art.~28).} Il criterio per distinguerlo dal titolare è il \textbf{potere
+decisionale} sul trattamento. Il responsabile deve offrire \textbf{garanzie sufficienti} su misure
+tecniche e organizzative adeguate (art.~28(1)). Il contratto (il \emph{Data Processing Agreement},
+art.~28(3)) deve indicare: oggetto e durata, natura e finalità, tipo di dati e categorie di
+interessati, obblighi e diritti del titolare.
+
+\subsection{Caso: la misura del piede con l'IA}
+Un'azienda francese offre ai siti di calzature un servizio: si fotografa il piede con lo smartphone e
+l'IA indica la taglia giusta (riducendo i resi). L'azienda sostiene di essere \textbf{titolare}, perché
+vuole usare le foto per migliorare il servizio e addestrare l'IA.
+\begin{itemize}
+  \item Ragionamento del docente: bisogna guardare all'\textbf{interessato}. Il cliente vuole comprare
+    un paio di scarpe, non misurarsi il piede; la finalità è del marchio di calzature, che è il
+    titolare. Il fornitore è \textbf{responsabile}.
+  \item La \textbf{contitolarità} è possibile, ma nel bilanciamento non è nell'interesse del
+    consumatore cedere a un terzo un database di milioni di immagini del corpo (i termini prevedono
+    l'uso per l'addestramento dell'IA; esistono anche rischi legati a usi feticistici). Con un semplice
+    rapporto titolare--responsabile, il titolare può vietare usi ulteriori e fissare i tempi di
+    conservazione.
+  \item Una decisione giuridica sui ruoli può cambiare la sorte dei dati di milioni di persone.
+\end{itemize}
+
+\paragraph{Sub-responsabile.} Il responsabile può ricorrere a un altro responsabile solo con
+l'autorizzazione scritta, specifica o generale, del titolare (art.~28(2)), imponendogli gli stessi
+obblighi; il responsabile iniziale resta pienamente responsabile verso il titolare (art.~28(4)).
+Esempi: il fornitore francese che usa un provider di IA; un'agenzia di selezione che fa il backup dei
+CV su Microsoft. Il titolare deve sapere quali sub-responsabili ci sono e \textbf{dove risiedono i
+dati}: la catena (responsabile, sub-responsabile, sub-sub-responsabile\ldots) va seguita, e secondo il
+docente moltissimi incidenti nascono da sub-responsabili di cui il titolare non era consapevole.
+
+\paragraph{Data Privacy Framework.} Elenco delle aziende statunitensi aderenti al quadro UE--USA per il
+trasferimento dei dati. Se il fornitore è nell'elenco con stato attivo (es.\ Microsoft, OpenAI), il
+trasferimento è più semplice; se non c'è, servono accordi specifici come le \textbf{clausole
+contrattuali standard}. Poiché la grande maggioranza dei fornitori di storage e trattamento è
+statunitense, la verifica conta molto. Non è una domanda d'esame.
+
+% ---------------------------------------------------------------------
+\section{Accountability e stato dell'arte}
+\textbf{Accountability} significa saper sempre spiegare, in modo legale e adeguato, \textbf{perché} si
+è presa una decisione. Nella zona grigia bisogna poter dimostrare di stare dalla parte bianca.
+L'ingegnere tende a risolvere il problema; il giurista guarda anche al processo e alle conseguenze
+(esempio del docente: una ristrutturazione ``efficiente'' delle ferrovie con prepensionamenti di massa,
+che decenni dopo pesa sul sistema pensionistico). Con l'IA, che decide in modo probabilistico e poco
+spiegabile, tracciare il processo decisionale è ancora più importante.
+
+\begin{esame}
+Ciò che il docente vuole vedere dagli studenti: in un incidente si decide in pochi minuti e la
+decisione può rivelarsi sbagliata, ma bisogna \textbf{documentarla e renderla tracciabile}, scrivendo
+perché la si prende. ``Non diventate avvocati: serve risolvere il problema, ma documentate le
+decisioni.''
+\end{esame}
+
+\paragraph{Stato dell'arte.} Con un budget illimitato si proteggerebbe tutto: le misure vanno valutate
+con un budget limitato e devono essere \textbf{economicamente sostenibili}. Lo stato dell'arte cambia:
+quindici anni fa l'\textbf{autenticazione a più fattori} era un'idea innovativa, oggi è di fatto un
+obbligo per il titolare, e senza MFA si rischia la sanzione. L'interessato, come privato, è libero di
+non usarla (anche se è fortemente consigliata).
+
+\begin{esame}
+Due parole da ricordare: \textbf{accountability} e \textbf{stato dell'arte} (spiegati bene
+nell'art.~32).
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Art.~32: sicurezza del trattamento}
+Tenendo conto dello stato dell'arte, dei costi di attuazione, della natura, dell'ambito, del contesto e
+delle finalità del trattamento e dei rischi per i diritti e le libertà delle persone, titolare e
+responsabile mettono in atto \textbf{misure tecniche e organizzative adeguate al rischio}. L'elenco è
+\textbf{aperto} (pseudonimizzazione, cifratura, riservatezza e integrità, disponibilità e resilienza,
+test periodici): prima c'era una lista chiusa di misure, ma con nuove vulnerabilità ogni settimana una
+lista non regge. Bisogna decidere ogni volta e saper spiegare perché la soluzione scelta è adeguata.
+
+\begin{integrazione}[la vecchia lista di misure]
+La ``lista'' a cui il docente si riferisce è l'Allegato~B al D.lgs.~196/2003 nella versione originaria
+(\emph{Disciplinare tecnico in materia di misure minime di sicurezza}), superato con l'arrivo del GDPR e
+del suo approccio basato sul rischio.
+\end{integrazione}
+
+\begin{itemize}
+  \item Va verificata la sicurezza del \textbf{responsabile}, che materialmente detiene i dati: la scelta
+    tra provider (grandi hyperscaler statunitensi o provider europei) è una decisione caso per caso,
+    con vantaggi e svantaggi di compliance e sicurezza.
+  \item Chiunque agisca sotto l'autorità di titolare o responsabile tratta i dati solo su istruzione
+    (art.~32(4)): servono \textbf{istruzioni e formazione}.
+  \item Per ruoli e responsabilità in caso di incidente il docente richiama la matrice \textbf{RACI}
+    (chi è responsabile, chi decide, chi è consultato, chi è informato): come in un'evacuazione
+    antincendio, ognuno deve sapere cosa fare.
+\end{itemize}
+
+\paragraph{Misure tecniche e organizzative (report ENISA 2021).} Tecniche: cultura della
+cybersicurezza, formazione, rapporti con terze parti (anche con ENISA), procedura di data breach,
+accesso sicuro ai sistemi, sicurezza dei dispositivi, della rete, fisica, backup, cloud, siti web,
+condivisione delle informazioni. Organizzative: modello organizzativo, informative, policy (retention,
+data breach, valutazione dei rischi), privacy by design, consensi, documentazione (registro dei
+trattamenti, DPA). Le misure organizzative sono ``pezzi di carta'', ma concreti.
+
+\begin{esame}
+Conoscere la \textbf{differenza tra misure tecniche e misure organizzative}. Gli elenchi delle slide
+sono solo esempi e non vanno imparati a memoria.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Risk assessment: prima introduzione}
+Il docente presenta una visione ``più giuridica'' (\emph{anticipatory compliance}); Gianluca ne darà
+una più ibrida, tecnico-giuridica, e la \textbf{definizione di riferimento di risk assessment} arriverà
+con lui tra qualche settimana.
+\begin{itemize}
+  \item \textbf{Analisi preliminare}: mappare sistemi \emph{e} dati. Il tecnico guarda ai sistemi, ma
+    la qualità dei dati cambia tutto.
+  \item \textbf{Strategia sui dati} e \textbf{piano di remediation}: portare il rischio, ad esempio,
+    da 8 a 3 su 10.
+  \item \textbf{Minimizzazione e approccio by design}.
+\end{itemize}
+
+\paragraph{Dati finanziari: ENISA e GDPR.} Per il GDPR i dati finanziari sono \textbf{dati comuni};
+nella metodologia ENISA di severity assessment (che si vedrà nel laboratorio) pesano più dei dati
+semplici, perché nasce da una logica di cybersicurezza vicina al settore finanziario: l'obiettivo
+finale del criminale è quasi sempre il denaro.
+
+\paragraph{By design e by default.} \emph{By design}: valutare la privacy fin dal primo momento della
+progettazione, non a prodotto finito (``a quel punto è troppo tardi''). \emph{By default}: per
+impostazione predefinita si trattano solo i dati necessari; esempio dell'\textbf{opt-in} europeo
+(serve il tuo sì) contro l'\textbf{opt-out} statunitense (si tratta finché non ti opponi).
+
+\paragraph{Il modello in tre fasi delle slide.} Valutazione generale (artt.~24 e 32) e approccio by
+design/by default (art.~25); valutazione formale (art.~35, rischio elevato); consultazione preventiva
+(art.~36); compliance ed enforcement (art.~83). Il docente avverte che questa slide è
+``discutibile'' e di non prenderla come definizione definitiva.
+
+\paragraph{DPIA e consultazione preventiva: l'esempio Immuni.} L'app di contact tracing del periodo
+COVID fu considerata ad alto rischio: dopo la DPIA il rischio residuo restava elevato, quindi serviva la
+\textbf{consultazione preventiva} con il Garante, che indicò ulteriori misure di mitigazione prima del
+via libera. Dopo l'approvazione il lavoro non finisce: la compliance va \textbf{monitorata di continuo},
+perché ogni applicazione può generare nuovi rischi.
+
+\paragraph{Probabilità e gravità.} Ogni valutazione del rischio si basa su due parole:
+\textbf{probabilità} (\emph{likelihood}) e \textbf{gravità} (\emph{severity}). Le misure tecniche e
+organizzative servono a mitigare il rischio così stimato; l'approccio è circolare (valutazione,
+misure, test).
+
+\subsection{Dopo la lezione: valutazione generale e specifica}
+Nello scambio in italiano con uno studente collegato si chiarisce:
+\begin{itemize}
+  \item la \textbf{valutazione generale} (artt.~24 e 32) riguarda tutto l'ambiente IT e ogni misura di
+    sicurezza, in modo continuo; la valutazione dell'\textbf{art.~35} (DPIA) riguarda un
+    \textbf{trattamento specifico} (es.\ un nuovo smartwatch) ed è più dettagliata. Più che
+    ``formale'', sarebbe meglio chiamarla ``specifica'';
+  \item probabilità $\times$ gravità dà il \textbf{rischio inerente}; applicando le misure di mitigazione
+    si ottiene il \textbf{rischio residuo}, cioè quello che resta dopo le misure. Se resta alto, si va dall'autorità, che può indicare altre
+    misure o vietare il trattamento;
+  \item con l'AI Act, invece, il livello di rischio dei sistemi ad alto rischio non si autodefinisce: è
+    la norma a classificarli (es.\ IA sul posto di lavoro).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Calendario dei laboratori}: dalla trascrizione, i due lab da remoto dovrebbero essere il
+    2 e il 9 ottobre, poi in presenza dal 16 ottobre. Il 2/10 si è poi svolta solo una simulazione (vedi
+    lezione del 02/10).
+  \item \textbf{Sanzione a Google per Street View}: il docente cita una sanzione di 400 milioni di euro
+    ``di ieri'' a Google Ireland. Notizia non verificata.
+  \item \textbf{Data Privacy Framework}: secondo il docente un noto fornitore di IA non compare
+    nell'elenco. Da verificare sul sito ufficiale, perché la situazione cambia nel tempo.
+  \item \textbf{Fideuram}: l'importo della truffa con voce clonata non è affidabile nella trascrizione.
+  \item \textbf{Modello in tre fasi}: il docente ha dichiarato la slide ``discutibile''; la definizione
+    di risk assessment da usare all'esame è quella che darà Gianluca.
+  \item \textbf{Riferimenti dell'art.~28}: paragrafi (1), (2), (3), (4) ripresi dalle slide; il docente
+    non li ha letti in aula.
+\end{itemize}
+\end{verifica}

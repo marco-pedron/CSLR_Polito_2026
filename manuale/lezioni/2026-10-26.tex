@@ -1,0 +1,361 @@
+% =====================================================================
+\lezione{26/10/2026}{Risk management ISO e introduzione al Cyber Resilience Act}
+  {Gianluca Gilardi; Prof.~Giuseppe Vaciago}
+  {minacce e threat intelligence; scale di probabilità e impatto; prioritizzazione; metodologia ENISA
+   per i dati personali; ISO vs ENISA; risk register; opzioni di trattamento; Statement of
+   Applicability; piano di trattamento; casi di digital forensics su dispositivi smart; CRA: ambito,
+   esclusioni, requisiti essenziali, prodotti importanti e critici, obblighi della filiera, segnalazione;
+   briefing del laboratorio~3}
+\label{lez:2026-10-26}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata (inizio con prove audio; pausa intorno ai
+minuti 63--78). Slide di riferimento: \emph{06.~27001\_2026\_2310} (\emph{Risk Management}) per la prima
+parte, \emph{05.~PoliTO\_CRA} per la seconda; briefing del laboratorio in
+\texttt{lab/lab\_03/materiale}. La parte del CRA prosegue e si conclude nella lezione del 02/11
+(Capitolo~\ref{lez:2026-11-02}).
+\end{nota}
+
+\section{Sintesi}
+Tre blocchi. Gianluca completa il \textbf{risk management secondo la ISO}: scale, prioritizzazione,
+confronto con la metodologia ENISA per i dati personali, contenuto del risk register, opzioni di
+trattamento, Statement of Applicability e piano di trattamento. Il professore introduce poi il
+\textbf{Cyber Resilience Act} partendo da casi in cui dispositivi smart sono diventati prove in giudizio,
+per mostrare quanto IoT e dispositivi indossabili siano sottovalutati sul piano della sicurezza; segue la
+prima metà delle slide (ambito, esclusioni, requisiti, filiera, segnalazione). Chiude il briefing del
+laboratorio~3 sul risk register.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item \textbf{Laboratorio~3, venerdì 30/10}: compilazione di un risk register ISO~27001. Materiale nella
+    cartella della piattaforma ``lab 2026 1030'': briefing (PDF), playbook (Markdown) e una copia di prova
+    del file Excel senza scenari, per esercitarsi. Il playbook va letto prima.
+  \item Domande sull'esercitazione: per email a Gianluca, o in aula il venerdì.
+  \item Il professore resta disponibile durante la pausa per chi vuole discutere il laboratorio~2.
+  \item La parte finale del CRA (slide residue e un ``meme'' sulla filiera) è rinviata al lunedì
+    successivo.
+\end{itemize}
+
+% =====================================================================
+\section{Risk management ISO (Gianluca)}
+% =====================================================================
+
+\subsection{Minacce, vulnerabilità e threat intelligence}
+Le minacce sfruttano vulnerabilità tecniche (individuabili con penetration test e scansioni) o umane
+(ingegneria sociale). L'ultima revisione della 27001 chiede di individuare le proprie \textbf{fonti di
+threat intelligence}: non si deve conoscere ogni minaccia da soli, ma attingere a fonti esterne, come i
+bollettini dell'ACN. La probabilità di sfruttamento di molte vulnerabilità note è già stimata nelle fonti
+di threat intelligence.
+
+\subsection{Scale, prioritizzazione, propensione al rischio}
+\begin{itemize}
+  \item Le matrici sono quasi sempre \textbf{qualitative}: alto, medio, basso (al massimo quattro livelli,
+    con ``molto alto''); le scale quantitative sono rare.
+  \item Formula di base: \textbf{Rischio = Impatto $\times$ Probabilità}.
+  \item Prioritizzare: di solito si parte dal rischio complessivo, ma conta anche il tempo di attuazione
+    delle contromisure. Le \emph{quick win} possono passare avanti a rischi più alti che richiedono
+    progetti lunghi. Decide il vertice (il board), che però chiede a chi valuta costi, tempi e proposta di
+    priorità.
+  \item La ISO \textbf{non fissa} alcuna matrice: si deve essere coerenti e saper difendere le scelte. La
+    più usata è la \textbf{3$\times$3}.
+  \item \textbf{Risk appetite} (slide): disponibilità complessiva ad assumere rischi, decisione strategica
+    del board. \textbf{Risk tolerance}: livello accettato per singole attività o processi, livello
+    operativo con soglie specifiche.
+\end{itemize}
+
+\paragraph{Livelli di impatto sull'organizzazione (indicazioni del docente).} Basso: perdita economica
+limitata, nessun fermo operativo, recupero facile. Medio: un ``mal di testa'' misurabile (sanzioni, fermo
+limitato nel tempo) ma superabile. Alto (o molto alto): evento che può mettere a rischio
+\textbf{l'esistenza stessa} dell'organizzazione, come la perdita totale dei dati senza backup.
+
+\subsection{La metodologia ENISA per i dati personali}
+ENISA non ha pubblicato solo la metodologia di severità dei breach, ma anche linee guida per le PMI sulla
+valutazione del rischio dei trattamenti. Sono pensate per i dati personali, ma ogni dato personale è
+un'informazione: il metodo è un buon punto di partenza per costruirne uno proprio.
+\begin{enumerate}
+  \item \textbf{Contesto del trattamento}: quali dati, finalità, mezzi, luogo (on premise o cloud, con
+    rischi di terze parti), categorie di interessati, destinatari; tutte le fasi: raccolta, conservazione,
+    uso, trasferimento, cancellazione. Output: il perimetro della valutazione.
+  \item \textbf{Impatto sugli individui}, su quattro livelli (basso, medio, alto, molto alto), valutato
+    separatamente per perdita di riservatezza, integrità e disponibilità: \textbf{si prende il più alto}.
+  \item \textbf{Probabilità della minaccia}, su quattro aree (risorse di rete e tecniche; processi e
+    procedure; persone e terze parti; settore e dimensione), ciascuna con punteggio 1--3. Totale: 4--5
+    bassa, 6--8 media, 9--12 alta. Le definizioni sono qualitative (``improbabile'', ``ragionevole
+    possibilità'', ``probabile''), senza percentuali.
+  \item \textbf{Valutazione del rischio} con la matrice probabilità $\times$ impatto.
+\end{enumerate}
+
+\begin{center}
+\small
+\textbf{Matrice ENISA (slide)}\par\smallskip
+\begin{tabular}{llll}
+\toprule
+\textbf{Probabilità} & \textbf{Impatto basso} & \textbf{Impatto medio} & \textbf{Impatto alto/molto alto} \\ \midrule
+Bassa & basso & medio & alto \\
+Media & medio & alto & alto \\
+Alta  & alto & alto & alto \\ \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{ISO 27001 e ENISA a confronto}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Aspetto} & \textbf{ISO/IEC 27001} & \textbf{ENISA (dati personali)} \\ \midrule
+Ambito & sicurezza delle informazioni in generale & trattamenti di dati personali \\
+Impatto & sull'organizzazione (triade CIA) & sui diritti e le libertà degli individui \\
+Calcolo & metodologie libere & approccio strutturato in 4 passi \\
+Minacce & categorie generali & questionari per contesto \\
+Controlli & 93 controlli (Allegato A) & misure proporzionate al livello di rischio \\
+Conformità & certificazione ISO & art.~32 GDPR \\ \bottomrule
+\end{tabularx}
+\end{center}
+I due approcci si usano spesso insieme: ENISA per i trattamenti di dati personali, ISO per l'ISMS, un
+unico registro con doppia valutazione. La metodologia ENISA è apprezzata anche nella comunità ISO.
+
+\subsection{Il risk register}
+Non esiste un formato obbligatorio (Excel o piattaforme SaaS). Campi che, per esperienza, vanno considerati
+irrinunciabili:
+\begin{itemize}
+  \item \textbf{ID univoco} del rischio, per tracciarlo in tutti i documenti e progetti;
+  \item asset coinvolti, minaccia, vulnerabilità;
+  \item probabilità e impatto \textbf{inerenti} e, dopo i controlli, \textbf{residui};
+  \item livello di rischio calcolato con la matrice;
+  \item \textbf{risk owner}: chi decide e firma il trattamento e ne risponde;
+  \item trattamento proposto (misure già adottate e da adottare).
+\end{itemize}
+
+\subsection{Opzioni di trattamento e controlli}
+\begin{itemize}
+  \item \textbf{Mitigare} (ridurre): controlli che riducono probabilità o impatto; è l'opzione più comune.
+  \item \textbf{Accettare}: il rischio rientra nella propensione al rischio (vale per l'inerente o per il
+    residuo); richiede approvazione formale.
+  \item \textbf{Evitare}: rinunciare all'attività che genera il rischio.
+  \item \textbf{Trasferire}: condividere il rischio con un terzo (assicurazione, outsourcing). Non elimina
+    la responsabilità: anche il trasferimento è una decisione di cui si risponde e che deve essere coerente
+    con la propensione al rischio. La \emph{shared responsibility matrix} dei cloud provider è una forma di
+    trasferimento parziale.
+\end{itemize}
+La 27001 dà i nomi dei controlli, la 27002 i mezzi per attuarli (es.\ controllo d'accesso attuato con
+l'MFA). \textbf{Tipi di controllo}: preventivi (VA, penetration test), detective (IDS/IPS, DLP),
+correttivi (disaster recovery, business continuity).
+
+\subsection{Statement of Applicability e piano di trattamento}
+\paragraph{SoA.} Documento \textbf{obbligatorio} per la conformità 27001: elenca tutti i controlli
+dell'Allegato~A, dichiara se ciascuno è applicabile, ne giustifica inclusione o esclusione e ne indica lo
+stato di attuazione. Documenta le decisioni prese nel trattamento del rischio. Per Gianluca è ancora più
+importante saper giustificare perché un controllo \textbf{non} è attuato; l'auditor può contestare il
+legame tra un controllo e un rischio e imporre di correggere la SoA.
+
+\paragraph{Piano di trattamento.} Per ogni rischio da trattare: opzione scelta, azioni concrete, owner di
+ogni azione (accountability), tempi di completamento, risorse (budget e personale: il management chiederà
+sempre ``quanto costa?''), giustificazione. La giustificazione discende in gran parte dalla propensione al
+rischio: si accetta perché sotto soglia; si mitiga perché l'inerente è sopra soglia e i controlli portano il
+residuo entro la soglia; si trasferisce ciò che resta fuori dal proprio controllo; si evita quando nessun
+residuo è accettabile. La matrice \textbf{RACI} (responsabile, accountable, consultato, informato) è
+fondamentale nella procedura di gestione dei data breach, ma non è richiesta per il piano di trattamento.
+
+\paragraph{Monitoraggio continuo.} I rischi cambiano, nascono e muoiono: il registro non si chiude in un
+cassetto. La threat intelligence dimostra all'auditor l'attenzione continua al rischio.
+
+\begin{esame}
+\textbf{Messaggi chiave del risk management (slide finali):} è il fondamento della cybersicurezza; servono
+asset, minacce, vulnerabilità, impatto e probabilità; si segue un processo strutturato (ISO, NIST, FAIR,
+ENISA: non serve reinventare la ruota); il trattamento è \textbf{strategico}, non solo tattico (non ha
+senso spendere per mitigare un processo che verrà dismesso a breve); le decisioni si documentano nella
+\textbf{SoA}; il monitoraggio è continuo.
+\end{esame}
+
+% =====================================================================
+\section{Cyber Resilience Act (Prof.~Vaciago)}
+% =====================================================================
+
+\subsection{Introduzione: i dispositivi smart come fonte di prova e di rischio}
+Fuori programma, per introdurre il tema. Ogni dispositivo digitale tocca due ambiti: \textbf{digital
+forensics} e \textbf{cybersecurity}. Le stesse informazioni utili alla polizia sono utili a chi vuole
+commettere un reato.
+\begin{itemize}
+  \item \textbf{Caso Fitbit}: in un'indagine per omicidio i dati dei braccialetti dei coniugi hanno
+    smentito la versione del marito, che ha poi confessato.
+  \item \textbf{Caso Amazon Echo}: la polizia cercava registrazioni ambientali; Amazon ha chiarito che non
+    registra in continuo (solo dopo la parola di attivazione o per attivazioni accidentali). L'aspetto
+    curioso: inizialmente ha negato i dati sostenendo che solo il proprietario potesse chiederli.
+  \item \textbf{Smart TV}: studi recenti (il professore cita la ricercatrice Anna Maria Mandalari)
+    mostrano funzioni nascoste che attivano la telecamera per rilevare le reazioni degli spettatori;
+    erano previste nelle condizioni d'uso.
+  \item \textbf{Caso Ross Compton}: accusato di aver incendiato la propria casa per frodare
+    l'assicurazione, è stato condannato anche grazie ai dati del suo pacemaker (battito incompatibile con
+    la sua versione). Dibattito sull'uso processuale dei dati sanitari.
+\end{itemize}
+Il professore richiama il rischio legato alla quantità di dati sanitari ceduti spontaneamente a
+dispositivi e assistenti di IA, spesso in mano a soggetti statunitensi o cinesi, e la superficie
+d'attacco offerta da oggetti come termostati o pacemaker. Opinione del docente: il CRA è più importante
+di AI Act e NIS2, anche se meno ``di moda''.
+
+\subsection{CRA e NIS2: prodotto contro organizzazione}
+\begin{itemize}
+  \item \textbf{NIS2} riguarda le reti e le \textbf{aziende}; è una \textbf{direttiva}, attuata in Italia con
+    il D.Lgs.~138/2024 (in Italia i soggetti obbligati sono, secondo il docente, circa 20.000).
+  \item \textbf{CRA} riguarda il \textbf{prodotto}; è un \textbf{regolamento}, direttamente applicabile in
+    tutti gli Stati membri.
+\end{itemize}
+Obiettivo: tutelare consumatori e imprese che acquistano o usano prodotti o software con una componente
+digitale, con requisiti obbligatori per fabbricanti e rivenditori. Problemi affrontati: livello di
+sicurezza inadeguato e aggiornamenti insufficienti; impossibilità per gli utenti di capire quali prodotti
+siano sicuri. La sicurezza è la prima voce su cui si risparmia per tenere basso il prezzo. Soluzioni:
+regole armonizzate per l'immissione sul mercato, requisiti lungo progettazione, sviluppo e manutenzione,
+\textbf{dovere di diligenza per l'intero ciclo di vita}. Il considerando~3 spiega perché serve: né il
+Cybersecurity Act né la NIS2 coprono direttamente requisiti obbligatori di sicurezza dei prodotti.
+
+\subsection{Ambito di applicazione}
+Il CRA si applica ai \textbf{prodotti con elementi digitali messi a disposizione sul mercato} il cui uso
+previsto o ragionevolmente prevedibile include una \textbf{connessione dati} diretta o indiretta, logica o
+fisica, a un dispositivo o a una rete.
+\begin{itemize}
+  \item \emph{Prodotto con elementi digitali}: prodotto software o hardware e le relative soluzioni di
+    elaborazione dati da remoto, inclusi i componenti immessi sul mercato separatamente.
+  \item Connessione \emph{logica} (tramite interfaccia software), \emph{fisica} (cavi, onde radio,
+    interfacce elettriche, ottiche, meccaniche), \emph{indiretta} (come parte di un sistema più ampio
+    collegabile).
+\end{itemize}
+
+\begin{esame}
+\textbf{Il software è un prodotto ai fini del CRA.} Errore tipico all'esame: pensare solo a smartwatch e
+smart TV ed escludere le applicazioni. Le due parole chiave sono \textbf{mercato} (messa a disposizione
+sul mercato, cioè prospettiva commerciale) e \textbf{connessione}.
+\end{esame}
+
+\subsection{Esclusioni}
+\begin{itemize}
+  \item Prodotti già disciplinati da norme settoriali (es.\ regolamento sui \textbf{dispositivi medici}):
+    il CRA può essere limitato o escluso se la disciplina settoriale è coerente con il quadro complessivo e
+    garantisce un livello di protezione pari o superiore; la Commissione può chiarire con atti delegati.
+    Un anello o un orologio smart non è un dispositivo medico; il confine resta discusso (in futuro alcuni
+    sistemi di IA generativa potrebbero esservi ricondotti).
+  \item \textbf{Pezzi di ricambio} identici, fabbricati secondo le stesse specifiche.
+  \item Prodotti sviluppati o modificati esclusivamente per \textbf{sicurezza nazionale o difesa}, o per
+    trattare informazioni classificate.
+\end{itemize}
+Per l'esame basta sapere che esiste un'esclusione generale a favore delle norme settoriali più specifiche.
+
+\subsection{Approccio basato sul rischio e requisiti essenziali}
+Il fabbricante deve svolgere un \textbf{cybersecurity risk assessment} del prodotto, che informa tutte le
+fasi del ciclo di vita, è documentato e aggiornato durante il periodo di supporto e considera uso previsto e
+prevedibile, condizioni d'uso, applicabilità dei requisiti e gestione delle vulnerabilità. Rispetto a un
+risk assessment su un processo (es.\ selezione del personale), quello sul dispositivo è
+\textbf{profondamente tecnico}: bisogna entrare in ogni processo del dispositivo e nella sua filiera di
+fornitori.
+
+\paragraph{Uso prevedibile.} Il fabbricante non può conoscere tutti gli usi futuri; quando emerge un uso non
+previsto, una risposta è aggiornare le condizioni d'uso. Il professore cita l'esempio di un assistente di
+IA generativa le cui condizioni sono state aggiornate per escludere che si sostituisca a un giudice.
+
+\paragraph{Requisiti per l'immissione sul mercato.} Il prodotto deve rispettare i requisiti essenziali
+dell'\textbf{Allegato~I, Parte~I} (se installato, mantenuto e usato correttamente, con gli aggiornamenti
+di sicurezza) e i processi del fabbricante quelli dell'\textbf{Allegato~I, Parte~II} (gestione delle
+vulnerabilità). Tra i requisiti della Parte~I: nessuna vulnerabilità sfruttabile nota, configurazione
+sicura per impostazione predefinita, aggiornamenti di sicurezza, protezione da accessi non autorizzati,
+riservatezza e integrità dei dati, \textbf{minimizzazione dei dati}, disponibilità delle funzioni
+essenziali, superficie d'attacco ridotta, registrazione dell'attività interna, cancellazione sicura dei dati
+da parte dell'utente. Non serve conoscere gli allegati nel dettaglio.
+
+\begin{esame}
+\textbf{Spunto per le domande aperte: il rovescio della minimizzazione.} Meno dati significa meno rischio
+per l'interessato e per la sicurezza, ma anche meno elementi per il debugging, per l'usabilità e
+soprattutto per l'\textbf{analisi forense} dopo un incidente. ``Vince la privacy, muore l'esperto di
+cybersecurity'': c'è una tensione da saper argomentare.
+\end{esame}
+
+\subsection{Prodotti importanti e critici}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.4cm} X X}
+\toprule
+& \textbf{Prodotti importanti} & \textbf{Prodotti critici} \\ \midrule
+Dove & Allegato~III, classi I e II (es.\ password manager) & Allegato~IV (es.\ dispositivi hardware con
+  \emph{security box}), individuati con atti della Commissione \\
+Criteri & funzioni critiche per la sicurezza di altri prodotti, reti o servizi, oppure rischio
+  significativo di effetti negativi su molti prodotti o sulla salute e sicurezza degli utenti & --- \\
+Conseguenza & procedure di valutazione della conformità più rigorose & certificato europeo di
+  cybersicurezza con livello di affidabilità almeno \emph{sostanziale} \\ \bottomrule
+\end{tabularx}
+\end{center}
+Il professore ammette che la distinzione pratica non è ancora chiara: per ora l'unico obbligo già operativo
+è la \textbf{segnalazione degli incidenti}.
+
+\subsection{Security by design e obblighi lungo la filiera}
+\begin{itemize}
+  \item \textbf{Fabbricante}: sicurezza integrata in progettazione e sviluppo (come la privacy by design
+    del GDPR: la sicurezza è parte della privacy); risk assessment come base di tutto; \textbf{due
+    diligence sui componenti di terzi} (supply chain); gestione delle vulnerabilità durante il periodo di
+    supporto.
+  \item \textbf{Importatore}: verifica che il fabbricante abbia svolto la valutazione di conformità e
+    redatto la documentazione tecnica, che ci siano marcatura CE e dichiarazione UE di conformità; azioni
+    correttive o ritiro se il prodotto non è conforme; informa fabbricante e autorità di vigilanza del
+    mercato delle vulnerabilità scoperte.
+  \item \textbf{Distributore}: due diligence, verifica di marcatura CE e documentazione, azioni correttive,
+    segnalazione di vulnerabilità e rischi.
+\end{itemize}
+\paragraph{Il problema pratico.} Il professore cita un grande distributore italiano di hardware e software:
+se molti prodotti a basso costo extra UE non rispettano il CRA, dovrà scegliere se toglierli dal catalogo.
+Se gli Stati membri applicassero le regole con rigore diverso, i consumatori potrebbero comprare
+all'estero ciò che in Italia non si trova più.
+
+\subsection{Obblighi di segnalazione (anticipazione)}
+Il fabbricante notifica ogni \textbf{vulnerabilità attivamente sfruttata} al CSIRT tramite la
+\textbf{piattaforma unica di segnalazione}, a cui ha accesso anche ENISA: \textbf{early warning entro 24
+ore}, \textbf{notifica entro 72 ore}, \textbf{final report entro 14 giorni} dalla disponibilità di una
+misura correttiva. Un incidente può far scattare insieme obblighi CRA e di altre norme (24 ore CRA, 72 ore
+GDPR\ldots): il tema è ripreso nella lezione del 02/11 (Capitolo~\ref{lez:2026-11-02}) e nella tabella
+delle scadenze (Capitolo~\ref{cap:scadenze}).
+
+% =====================================================================
+\section{Briefing del laboratorio 3 (Gianluca)}
+% =====================================================================
+Ruolo: \textbf{responsabile della sicurezza delle informazioni} di un piccolo studio professionale di
+consulenza (molto digitale). Il registro contiene già \textbf{18 rischi}: non va inventato nulla.
+\begin{itemize}
+  \item Per ogni rischio: probabilità e impatto \textbf{inerenti}, separatamente per riservatezza,
+    integrità e disponibilità; controlli di trattamento; rischio \textbf{residuo}; decisione finale.
+  \item Solo i \textbf{controlli tecnologici} (8.x): niente persone, processi o management.
+  \item Matrice \textbf{3$\times$3}; un rischio \textbf{alto} (inerente o residuo) non è accettabile, il
+    residuo deve essere medio o basso.
+  \item Decisione tra le quattro opzioni; un rischio trasferito resta sotto la responsabilità dell'azienda;
+    l'accettazione si usa quando l'inerente è già medio o inferiore.
+  \item Dei 34 controlli, 3 non sono applicabili a uno studio di consulenza, 26 sono applicabili e 5 vanno
+    valutati caso per caso; ogni esclusione va motivata nelle righe apposite (è ciò che finirebbe nella
+    SoA, che però non è oggetto dell'esercizio).
+  \item Un foglio di \textbf{coerenza} controlla la completezza formale, non la correttezza nel merito.
+  \item Non esiste una risposta unica: \textbf{conta il ragionamento}, non i numeri.
+\end{itemize}
+
+\begin{esame}
+\textbf{Errore tipico: fare la media} dei punteggi di riservatezza, integrità e disponibilità. Il livello
+del rischio è il \textbf{valore massimo} dei tre: un rischio alto solo sulla disponibilità è comunque alto.
+\end{esame}
+
+\noindent Svolgimento e metodo completi nel Capitolo~\ref{lab:03}.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Threat intelligence nella 27001:2022}: citata come requisito dell'ultima revisione, senza
+    numero di controllo nelle slide.
+  \item \textbf{Linee guida ENISA per le PMI}: titolo e anno del documento non indicati.
+  \item \textbf{Data di applicazione del CRA}: il professore dice ``in vigore da settembre, il 21 se ricordo
+    bene''; secondo le slide della lezione del 02/11 gli obblighi di segnalazione si applicano
+    dall'\textbf{11 settembre 2026}. Verificare.
+  \item \textbf{Circa 20.000 soggetti NIS2 in Italia}: stima a voce del docente.
+  \item \textbf{Nuovo decreto legislativo italiano su IA e rapporti di lavoro} (``in vigore da venerdì''),
+    citato a proposito dell'uso dell'IA nella selezione del personale: estremi non ricavabili dalla
+    trascrizione.
+  \item Nomi propri dei casi (Fitbit, Ross Compton, ricercatrice Mandalari) ricostruiti da una trascrizione
+    rumorosa: verificare l'ortografia prima di citarli.
+  \item Esempi di prodotti importanti e critici: dalle slide (password manager; dispositivi hardware con
+    security box); l'elenco completo è negli Allegati III e IV del CRA.
+\end{itemize}
+\end{verifica}

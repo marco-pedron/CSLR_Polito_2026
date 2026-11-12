@@ -1,13 +1,531 @@
 \chapter{AI Act}
 \label{cap:aiact}
 
-\dacompletare{Fonte: slide ancora da ricevere. Scaletta prevista:
+\begin{nota}[Stato e fonti]
+\textbf{Stato: non ancora trattato a lezione} (lezione dedicata prevista dopo NIS2 e DORA, data non
+ancora comunicata). Questo capitolo è un \textbf{inquadramento provvisorio}. Fonti usate: slide
+introduttive (\emph{01.~Introductory class}, in particolare la slide sull'AI Act), glossario del
+laboratorio~1, diario delle lezioni del 21/09, 28/09, 05/10, 02/11 e 09/11; come fonte secondaria gli
+\textbf{appunti di studenti dell'A.A.~2025/26}, sempre indicati come tali e in alcuni punti superati.
+Tutto il resto è nei riquadri viola di integrazione.
+\end{nota}
+
+% =====================================================================
+\section{Natura e logica del regolamento}
+\label{sec:aiact-natura}
+
+L'AI Act (Regolamento (UE) 2024/1689) è un \textbf{regolamento}. Secondo le slide ``non protegge i dati
+e non protegge le reti: regola un \textbf{sistema che decide}'' e importa tutto ciò che si è visto per
+le altre norme. Il bene protetto è \textbf{il sistema di IA e chi vi è esposto}; nella linea del tempo
+del corso è la generazione 2024 (CRA e AI Act) in cui \textbf{il prodotto e il modello} entrano nel
+perimetro.
+
+Punti emersi a lezione:
 \begin{itemize}
-  \item definizione di sistema di IA; ruoli (provider, deployer, importatore, distributore);
-  \item classificazione per rischio: pratiche vietate, alto rischio (Allegati I e III), rischio
-    limitato, rischio minimo;
-  \item obblighi per i sistemi ad alto rischio; FRIA;
-  \item art.~25: riqualificazione come provider;
-  \item art.~15: accuratezza, robustezza, cybersicurezza; presunzione tramite CRA;
-  \item sanzioni e calendario di applicazione (Digital Omnibus).
-\end{itemize}}
+  \item gli obblighi crescono con il rischio: la stessa logica dell'art.~32 GDPR applicata a un
+    prodotto; nella ``grammatica comune'' l'AI Act compare con gli \textbf{artt.~9} (sistema di
+    gestione dei rischi lungo tutto il ciclo di vita) e \textbf{15} (accuratezza, robustezza,
+    cybersicurezza);
+  \item per la prima volta un regolamento UE nomina gli \textbf{attacchi di machine learning} (data e
+    model poisoning, esempi avversari, evasione del modello) come oggetto di un obbligo di compliance;
+  \item è l'esempio di una legge che insegue la tecnologia: nato nel 2020, nella prima bozza non
+    prevedeva nulla sull'IA generativa, aggiunta in corsa dopo il novembre 2022 (lezione del 21/09);
+  \item fa scuola fuori dall'UE: alcuni Stati USA, come la California, si stanno avvicinando
+    all'AI Act;
+  \item \textbf{IA ad alto rischio $\neq$ IA generativa}: i sistemi ad alto rischio non sono gli LLM,
+    ma in gran parte sistemi legati a infrastrutture critiche e macchinari; l'IA generativa diventa
+    rilevante per l'uso (selezione del personale, cybersicurezza);
+  \item riguarda in primo luogo i \textbf{provider} di sistemi di IA (lezione del 02/11).
+\end{itemize}
+
+\paragraph{Appunti A.A.~2025/26.} Il sistema di IA è definito come un sistema automatizzato che opera
+con livelli variabili di autonomia, può adattarsi dopo la diffusione e deduce dagli input come generare
+output che influenzano ambienti fisici o virtuali: una definizione volutamente ampia, che rende difficile
+distinguere l'IA dall'automazione complessa. Il regolamento si applica anche fuori dall'UE quando gli
+output sono usati nell'Unione. Esclusioni citate: scopi esclusivamente militari, ricerca scientifica,
+ricerca e prove prima dell'immissione sul mercato (non le prove in condizioni reali), licenze libere e
+open source, uso personale non professionale. Gli appunti segnalano inoltre due aree che restano
+irrisolte (protezione dei dati nell'addestramento dei modelli generativi e diritto d'autore) e il
+confronto con la Cina, dove ogni contenuto generato da IA va dichiarato.
+
+\begin{integrazione}[definizione (art.~3(1)) e ambito (art.~2)]
+\begin{itemize}
+  \item Testo dell'art.~3(1), in sintesi: sistema automatizzato progettato per funzionare con livelli
+    di autonomia variabili, che può presentare adattabilità dopo la diffusione e che, per obiettivi
+    espliciti o impliciti, \textbf{deduce} dagli input ricevuti come generare output (previsioni,
+    contenuti, raccomandazioni, decisioni) che possono influenzare ambienti fisici o virtuali. La
+    capacità di inferenza è l'elemento che distingue l'IA dal software tradizionale; la Commissione ha
+    pubblicato linee guida sulla definizione.
+  \item \textbf{Esclusione open source}: vale solo in parte. Non copre i sistemi immessi sul mercato
+    come ad alto rischio, quelli che rientrano nelle pratiche vietate o negli obblighi di trasparenza
+    dell'art.~50 (art.~2(12)).
+  \item \textbf{Alfabetizzazione in materia di IA} (art.~4): provider e deployer devono garantire un
+    livello sufficiente di competenza del personale che usa i sistemi; si applica dal 2 febbraio 2025.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{L'approccio per livelli di rischio}
+\label{sec:aiact-rischio}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{2.6cm} X}
+\toprule
+\textbf{Livello} & \textbf{Riferimento} & \textbf{Dal corso} \\ \midrule
+Pratiche vietate & art.~5 & Vietate in ogni caso in Europa; esempio: \emph{social scoring} \\
+Sistemi ad alto rischio & art.~6, Allegati~I e~III & Molti legati a infrastrutture critiche, ma
+  anche strumenti HR; soggetti a misure specifiche, anche di cybersicurezza \\
+Obblighi di trasparenza & art.~50 & Dal 2 agosto 2026; es.\ indicare che un contenuto è generato con
+  IA \\
+Rischio minimo & -- & Nessun obbligo specifico (es.\ un chatbot elementare) \\
+\midrule
+Modelli GPAI & artt.~51--56 & ``Binario parallelo'', qualunque sia l'uso; obblighi dal 2 agosto 2025 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent Fonti: slide introduttive e lezioni del 21/09 e del 02/11. Sulla trasparenza il docente
+osserva che l'obbligo riguarda gli usi commerciali, ma il confine con l'uso personale è sfumato (chi
+diventa influencer monetizza) e consiglia di indicare sempre l'uso dell'IA, anche per ragioni etiche e
+culturali.
+
+\paragraph{La classificazione non si autodefinisce.} A differenza della DPIA del GDPR, dove il titolare
+stabilisce da sé se il rischio è alto, per i sistemi ad alto rischio è \textbf{la norma a
+classificarli} (per esempio l'IA usata sul posto di lavoro) (lezione del 28/09).
+
+\begin{esame}
+Gli allegati (incluso l'Allegato~III dell'AI Act, che verrà approfondito più avanti) \textbf{non vanno
+imparati a memoria}: conta riconoscere il quadro normativo in cui ci si trova (lezione del 02/11).
+\end{esame}
+
+\subsection{Pratiche vietate (art.~5)}
+\label{sec:aiact-vietate}
+\paragraph{Appunti A.A.~2025/26.} Tecniche subliminali, manipolative o ingannevoli che causano danni
+significativi; sfruttamento delle vulnerabilità di gruppi specifici; \emph{social scoring} con
+trattamenti ingiustificati o sproporzionati; raccolta non mirata di immagini facciali per creare banche
+dati biometriche; riconoscimento delle emozioni sul luogo di lavoro e negli istituti di istruzione;
+categorizzazione biometrica che deduce attributi sensibili (opinioni politiche, religione). Restano casi
+limite di difficile interpretazione (pubblicità mirata, profilazione comportamentale).
+
+\begin{integrazione}[l'elenco completo dell'art.~5(1)]
+Oltre alle pratiche sopra: la \textbf{valutazione del rischio che una persona commetta un reato} basata
+unicamente sulla profilazione o sui tratti della personalità; l'\textbf{identificazione biometrica
+remota ``in tempo reale''} in spazi accessibili al pubblico a fini di contrasto, salvo eccezioni tassative
+(ricerca di vittime, prevenzione di minacce imminenti, ricerca di sospettati di reati gravi) e con
+autorizzazione. Lo sfruttamento delle vulnerabilità riguarda età, disabilità o situazione sociale o
+economica; il riconoscimento delle emozioni è ammesso per motivi medici o di sicurezza.
+\end{integrazione}
+
+\subsection{Sistemi ad alto rischio (art.~6, Allegati~I e~III)}
+\label{sec:aiact-altorischio}
+\paragraph{Appunti A.A.~2025/26.} Sono ad alto rischio i sistemi usati come componenti di sicurezza di
+prodotti regolati (Allegato~I) e quelli dell'Allegato~III, per esempio: gestione di infrastrutture
+critiche; istruzione e occupazione (selezione, valutazione); accesso a servizi essenziali (merito
+creditizio, assicurazioni); identificazione biometrica e riconoscimento delle emozioni. Sono previste
+eccezioni per sistemi che svolgono compiti procedurali limitati, assistono senza sostituire la decisione
+umana, rilevano scostamenti dagli schemi decisionali o svolgono compiti preparatori.
+
+\begin{integrazione}[i due canali dell'art.~6 e la deroga]
+\begin{itemize}
+  \item \textbf{Art.~6(1)}: il sistema è un prodotto, o un componente di sicurezza di un prodotto,
+    coperto dalla normativa di armonizzazione dell'\textbf{Allegato~I} (macchine, giocattoli,
+    ascensori, dispositivi medici, ecc.) che richiede una valutazione di conformità da parte di terzi.
+  \item \textbf{Art.~6(2)}: il sistema rientra in uno degli otto ambiti dell'\textbf{Allegato~III}:
+    biometria; infrastrutture critiche; istruzione e formazione; occupazione e gestione dei
+    lavoratori; accesso a servizi privati essenziali e a servizi e prestazioni pubbliche (merito
+    creditizio, prezzi delle assicurazioni vita e salute, chiamate di emergenza); attività di
+    contrasto; migrazione, asilo e controllo delle frontiere; amministrazione della giustizia e
+    processi democratici.
+  \item \textbf{Art.~6(3)}: un sistema dell'Allegato~III non è ad alto rischio se non presenta un
+    rischio significativo, perché svolge un compito procedurale limitato, migliora il risultato di
+    un'attività umana già completata, rileva schemi o scostamenti senza sostituire o influenzare la
+    valutazione umana senza un'adeguata revisione, oppure svolge un compito preparatorio. La deroga
+    \textbf{non si applica mai} se il sistema effettua \textbf{profilazione} di persone fisiche. Il
+    provider che se ne avvale deve documentare la valutazione e registrare comunque il sistema
+    (art.~6(4)).
+  \item ``Supervisione umana efficace'', citata negli appunti tra le eccezioni, non è in sé una
+    condizione di deroga: è un requisito che i sistemi ad alto rischio devono rispettare (art.~14).
+\end{itemize}
+\end{integrazione}
+
+\subsection{Obblighi di trasparenza (art.~50)}
+\label{sec:aiact-trasparenza}
+\paragraph{Appunti A.A.~2025/26.} Oltre alle pratiche vietate e all'alto rischio, gli altri sistemi
+hanno in genere solo obblighi di trasparenza, che riguardano i sistemi che interagiscono direttamente con
+persone fisiche, quelli che generano contenuti sintetici (audio, immagini, video, testo), quelli che
+generano o manipolano immagini, audio o video, e i testi pubblicati per informare il pubblico su
+questioni di interesse pubblico.
+
+\begin{integrazione}[chi deve fare cosa]
+\begin{itemize}
+  \item \textbf{Provider}: progettare i sistemi che interagiscono con persone in modo che queste
+    sappiano di interagire con un'IA (salvo che sia ovvio); marcare gli output sintetici in formato
+    leggibile da una macchina e rilevabile.
+  \item \textbf{Deployer}: informare le persone esposte a sistemi di riconoscimento delle emozioni o di
+    categorizzazione biometrica; dichiarare i \emph{deep fake}; dichiarare i testi generati o
+    manipolati pubblicati per informare il pubblico, salvo revisione umana con responsabilità
+    editoriale.
+\end{itemize}
+\end{integrazione}
+
+\subsection{Modelli di IA per finalità generali (GPAI)}
+\label{sec:aiact-gpai}
+Dalle slide: i modelli GPAI (artt.~51--56) seguono un \textbf{binario parallelo}, indipendentemente
+dall'uso; dal glossario, gli obblighi si applicano dal \textbf{2 agosto 2025} e la vigilanza spetta
+all'\textbf{AI Office}.
+
+\begin{integrazione}[artt.~51--55]
+\begin{itemize}
+  \item \textbf{Tutti i provider di modelli GPAI} (art.~53): documentazione tecnica, informazioni per i
+    provider a valle che integrano il modello, politica di rispetto del diritto d'autore, sintesi dei
+    contenuti usati per l'addestramento (con alleggerimenti per i modelli open source).
+  \item \textbf{Modelli con rischio sistemico} (art.~51): presunti tali quando il calcolo usato per
+    l'addestramento supera $10^{25}$ FLOP, o designati dalla Commissione. Obblighi aggiuntivi
+    (art.~55): valutazioni del modello e \emph{adversarial testing}, valutazione e mitigazione dei rischi
+    sistemici, tracciamento e \textbf{segnalazione degli incidenti gravi all'AI Office},
+    \textbf{adeguata protezione di cybersicurezza} del modello e della sua infrastruttura.
+  \item Un \textbf{codice di buone pratiche} (2025) offre ai provider un modo per dimostrare la
+    conformità.
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Ruoli lungo la catena del valore}
+\label{sec:aiact-ruoli}
+
+Dalla slide sul perimetro: gli \textbf{artt.~22--25} distribuiscono i ruoli lungo la catena del valore,
+e \textbf{un deployer che modifica un sistema può diventarne il provider}. Ruoli riassunti nelle schede
+di ripasso: provider, deployer, importatore, distributore, fabbricante del prodotto (art.~25:
+riqualificazione come provider).
+
+\paragraph{Appunti A.A.~2025/26.}
+\begin{itemize}
+  \item \textbf{Provider}: persona fisica o giuridica, autorità pubblica o organismo che sviluppa un
+    sistema di IA (o lo fa sviluppare) e lo immette sul mercato o lo mette in servizio con il proprio
+    nome o marchio.
+  \item \textbf{Deployer}: chi usa un sistema di IA sotto la propria autorità in ambito
+    professionale; l'uso personale non professionale è escluso.
+  \item \textbf{Importatore} (immette nell'UE sistemi di provider extra-UE), \textbf{distributore}
+    (rende disponibile il sistema nella catena), \textbf{fabbricante del prodotto} (integra l'IA in
+    prodotti regolati, come macchine o dispositivi medici).
+  \item \textbf{Finalità prevista} e \textbf{modifica sostanziale}: la finalità prevista è quella
+    indicata dal provider; una modifica successiva non prevista dal provider, che incide sulla
+    conformità o cambia la finalità valutata, può portare a riclassificare il sistema.
+  \item \textbf{Art.~25}: distributore, importatore, deployer o altro terzo è considerato provider di un
+    sistema ad alto rischio se vi appone nome o marchio, se vi apporta una modifica sostanziale, o se
+    modifica un sistema non ad alto rischio in modo che lo diventi. Il rischio è concreto per startup e
+    società di servizi che costruiscono soluzioni su sistemi esistenti: un semplice \emph{rebranding}
+    può far scattare tutti gli obblighi del provider.
+\end{itemize}
+
+\begin{integrazione}[precisazioni sull'art.~25]
+\begin{itemize}
+  \item Il terzo caso dell'art.~25(1)(c) riguarda la modifica della \textbf{finalità prevista} di un
+    sistema non ad alto rischio, compreso un sistema GPAI, che lo rende ad alto rischio.
+  \item Il provider originario non è più considerato provider di quel sistema specifico, ma deve
+    \textbf{cooperare} e fornire informazioni e accesso tecnico necessari (art.~25(2)).
+  \item Il \textbf{fabbricante del prodotto} dell'Allegato~I che immette sul mercato con il proprio nome
+    un prodotto con un sistema di IA ad alto rischio come componente di sicurezza è considerato provider
+    (art.~25(3)).
+  \item Gli \textbf{artt.~22--24} disciplinano rispettivamente rappresentante autorizzato dei provider
+    extra-UE, importatori e distributori (verifiche su marcatura CE, documentazione e dichiarazione di
+    conformità prima di immettere o distribuire).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Obblighi per i sistemi ad alto rischio}
+\label{sec:aiact-obblighi}
+
+Dalle slide, i punti in cui ``entra la sicurezza'': \textbf{art.~9} sistema di gestione dei rischi,
+\textbf{art.~10} dati e governance dei dati, \textbf{art.~15} accuratezza, robustezza e cybersicurezza,
+\textbf{art.~73} segnalazione degli incidenti gravi. Dal glossario: la \textbf{FRIA} (valutazione
+d'impatto sui diritti fondamentali) è richiesta a \textbf{determinati deployer} di sistemi ad alto
+rischio; come la DPIA, richiede un monitoraggio continuo (lezione del 09/11). La valutazione di
+conformità segue la logica della marcatura CE, applicata a software e modelli: documentazione tecnica,
+valutazione di conformità, vigilanza del mercato (slide sul passaggio dall'obbligo alla prova).
+
+\paragraph{Appunti A.A.~2025/26.} I provider devono adottare un sistema di gestione dei rischi, redigere
+la documentazione tecnica, svolgere la valutazione di conformità e apporre la marcatura CE; i deployer
+hanno obblighi più limitati (misure di sicurezza e governance, supervisione umana, FRIA quando
+richiesta); importatori e distributori verificano valutazione e dichiarazione di conformità. Gli
+appunti citano anche l'\emph{AI Pact}, iniziativa volontaria per anticipare la conformità.
+
+\begin{integrazione}[requisiti e obblighi]
+\textbf{Requisiti del sistema (artt.~8--15)}: sistema di gestione dei rischi per tutto il ciclo di vita
+(9); qualità e governance dei dati di addestramento, validazione e prova, anche contro i bias (10);
+documentazione tecnica (11); registrazione automatica degli eventi, cioè log (12); trasparenza e
+istruzioni per i deployer (13); supervisione umana (14); accuratezza, robustezza e cybersicurezza (15).
+
+\textbf{Obblighi del provider (artt.~16--21 e collegati)}: sistema di gestione della qualità (17);
+conservazione di documentazione e log; azioni correttive; valutazione di conformità (43),
+dichiarazione UE di conformità (47) e marcatura CE (48); \textbf{registrazione nella banca dati UE}
+(49, 71); monitoraggio successivo all'immissione sul mercato (72); segnalazione degli incidenti gravi
+(73).
+
+\textbf{Obblighi del deployer (art.~26)}: usare il sistema secondo le istruzioni; affidare la
+supervisione umana a persone competenti; garantire la pertinenza dei dati di input sotto il proprio
+controllo; monitorare il funzionamento e segnalare rischi e incidenti al provider; conservare i log
+(almeno sei mesi); informare i rappresentanti dei lavoratori prima di usare il sistema sul posto di
+lavoro e le persone soggette a decisioni del sistema.
+
+\textbf{FRIA (art.~27)}: la devono svolgere, prima del primo uso, i deployer che sono organismi di
+diritto pubblico o privati che forniscono servizi pubblici, e i deployer dei sistemi per il merito
+creditizio e per i prezzi delle assicurazioni vita e salute. È un obbligo del \textbf{deployer}, non del
+provider; i risultati vanno comunicati all'autorità di vigilanza del mercato e la FRIA integra
+l'eventuale DPIA.
+
+\textbf{Valutazione di conformità (art.~43)}: per gran parte dei sistemi dell'Allegato~III è un
+\textbf{controllo interno} del provider (Allegato~VI); l'organismo notificato interviene soprattutto per
+la biometria; per i prodotti dell'Allegato~I si segue la procedura della normativa di settore.
+\end{integrazione}
+
+\begin{verifica}
+\begin{itemize}
+  \item Gli appunti A.A.~2025/26 elencano la FRIA tra gli obblighi dei \emph{provider}: nel testo
+    dell'AI Act (art.~27) è un obbligo di alcuni \emph{deployer}, come dice anche il glossario del
+    corso.
+  \item Lezione del 05/10: la trascrizione fa dire al docente che per i sistemi ad alto rischio serve un
+    passaggio o un'autorizzazione dell'autorità prima dell'uso. Nel testo del regolamento non c'è
+    un'autorizzazione generale: ci sono la valutazione di conformità (per lo più interna), la
+    registrazione nella banca dati UE e, per alcuni deployer, la comunicazione dei risultati della FRIA
+    all'autorità. Da chiarire nella lezione dedicata.
+\end{itemize}
+\end{verifica}
+
+% =====================================================================
+\section{Cybersicurezza: l'art.~15 e il rapporto con il CRA}
+\label{sec:aiact-art15}
+
+L'\textbf{art.~15} chiede che i sistemi ad alto rischio raggiungano un livello adeguato di
+\textbf{accuratezza, robustezza e cybersicurezza}, e lo mantengano per tutto il ciclo di vita. Le
+minacce nominate dal regolamento, citate nelle slide, sono gli attacchi di machine learning:
+\textbf{data poisoning}, \textbf{model poisoning}, \textbf{esempi avversari}, \textbf{evasione del
+modello}. Gli appunti A.A.~2025/26 aggiungono gli attacchi alla riservatezza e di inferenza e il furto
+o la fuoriuscita del modello.
+
+\paragraph{Presunzione di conformità tramite il CRA} (lezione del 02/11). I prodotti con elementi digitali
+che rientrano nel CRA e sono anche sistemi di IA ad alto rischio si considerano conformi ai requisiti di
+cybersicurezza dell'art.~15 se:
+\begin{enumerate}
+  \item soddisfano i requisiti essenziali dell'\textbf{Allegato~I, Parte~I} del CRA;
+  \item i processi del fabbricante rispettano l'\textbf{Allegato~I, Parte~II} del CRA (gestione delle
+    vulnerabilità);
+  \item il livello di protezione richiesto dall'AI Act è dimostrato nella \textbf{dichiarazione UE di
+    conformità} rilasciata ai sensi del CRA.
+\end{enumerate}
+Si veda anche il Capitolo~\ref{cap:cra}.
+
+\begin{esame}
+Da ricordare: esiste un'\textbf{interazione forte tra l'art.~15 dell'AI Act e il CRA} per i sistemi di IA
+ad alto rischio (lezione del 02/11).
+\end{esame}
+
+\paragraph{Nello scenario del corso.} Nell'incidente delle 8:14 lo strumento di triage basato su IA,
+addestrato sul database compromesso, inizia a dare risultati inaffidabili e nessuno se ne accorge per due
+giorni (lezione del 21/09): è il tipo di evento che l'art.~15 (robustezza, dati avvelenati) e l'art.~73
+vogliono intercettare.
+
+\begin{integrazione}[il testo dell'art.~15 e la certificazione]
+\begin{itemize}
+  \item I livelli di accuratezza e le relative metriche vanno dichiarati nelle istruzioni per l'uso
+    (art.~15(3)).
+  \item \textbf{Robustezza} (art.~15(4)): resilienza a errori, guasti e incoerenze, anche con soluzioni
+    di ridondanza, backup e \emph{fail-safe}; per i sistemi che continuano ad apprendere, gestione dei
+    \emph{feedback loop} che potrebbero distorcere gli output.
+  \item \textbf{Cybersicurezza} (art.~15(5)): resilienza ai tentativi di terzi non autorizzati di
+    alterarne uso, output o prestazioni sfruttando vulnerabilità; misure, ove opportuno, contro data
+    poisoning, model poisoning, esempi avversari ed evasione del modello, attacchi alla riservatezza e
+    difetti del modello.
+  \item Oltre alla via del CRA (art.~12 CRA), la conformità all'art.~15 si presume anche per i sistemi
+    certificati nell'ambito di uno schema europeo del \textbf{Cybersecurity Act} che copra quei
+    requisiti (art.~42(2) AI Act; Capitolo~\ref{cap:csa}).
+\end{itemize}
+\end{integrazione}
+
+% =====================================================================
+\section{Incidenti gravi (art.~73)}
+\label{sec:aiact-art73}
+
+Nella tabella dei cinque ``orologi'' delle slide l'AI Act conta la \textbf{gravità dell'esito}: l'orologio
+parte da un \textbf{incidente grave}, una volta stabilito il \textbf{nesso causale} con il sistema di IA;
+destinataria è l'\textbf{autorità di vigilanza del mercato}.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{X >{\raggedright\arraybackslash}p{4.2cm}}
+\toprule
+\textbf{Caso (slide introduttive e glossario)} & \textbf{Termine} \\ \midrule
+Regola generale & \textbf{15 giorni} \\
+Incidente che riguarda un'infrastruttura critica & \textbf{2 giorni} \\
+Decesso di una persona & \textbf{10 giorni} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\noindent Non ci sono early warning né relazione finale a scadenza fissa come in NIS2, DORA e CRA. Gli
+appunti A.A.~2025/26 osservano che l'art.~73 ricalca la logica delle notifiche di data breach del GDPR.
+
+\begin{integrazione}[dettagli dell'art.~73]
+\begin{itemize}
+  \item \textbf{Incidente grave} (art.~3(49)): incidente o malfunzionamento che causa, direttamente o
+    indirettamente, il decesso o un grave danno alla salute di una persona; una perturbazione grave e
+    irreversibile della gestione o del funzionamento di un'infrastruttura critica; la violazione di
+    obblighi del diritto dell'Unione a tutela dei diritti fondamentali; un grave danno a beni o
+    all'ambiente.
+  \item Obbligato è il \textbf{provider}, che segnala all'autorità di vigilanza del mercato dello Stato
+    in cui si è verificato l'incidente \textbf{subito dopo} aver stabilito il nesso causale o la sua
+    ragionevole probabilità, e comunque entro i termini della tabella, che decorrono dalla
+    \textbf{conoscenza} dell'incidente. Il termine di 2 giorni vale anche per le \textbf{violazioni
+    diffuse}. È ammessa una prima segnalazione incompleta.
+  \item Il provider indaga senza alterare il sistema in modo da compromettere la valutazione delle
+    cause prima di aver informato l'autorità; il \textbf{deployer} che individua un incidente grave
+    informa subito il provider (art.~26(5)).
+  \item Per i sistemi dell'Allegato~III di provider già soggetti, in base ad altri atti dell'Unione, a
+    obblighi di segnalazione equivalenti, e per i dispositivi medici, la segnalazione AI Act
+    si limita alle violazioni dei diritti fondamentali (art.~73(9)--(10)).
+  \item Per i modelli GPAI con rischio sistemico la segnalazione va all'AI Office (art.~55).
+\end{itemize}
+\end{integrazione}
+
+\begin{nota}[Tabella delle scadenze]
+L'art.~73 compare nella tabella dei cinque orologi delle slide e del glossario, ma non ancora nella
+tabella comparativa del Capitolo~\ref{cap:scadenze}: va aggiunto dopo la lezione dedicata.
+\end{nota}
+
+% =====================================================================
+\section{Governance e autorità}
+\label{sec:aiact-autorita}
+
+Dalle slide sulle istituzioni: per l'IA operano l'\textbf{AI Office} (presso la Commissione) e
+l'\textbf{AI Board}, le \textbf{autorità nazionali di vigilanza del mercato}, le \textbf{autorità di
+notifica} e gli \textbf{organismi notificati}. Il glossario attribuisce ad AI Office e AI Board il
+coordinamento dell'applicazione e la vigilanza sui GPAI. Per l'Italia il docente ha citato
+l'\textbf{AgID}, agenzia governativa e non indipendente come il Garante (lezione del 21/09).
+
+\begin{integrazione}[autorità italiane]
+La \textbf{L.~23 settembre 2025, n.~132} (legge italiana sull'IA) designa l'\textbf{AgID} come autorità
+di notifica e l'\textbf{ACN} come autorità di vigilanza del mercato, con compiti ispettivi e
+sanzionatori; restano ferme le competenze delle autorità di settore (per esempio Banca d'Italia, CONSOB
+e IVASS per il settore finanziario) e del Garante per i dati personali.
+\end{integrazione}
+
+\begin{verifica}
+Ruolo di AgID e ACN per l'AI Act: è lo stesso punto aperto nel diario del 21/09; da confermare sulle slide
+AI Act.
+\end{verifica}
+
+% =====================================================================
+\section{Sanzioni}
+\label{sec:aiact-sanzioni}
+
+Dal glossario del corso: sanzioni fino a \textbf{35 milioni di euro o al 7\%} del fatturato mondiale
+annuo (il massimo, per le pratiche vietate). Gli appunti A.A.~2025/26 riportano tre fasce e osservano che
+le sanzioni AI Act possono cumularsi con quelle di altri regimi, come il GDPR.
+
+\begin{integrazione}[le fasce dell'art.~99]
+\begin{itemize}
+  \item \textbf{Pratiche vietate} (art.~5): fino a 35 milioni di euro o al 7\% del fatturato mondiale
+    annuo, se superiore.
+  \item \textbf{Altri obblighi} (operatori, organismi notificati, art.~50): fino a 15 milioni di euro o
+    al 3\%.
+  \item \textbf{Informazioni inesatte, incomplete o fuorvianti} alle autorità: fino a 7,5 milioni di
+    euro o all'1\%.
+  \item Per le \textbf{PMI e le startup} vale l'importo \emph{inferiore} tra i due.
+  \item \textbf{Provider di modelli GPAI} (art.~101): sanzioni irrogate dalla Commissione, fino a
+    15 milioni di euro o al 3\%.
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+Gli appunti A.A.~2025/26 riportano per l'alto rischio ``50 milioni o 3\%'' e per le informazioni
+inesatte ``7 milioni o 1\%'': il testo dell'art.~99 indica 15 milioni o 3\% e 7,5 milioni o 1\%.
+Riportano anche che, cumulando con il GDPR, le sanzioni potrebbero arrivare all'``11\%'' del fatturato:
+dato non verificato (i regimi hanno presupposti diversi). Verificare sulle slide AI Act.
+\end{verifica}
+
+% =====================================================================
+\section{Calendario di applicazione}
+\label{sec:aiact-calendario}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.4cm} X}
+\toprule
+\textbf{Data} & \textbf{Che cosa (slide introduttive)} \\ \midrule
+1 agosto 2024 & Entrata in vigore \\
+2 febbraio 2025 & Pratiche vietate e alfabetizzazione in materia di IA \\
+2 agosto 2025 & Obblighi per i modelli GPAI \\
+2 agosto 2026 & Obblighi di trasparenza (art.~50) \\
+27 luglio 2026 & Entra in vigore l'\textbf{AI Omnibus}, che rinvia l'alto rischio \\
+2 dicembre 2027 & Alto rischio, sistemi dell'\textbf{Allegato~III} (dopo il rinvio) \\
+2 agosto 2028 & Alto rischio, sistemi dell'\textbf{Allegato~I} (dopo il rinvio) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Le slide parlano di un ``calendario che si è mosso mentre le scrivevamo''. Per il docente il rinvio
+nasce anche dalle pressioni politiche statunitensi (lezione del 21/09). In generale le slide avvertono
+che in questa materia ``la risposta dell'anno scorso è spesso sbagliata'': tre delle scadenze
+presentate sono cambiate negli ultimi dodici mesi.
+
+\paragraph{Appunti A.A.~2025/26 (superati).} Gli appunti collocano l'avvio del \emph{Digital Omnibus} a
+novembre 2025 (semplificazione di GDPR, Cybersecurity Act, DORA e AI Act, con armonizzazione delle
+notifiche di incidenti e data breach) e riportano un rinvio dell'applicazione piena da agosto 2026 ad
+agosto 2027, oltre all'applicazione dell'art.~15 da agosto 2026: date superate dall'AI Omnibus
+riportato nelle slide di quest'anno. Indicano anche come data di entrata in vigore il 2 agosto 2024,
+mentre le slide indicano il 1 agosto 2024.
+
+\begin{integrazione}[calendario originario]
+Nel testo originario del regolamento: applicazione generale dal 2 agosto 2026, compreso l'alto rischio
+dell'Allegato~III; alto rischio dell'Allegato~I (art.~6(1)) dal 2 agosto 2027; governance, organismi
+notificati e sanzioni dal 2 agosto 2025; i modelli GPAI già sul mercato prima del 2 agosto 2025 hanno
+tempo fino al 2 agosto 2027. Le proposte \emph{Digital Omnibus} della Commissione (novembre 2025)
+collegavano l'applicazione dell'alto rischio alla disponibilità di norme armonizzate e strumenti di
+supporto, con date limite che corrispondono a quelle delle slide.
+\end{integrazione}
+
+\begin{verifica}
+Il diario del 21/09 segnala che il docente ha parlato sia di un \emph{Digital Omnibus} ``applicato a
+luglio'' sia di un punto unico di segnalazione ENISA ``non ancora in vigore'', mentre le slide citano
+solo l'\emph{AI Omnibus} in vigore dal 27 luglio 2026. Distinguere i due pacchetti (AI Omnibus già
+applicabile; parte del Digital Omnibus su notifiche e GDPR ancora in corso?) nella lezione dedicata.
+\end{verifica}
+
+% =====================================================================
+\section{Rapporti con CRA, GDPR e altre norme}
+\label{sec:aiact-rapporti}
+
+\paragraph{CRA.} Presunzione di conformità all'art.~15 per i prodotti che rispettano il CRA
+(Sezione~\ref{sec:aiact-art15}). La valutazione di conformità di CRA e AI Act serve a dimostrare la
+diligenza: un certificato è un elemento di prova, mai un'immunità (slide introduttive).
+
+\paragraph{GDPR.} Il GDPR si applica a chiunque tratti dati personali, l'AI Act riguarda in primo luogo i
+provider (lezione del 02/11). Nel GDPR il titolare valuta da sé il rischio (DPIA) e, se resta alto,
+consulta l'autorità o rinuncia; nell'AI Act è la norma a classificare i sistemi ad alto rischio (lezioni
+del 28/09 e del 05/10). FRIA e DPIA richiedono entrambe un monitoraggio continuo (lezione del 09/11).
+Per il docente, nel 2026, con NIS2, DORA, Cybersecurity Act, AI Act e la \emph{shadow AI}, il DPO
+dovrebbe esserci in ogni azienda (lezione del 28/09).
+
+\paragraph{Supply chain.} Come GDPR art.~28, NIS2 art.~21(2)(d), DORA artt.~28--30 e CRA artt.~13--14,
+l'AI Act (artt.~22--25) regola i rapporti lungo la catena di fornitura (slide introduttive).
+
+\begin{integrazione}[coordinamento con il GDPR e con le norme di settore]
+\begin{itemize}
+  \item L'AI Act lascia impregiudicato il GDPR (art.~2(7)): se un sistema di IA tratta dati personali
+    servono comunque base giuridica, informativa ed eventualmente DPIA.
+  \item Il deployer usa le informazioni fornite dal provider (art.~13) per svolgere la propria DPIA
+    (art.~26(9)); la FRIA integra la DPIA senza sostituirla (art.~27(4)).
+  \item In via eccezionale i provider possono trattare categorie particolari di dati per individuare e
+    correggere i bias, con garanzie rigorose (art.~10(5)).
+  \item Per i prodotti dell'Allegato~I (macchine, dispositivi medici, ecc.) i requisiti AI Act si
+    integrano nella valutazione di conformità prevista dalla normativa di settore.
+  \item Lo stesso evento può attivare più regimi: nello scenario del corso, il triage IA inaffidabile
+    dopo il ransomware è insieme un possibile incidente grave AI Act, un incidente NIS2 per la
+    struttura sanitaria e un data breach GDPR.
+\end{itemize}
+\end{integrazione}
+
+\dacompletare{Da integrare dopo la lezione dedicata all'AI Act (data da comunicare) con slide e diario:
+definizione e ambito, pratiche vietate, Allegato~III, art.~25, obblighi di provider e deployer, FRIA,
+art.~15 e attacchi di machine learning, art.~73, autorità italiane, sanzioni, calendario dopo l'AI
+Omnibus. Aggiungere poi l'art.~73 alla tabella del Capitolo~\ref{cap:scadenze} e il calendario alle
+schede di ripasso.}

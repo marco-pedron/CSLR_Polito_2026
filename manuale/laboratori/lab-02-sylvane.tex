@@ -1,0 +1,280 @@
+% =====================================================================
+\chapter{Lab 2 -- Sylvane Retraite: il canale di scambio file}
+\label{lab:02}
+% =====================================================================
+
+\begin{nota}[Fonti e date]
+Caso presentato da Gianluca il 12/10/2026 (Capitolo~\ref{lez:2026-10-12}), svolto venerdì 16/10/2026
+(Capitolo~\ref{lez:2026-10-16}), discusso nel debrief di lunedì 19/10/2026. Materiale: README del caso,
+\emph{Sylvane Retraite Breach Case Study} (PDF), \emph{Severity Assessment Worksheet} (obbligatorio),
+\emph{Notification Form} (Excel, condizionale), immagine della \emph{curveball~1}. Caso di fantasia.
+\textbf{Non esiste una soluzione ufficiale}: lo svolgimento ragionato è dei redattori ed è segnalato
+come tale.
+\end{nota}
+
+\section{Il caso in sintesi}
+
+\paragraph{Contesto.} Sylvane Retraite è un fondo pensione professionale francese (IRPS), titolare
+dei dati dei propri iscritti. Un fornitore esterno (responsabile del trattamento) carica file
+operativi su un \textbf{server SFTP nella DMZ del fondo}, che funge da ``cassetta delle lettere'':
+il fondo sposta poi i file nei propri ambienti interni. L'accesso al server è con autenticazione a
+\textbf{certificato} (niente password) e solo dall'IP pubblico del fornitore. Gli studenti sono il
+\textbf{DPO}, che venerdì 11 aprile 2025 pomeriggio deve consigliare CEO, CISO e Head of Member
+Services.
+
+\paragraph{Cronologia (2025).}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{p{2.6cm} X}
+\toprule
+\textbf{Quando} & \textbf{Evento} \\ \midrule
+Mer 2/4, 08:30 & Inizia l'accesso non autorizzato al server SFTP, attraverso i sistemi del fornitore e
+  con le sue credenziali legittime. \\
+2--4/4 & Circa 53 ore di permanenza; file esfiltrati. \\
+Ven 4/4, 13:37 & Finestra chiusa: accesso bloccato, arrivano i forensi. Il fornitore viene a
+  conoscenza dell'incidente e lo riconduce ai propri sistemi. \\
+Sab 5 -- Gio 10/4 & ``Settimana silenziosa'': il fornitore completa i controlli; il fondo non sa nulla. \\
+Ven 11/4, 10:44 & Comunicazione formale del fornitore via email certificata: ``qualcosa'' è stato
+  esfiltrato, senza dettagli. Il fornitore ha già notificato la propria agenzia nazionale di
+  cybersicurezza. \\
+Ven 11/4, 11:12 & Il fondo classifica l'incidente come \textbf{grave ai sensi del DORA}; nessun
+  impatto sulla continuità. \\
+Ven 11/4, pomeriggio & Punto di decisione (Parte~A, ore 14:00). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Che cosa passava nel canale.}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X l}
+\toprule
+\textbf{Gruppo} & \textbf{Contenuto} & \textbf{Stato} \\ \midrule
+G1 & nome e cognome dell'iscritto + valore totale della posizione pensionistica maturata (dati comuni +
+  finanziari); oltre 100 iscritti, numero non ancora quantificato & confermato \\
+G2 & file operativi caricati dal fornitore; categorie e volume da determinare & confermato \\
+G3 & il server riceveva un \textbf{export giornaliero completo} del database: dati storici e recenti
+  non separabili & indeterminato \\
+G4 & quattro ambienti interni alimentati dalla DMZ (antiriciclaggio, BI, risk, middleware): non
+  raggiunti & non coinvolto \\
+G5 & categorie particolari (art.~9): nessuna individuata finora & nessuna \\
+G6 & pubblicazione o abuso: nessuna evidenza (``l'assenza di prova non è prova di assenza'') & non
+  accertato \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Le tre posizioni.}
+\begin{itemize}
+  \item \textbf{CEO}: nessuna notifica, solo registro. L'accesso è passato dai sistemi del fornitore,
+    il server è protetto da certificati, nulla è stato pubblicato; informare gli iscritti porterebbe
+    solo un'ondata di telefonate. Si rivaluterà con nuove informazioni.
+  \item \textbf{CISO}: solo CNIL. Nome, cognome e valore della posizione sono stati esfiltrati: c'è un
+    rischio ex art.~33; notifica preliminare e integrazioni successive.
+  \item \textbf{Head of Member Services}: CNIL e tutti gli iscritti coinvolti. Se un truffatore chiama
+    un iscritto citando l'importo esatto della sua posizione (social engineering) e noi non abbiamo
+    detto nulla, non abbiamo difese.
+\end{itemize}
+
+\section{Consegna}
+\begin{itemize}
+  \item \textbf{Tempi}: 105 minuti di \emph{wall clock} = tre giorni di \emph{exercise clock}. Le nuove
+    informazioni (\emph{curveball}) arrivano in chat durante il lab.
+  \item \textbf{Worksheet obbligatorio} per tutti, qualunque sia la conclusione (anche ``nessuna
+    notifica''). Se la notifica è dovuta, si compila anche il \textbf{modulo di notifica} e si carica
+    un unico zip con entrambi i file, non protetto da password.
+  \item Nome del gruppo e dei componenti nell'intestazione e nel modulo di caricamento; file nominati
+    con il nome del gruppo. Lavori non attribuibili: scartati.
+  \item Compiti della Parte~A: (1) due perimetri (solo ciò che è stato preso o tutto ciò che il server
+    conteneva); (2) punteggio dei gruppi di dati; (3) la severità non è il rischio; (4) scegliere chi
+    informare: iscritti, CNIL, ACPR o nessuno; (5) da quando decorrono le 72 ore, e dalla conoscenza
+    di chi.
+  \item Indicazione data durante il lab: serve una valutazione \textbf{complessiva} della violazione,
+    non un punteggio per ogni voce.
+\end{itemize}
+
+\subsection{Il worksheet}
+Struttura (10 sezioni): sintesi dei fatti; DPC (tabella delle quattro categorie, con motivazione di
+ogni scostamento); EI (0,25 / 0,50 / 0,75 / 1,00); CB (somma di riservatezza, integrità, disponibilità,
+intento malevolo); calcolo di SE; fascia di rischio; decisione (solo registro / CNIL / CNIL e iscritti
+/ segnalazione DORA all'ACPR); perimetro; \textbf{giustificazione} (la risposta da dare all'autorità
+se chiede ``cosa avete fatto e perché''); \textbf{strategia} (il ragionamento interno, ``ciò che non
+si può dire ad alta voce'').
+
+\begin{nota}[Honne e tatemae]
+Gianluca ha presentato le ultime due sezioni con due concetti giapponesi: \textbf{tatemae} è la
+facciata, ciò che si mostra all'autorità (sezione~9); \textbf{honne} è la verità, il motivo reale
+della scelta, che può includere anche il timore di essere licenziati (sezione~10). Nella realtà sono
+due cose molto diverse.
+\end{nota}
+
+\subsection{Il modulo di notifica}
+È la trasposizione, in Excel, del modulo online dell'autorità (art.~33): sezioni A (chi notifica: il
+legale rappresentante o un delegato, con dichiarazione sulle conseguenze di dichiarazioni false),
+B (notifica preliminare o completa), C (titolare), D (DPO), E (altri soggetti: il fornitore come
+responsabile), F (informazioni sulla violazione: date, modalità di conoscenza, motivi del ritardo,
+natura, causa, sistemi, misure in essere, categorie e numero di interessati e registrazioni),
+H (misure adottate e per il futuro), L (comunicazione agli interessati, con il \textbf{testo effettivo}
+della comunicazione), M (altre autorità: già indicata la notifica all'ACPR ai sensi del DORA),
+N (trattamenti transfrontalieri). Alcuni campi sono precompilati perché lo studente non può
+conoscerli.
+
+\subsection{La curveball~1 (venerdì 11/4, 16:30)}
+Il fornitore ha inviato una comunicazione identica a un'altra società del gruppo, che fa
+\textbf{wealth management} per clienti facoltosi e di alto profilo. Stesso fornitore, stesso canale,
+stessa finestra. Domande guida: il proprio perimetro e punteggio; chi è titolare dei dati della
+società sorella; se il gruppo ha ora un problema che nessuna singola entità può risolvere da sola.
+
+\section{Metodologia}
+Stessa formula del Lab~1 (scale complete nel Capitolo~\ref{lab:01}):
+\[
+SE = DPC \times EI + CB
+\]
+con la mappatura di lavoro $SE<2$ solo registro, $2 \le SE <3$ CNIL, $SE \ge 3$ CNIL e iscritti
+(salvo art.~34(3)). In parallelo corre un \textbf{secondo orologio}: secondo il caso, ai sensi del
+DORA il fondo deve inviare all'ACPR una notifica iniziale entro 24 ore, intermedia entro 72 ore e
+finale entro un mese. È una questione distinta dalla notifica GDPR.
+
+\section{Svolgimento ragionato}
+
+\begin{integrazione}[Svolgimento dei redattori -- non è una soluzione ufficiale]
+\paragraph{Qualificazione.} È un data breach ai sensi dell'art.~4(12): esfiltrazione confermata di
+dati personali degli iscritti (riservatezza) da parte di un terzo non autorizzato. Il fatto che il
+vettore d'attacco sia nei sistemi del fornitore non toglie al fondo, in quanto titolare, gli obblighi
+degli artt.~33 e 34; incide sulla responsabilità del fornitore (art.~28) e sui rapporti contrattuali.
+
+\paragraph{Perimetri.} Perimetro~A: ciò che risulta preso (G1, più G2 per quanto si saprà). Perimetro~B:
+tutto ciò che il server riceveva, incluso l'export giornaliero completo (G3), dove dati storici e
+recenti non si separano. G4 è escluso (accesso fermo alla DMZ), G5 vuoto allo stato.
+
+\paragraph{Punteggio di G1.}
+\begin{itemize}
+  \item \textbf{DPC}: dati finanziari, base 3. Il valore della posizione dà un'indicazione concreta
+    della situazione patrimoniale, quindi non è un ``semplice numero di conto'' (che giustificherebbe
+    2). Abbassarlo a 2 è sostenibile solo argomentando che un singolo importo, senza movimenti, dà un
+    quadro limitato. Potrebbe salire a 4 se l'export storico permette di ricostruire l'andamento nel
+    tempo (volume).
+  \item \textbf{EI}: nome e cognome, nel contesto di un fondo specifico e associati a un importo:
+    identificazione significativa o diretta (0,75--1).
+  \item \textbf{CB}: riservatezza +0,5 (esfiltrazione verso un soggetto criminale, destinatari non
+    delimitabili; +0,25 sostenibile se si ritiene il destinatario unico); intento malevolo +0,5;
+    integrità e disponibilità 0 (nessuna alterazione, continuità intatta). CB = 1,0.
+\end{itemize}
+\begin{center}
+\small
+\begin{tabular}{cccll}
+\toprule
+\textbf{DPC} & \textbf{EI} & \textbf{CB} & \textbf{SE} & \textbf{Livello} \\ \midrule
+2 & 1 & 1,0 & 3,0 & alto (al limite) \\
+3 & 0,75 & 1,0 & 3,25 & alto \\
+3 & 1 & 1,0 & 4,0 & molto alto \\
+\bottomrule
+\end{tabular}
+\end{center}
+Flag: più di 100 interessati. Il caso è costruito per stare \textbf{sul confine} tra medio e alto.
+
+\paragraph{Severità e probabilità.} L'accesso a G1 è certo; l'abuso non è accertato, ma la
+combinazione nome + importo è esattamente ciò che serve per un attacco di social engineering
+credibile (``la chiamo dal fondo, la sua posizione è di X euro''). La curveball~1 aumenta la
+probabilità: più società finanziarie colpite attraverso lo stesso fornitore suggeriscono un'operazione
+organizzata e a scopo di lucro.
+
+\paragraph{Decisione.}
+\begin{itemize}
+  \item \textbf{CNIL}: notifica \textbf{preliminare} (art.~33(4)), senza attendere il quadro completo,
+    con impegno a integrarla. La posizione del CEO va respinta: protezione con certificati e colpa del
+    fornitore non rilevano, perché l'attaccante ha usato le credenziali legittime del fornitore e i
+    dati sono comunque usciti; ``nessun abuso rilevato'' non equivale a ``rischio improbabile''.
+  \item \textbf{Iscritti}: la tesi dell'Head of Member Services è forte. Una comunicazione (art.~34)
+    con consigli pratici, ad esempio ``il fondo non vi chiederà mai password o pagamenti al
+    telefono'', riduce proprio il rischio principale. In alternativa, chi sceglie ``solo CNIL'' deve
+    documentare i trigger che farebbero scattare la comunicazione.
+  \item \textbf{ACPR}: notifica DORA separata, già avviata con la classificazione delle 11:12.
+  \item \textbf{Fornitore}: richiesta formale di informazioni (categorie, volume, finestra, log),
+    contestazione della settimana di silenzio (art.~33(2)), riserva di azioni contrattuali.
+  \item \textbf{Registro} (art.~33(5)): tutte le scelte e i relativi motivi.
+\end{itemize}
+
+\paragraph{Le 72 ore.} Per il titolare decorrono da quando \emph{il titolare} è venuto a conoscenza:
+venerdì 11/4 alle 10:44 (comunicazione del responsabile), quindi scadenza \textbf{lunedì 14/4 alle
+10:44} (il weekend conta). Questo regge solo se il fondo può dimostrare di non aver potuto sapere
+prima: nessuna visibilità sul server durante la settimana silenziosa, nessun alert. Il ritardo del
+fornitore (conoscenza il 4/4) è una sua violazione dell'art.~33(2), non sposta indietro l'orologio
+del titolare. È lo schema anticipato dal prof.~Vaciago il 05/10 (Capitolo~\ref{lez:2026-10-05}).
+
+\paragraph{La curveball~1.} La società sorella è un \textbf{titolare distinto} dei dati dei propri
+clienti: valuta e notifica per conto proprio, e per i suoi clienti di alto profilo il DPC sale
+(caratteristiche particolari degli interessati). Il punteggio di Sylvane, sul proprio perimetro, non
+cambia; cambiano la probabilità di abuso e la dimensione di gruppo: comunicazioni coerenti (se la
+sorella informa i clienti e Sylvane no, il messaggio è incoerente), un'unica linea verso il fornitore
+condiviso, coordinamento della risposta.
+\end{integrazione}
+
+\section{Indicazioni emerse nel debrief (19/10)}
+\begin{esame}
+\begin{itemize}
+  \item \textbf{Riservatezza senza esfiltrazione}: la violazione di riservatezza c'è anche se i file
+    sono stati solo visti e non portati via; l'impatto sugli interessati, però, è molto diverso
+    (prof.~Vaciago).
+  \item \textbf{Le fasce di rischio sono una guida, non una regola matematica}: nel worksheet le fasce
+    ``$2 \le 3$'' e ``$3 \le 4$'' si sovrappongono proprio su 3. Con $SE = 3$ si è in zona grigia: si
+    decide e ci si assume la responsabilità in base all'\emph{accountability}; l'autorità può valutare
+    diversamente. Gruppi diversi, sullo stesso caso, sono arrivati a numeri molto diversi.
+  \item \textbf{Non presumere nulla che non si possa provare} (Gianluca): ogni dichiarazione falsa
+    all'autorità è un reato e chi la firma ne risponde personalmente. Nel dubbio ci si attiene alle
+    evidenze. Il prof.~Vaciago aggiunge che serve il dolo (\emph{mens rea}): l'errore in buona fede
+    non è punito, ma va poi spiegato a un pubblico ministero spesso digiuno di tecnica.
+  \item \textbf{Responsabilità del fornitore}: se il vettore d'attacco è nell'infrastruttura del
+    responsabile, è sua la colpa di essere stato violato, anche se i dati stavano sul server del
+    titolare.
+\end{itemize}
+\end{esame}
+
+\paragraph{Una delle soluzioni presentate.} Un gruppo ha diviso i dati in due insiemi (canale di
+scambio; una copia di backup sul server con dati più ricchi, senza evidenza di accesso nei log),
+notificando CNIL e iscritti (lettera con l'avvertimento che il fondo non chiederà mai password o
+denaro) e segnalando all'ACPR. Ha fatto partire le 72 ore dall'11/4, potendo dimostrare di non aver
+saputo prima, e ha proposto una risposta condivisa a livello di gruppo, documentando e firmando ogni
+passaggio. Il docente ha giudicato la presentazione molto buona.
+
+\section{Errori tipici}
+\begin{itemize}
+  \item Accettare l'argomento ``è colpa del fornitore'' come motivo per non notificare: gli obblighi
+    di notifica restano del titolare.
+  \item Far partire le 72 ore dal 4/4 (conoscenza del fornitore) oppure, all'opposto, rimandarle in
+    attesa di dettagli: la notifica preliminare esiste proprio per questo.
+  \item Trattare la fascia di rischio come una regola matematica, specialmente con $SE = 3$.
+  \item Fondare la decisione su ipotesi non documentate (es.\ ``probabilmente sono solo dati
+    recenti'').
+  \item Confondere la notifica GDPR alla CNIL con la segnalazione DORA all'ACPR: due binari, due
+    autorità, due orologi.
+  \item Valutare voce per voce invece di dare un giudizio complessivo sulla violazione.
+  \item Ignorare la curveball o, all'opposto, assorbire nel proprio perimetro i dati della società
+    sorella, che ha un proprio titolare.
+\end{itemize}
+
+\section{Collegamenti}
+\begin{itemize}
+  \item GDPR: artt.~4(12), 28, 33(2), 33(4), 33(5), 34 (Capitolo~\ref{cap:data-breach}).
+  \item DORA: notifica degli incidenti gravi all'autorità finanziaria (Capitolo~\ref{cap:dora}).
+  \item Lezione del 05/10: ritardo del responsabile e decorrenza delle 72 ore; art.~168 Codice privacy
+    sulle false dichiarazioni (Capitolo~\ref{lez:2026-10-05}).
+  \item Lab~1: metodologia e scale ENISA (Capitolo~\ref{lab:01}).
+\end{itemize}
+
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Curveball successive}: nel materiale c'è solo la curveball~1. Dal debrief del 19/10
+    (trascrizione molto disturbata) sembrano esserne emerse altre: un account non autorizzato presente
+    da tempo, il coinvolgimento di altre istituzioni finanziarie e una \textbf{copia di backup} sul
+    server con dati più ricchi (identificativi fiscali, dati KYC, transazioni) senza evidenza di
+    accesso. Da ricostruire con certezza.
+  \item \textbf{Scadenze DORA}: il caso indica notifica iniziale entro 24 ore dalla rilevazione,
+    intermedia entro 72 ore, finale entro un mese. Le norme tecniche attuative del DORA fissano la
+    notifica iniziale a 4 ore dalla classificazione (e comunque entro 24 ore dalla conoscenza):
+    verificare nel capitolo DORA quale formulazione usa il corso.
+  \item La data dell'esercizio è l'11 aprile \textbf{2025} (come nel materiale), non 2026.
+  \item Lo svolgimento ragionato non è stato validato dai docenti: i punteggi sono alternative
+    argomentabili, non la ``risposta giusta''.
+\end{itemize}
+\end{verifica}

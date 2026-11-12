@@ -1,0 +1,247 @@
+% =====================================================================
+\lezione{25/09/2026}{GDPR (I): ruoli, bilanciamento, principi, basi giuridiche}
+  {Prof.~Giuseppe Vaciago}
+  {titolare, responsabile e contitolari; bilanciamento degli interessi e caso Google Spain; principi
+   dell'art.~5; definizione di trattamento ed esenzione domestica (caso Lindqvist); i quattro pilastri;
+   categorie di dati; basi giuridiche; consenso e cookie paywall}
+\label{lez:2026-09-25}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione, revisionata. Lezione \textbf{da remoto} (circa 60--90
+collegati). Slide di riferimento: \emph{02.~Cybersecurity Laws and Regulations -- II Privacy}, dalla
+prima slide fino al consenso (il legittimo interesse è stato rinviato al 28/09). Le slide sono state
+caricate ruotate: il docente invita a segnalarlo se serve una nuova versione.
+\end{nota}
+
+\section{Sintesi}
+Prima lezione sul GDPR, ``la madre'' delle altre norme del corso. Il docente insiste soprattutto sui
+\textbf{ruoli} (titolare, responsabile, contitolari), che definisce ``la Bibbia del GDPR'', e sul
+\textbf{bilanciamento degli interessi}, illustrato con il caso \emph{Google Spain} e con esempi dalla
+sua pratica sul diritto all'oblio. Seguono i principi dell'art.~5, la definizione (larghissima) di
+trattamento, l'esenzione per le attività domestiche (caso \emph{Lindqvist}), i quattro pilastri del
+GDPR, le tre categorie di dati, le basi giuridiche e le condizioni del consenso, con il caso dei
+\emph{cookie paywall}.
+
+% ---------------------------------------------------------------------
+\section{Organizzazione}
+\begin{itemize}
+  \item Lunedì 28/09 si conclude la parte generale sul GDPR, \textbf{in presenza}.
+  \item Il venerdì successivo (2/10) dovrebbe partire il primo laboratorio; per ora l'idea è farlo
+    online, la decisione definitiva sarà presa lunedì in base ai presenti.
+  \item Per ragioni logistiche e di aule, alcune lezioni in più si svolgeranno da remoto.
+  \item Tutte le lezioni sono \textbf{trasmesse in streaming e registrate}; le registrazioni sono
+    sulla piattaforma del corso.
+\end{itemize}
+
+\begin{esame}
+Questa lezione e quella del 28/09 sono ``molto importanti per l'esame'': contengono molte
+\textbf{definizioni} che possono essere usate nelle domande a risposta multipla. Non vanno imparate a
+memoria, ma bisogna capirne esattamente il \textbf{significato giuridico}.
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{I ruoli: titolare, responsabile, contitolari}
+\begin{itemize}
+  \item \textbf{Titolare} (\emph{data controller}): persona fisica o giuridica che, da sola o insieme
+    ad altri, \textbf{determina le finalità e i mezzi} del trattamento. Le due parole chiave da
+    ricordare ``per sempre'': \emph{purposes and means}.
+  \item \textbf{Responsabile} (\emph{data processor}): tratta i dati \textbf{per conto} del titolare.
+  \item \textbf{Contitolari} (\emph{joint controllers}): due o più titolari che determinano
+    \textbf{congiuntamente} finalità e mezzi.
+\end{itemize}
+
+\paragraph{Esempio 1 -- La piattaforma di e-commerce.} Un'azienda di prodotti per l'igiene vuole
+vendere online tramite una piattaforma SaaS specializzata. La piattaforma chiede di avere anch'essa i
+dati dei clienti e propone un accordo di contitolarità. Ma i clienti comprano i prodotti dell'azienda:
+è l'azienda che decide le finalità, quindi è il \textbf{titolare}; la piattaforma tratta moltissimi
+dati, ma \textbf{per conto} del titolare, quindi è \textbf{responsabile}.
+
+\paragraph{Esempio 2 -- La maratona di beneficenza.} Una catena di negozi di scarpe e una fondazione
+per la ricerca sul cancro organizzano insieme una maratona. Nessuna delle due agisce per conto
+dell'altra: decidono insieme che cosa fare con i dati degli iscritti, quindi sono
+\textbf{contitolari}.
+
+\begin{esame}
+\begin{itemize}
+  \item Ciò che conta è la \textbf{situazione di fatto}, non ciò che le parti scrivono nell'accordo:
+    non si diventa contitolari solo perché lo si dichiara in un contratto. Il docente lo indica come
+    possibile spunto per la domanda aperta.
+  \item ``Non fate confusione sui ruoli'': è probabilmente l'unico punto su cui il docente dice che
+    sarà davvero severo all'esame. Tutto il GDPR, anche la parte su data breach e art.~32, si basa su
+    questi ruoli.
+\end{itemize}
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Il bilanciamento degli interessi}
+La privacy è un diritto fondamentale, ma non è ``scritto nella pietra'': a differenza del diritto alla
+vita, spesso va bilanciato con altri interessi, e c'è molta zona grigia. Anche la cybersicurezza è un
+bilanciamento: per prevenire incidenti bisogna loggare, monitorare, controllare, il che va in
+direzione opposta al diritto di essere lasciati in pace (\emph{right to be let alone}). Oggi la quasi
+totalità dei problemi di protezione dei dati riguarda la vita digitale.
+
+\subsection{Il caso Google Spain (CGUE, C-131/12, 2014)}
+\begin{itemize}
+  \item Il sig.\ Costeja González si rivolge all'autorità spagnola contro il quotidiano \emph{La
+    Vanguardia} e contro Google: cercando il suo nome comparivano due pagine del 1998 con l'annuncio di
+    un'asta immobiliare legata a debiti previdenziali, vicenda chiusa da anni.
+  \item L'autorità spagnola (decisione del 30 luglio 2010) \textbf{respinge} il reclamo contro il
+    giornale, la cui pubblicazione era legittima (doveva dare la massima pubblicità all'asta), ma lo
+    \textbf{accoglie} contro Google: il motore di ricerca svolge un trattamento di cui è \textbf{titolare} (nelle slide ``responsible'' è usato in senso generico).
+  \item La \textbf{Corte di giustizia}: alla luce degli artt.~7 e 8 della Carta, i diritti
+    dell'interessato prevalgono di regola sull'interesse economico del motore di ricerca e
+    sull'interesse del pubblico a trovare l'informazione, \textbf{salvo} ragioni particolari come il
+    ruolo dell'interessato nella vita pubblica.
+\end{itemize}
+Il punto per il docente non è il caso in sé, ma il \textbf{diritto all'oblio} come esempio di
+bilanciamento (oggi ancora più delicato con l'IA). Dopo la sentenza Google, non avendo strumenti per
+bilanciare caso per caso, istituì una sorta di comitato di saggi.
+
+\paragraph{Un caso della pratica del docente.} Una persona coinvolta in un processo di grande rilievo
+mediatico chiedeva la rimozione di contenuti. Rimuovere la vicenda processuale (``un pezzo di storia
+italiana'') non era possibile; rimuovere le sole \textbf{immagini} inopportune che la ritraevano sì,
+perché non manipolava la storia. Google ha accolto la richiesta, anche se tecnicamente non si riesce a
+eliminare tutte le copie diffuse online.
+
+\begin{nota}[Una regola di vita]
+``Ogni volta che risolvi un tuo problema, probabilmente ne crei uno a qualcun altro.'' Anche un piano
+di remediation dopo un incidente va valutato per le sue conseguenze, ad esempio sui diritti
+fondamentali: è l'approccio del giurista, complementare a quello dell'ingegnere che punta a risolvere
+il problema.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{I principi (art.~5)}
+\begin{itemize}
+  \item \textbf{Liceità, correttezza e trasparenza}. Nessuno legge le informative (leggere tutte
+    quelle dei propri dispositivi richiederebbe ore ogni mattina), perciò il titolare deve informare in
+    modo chiaro. Molte sanzioni colpiscono trattamenti nascosti (es.\ ``per migliorare i servizi''
+    si cedono i dati a centinaia di aziende) o \emph{dark pattern} grafici (un solo clic che spunta
+    tutti i consensi).
+  \item \textbf{Limitazione della finalità}: finalità determinate, esplicite e legittime; l'ulteriore
+    trattamento a fini di archiviazione, ricerca o statistica non è incompatibile.
+  \item \textbf{Minimizzazione}: meno dati hai, meno danni puoi subire.
+  \item \textbf{Esattezza}: dati inesatti o non aggiornati creano danni (una biografia online con
+    l'università sbagliata; una condanna in primo grado ancora online dopo l'assoluzione in appello).
+  \item \textbf{Limitazione della conservazione}: legata alla minimizzazione; serve una
+    \textbf{retention policy} che fissi per quanto tempo conservare ogni tipo di dato.
+  \item \textbf{Integrità e riservatezza}: sicurezza adeguata con misure tecniche e organizzative.
+    Con la disponibilità formano la triade RID/CIA.
+\end{itemize}
+
+\begin{esame}
+Ricordare i \textbf{sei principi} dell'art.~5 (``i sei pilastri dei principi'').
+\end{esame}
+
+\paragraph{Un po' di storia.} Il GDPR è il Reg.~(UE) 2016/679, applicato dal 2018; prima c'era la
+Direttiva 95/46/CE. Il merito del GDPR è aver dato a tutti gli Stati membri regole uniformi. Il
+docente sottolinea che alla sua stesura hanno contribuito anche ingegneri ed esperti IT: la
+combinazione giuristi--tecnici è quella giusta.
+
+% ---------------------------------------------------------------------
+\section{Trattamento ed esenzione domestica}
+\textbf{Trattamento} (art.~4(2)): qualsiasi operazione su dati personali, automatizzata o no:
+raccolta, registrazione, organizzazione, conservazione, modifica, estrazione, \textbf{consultazione},
+uso, comunicazione, diffusione, cancellazione, distruzione\ldots{} Non va imparato a memoria, ma
+bisogna ricordare che quasi ogni attività è un trattamento: anche solo \emph{guardare} i dati.
+
+\paragraph{Esenzione domestica.} Il trattamento per attività esclusivamente personali o domestiche
+non rientra nel GDPR, ma l'esenzione si interpreta \textbf{in senso restrittivo}. Il GDPR si rivolge a
+chi agisce come titolare o responsabile (tipicamente persone giuridiche), non al privato nella sua
+vita personale.
+
+\subsection{Il caso Lindqvist (CGUE, C-101/01)}
+Una catechista svedese, durante un corso di informatica, crea da casa un sito per i parrocchiani con
+informazioni sui colleghi catechisti, che non ne erano informati. Accusata penalmente di trattamento
+illecito, invoca l'esenzione domestica. La Corte la esclude: l'esenzione riguarda la vita privata o
+familiare, \textbf{mai la pubblicazione su Internet} di dati accessibili a un numero indefinito di
+persone. Nominare persone su una pagina web, con telefono, condizioni di lavoro o hobby, è
+trattamento automatizzato (allora ai sensi della Direttiva 95/46).
+
+\paragraph{Ricadute pratiche.} A chi vuole fare un sito ``per la famiglia'' il docente chiede: è
+aperto? Con password e senza indicizzazione si resta nella sfera privata; aprendolo al pubblico
+l'esenzione diventa problematica. Sui social i termini di servizio parlano di ``community'', ma una
+community di miliardi di persone difficilmente è privata: dipende dal bilanciamento e dal giudice.
+Esempio della zona grigia: una foto di Street View usata come prova in una causa di separazione a
+Napoli. Ogni foto pubblicata può avere conseguenze imprevedibili.
+
+% ---------------------------------------------------------------------
+\section{I quattro pilastri del GDPR}
+\begin{enumerate}
+  \item \textbf{Registro delle attività di trattamento} tenuto dal titolare (o dal suo
+    rappresentante).
+  \item \textbf{Responsabili del trattamento}: il titolare deve usare solo responsabili che offrano
+    garanzie sufficienti su misure tecniche e organizzative adeguate.
+  \item \textbf{DPIA}: valutazione d'impatto, prima del trattamento, quando questo può presentare un
+    rischio elevato per i diritti e le libertà delle persone.
+  \item \textbf{Data breach}: notifica all'autorità di controllo senza ingiustificato ritardo e, ove
+    possibile, entro \textbf{72 ore} dalla conoscenza.
+\end{enumerate}
+
+\section{Le tre categorie di dati}
+Il docente semplifica così:
+\begin{itemize}
+  \item \textbf{dati comuni}: nome, cognome, email, indirizzo;
+  \item \textbf{categorie particolari} (art.~9): opinioni politiche, religione, orientamento sessuale,
+    appartenenza sindacale, salute\ldots{} da trattare con maggiore protezione;
+  \item \textbf{dati giudiziari} (art.~10): condanne penali e reati.
+\end{itemize}
+In Europa i dati giudiziari sono tra i più protetti per il principio della \textbf{funzione rieducativa
+della pena} (risalente a Cesare Beccaria): chi ha scontato la pena deve poter ricominciare. Negli USA
+l'approccio è opposto (esistono app che collegano una foto ai registri penali).
+
+\begin{esame}
+Ricordare le \textbf{tre categorie}: comuni, particolari, giudiziari. A ciascuna corrispondono basi
+giuridiche diverse.
+\end{esame}
+
+\section{Le basi giuridiche}
+\begin{itemize}
+  \item \textbf{Dati comuni} (art.~6): consenso, contratto, obbligo legale, interessi vitali, compito
+    di interesse pubblico, \textbf{legittimo interesse} del titolare (purché non prevalgano i diritti
+    fondamentali dell'interessato).
+  \item \textbf{Categorie particolari} (art.~9): consenso, sicurezza e protezione sociale, interessi
+    vitali, attività di fondazioni e associazioni senza scopo di lucro, dati resi manifestamente
+    pubblici, difesa in giudizio, interesse pubblico rilevante, medicina preventiva o del lavoro.
+  \item \textbf{Dati giudiziari} (art.~10): solo sotto il controllo dell'autorità pubblica o se
+    autorizzati dal diritto dell'Unione o degli Stati membri.
+\end{itemize}
+Non serve sapere a memoria tutte le basi giuridiche, ma sapere che \textbf{dipendono dalla categoria}
+di dati trattati.
+
+\subsection{Il consenso (art.~7)}
+\begin{itemize}
+  \item Il titolare deve poter \textbf{dimostrare} che l'interessato ha acconsentito.
+  \item La richiesta deve essere chiaramente distinguibile dal resto, comprensibile, in linguaggio
+    semplice.
+  \item Non è libero se l'interessato non ha una scelta reale o non può rifiutare o revocare senza
+    subire un pregiudizio (considerando 42), né quando c'è un \textbf{evidente squilibrio} tra
+    interessato e titolare (considerando 43).
+  \item Si può revocare in ogni momento, ma la revoca non rende illecito il trattamento precedente.
+\end{itemize}
+\textbf{Squilibrio}: tipico del rapporto di lavoro (un datore che chiede informazioni sulla salute
+come condizione per l'assunzione). Su domanda di uno studente il docente chiarisce: il titolare è
+l'organizzazione, l'interessato la persona fisica; c'è squilibrio quando chi chiede il consenso ha un
+potere su di te (anche l'università rispetto allo studente), molto meno quando sei un cliente libero
+di comprare altrove.
+
+\paragraph{Cookie wall e cookie paywall.} Il \emph{cookie wall} (accesso solo accettando tutti i
+cookie) è vietato secondo l'EDPB. Il \emph{paywall} offre un'alternativa: abbonarsi o accettare i
+cookie di profilazione. Nell'ottobre 2022 i siti del gruppo GEDI lo hanno introdotto e il Garante ha
+aperto un'istruttoria. Le autorità austriaca e francese lo ritengono valido se l'abbonamento ha un
+costo moderato; la decisione italiana, secondo le slide, è ancora attesa. Domande d'esame sui
+paywall non sono previste: il caso serve solo a illustrare il requisito del consenso libero.
+
+% ---------------------------------------------------------------------
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item I nomi dei soggetti negli esempi di contitolarità (catena di scarpe e fondazione) sono
+    incomprensibili nella trascrizione; l'esempio vale comunque in astratto.
+  \item Il docente cita un caso di truffa con voce clonata da IA ai danni di Fideuram, avvenuto ``oggi'';
+    importi e dettagli non sono affidabili nella trascrizione (ripreso il 28/09).
+  \item Il docente dice che la vicenda Lindqvist ``è del 2001'': è il numero di ruolo della causa
+    (C-101/01); la data della sentenza va verificata.
+\end{itemize}
+\end{verifica}
