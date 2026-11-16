@@ -435,6 +435,27 @@ The assurance levels of European cybersecurity certificates under the CSA are:
 \end{opzioni}
 \end{domanda}
 
+\begin{domanda}[CSA, autovalutazione -- \rif{2026-11-09}{09/11}]\label{q:csa-self}
+Under the Cybersecurity Act, conformity self-assessment by the manufacturer:
+\begin{opzioni}
+  \item is always allowed at the basic assurance level;
+  \item is allowed only if the scheme permits it, for low-risk objects at the basic level;
+  \item is allowed at the substantial level for EUCC;
+  \item is equivalent to a marketing claim of ``certified security''.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[CSA, certificato -- \rif{2026-11-09}{09/11}]\label{q:csa-cert}
+A hospital's software supplier holds an EUCC certificate for one encryption component (v3, configuration
+A). \textbf{Select the WRONG statement.}
+\begin{opzioni}
+  \item The certificate gives evidence about that identified component, version and configuration.
+  \item The certificate does not automatically cover version 4 in configuration B.
+  \item The certificate proves that the whole hospital system is secure and compliant with NIS2.
+  \item A security patch does not automatically cancel the certificate, but its impact must be assessed.
+\end{opzioni}
+\end{domanda}
+
 \begin{domanda}[CSA -- \rif{2026-11-09}{09/11}]\label{q:csa-cra}
 About the relationship between CSA and CRA. \textbf{Select the WRONG statement.}
 \begin{opzioni}
@@ -449,11 +470,11 @@ About the relationship between CSA and CRA. \textbf{Select the WRONG statement.}
 \section{NIS2, DORA e AI Act}
 
 \begin{nota}
-Norme non ancora trattate a lezione (al 11/11/2026): domande basate sull'appello precedente e
-sull'inquadramento dei Capitoli~\ref{cap:nis2}--\ref{cap:aiact}.
+NIS2 trattata a lezione dal 13/11/2026; DORA e AI Act non ancora (al 16/11/2026): per queste le domande
+si basano sull'appello precedente e sull'inquadramento dei Capitoli~\ref{cap:dora}--\ref{cap:aiact}.
 \end{nota}
 
-\begin{domanda}[NIS2]\label{q:nis2-incidente}
+\begin{domanda}[NIS2 -- \rif{2026-11-13}{13/11}]\label{q:nis2-incidente}
 Under NIS2, an \emph{incident} is:
 \begin{opzioni}
   \item an event compromising the availability, authenticity, integrity or confidentiality of stored,
@@ -486,7 +507,38 @@ Under DORA, the initial notification of a major ICT-related incident must be sub
 \end{opzioni}
 \end{domanda}
 
-\begin{domanda}[NIS2 e DORA]\label{q:lex-specialis}
+\begin{domanda}[NIS2, notifiche -- \rif{2026-11-13}{13/11}]\label{q:nis2-tempi}
+An Italian essential entity becomes aware of a significant incident. \textbf{Select the WRONG
+statement.}
+\begin{opzioni}
+  \item It must send an early warning within 24 hours of becoming aware of it.
+  \item The reports go to the ACN, not to the CSIRT Italia.
+  \item An incident notification follows within 72 hours of awareness.
+  \item A final report is due within one month of the incident notification.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2, ambito -- \rif{2026-11-13}{13/11}]\label{q:nis2-soggetti}
+Under NIS2, which entity is \textbf{essential regardless of its size}?
+\begin{opzioni}
+  \item a small food distributor;
+  \item a small DNS service provider;
+  \item a medium-sized hospital;
+  \item a small online marketplace.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2, da NIS1 -- \rif{2026-11-13}{13/11}]\label{q:nis2-nis1}
+Compared with NIS1, NIS2:
+\begin{opzioni}
+  \item keeps the distinction between operators of essential services and digital service providers;
+  \item classifies \emph{entities} as essential or important, mainly by sector (Annexes I--II) and size;
+  \item applies only to railway transport and energy;
+  \item is a regulation directly applicable without national transposition.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2 e DORA -- \rif{2026-11-13}{13/11}]\label{q:lex-specialis}
 A bank is in a sector covered by both NIS2 and DORA. For ICT incident reporting:
 \begin{opzioni}
   \item NIS2 prevails, being a directive;
@@ -584,6 +636,11 @@ About ``72 hours'' in EU law. \textbf{Select the WRONG statement.}
     rilasciati da organismi di valutazione o autorità nazionali (e ISO non è uno schema UE); il CSIRT
     italiano è presso l'ACN.
   \sol{q:livelli}{b} Base, sostanziale, elevato (\emph{basic, substantial, high}).
+  \sol{q:csa-self}{b} L'autovalutazione (dichiarazione UE sotto la responsabilità del fabbricante) è
+    ammessa solo se lo schema la prevede; ``base'' non significa automaticamente autovalutazione, ed
+    EUCC non ha il livello base.
+  \sol{q:csa-cert}{c} Un componente certificato non è un ospedale certificato: il certificato non prova
+    la sicurezza dell'intero sistema né assolve gli obblighi di altre leggi.
   \sol{q:csa-cra}{c} Il CSA è soft law e aiuta a dimostrare la conformità al CRA (hard law), ma non lo
     sostituisce.
   \sol{q:nis2-incidente}{a} (b) è la definizione GDPR di data breach; (c) è la vulnerabilità
@@ -593,6 +650,13 @@ About ``72 hours'' in EU law. \textbf{Select the WRONG statement.}
     finanziaria; ai fornitori ICT gli obblighi arrivano per via contrattuale.
   \sol{q:dora-iniziale}{b} Doppio limite: 4 ore dalla classificazione come grave e comunque non oltre
     24 ore dalla conoscenza. Le 72 ore di DORA riguardano invece la relazione intermedia.
+  \sol{q:nis2-tempi}{b} In Italia le segnalazioni vanno al CSIRT Italia; l'ACN è l'autorità di
+    vigilanza (punto sottolineato a lezione).
+  \sol{q:nis2-soggetti}{b} Prestatori di servizi fiduciari qualificati e fornitori DNS sono essenziali a
+    prescindere dalla dimensione; una piccola impresa degli altri settori resta fuori, e un ospedale medio
+    è importante.
+  \sol{q:nis2-nis1}{b} La NIS1 guardava ai servizi (OES e DSP); la NIS2 ai soggetti. Resta una
+    direttiva, recepita in Italia con il D.lgs.~138/2024.
   \sol{q:lex-specialis}{c} DORA è lex specialis rispetto a NIS2 per le entità finanziarie.
   \sol{q:72h}{c} Le 72 ore di DORA decorrono dalla notifica iniziale, non dalla consapevolezza.
 \end{description}

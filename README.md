@@ -54,7 +54,7 @@ CSLR_Polito_2026/
 
 ## Copertura attuale
 
-15 lezioni, dal 21/09 al 09/11/2026, tutte nel diario, inclusi i 4 laboratori.
+16 lezioni, dal 21/09 al 13/11/2026, tutte nel diario, inclusi i 4 laboratori.
 
 | Data | Argomento |
 |---|---|
@@ -71,9 +71,11 @@ CSLR_Polito_2026/
 | 02/11 | CRA e simulazione Pulse K (CRA + GDPR) |
 | 06/11 | Lab 4: conformity audit CRA (Sestante Mobility) |
 | 09/11 | Hard e soft law; Cybersecurity Act |
+| 13/11 | NIS2 (I): calendario, cooperazione, ambito, soggetti essenziali e importanti, notifiche |
 
-NIS2, DORA e AI Act non sono ancora stati trattati a lezione. I loro capitoli contengono per ora un inquadramento,
-quasi tutto in riquadri `integrazione`.
+Il capitolo NIS2 integra la prima lezione (13/11; slide NIS2 non ancora disponibili); il capitolo CSA è rivisto
+sulle slide ufficiali e include il caso dell'ospedale. DORA e AI Act non sono ancora stati trattati a lezione: i
+loro capitoli contengono per ora un inquadramento, quasi tutto in riquadri `integrazione`.
 
 ## Come compilare
 

@@ -2,10 +2,11 @@
 \label{cap:nis2}
 
 \begin{nota}[Stato e fonti]
-\textbf{Stato: non ancora trattata a lezione} (lezione frontale prevista venerdì 13/11/2026, online:
-Capitolo~\ref{lez:2026-11-09}). Questo capitolo è un \textbf{inquadramento provvisorio}. Fonti usate:
-slide introduttive (\emph{01.~Introductory class}), glossario del laboratorio~1, diario delle lezioni
-del 21/09, 05/10, 26/10, 02/11 e 09/11, tema d'esame precedente (Capitolo~\ref{cap:tema-precedente});
+\textbf{Stato: prima parte trattata a lezione} il 13/11/2026 (online, Gianluca Gilardi:
+Capitolo~\ref{lez:2026-11-13}); la lezione prosegue il 16/11 e le slide NIS2 non sono ancora disponibili.
+Fonti usate: la lezione del 13/11, slide introduttive (\emph{01.~Introductory class}), glossario del
+laboratorio~1, diario delle lezioni del 21/09, 05/10, 26/10, 02/11 e 09/11, tema d'esame precedente
+(Capitolo~\ref{cap:tema-precedente});
 come fonte secondaria gli \textbf{appunti di studenti dell'A.A.~2025/26}, sempre indicati come tali.
 Tutto il resto è nei riquadri viola di integrazione.
 \end{nota}
@@ -41,15 +42,58 @@ Punti emersi a lezione:
     mercato, perché i grandi clienti scelgono i fornitori anche in base a essa (lezione del 21/09).
 \end{itemize}
 
-\paragraph{Dalla NIS alla NIS2 (appunti A.A.~2025/26).} La prima direttiva NIS (2016) si applicava a un
-gruppo ristretto di operatori e fu recepita in modo disomogeneo; la NIS2 la sostituisce allargando
-l'ambito a 18 settori, distinguendo soggetti essenziali e importanti, rafforzando vigilanza e obblighi
-di segnalazione e inserendo la gestione del rischio della catena di fornitura.
+\paragraph{Obiettivi e oggetto (lezione del 13/11).} La NIS2 fornisce un quadro giuridico unificato per
+\textbf{prevenire, gestire e risolvere gli incidenti} nelle infrastrutture critiche dell'UE, al posto
+del quadro ``a toppe'' della NIS1. Protegge reti e sistemi informativi, i loro utenti e chiunque sia
+colpito da un incidente: per decidere se notificare conta anche l'\textbf{impatto sugli utenti finali}
+(esempio della lezione: il disservizio della posta Microsoft del 13/11/2026). Due precisazioni:
+\begin{itemize}
+  \item il \textbf{sistema informativo} comprende anche i \textbf{dati} conservati, elaborati o
+    trasmessi, non solo hardware e software;
+  \item la \textbf{sicurezza} dei sistemi informativi è la capacità di resistere agli eventi che
+    compromettono \textbf{disponibilità, autenticità, integrità o riservatezza}: la NIS2 aggiunge
+    l'\textbf{autenticità} alla triade CIA. L'incidente può anche non essere un attacco.
+\end{itemize}
+Il rischio vero viene spesso dalla \textbf{supply chain}: se un fornitore ``fuori perimetro'' si ferma e
+il soggetto non riesce più a erogare i servizi che rientrano nella direttiva, quel fornitore è critico.
+Come tutte le norme di sicurezza del corso, la NIS2 è \textbf{risk-based} e di \textbf{accountability}.
+
+\paragraph{Dalla NIS alla NIS2.} Dalla lezione del 13/11: la NIS1 copriva pochi settori e distingueva
+\emph{operatori di servizi essenziali} e \emph{fornitori di servizi digitali}, cioè guardava al
+\textbf{servizio}; la NIS2 allarga molto l'ambito e guarda al \textbf{soggetto}, distinguendo
+\textbf{essenziali} e \textbf{importanti}; le notifiche sono molto più severe. Gli appunti A.A.~2025/26
+aggiungono che la NIS1 fu recepita in modo disomogeneo e che la NIS2 rafforza la vigilanza e inserisce
+la gestione del rischio della catena di fornitura.
+
+\paragraph{Il calendario (lezione del 13/11).}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm} X}
+\toprule
+\textbf{Quando} & \textbf{Che cosa}\\
+\midrule
+Dicembre 2022 & adozione della direttiva\\
+Ottobre 2024 & termine di recepimento; la NIS1 cessa di applicarsi; in Italia D.lgs.~138/2024\\
+Dicembre 2024 & le imprese autovalutano se rientrano nell'ambito\\
+Gennaio--febbraio 2025 & auto-registrazione sulla piattaforma ACN (in Italia entro fine febbraio)\\
+Aprile 2025 & elenco dei soggetti essenziali e importanti (in Italia 17/04/2025); l'ACN comunica
+  l'inclusione\\
+Comunicazione ACN + 9 mesi & obblighi di \textbf{notifica} e procedure interne (quindi da gennaio
+  2026)\\
+Comunicazione ACN + 18 mesi & \textbf{piena attuazione}: governance, gestione del rischio, misure
+  di sicurezza (ultima scadenza indicata a lezione: 30/10/2026)\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Nei 18 mesi ci sono altre scadenze (valutazione della supply chain, comunicazione degli intervalli di
+indirizzi IP, elenco dei processi critici). Al 13/11/2026 la situazione è ``come il GDPR nel 2018'':
+nessuna decisione, nessun audit e nessuna sanzione delle autorità; si lavora sulle linee guida e sulle
+FAQ dell'ACN.
 
 \begin{integrazione}[dati formali]
 \begin{itemize}
   \item Direttiva (UE) 2022/2555 del 14 dicembre 2022, in vigore dal 16 gennaio 2023; termine di
-    recepimento il 17 ottobre 2024. La direttiva NIS (UE) 2016/1148 è abrogata dal 18 ottobre 2024.
+    recepimento il 17 ottobre 2024 (giorni esatti non detti a lezione). La direttiva NIS (UE) 2016/1148 è abrogata dal 18 ottobre 2024.
   \item Il limite della NIS1 era anche di metodo: erano gli Stati a individuare uno per uno gli
     ``operatori di servizi essenziali'', con criteri molto diversi tra Paesi. La NIS2 sostituisce
     l'identificazione caso per caso con un criterio generale (settore + dimensione).
@@ -69,6 +113,27 @@ Nel tema d'esame precedente (Capitolo~\ref{cap:tema-precedente}) la qualificazio
 della risposta: la sanità è un settore dell'Allegato~I, quindi un ospedale è \textbf{essenziale} se
 grande impresa e \textbf{importante} se media; i suoi fornitori di cloud e di servizi di sicurezza
 gestiti sono a loro volta soggetti NIS2 (infrastrutture digitali e gestione dei servizi ICT B2B).
+
+\paragraph{Lezione del 13/11.} Gli \textbf{essenziali} sono i soggetti dell'Allegato~I \textbf{più
+grandi delle PMI}: una PMI in un settore critico non è essenziale. Fanno eccezione i
+\textbf{prestatori di servizi fiduciari qualificati} e i \textbf{fornitori DNS}, essenziali a
+prescindere dalla dimensione, i fornitori di \textbf{comunicazioni elettroniche} pubbliche, essenziali
+già se \textbf{medie} imprese, e i soggetti \textbf{designati dallo Stato}. Gli \textbf{importanti} sono
+la categoria \textbf{residuale}: soggetti degli Allegati~I e~II sotto le soglie degli essenziali. Gli
+importanti hanno obblighi organizzativi minori, ma sulla notifica le differenze sono poche e in pratica
+adottano le stesse procedure.
+
+\textbf{Calcolo della dimensione.} Dipendenti e fatturato si sommano a quelli delle società che
+controllano il soggetto o in cui ha partecipazioni, \textbf{in proporzione alla partecipazione}: piccole
+società controllate da un grande gruppo possono rientrare nell'ambito pur sembrando ``piccole''.
+
+\textbf{Esempi di settore dati a lezione.} Allegato~I: chi fa \textbf{assistenza remota} con accesso ai
+sistemi del cliente è nella gestione dei servizi ICT; chi gestisce un \textbf{SOC}, anche senza accedere
+ai sistemi del cliente, è un MSSP; il servizio di comunicazione elettronica pubblico è quello che, su
+richiesta dell'utente, gli permette di comunicare con un terzo (la posta elettronica del caso Outlook).
+Allegato~II: rifiuti, alimenti (meno critici dell'energia perché più distribuiti), chimica (un impianto
+SCADA compromesso può avvelenare a valle colture e cibo), dispositivi medici, marketplace, motori di
+ricerca e social network, ricerca.
 
 \paragraph{Appunti A.A.~2025/26.} Agli ambiti già coperti dalla NIS1 (energia, trasporti, sanità,
 finanza, acqua, infrastrutture digitali) si aggiungono, tra gli altri, alimenti, servizi postali,
@@ -125,8 +190,12 @@ essenziali e importanti e comunica loro l'inclusione.
   \item Gli appunti A.A.~2025/26 parlano in un punto di ``18 settori'' e in un altro di ``25 settori'':
     il dato corretto per la direttiva è 18 (11 + 7); il numero maggiore potrebbe contare anche i
     sottosettori o gli allegati italiani. Verificare sulle slide NIS2.
-  \item Allegati italiani del D.lgs.~138/2024, finestre di registrazione sulla piattaforma ACN e
-    calendario degli obblighi: dettagli da confermare sulle slide e sul sito dell'ACN.
+  \item Allegati italiani del D.lgs.~138/2024; finestre di registrazione e calendario detti a lezione
+    il 13/11 (fine febbraio 2025, 17/04/2025, 9 e 18 mesi, 30/10/2026): da confermare sulle slide e sul
+    sito dell'ACN.
+  \item Registro: aggiornamento ``almeno ogni due anni'' e cambiamenti da comunicare l'anno successivo
+    (lezione del 13/11); dati richiesti: contatti e intervalli di indirizzi IP. Chi non è stabilito
+    nell'UE ma vi offre servizi nomina un \textbf{rappresentante} (art.~26), come nel GDPR.
 \end{itemize}
 \end{verifica}
 
@@ -182,6 +251,13 @@ vulnerabilità specifiche di ciascun fornitore, la qualità dei loro prodotti e 
 sicurezza, comprese le procedure di sviluppo sicuro; in pratica, inventario dei fornitori e dei
 servizi critici, mappatura delle dipendenze, requisiti minimi nei contratti, SLA e tempi di
 ripristino, rivalutazione periodica.
+
+\paragraph{ISO/IEC~27001 e misure ACN (lezione del 13/11).} Tra le politiche richieste c'è quella di
+\textbf{analisi dei rischi e risposta agli incidenti}: valutazione, mitigazione e gestione degli
+incidenti sono il cuore della norma. Secondo il docente chi è conforme alla ISO/IEC~27001 copre circa il
+\textbf{75--80\%} dei requisiti NIS2. L'ACN ha pubblicato un file Excel con le misure richieste, distinte
+per soggetti essenziali e importanti (per questi ultimi un \textbf{sottoinsieme}); la guida non è
+chiarissima e restano molte domande aperte.
 
 \paragraph{Certificazioni.} Le slide ricordano che l'\textbf{art.~24} NIS2, come gli artt.~42--43 GDPR e
 il Titolo~III del Cybersecurity Act, tratta la certificazione come \textbf{elemento di prova} da
@@ -263,9 +339,10 @@ danni materiali o immateriali considerevoli. Il ``può causare'' è giuridicamen
 \end{esame}
 
 \paragraph{Le tempistiche.} L'orologio parte dalla \textbf{consapevolezza} di un incidente
-significativo. Destinatario è il \textbf{CSIRT} (in Italia il CSIRT Italia, presso l'ACN). Le slide
-precisano che \textbf{in Italia, da gennaio 2026}, gli incidenti significativi vanno segnalati al CSIRT
-Italia.
+significativo. Destinatario è il \textbf{CSIRT} (in Italia il CSIRT Italia, presso l'ACN): la lezione del
+13/11 insiste che si notifica al CSIRT, \textbf{non all'ACN}. Le slide introduttive precisano che
+\textbf{in Italia, da gennaio 2026}, gli incidenti significativi vanno segnalati al CSIRT Italia: è
+coerente con i 9 mesi dalla comunicazione ACN di aprile 2025.
 
 \begin{center}
 \small
@@ -284,6 +361,15 @@ Relazione finale & \textbf{1 mese} dalla notifica dell'incidente
 \bottomrule
 \end{tabularx}
 \end{center}
+
+\paragraph{Dalla lezione del 13/11.} Il preallarme a 24 ore non richiede un quadro completo: serve ai
+CSIRT europei per coordinarsi e capire se l'incidente si sta diffondendo. Deve dire almeno che cosa
+succede, quali sistemi sono coinvolti e che tipo di incidente è (disponibilità, autenticità, integrità,
+riservatezza). La relazione finale con la \emph{root cause analysis} non ammette proroghe; la
+mitigazione può durare oltre. Il problema pratico è la supply chain: le informazioni spesso devono
+arrivare da un fornitore, ma l'obbligo resta \textbf{del soggetto} (il fornitore ne ha di propri solo se
+è a sua volta soggetto NIS2). Consiglio pratico del docente: finché i criteri di significatività non
+sono chiari, \textbf{notificare} almeno il preallarme, che si può poi ritirare; le sanzioni sono alte.
 
 Nelle slide la tabella dei cinque ``orologi'' riassume la logica: la NIS2 conta la
 \textbf{perturbazione di un servizio}, il GDPR il danno alle persone, il DORA l'impatto su una funzione.
@@ -331,9 +417,11 @@ allineamento tra registro degli incidenti e registro dei data breach.
 
 \begin{verifica}
 \begin{itemize}
-  \item ``Da gennaio 2026'' (slide): coerente con il calendario del D.lgs.~138/2024, che fa decorrere
-    l'obbligo di notifica dal 1 gennaio 2026 per i soggetti inclusi nell'elenco ACN. Confermare sulle
-    slide NIS2.
+  \item ``Da gennaio 2026'' (slide): coerente con il calendario detto a lezione (9 mesi dalla
+    comunicazione ACN di aprile 2025). Confermare sulle slide NIS2.
+  \item Il 13/11 il docente colloca la relazione finale ``entro il trentesimo giorno dalla
+    consapevolezza'' e gli IoC già nel preallarme; l'art.~23(4) indica un mese dalla \emph{notifica}
+    dell'incidente e gli IoC nella notifica a 72 ore. In caso di dubbio, all'esame vale il testo.
   \item Le soglie di ``incidente significativo'' fissate dall'ACN per i soggetti italiani (determinazioni
     dell'Agenzia) non sono state ancora viste a lezione.
 \end{itemize}
@@ -358,6 +446,16 @@ docente l'ACN può arrivare a \textbf{fermare un fornitore} ritenuto pericoloso 
 critica, anche se il fornitore non è direttamente soggetto a NIS2 (lezione del 21/09). Due conseguenze
 indicate dalle slide: non si sceglie il proprio interlocutore, e i difetti di coordinamento tra queste
 autorità sono un rischio che gestisce il soggetto, non l'autorità.
+
+\paragraph{I tre livelli della cooperazione (lezione del 13/11).} La \textbf{rete dei CSIRT} lavora sul
+piano tecnico: condivide informazioni sulle minacce (prevenzione) e coordina la risposta agli incidenti
+transfrontalieri, ma \textbf{non gestisce crisi}. \textbf{EU-CyCLONe} gestisce le conseguenze degli
+incidenti su larga scala che colpiscono un numero rilevante di Stati, con ENISA. Il \textbf{NIS
+Cooperation Group} (Stati, Commissione, ENISA) è il livello strategico e politico: pubblica
+\textbf{linee guida non vincolanti} ma ``altamente suggestive'', che vanno seguite. Gli organismi europei
+non tolgono responsabilità alle autorità nazionali. In Italia non sono state create autorità nuove: ACN
+e CSIRT esistevano già e sono stati designati. Ogni Stato ha una strategia nazionale (in Italia
+triennale) che include la cooperazione pubblico-privato.
 
 \paragraph{ENISA.} Per il ruolo di ENISA (mandato permanente dal Cybersecurity Act, cooperazione
 operativa, verso la centralizzazione delle notifiche) si veda il Capitolo~\ref{cap:csa} e la domanda
@@ -387,7 +485,7 @@ funzioni sono accentrate nell'ACN.
 Il potere dell'ACN di ``fermare un fornitore'' non soggetto a NIS2 non è stato ricondotto a lezione a
 un articolo preciso: potrebbe riferirsi alle valutazioni coordinate dei rischi della supply chain
 (art.~22), ai poteri nazionali sul perimetro di sicurezza nazionale cibernetica o ad altri strumenti
-nazionali. Da chiarire nella lezione del 13/11.
+nazionali. Non chiarito nella lezione del 13/11.
 \end{verifica}
 
 % =====================================================================
@@ -407,7 +505,9 @@ Sanzione massima & fino a \textbf{10 milioni di euro} o al \textbf{2\%} del fatt
 \end{tabularx}
 \end{center}
 \noindent Fonti: glossario del laboratorio~1 (classi, vigilanza, sanzioni) e slide introduttive
-(sanzione per gli essenziali). Gli appunti A.A.~2025/26 aggiungono che le sanzioni tengono conto di
+(sanzione per gli essenziali). Il 13/11 il docente ha aggiunto che la sanzione per la
+\textbf{mancata registrazione} nel registro è molto alta (``il triplo'' della base, da verificare) e
+che al 13/11/2026 nessuna sanzione NIS2 è ancora stata irrogata in Italia. Gli appunti A.A.~2025/26 aggiungono che le sanzioni tengono conto di
 proporzionalità, gravità e cooperazione del soggetto, e che nel laboratorio dello scorso anno il
 rischio sanzionatorio NIS2 era giudicato basso grazie alla sostanziale conformità, nonostante lacune
 di formazione: la sanzione dipende dall'adeguatezza delle misure e dalla tempestività delle notifiche,
@@ -437,7 +537,9 @@ non dal solo fatto che l'incidente sia avvenuto.
 sono nell'Allegato~I della NIS2, ma per le entità finanziarie il \textbf{DORA} prevale dove le norme
 si sovrappongono (gestione del rischio ICT, notifica degli incidenti): la norma speciale prevale su
 quella generale (glossario del corso; Simulazione~2 nel Capitolo~\ref{cap:simulazioni}). Per il resto
-si veda la Sezione~\ref{sec:dora-lexspecialis}. Viceversa, un ospedale non è soggetto al DORA perché
+si veda la Sezione~\ref{sec:dora-lexspecialis}. Lezione del 13/11: il DORA è ``la NIS2 per le
+istituzioni finanziarie''; chi rientra in entrambe applica \textbf{solo il DORA}; le due norme si
+sovrappongono sulle misure, non sui settori. Viceversa, un ospedale non è soggetto al DORA perché
 non è un'entità finanziaria (tema precedente).
 
 \paragraph{GDPR.} Lo stesso evento può essere incidente significativo NIS2 e data breach GDPR: le
@@ -445,7 +547,9 @@ notifiche al CSIRT e al Garante sono \textbf{separate e parallele} e una non ade
 (Capitolo~\ref{cap:scadenze}). Le due definizioni non coincidono (autenticità; dati personali sì o no) e
 gli orologi partono da eventi diversi. Nel tema precedente la risposta modello suggerisce una procedura
 integrata GDPR--NIS2 e registri allineati. Gli appunti A.A.~2025/26 aggiungono che le informazioni
-raccolte per la notifica NIS2 possono essere in gran parte riutilizzate per quella GDPR.
+raccolte per la notifica NIS2 possono essere in gran parte riutilizzate per quella GDPR. Sulle sanzioni
+il docente ha precisato il 13/11 che per la stessa violazione si è sanzionati \textbf{una volta sola},
+non per entrambe le norme (vedi art.~35 nel riquadro sotto).
 
 \paragraph{CRA.} NIS2 = organizzazione, CRA = prodotto (lezione del 26/10): il considerando~3 del CRA
 spiega che né il Cybersecurity Act né la NIS2 impongono requisiti obbligatori di sicurezza ai prodotti.
@@ -468,7 +572,7 @@ prodotto, l'obbligo CRA è del fabbricante, non dell'ospedale.
 \end{itemize}
 \end{integrazione}
 
-\dacompletare{Da integrare dopo la lezione del 13/11/2026 con slide e diario: ambito e allegati
-(versione del corso), recepimento italiano e calendario ACN, art.~20, art.~21 e linee guida ACN,
-art.~23 e soglie di significatività, sanzioni, rapporti con DORA e GDPR. Aggiornare poi le schede di
-ripasso (date NIS2) e verificare la coerenza con il Capitolo~\ref{cap:scadenze}.}
+\dacompletare{Da integrare con la seconda parte della lezione (16/11/2026) e con le slide NIS2 quando
+saranno caricate (anche il caso Outlook): confermare calendario, sanzioni (anche per la mancata
+registrazione) e termini della relazione finale; art.~20 e linee guida ACN; soglie di
+significatività. Spostare poi nel testo ciò che le slide confermano.}
