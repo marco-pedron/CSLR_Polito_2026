@@ -4,6 +4,16 @@ Manuale in LaTeX, scritto da studenti, del corso **Cybersecurity Laws and Regula
 A.A. 2026/27, Prof. Giuseppe Vaciago; laboratori con Gianluca Gilardi). Copre GDPR e data breach, ISO/IEC 27001 e
 risk management, Cyber Resilience Act, Cybersecurity Act, NIS2, DORA e AI Act. Si aggiorna lezione per lezione.
 
+## 📄 Scarica il PDF
+
+**[Manuale_CSLR.pdf](https://github.com/marco-pedron/CSLR_Polito_2026/releases/latest/download/Manuale_CSLR.pdf)**: l'ultima versione compilata,
+sempre allineata a `main`.
+
+Il PDF non è nel repository: lo genera una GitHub Action (`.github/workflows/manuale.yml`) a ogni push su `main` che
+tocca `manuale/`, e lo pubblica nella release [`latest`](https://github.com/marco-pedron/CSLR_Polito_2026/releases/latest)
+con data e commit di origine. Se la compilazione fallisce, la scheda *Actions* mostra l'errore e resta il PDF
+precedente. Per rigenerarlo a mano: *Actions → Manuale PDF → Run workflow*.
+
 > ⚠️ **Non è materiale ufficiale.** Sono appunti rielaborati: possono contenere errori. Per l'esame fanno fede le
 > slide, i testi normativi e le indicazioni del docente. Le parti aggiunte da noi, cioè non dette a lezione e non
 > presenti nelle slide, sono sempre in un riquadro viola **"Integrazione – non dal corso"**. I punti incerti sono
@@ -14,7 +24,9 @@ risk management, Cyber Resilience Act, Cybersecurity Act, NIS2, DORA e AI Act. S
 ```
 CSLR_Polito_2026/
 ├── README.md
-├── .gitignore              whitelist: entrano solo i sorgenti .tex (e latexmkrc)
+├── .gitignore              whitelist: entrano solo i sorgenti .tex, latexmkrc e il workflow
+├── .github/workflows/
+│   └── manuale.yml         compila il manuale e pubblica il PDF nella release "latest"
 └── manuale/
     ├── main.tex            documento principale: ordine delle parti e degli \input
     ├── preambolo.tex       pacchetti, riquadri (esame, integrazione, verifica, …), macro
@@ -79,6 +91,9 @@ loro capitoli contengono per ora un inquadramento, quasi tutto in riquadri `inte
 
 ## Come compilare
 
+Per leggere il manuale non serve compilarlo: basta il [PDF della release](#-scarica-il-pdf). Compila in locale
+solo se modifichi i sorgenti.
+
 **In locale (macOS):**
 
 ```sh
@@ -114,6 +129,7 @@ registrazione → audio ottimizzato per ASR → trascrizione (Whisper) → bozza
    Ciò che non viene dal corso va nei riquadri `integrazione`.
 5. **Controllo:** il documento deve compilare senza errori né riferimenti indefiniti. Si rilegge, poi si fa commit e
    push.
+   Dopo il push controlla che l'Action *Manuale PDF* sia verde: il PDF nella release si aggiorna da solo.
 
 **Registrazioni, audio, trascrizioni, slide e materiale del docente non sono e non saranno nel repository**, per
 il diritto d'autore dell'ateneo e del docente. Restano solo sul computer di chi cura la pipeline. Il `.gitignore`
@@ -122,7 +138,8 @@ lascia entrare solo i sorgenti `.tex`.
 ## Come contribuire
 
 - Correzioni e aggiunte sono benvenute: crea un branch (`git checkout -b fix/gdpr-art6`), fai le modifiche, compila,
-  apri una pull request. Per una segnalazione rapida basta una *issue*.
+  apri una pull request. Per una segnalazione rapida basta una *issue*. Il PDF della release si rigenera solo dopo
+  il merge su `main`.
 - **Nuova lezione:** copia `lezioni/_template.tex` in `lezioni/AAAA-MM-GG.tex` e aggiungi
   `\input{lezioni/AAAA-MM-GG}` in `main.tex`, in ordine cronologico.
 - Scrivi in italiano. Sintassi LaTeX: `art.~33`, virgolette ``` ``…'' ```.

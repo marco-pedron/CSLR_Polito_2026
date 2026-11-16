@@ -9,3 +9,7 @@
 !/manuale/**/
 !/manuale/**/*.tex
 !/manuale/latexmkrc
+!/.github/
+/.github/**
+!/.github/workflows/
+!/.github/workflows/*.yml

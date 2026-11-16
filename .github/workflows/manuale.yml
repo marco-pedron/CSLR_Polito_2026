@@ -1,0 +1,38 @@
+# Compila il manuale a ogni push su main e pubblica il PDF nella release "latest".
+name: Manuale PDF
+
+on:
+  push:
+    branches: [main]
+    paths: ['manuale/**', '.github/workflows/manuale.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manuale-pdf
+  cancel-in-progress: true
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compila con latexmk
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: manuale
+
+      - name: Pubblica nella release latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp manuale/build/main.pdf Manuale_CSLR.pdf
+          title="Manuale CSLR – $(date -u +%d/%m/%Y) (${GITHUB_SHA::7})"
+          notes="PDF compilato automaticamente dal commit ${GITHUB_SHA::7}."
+          # Ricrea release e tag sul commit appena compilato
+          gh release delete latest --cleanup-tag --yes || true
+          gh release create latest Manuale_CSLR.pdf --target "$GITHUB_SHA" --title "$title" --notes "$notes" --latest
