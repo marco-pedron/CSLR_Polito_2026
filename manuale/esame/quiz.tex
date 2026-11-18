@@ -470,7 +470,7 @@ About the relationship between CSA and CRA. \textbf{Select the WRONG statement.}
 \section{NIS2, DORA e AI Act}
 
 \begin{nota}
-NIS2 trattata a lezione dal 13/11/2026; DORA e AI Act non ancora (al 16/11/2026): per queste le domande
+NIS2 trattata a lezione il 13/11 e il 16/11/2026; DORA e AI Act non ancora (al 16/11/2026): per queste le domande
 si basano sull'appello precedente e sull'inquadramento dei Capitoli~\ref{cap:dora}--\ref{cap:aiact}.
 \end{nota}
 
@@ -545,6 +545,52 @@ A bank is in a sector covered by both NIS2 and DORA. For ICT incident reporting:
   \item the bank must report the same incident twice, under both regimes;
   \item DORA applies as lex specialis;
   \item neither applies: the GDPR covers it.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2, governance -- \rif{2026-11-16}{16/11}]\label{q:nis2-organo}
+Under NIS2, the management body of an essential entity:
+\begin{opzioni}
+  \item may delegate cybersecurity entirely to the CISO and is then exempt from liability;
+  \item approves the cybersecurity risk-management measures, oversees their implementation and can be
+    held liable for infringements;
+  \item is liable only if the entity is also subject to DORA;
+  \item has no training obligations, which apply only to employees.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2, vigilanza e sanzioni -- \rif{2026-11-16}{16/11}]\label{q:nis2-vigilanza}
+\textbf{Select the WRONG statement} on NIS2 supervision and enforcement.
+\begin{opzioni}
+  \item Essential entities are supervised ex ante, including random on-site checks.
+  \item Important entities are supervised ex post, on evidence of non-compliance.
+  \item The cost of an independent security audit is borne by the competent authority.
+  \item For important entities the maximum fine is at least EUR 7 million or 1.4\% of worldwide
+    annual turnover, whichever is higher.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2 e GDPR -- \rif{2026-11-16}{16/11}]\label{q:nis2-gdpr-orologi}
+A ransomware attack on an essential entity is detected on day 0; on day 4 the entity discovers that
+customer personal data were exfiltrated. Which statement is \textbf{correct}?
+\begin{opzioni}
+  \item Both the NIS2 incident notification and the GDPR notification are due 72 hours after day 0.
+  \item The GDPR 72-hour clock starts when the entity becomes aware of the personal data breach, so it
+    can run later than the NIS2 clocks.
+  \item Once the CSIRT is notified, the Garante need not be notified.
+  \item If the Garante fines the entity under Art.~58(2)(i) GDPR, the NIS2 authority may fine it again
+    for the same conduct.
+\end{opzioni}
+\end{domanda}
+
+\begin{domanda}[NIS2, caso Microsoft~365 -- \rif{2026-11-16}{16/11}]\label{q:nis2-cloud}
+A cloud provider suffers a global outage with no evidence of malicious activity. Under NIS2:
+\begin{opzioni}
+  \item it is not an incident, because no attack took place;
+  \item its NIS2 customers are discharged of any obligation by the provider's notification;
+  \item it can be a significant incident under Implementing Regulation (EU) 2024/2690, and each NIS2
+    customer must assess its own incident against its own expected service levels;
+  \item it must be notified to the CSIRT of every Member State where customers are located.
 \end{opzioni}
 \end{domanda}
 
@@ -658,5 +704,15 @@ About ``72 hours'' in EU law. \textbf{Select the WRONG statement.}
   \sol{q:nis2-nis1}{b} La NIS1 guardava ai servizi (OES e DSP); la NIS2 ai soggetti. Resta una
     direttiva, recepita in Italia con il D.lgs.~138/2024.
   \sol{q:lex-specialis}{c} DORA è lex specialis rispetto a NIS2 per le entità finanziarie.
+  \sol{q:nis2-organo}{b} Art.~20: approvazione, sorveglianza, responsabilità (anche personale) e
+    formazione obbligatoria per l'organo di gestione; il ruolo di indirizzo non si delega.
+  \sol{q:nis2-vigilanza}{c} Il costo dell'audit indipendente è a carico del soggetto, essenziale o
+    importante che sia.
+  \sol{q:nis2-gdpr-orologi}{b} I due orologi partono da momenti diversi (incidente significativo contro
+    violazione di dati personali); le notifiche sono separate; per la stessa condotta la sanzione è una
+    sola (art.~35 NIS2).
+  \sol{q:nis2-cloud}{c} L'incidente non richiede un atto malevolo; il fornitore notifica nello Stato
+    dello stabilimento principale (art.~26); il cliente fa la propria valutazione e, se significativo,
+    la propria notifica.
   \sol{q:72h}{c} Le 72 ore di DORA decorrono dalla notifica iniziale, non dalla consapevolezza.
 \end{description}

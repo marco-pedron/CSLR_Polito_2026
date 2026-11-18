@@ -1,0 +1,345 @@
+% =====================================================================
+\lezione{16/11/2026}{NIS2 (II): governance, misure, notifiche, vigilanza, sanzioni; caso Microsoft 365}
+  {Gianluca Gilardi (lezione online); breve intervento di Giuseppe Vaciago}
+  {strategia nazionale e organismi UE (Cooperation Group, EU-CyCLONe); responsabilità personale
+   dell'organo di gestione; misure proporzionate e perimetro NIS2; divulgazione coordinata delle
+   vulnerabilità; incidente e incidente significativo; orologi 24 h / 72 h / 1 mese e orologio GDPR;
+   vigilanza \emph{ex ante} / \emph{ex post}; esecuzione e sanzioni (triplicate per mancata
+   registrazione); \emph{ne bis in idem} con il GDPR; caso del disservizio Microsoft 365; presentazione
+   del laboratorio~5 (EnergiaTech)}
+\label{lez:2026-11-16}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Trascrizione automatica della registrazione (lezione online; la lezione inizia dopo circa 8 minuti di
+silenzio e dura circa 80 minuti), revisionata. Slide: il docente proietta le slide NIS2 aggiornate
+(``NIS2\_PoliTo\_2026-27\_v3'', slide 17--40, con il caso Microsoft~365) e la presentazione del
+laboratorio~5. Le slide non sono ancora in \emph{material}: il docente le carica dopo la lezione.
+Quanto riportato qui dalle slide è stato letto sui fotogrammi della registrazione.
+\end{nota}
+
+\section{Sintesi}
+Seconda e ultima lezione sulla NIS2. Il docente completa il quadro istituzionale (strategia nazionale,
+Cooperation Group, EU-CyCLONe), poi passa agli obblighi: approvazione delle misure e
+\textbf{responsabilità personale} dell'organo di gestione, misure \textbf{proporzionate} da valutare
+solo sul \textbf{perimetro NIS2} del soggetto, notifica degli \textbf{incidenti significativi} con i suoi
+orologi (distinti da quello del GDPR), vigilanza asimmetrica tra soggetti essenziali e importanti,
+misure di esecuzione e sanzioni. Chiude con il caso del disservizio globale di \textbf{Microsoft~365}
+del 12--13/11/2026 (``un evento, tre fascicoli'') e presenta il \textbf{laboratorio~5} di venerdì
+20/11, una simulazione di notifiche NIS2 e GDPR. Messaggio di fondo: la domanda giusta non è mai ``è
+NIS2?'', ma ``quale soggetto deve quale notifica, a chi e da quando''.
+
+\section{Contenuti}
+
+\subsection{Strategia nazionale e organismi di cooperazione}
+In Italia l'\textbf{ACN} è l'autorità di regolazione per la NIS2; il \textbf{CSIRT Italia} ne è la
+divisione tecnica (minacce, incidenti, risposta). La \textbf{Strategia Nazionale di Cybersicurezza
+2022--2026} comprende \textbf{82 misure}, rivolte soprattutto alla pubblica amministrazione, con ricadute
+su imprese e cittadini; sarà rinnovata a breve. Sull'attuazione della strategia l'ACN ha un ruolo più
+politico che operativo: dà indirizzi ma non ha poteri per imporla.
+
+Le slide elencano i compiti dei \textbf{CSIRT nazionali}: monitoraggio e analisi di minacce,
+vulnerabilità e incidenti; preallarmi e allerte ai soggetti; risposta agli incidenti e assistenza;
+analisi forense e consapevolezza situazionale; su richiesta, \textbf{scansione proattiva} dei sistemi di
+un soggetto; partecipazione alla rete dei CSIRT. Sui livelli europei:
+\begin{itemize}
+  \item il \textbf{Cooperation Group} (Stati, Commissione, ENISA) è un organo consultivo, non di
+    esecuzione: linee guida alle autorità, buone pratiche, \textbf{valutazioni coordinate dei rischi
+    delle catene di approvvigionamento critiche}, indirizzi alla rete dei CSIRT e a EU-CyCLONe;
+  \item \textbf{EU-CyCLONe} (autorità di gestione delle crisi degli Stati, più la Commissione negli
+    incidenti su larga scala) si attiva per gli incidenti e le crisi su vasta scala: preparazione,
+    valutazione dell'impatto, coordinamento e supporto alle decisioni a livello politico.
+\end{itemize}
+Immagine del docente: la rete dei CSIRT è il ``piano terra'' (lavoro quotidiano, scambio di minacce e
+segnalazioni); quando si sale al livello politico e strategico europeo entra in gioco EU-CyCLONe.
+
+\subsection{Governance: l'organo di gestione}
+Gli organi di gestione dei soggetti essenziali e importanti \textbf{approvano} le misure di gestione del
+rischio e ne \textbf{sorvegliano l'attuazione}; devono seguire una formazione e incoraggiare quella dei
+dipendenti (slide). Il docente sottolinea la novità: di regola in Europa (diversamente dagli Stati
+Uniti) la sanzione colpisce la società, non i consiglieri; con la NIS2 il componente dell'organo che non
+fornisce indirizzo e sorveglianza sulla cybersicurezza risponde \textbf{personalmente}. Il consiglio
+non deve gestire i singoli controlli, ma dare strategia, obiettivi e supervisione; questo non si
+delega. È uno dei motivi per cui la NIS2 viene presa sul serio.
+
+\subsection{Misure proporzionate e perimetro}
+Le misure sono \textbf{tecniche, operative e organizzative}, basate su un approccio
+\textbf{multi-rischio} (\emph{all-hazards}) e \textbf{proporzionate} all'esposizione al rischio, alla
+dimensione e alla probabilità e gravità degli incidenti; devono prevenire o ridurre l'impatto degli
+incidenti sui destinatari dei servizi e su altri servizi. Le slide riportano le dieci misure minime
+(Sezione~\ref{sec:nis2-misure}). ``Proporzionato significa tutto e niente'': in ottica di
+accountability bisogna dimostrare di aver valutato il rischio e l'efficacia dei controlli. Per il
+docente il minimo indispensabile è: gestione degli incidenti con responsabilità chiare, politiche di
+sicurezza, controllo e audit della supply chain (anche acquisti di hardware e infrastrutture), gestione
+delle vulnerabilità e penetration test, valutazione dell'efficacia delle misure; MFA e comunicazioni
+protette sono ``fortemente consigliate'', ove opportuno.
+
+\paragraph{Il perimetro.} Un soggetto può rientrare nella NIS2 solo per alcuni prodotti o servizi.
+Valutazioni, livelli di servizio e misure si fanno \textbf{solo sul perimetro NIS2}: ciò che è fuori
+ambito resta fuori. Il difficile è che processi fuori perimetro possono incidere ``a cascata'' su
+processi in perimetro: bisogna risalire fino al processo più granulare.
+
+\paragraph{Il fornitore in crisi.} Nel disservizio di Microsoft, Microsoft ha i suoi obblighi di
+notifica, ma anche ogni soggetto NIS2 che usa Outlook per erogare i propri servizi deve valutare se
+notificare: l'incidente nella sua supply chain lo rende responsabile dei propri obblighi.
+
+\subsection{Divulgazione coordinata delle vulnerabilità}
+Dalle slide: ogni Stato designa un CSIRT \textbf{coordinatore}, intermediario di fiducia tra chi segnala
+una vulnerabilità e il fabbricante o fornitore; chiunque può segnalare, anche in forma anonima;
+per le vulnerabilità che toccano più Stati i coordinatori cooperano nella rete dei CSIRT; ENISA
+gestisce una \textbf{banca dati europea delle vulnerabilità}, alimentata su base volontaria. Il docente
+segnala il problema aperto dei \textbf{ricercatori di sicurezza}: alcune loro attività sono reato in
+Italia e in molti Paesi europei; se i ricercatori migliori temono di essere incriminati e non
+segnalano, l'ecosistema di scambio di informazioni costruito dalla NIS2 ne soffre. Se ne discute a
+livello europeo.
+
+\subsection{Incidente e incidente significativo}
+L'\textbf{incidente} (art.~6, punto~6) è un evento che compromette disponibilità, \textbf{autenticità},
+integrità o riservatezza di dati conservati, trasmessi o elaborati, o dei servizi offerti da reti e
+sistemi informativi o accessibili attraverso di essi. Non ogni incidente si notifica: solo quello
+\textbf{significativo}, cioè che ha causato o \textbf{può causare} una grave perturbazione operativa o
+perdite finanziarie per il soggetto, oppure si è ripercosso o può ripercuotersi su altre persone
+causando danni materiali o immateriali considerevoli.
+
+\paragraph{La soglia nella pratica.} Secondo le linee guida ACN il soggetto definisce i propri
+\textbf{livelli di servizio attesi} (una \emph{baseline}): superarli è un incidente significativo.
+Esempio del docente: se il livello di servizio fissato è un'indisponibilità massima di 17 ore, un fermo
+più lungo è significativo, uno più breve può non esserlo. Va però valutato anche l'effetto su terzi che
+dipendono dai servizi del soggetto.
+
+\paragraph{Materiale e immateriale.} Nell'inglese giuridico \emph{material} significa spesso
+``rilevante''; nella NIS2 \emph{material / non-material} significa \textbf{patrimoniale / non
+patrimoniale}: danno misurabile in denaro da un lato, danno alla reputazione o alla salute dall'altro
+(si pensi alla sanità). Anche il danno non patrimoniale si può liquidare in giudizio.
+
+\subsection{Chi notifica, a chi, quando}
+Notificano i \textbf{soggetti} essenziali e importanti (le società, non i consiglieri) al
+\textbf{CSIRT} competente; in Italia al CSIRT Italia tramite il portale ACN, non ``all'ACN'' in
+generale. Le slide:
+\begin{itemize}
+  \item \textbf{24 ore} dalla consapevolezza: \emph{early warning}, indicando se si sospetta un atto
+    illegittimo o malevolo e se l'impatto può essere transfrontaliero. Vale anche nel fine settimana.
+    Contiene poche informazioni (per il docente anche meno della prima notifica GDPR): che cosa
+    succede, quando, come è stato scoperto ed eventuali indicatori di compromissione;
+  \item \textbf{72 ore}: notifica dell'incidente con valutazione iniziale di gravità e impatto e, ove
+    disponibili, gli \textbf{indicatori di compromissione} (prestatori di servizi fiduciari: sempre
+    24 ore);
+  \item \textbf{su richiesta} del CSIRT: relazione intermedia. Il CSIRT raccoglie informazioni
+    attivamente, non aspetta;
+  \item \textbf{entro un mese dalla notifica dell'incidente}: relazione finale con descrizione
+    dettagliata, tipo di minaccia o causa di fondo, misure di mitigazione, impatto transfrontaliero;
+  \item se l'incidente è \textbf{ancora in corso}: relazione sui progressi a quella data e relazione
+    finale entro un mese dalla gestione dell'incidente.
+\end{itemize}
+Il docente aggiunge che nella relazione finale vanno anche \emph{gap analysis} e piano di rimedio, e che
+oltre i due mesi dall'incidente senza relazione finale ci si deve aspettare un audit di ACN e CSIRT.
+Diversamente dal GDPR, dove l'integrazione della notifica non ha un termine finale, qui la mancata o
+insufficiente relazione finale è di per sé una violazione.
+
+\paragraph{Due orologi.} L'orologio NIS2 parte dalla consapevolezza dell'incidente significativo;
+quello del GDPR (72 ore) dalla consapevolezza della violazione di dati personali, che può arrivare più
+tardi, anche dopo la scadenza delle 72 ore NIS2. Le scadenze possono coincidere, ma non è automatico:
+``avvio l'orologio NIS2, quindi tra 72 ore faccio entrambe le notifiche'' è un errore.
+
+\paragraph{Dopo la notifica.} Il CSIRT risponde, ove possibile entro 24 ore dal preallarme, con un
+primo riscontro e, su richiesta, indicazioni sulla mitigazione; può sapere cose che il soggetto ignora
+(campagne in corso in altri Stati). Se l'incidente riguarda due o più Stati informa senza indebito
+ritardo gli altri Stati ed ENISA, tutelando la sicurezza, gli interessi commerciali e la riservatezza
+del soggetto. Il docente insiste sulla riservatezza: una mappa dell'infrastruttura di un gruppo
+multinazionale, se divulgata, diventa essa stessa un rischio.
+
+\begin{esame}
+\begin{itemize}
+  \item Orologi NIS2: \textbf{24 h / 72 h / 1 mese} dalla \emph{notifica} dell'incidente, al CSIRT
+    (in Italia CSIRT Italia, tramite il portale ACN). Gli orologi NIS2 e GDPR sono \textbf{distinti}.
+  \item Responsabilità \textbf{personale} dei componenti dell'organo di gestione.
+  \item Vigilanza asimmetrica: essenziali \emph{ex ante}, importanti \emph{ex post}.
+  \item Sanzioni 10~milioni / 2\% (essenziali) e 7~milioni / 1,4\% (importanti); una sola sanzione per
+    la stessa condotta tra NIS2 e GDPR.
+\end{itemize}
+\end{esame}
+
+\subsection{Vigilanza: essenziali e importanti}
+Tabella delle slide, commentata dal docente:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.8cm} X X}
+\toprule
+ & \textbf{Essenziali} & \textbf{Importanti}\\
+\midrule
+Approccio & \emph{ex ante}, basato sul rischio & \emph{ex post}, su indizi di non conformità\\
+Ispezioni & in loco e a distanza, anche a campione & in loco e a distanza, \emph{ex post}\\
+Audit & periodici e mirati, più \emph{ad hoc} (es.\ dopo un incidente significativo) & mirati\\
+Scansioni & su criteri oggettivi, non discriminatori, equi e trasparenti & stessi criteri\\
+Informazioni & richieste di informazioni, dati, documenti, prove di attuazione & le stesse, per la
+  valutazione \emph{ex post}\\
+Costo dell'audit indipendente & a carico del soggetto & a carico del soggetto\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Commento del docente: un soggetto essenziale mette a budget gli audit; un importante che non subisce
+incidenti ``non riceverà visite'', ma se notifica può essere sottoposto a verifica e pagarne il costo,
+il che crea un incentivo (sbagliato) a non notificare.
+
+\subsection{Esecuzione e sanzioni}
+Scala delle misure (slide e docente): avvertimenti e \textbf{istruzioni vincolanti} (anche con una
+\emph{gap analysis} e le misure da adottare); ordini di cessare la condotta, di conformarsi
+all'art.~21 o agli obblighi di notifica entro un termine, di informare i destinatari esposti a una
+minaccia significativa, di attuare le raccomandazioni di un audit; nomina di un responsabile del
+monitoraggio e pubblicazione della violazione. Se le misure restano inefficaci, l'autorità fissa un
+termine e poi può \textbf{sospendere} certificazioni o autorizzazioni relative ai servizi e chiedere il
+\textbf{divieto temporaneo di funzioni dirigenziali} fino al livello di amministratore delegato o
+rappresentante legale: misure di ultima istanza, con garanzie procedurali. Secondo il docente la leva
+sulle persone (sospensione, stipendio) spesso funziona meglio di quella sulla società.
+
+\paragraph{Sanzioni pecuniarie.} Per la violazione delle misure di sicurezza e degli obblighi di
+notifica: massimo di almeno \textbf{10 milioni di euro o 2\%} del fatturato mondiale annuo, se
+superiore, per gli \textbf{essenziali} (il livello più basso della scala GDPR); almeno \textbf{7
+milioni o 1,4\%} per gli \textbf{importanti}. Gli Stati possono prevedere penalità di mora. Secondo il
+docente le sanzioni sono \textbf{triplicate} (30 milioni o 6\%) per chi non si registra nel registro
+nazionale dei soggetti NIS2 o non comunica il punto di contatto: il regolatore vuole prima di tutto
+sapere chi vigilare, e molte imprese hanno provato a non registrarsi.
+
+\subsection{NIS2 e gli altri strumenti}
+Tabella delle slide: la NIS2 si applica fatti salvi GDPR, direttiva ePrivacy, le direttive 2011/93/UE e
+2013/40/UE e la direttiva CER. Le \textbf{entità critiche} CER sono essenziali a prescindere dalla
+dimensione; il \textbf{DORA} è \emph{lex specialis} (un'entità finanziaria in ambito di entrambe applica
+solo il DORA); il \textbf{CRA} riguarda la sicurezza dei prodotti ed è complementare agli obblighi
+organizzativi NIS2; la NIS1 (Dir.~2016/1148) è abrogata dal 18/10/2024.
+
+\paragraph{NIS2 e GDPR.} Le misure di sicurezza si sovrappongono (art.~32 GDPR). Se una violazione NIS2
+può comportare un data breach da notificare ai sensi dell'art.~33 GDPR, l'autorità NIS informa senza
+indebito ritardo il Garante; se il Garante ha già inflitto una sanzione ai sensi dell'art.~58(2)(i)
+GDPR, l'autorità NIS \textbf{non} può sanzionare la stessa condotta ai sensi dell'art.~34 NIS2, ma può
+adottare le misure di esecuzione. ``Una sola sanzione'' (\emph{ne bis in idem}): per il docente è anche
+il motivo per cui gli importi sono allineati. Le due notifiche corrono in parallelo con termini
+diversi; gli Stati sono incoraggiati a creare un \textbf{punto di ingresso unico} per le notifiche.
+
+\subsection{Messaggi chiave (slide 36)}
+\begin{itemize}
+  \item La NIS2 (Dir.~(UE) 2022/2555) è un quadro unico per \textbf{18 settori critici}; allarga molto
+    l'ambito (\textbf{da 8 a 25 settori}, secondo la slide) e sostituisce le categorie della NIS1 con
+    soggetti essenziali e importanti; l'elenco è tenuto a livello nazionale e riportato nel registro
+    ENISA.
+  \item Gli obblighi di sicurezza sono minimi, basati sul rischio e multi-rischio (almeno dieci misure),
+    con divulgazione coordinata delle vulnerabilità e banca dati europea.
+  \item Notifica degli incidenti significativi 24 h / 72 h / 1 mese; vigilanza asimmetrica; in Italia
+    il D.lgs.~138/2024 designa l'ACN (con il CSIRT Italia al suo interno) e fa decorrere i termini dalla
+    comunicazione di inserimento nell'elenco NIS.
+\end{itemize}
+Il docente aggiunge che tra i settori ci sono anche \textbf{manifatture}, perché i sistemi informativi
+sono incorporati nella produzione, e che l'ACN ha per la NIS2 il ruolo che il Garante ha per la
+protezione dei dati.
+
+\subsection{Caso di studio: il disservizio globale di Microsoft~365}
+Il docente lascia le slide da leggere e ne riassume il punto. Dalle slide:
+\begin{itemize}
+  \item \textbf{Fatti.} Il 12--13/11/2026 Outlook, Teams, OneDrive, SharePoint, le app Office e
+    Copilot sono stati degradati o non disponibili per buona parte di una giornata, con problemi in
+    almeno 74 Paesi e ripercussioni sui servizi di terzi integrati con Microsoft~365. Causa (rapporto
+    preliminare del 15/11): un difetto software introdotto da un aggiornamento di luglio 2026 al
+    gateway di rete, scatenato da un picco di carico mentre circa il 14\% della capacità era fuori
+    servizio, propagato a cascata (al minimo oltre l'80\% dei server non rispondeva). Nessuna prova di
+    attività malevola: per la definizione di incidente \textbf{non serve un atto malevolo}.
+  \item \textbf{Il fascicolo del fornitore.} Un fornitore di cloud è nell'Allegato~I (infrastrutture
+    digitali): sopra le soglie della media impresa è essenziale. Per i fornitori di cloud la
+    significatività non dipende da un livello di servizio auto-dichiarato: l'\textbf{art.~7 del
+    Regolamento di esecuzione (UE) 2024/2690} fissa soglie (servizio del tutto indisponibile per più
+    di 30 minuti; disponibilità limitata per più di un'ora per oltre il 5\% degli utenti nell'Unione o
+    oltre un milione di utenti, se inferiore; compromissione di integrità, riservatezza o autenticità
+    per sospetta azione malevola sopra la stessa soglia). Solo il terzo criterio richiede la malizia:
+    ``nessuna traccia di attacco'' non esclude nulla. La notifica va al CSIRT dello Stato dello
+    \textbf{stabilimento principale} (art.~26), dove si prendono le decisioni di gestione del rischio.
+    Tre doveri distinti, non assolti da una pagina di stato pubblica: notificare il CSIRT, informare i
+    destinatari dei servizi colpiti (art.~23(1)), comunicare misure e rimedi per le minacce
+    significative (art.~23(2)).
+  \item \textbf{Un evento, tre fascicoli} per il cliente soggetto NIS2, che non è sollevato dalla
+    notifica del fornitore: (1) l'incidente significativo del fornitore; (2) il \textbf{proprio}
+    incidente significativo, valutato sui propri livelli di servizio attesi (tipologia ACN
+    \textbf{IS-3}, superamento dei livelli definiti nella misura DE.CM-01) e sull'art.~23(3), da
+    notificare al CSIRT Italia tramite il portale ACN con gli orologi 24 h / 72 h / 1 mese; (3) il
+    fascicolo di rischio della \textbf{supply chain} (art.~21(2)(d) e~(3)): la dipendenza da un solo
+    fornitore è essa stessa un rischio da documentare e monitorare.
+  \item \textbf{Livello di servizio non è SLA}: uno SLA contrattuale violato, o assente, non decide
+    l'IS-3; lo decidono i livelli di servizio attesi documentati dal soggetto, senza i quali l'IS-3 non
+    si può nemmeno rilevare. Mentre l'evento è aperto vanno raccolti aggiornamenti e rapporto del
+    fornitore, servizi e ore di indisponibilità, chi è stato colpito, soluzioni alternative e
+    l'eventuale compromissione di dati (il binario GDPR corre in parallelo).
+\end{itemize}
+
+\begin{nota}[Il problema del ``livello'' irlandese]
+Le slide segnalano che al 4/11/2026 l'Irlanda, dove Microsoft ha lo stabilimento principale europeo,
+non aveva ancora recepito la NIS2 (parere motivato del 7/05/2025, deferimento alla Corte di giustizia
+deciso l'8/07/2026; resta in vigore la normativa di attuazione della NIS1): se lo stabilimento principale
+è in uno Stato che non ha recepito, l'obbligo del fornitore può non sorgere lì.
+\end{nota}
+
+\subsection{Il laboratorio~5 (venerdì 20/11, online)}
+Il docente presenta il laboratorio: \textbf{EnergiaTech S.p.A.}, scenario fittizio di ransomware su
+un distributore regionale di energia elettrica. Esercizio a squadre di \textbf{90 minuti}, autogestito
+(niente facilitatore e niente ``imprevisti'' durante l'esercizio).
+\begin{itemize}
+  \item \textbf{Profilo} (slide): soggetto \textbf{essenziale} (``non dovete chiedervi se è
+    importante''), 1.200 dipendenti, 15 sottostazioni e 3 centri di distribuzione, 450.000 utenti (non
+    tutti italiani: ``un indizio'' per il GDPR). \textbf{Attacco}: spear phishing mirato, LockBit~3.0
+    con doppia estorsione, 850 endpoint cifrati, 487~GB esfiltrati, richiesta di 50~BTC con minaccia di
+    pubblicazione in 7 giorni, permanenza non rilevata di circa 30 giorni. La distribuzione elettrica
+    non si è mai interrotta (OT separata dall'IT); fatturazione, CRM, posta e assistenza clienti
+    bloccati per giorni.
+  \item \textbf{Che cosa si valuta}: il processo, non l'analisi forense (i fatti tecnici sono dati
+    nel dossier, consegnato solo venerdì): classificare (incidente significativo ex art.~23(3)?
+    quale tipologia ACN, da IS-1 a IS-4?), \textbf{fissare l'inizio degli orologi} e motivarlo, scrivere
+    in modo difendibile, tenere separati i binari NIS2 (CSIRT/ACN) e GDPR (Garante), \textbf{non
+    inventare mai un fatto} (ciò che non si sa resta un segnaposto dichiarato, oppure si chiede).
+  \item \textbf{Consegne}: \emph{early warning} (10 campi), notifica dell'incidente (campi 11--19 più
+    allegato IoC), relazione finale (le quattro voci dell'art.~23(4)(d), più piano correttivo e
+    \emph{lessons learned}; riferimento nazionale art.~25 D.lgs.~138/2024), notifica ex art.~33 GDPR al
+    Garante (modulo A--O), nota di accompagnamento con le risposte alle domande di autovalutazione; un
+    file ZIP per squadra su SharePoint. File in markdown o PDF, nessuna formalità. Nessuna relazione
+    intermedia; la comunicazione agli interessati (art.~34) non è richiesta, ma una motivazione solida
+    del perché farla o non farla può far guadagnare punti.
+  \item \textbf{Canale}: portale ACN / CSIRT Italia, non ``l'ACN'' in generale: il docente avverte che
+    sbagliarlo costa molto nel voto.
+  \item \textbf{Materiale}: dopo la lezione il docente carica le slide, un manuale preparatorio
+    (\emph{pre-flight handbook}) e modelli compilati su un altro caso (SalusNova, piattaforma
+    sanitaria), da usare come struttura, non come risposte. Ci si può discostare dal modello
+    motivandolo.
+\end{itemize}
+Le slide elencano anche le trappole da controllare: decidere la significatività solo sui numeri,
+sbagliare l'orologio, fondere NIS2 e GDPR in un documento, affermare ciò che il dossier non supporta,
+dimenticare una notifica o comunicazione dovuta, lasciare segnaposto vuoti, trattare la notifica come
+un'ammissione di responsabilità (non lo è, art.~23(1)).
+
+\section{Avvisi}
+\begin{itemize}
+  \item Venerdì 20/11: laboratorio~5 (NIS2 + GDPR), da remoto. Il docente lo ha reso più semplice del
+    laboratorio~4 (audit), giudicato troppo complesso.
+  \item Più avanti potrebbe esserci un laboratorio più ampio su un incidente che coinvolge più norme
+    (NIS2, GDPR, CRA, DORA, AI Act), forse con più di 90 minuti; per ora i docenti hanno deciso di non
+    aggiungere il CRA a questo laboratorio per non creare confusione.
+  \item Slide NIS2 aggiornate, slide del laboratorio, manuale preparatorio e modelli: caricati sulla
+    piattaforma dopo la lezione.
+\end{itemize}
+
+\section{Domande aperte e punti da verificare}
+\begin{verifica}
+\begin{itemize}
+  \item \textbf{Sanzioni triplicate} per mancata registrazione (30 milioni o 6\%): detto a voce, non
+    nelle slide; da verificare nel D.lgs.~138/2024.
+  \item \textbf{Relazione finale}: il docente dice sia ``un mese meno tre giorni dopo la seconda
+    notifica'' sia ``un mese dall'inizio dell'incidente''; la slide e l'art.~23(4)(d) dicono un mese
+    dalla \emph{notifica dell'incidente} (la 72 ore). Il limite dei ``due mesi'' con audit è
+    un'indicazione del docente, non della norma.
+  \item \textbf{IoC}: nelle slide sono nella notifica a 72 ore (``ove disponibili''); a voce il docente
+    li cita già nel preallarme, se l'analisi li ha prodotti.
+  \item \textbf{Settori}: ``18 settori critici'' e ``da 8 a 25 settori'' nella stessa slide; 18 = 11
+    (Allegato~I) + 7 (Allegato~II); il 25 conterebbe anche i sottosettori o gli allegati italiani.
+  \item \textbf{Strategia nazionale}: il docente parla di strategia ``di quattro anni (2022--2026)'' e
+    ``triennale''; il titolo nelle slide è Strategia Nazionale di Cybersicurezza 2022--2026.
+  \item Il docente cita una sanzione del Garante a Meta ``lo scorso fine settimana'' (direttiva
+    ePrivacy): non approfondita.
+  \item \textbf{Docenti}: Gilardi non si presenta; il secondo intervento (sulla proposta di aggiungere il
+    CRA al laboratorio) è attribuito a Vaciago dal contesto (``ne abbiamo parlato con Giuseppe'').
+  \item Lo scenario del laboratorio è datato ``domenica 16 novembre 2025'' (Day~0) nelle slide.
+\end{itemize}
+\end{verifica}
