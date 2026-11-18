@@ -1,0 +1,236 @@
+% =====================================================================
+\chapter{Lab 5 -- Notifiche NIS2 e GDPR: EnergiaTech}
+\label{lab:05}
+% =====================================================================
+
+\begin{nota}[Fonte]
+Laboratorio di venerdì 20/11/2026 (online), presentato a fine lezione il 16/11
+(Capitolo~\ref{lez:2026-11-16}). Fonti: le slide \emph{NIS2 Incident-Reporting Lab -- EnergiaTech
+S.p.A.} (14 slide), il \emph{pre-flight pack} (quadro normativo e lessico, da leggere prima) e due
+esempi svolti su un caso diverso (\emph{SalusNova}, piattaforma sanitaria): le tre notifiche NIS2 e la
+notifica al Garante. Il dossier del caso (Allegato~A) e il \emph{playbook} sono consegnati solo il
+giorno del laboratorio: questo capitolo prepara all'esercizio e non contiene fatti che non siano già
+stati comunicati. Il caso è inventato; quadro normativo e moduli sono reali.
+\end{nota}
+
+% ---------------------------------------------------------------------
+\section{Il caso EnergiaTech}
+
+Le squadre fanno la \textbf{cellula di notifica} del soggetto colpito e, con l'orologio che corre,
+producono le notifiche NIS2 al CSIRT Italia e la notifica ex art.~33 GDPR al Garante: complete, coerenti
+e nei tempi. Nessun documento viene inviato a un'autorità.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.2cm} X}
+\toprule
+\multicolumn{2}{l}{\textbf{Profilo}}\\
+\midrule
+Settore & distribuzione regionale di energia elettrica (Allegato~I)\\
+Classificazione & soggetto NIS2 \textbf{essenziale} (dato, non da discutere)\\
+Dimensione & 1.200 dipendenti; 15 sottostazioni, 3 centri di distribuzione\\
+Clienti & 450.000 utenti, non tutti italiani\\
+\midrule
+\multicolumn{2}{l}{\textbf{Attacco}}\\
+\midrule
+Vettore & spear phishing mirato\\
+Ransomware & LockBit~3.0, doppia estorsione; 850 endpoint cifrati\\
+Esfiltrazione & 487~GB, anche dati dei clienti\\
+Richiesta & 50~BTC, minaccia di pubblicazione entro 7 giorni\\
+Permanenza & circa 30 giorni senza essere rilevati\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+In sintesi: un gruppo criminale entra nei sistemi aziendali e ci resta senza essere visto; poi lancia il
+ransomware su gran parte dell'IT e ruba molti dati. L'attacco emerge una \textbf{domenica notte} (Day~0
+= domenica 16 novembre 2025 nella finzione del caso); le prime segnalazioni arrivano alla sala
+operativa il lunedì mattina. La \textbf{distribuzione elettrica non si interrompe mai}: la tecnologia
+operativa (OT) è separata dall'IT. Fatturazione, CRM, posta e assistenza clienti restano gravemente
+compromessi per giorni. Date, sistemi e indicatori sono nel dossier: Allegato~A.1 soggetto, contatti,
+fornitori; A.2 cronologia; A.3 indicatori di compromissione; A.4 impatti e interessati; A.5 portata;
+A.6 sistemi e loro ubicazione; A.7 misure presenti e mancanti; A.8 autoverifica.
+
+% ---------------------------------------------------------------------
+\section{Che cosa si valuta}
+
+\begin{itemize}
+  \item \textbf{Il processo, non l'analisi forense}: i fatti tecnici sono dati, non si rifà l'indagine.
+  \item \textbf{Classificare}: è un incidente significativo ai sensi dell'art.~23(3)? Quale tipologia ACN
+    (IS-1\ldots IS-4, Sezione~\ref{sec:nis2-notifica})?
+  \item \textbf{Fissare l'orologio}: decidere e motivare il momento da cui decorrono i termini.
+  \item \textbf{Scrivere in modo difendibile}, con il contenuto che la norma prescrive.
+  \item \textbf{Tenere separati i binari}: NIS2 (CSIRT Italia/ACN) e GDPR (Garante) sono documenti
+    diversi per destinatari diversi.
+  \item \textbf{Non inventare mai un fatto}: ciò che non si sa diventa un segnaposto dichiarato, oppure
+    si chiede durante l'esercizio.
+\end{itemize}
+
+\begin{esame}
+Il docente ha avvertito che indicare il canale sbagliato costa molto nel voto: si notifica al
+\textbf{CSIRT Italia tramite il portale ACN / Piattaforma NIS}, non ``all'ACN'' in generale
+(lezione del 16/11).
+\end{esame}
+
+% ---------------------------------------------------------------------
+\section{Due binari, due orologi}
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.3cm} X X}
+\toprule
+ & \textbf{NIS2} & \textbf{GDPR}\\
+\midrule
+Destinatario & CSIRT Italia (portale ACN) & Garante\\
+Orologio & 24 h / 72 h / 1 mese dalla notifica; intermedia su richiesta & 72 h dalla consapevolezza
+  del titolare (+ art.~34 agli interessati se il rischio è elevato)\\
+Contenuto & incidente, gravità, impatto, IoC, misure, impatto transfrontaliero & interessati,
+  categorie e volumi di dati, rischio, misure\\
+Oggetto & sicurezza di reti e sistemi informativi & dati personali e diritti degli interessati\\
+Norme & art.~23 Dir.~2022/2555; art.~25 D.lgs.~138/2024 & artt.~33--34 GDPR; registro delle
+  violazioni (art.~33(5))\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Lo stesso evento può essere entrambe le cose, ma i documenti non sono mai lo stesso documento. Per la
+stessa condotta non c'è doppia sanzione (art.~35 D.lgs.~138/2024). Secondo il pre-flight pack i termini
+NIS2 decorrono dall'\textbf{evidenza} dell'incidente, non dall'ingresso dell'attaccante
+(Sezione~\ref{sec:nis2-notifica}); l'orologio GDPR può partire in un momento diverso.
+
+% ---------------------------------------------------------------------
+\section{Consegna}
+
+Un file ZIP per squadra, con il nome del gruppo, caricato su una \emph{file request} SharePoint; dentro
+esattamente sei file (\texttt{.md}, \texttt{.docx} o \texttt{.pdf}, in modo coerente), senza password.
+Senza nome del gruppo e membri la consegna non è attribuibile e viene scartata.
+
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X}
+\toprule
+\textbf{File} & \textbf{Contenuto}\\
+\midrule
+\texttt{01\_early\_warning.md} & preallarme NIS2 ($\le$ 24 h), 10 campi\\
+\texttt{02\_incident\_notification.md} & notifica dell'incidente ($\le$ 72 h), campi 11--19 più
+  allegato IoC\\
+\texttt{03\_final\_report.md} & relazione finale ($\le$ 1 mese)\\
+\texttt{04\_garante\_art33.md} & notifica preliminare al Garante, modulo A--O\\
+\texttt{05\_cover\_note.md} & risposte in prosa alle domande di autovalutazione\\
+\texttt{group.txt} & nome del gruppo e nomi di tutti i membri\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\paragraph{Tempi suggeriti (90 minuti, senza facilitatore e senza imprevisti).} Briefing 0--6';
+rilevazione e triage (significativo? quale IS? da quando l'orologio?) 6--15'; preallarme 15--27';
+notifica 27--45'; relazione finale 45--57'; Garante 57--71'; nota di accompagnamento 71--79';
+debriefing interno 79--87'; ZIP e caricamento 87--90'.
+
+% ---------------------------------------------------------------------
+\section{Che cosa scrivere}
+
+\subsection{Preallarme (24 ore)}
+Breve: serve ad allertare il CSIRT e a chiedere aiuto, non è la notifica. I dieci campi dell'esempio
+SalusNova: (1) soggetto notificante (ragione sociale, partita IVA, sede, essenziale/importante, legale
+rappresentante); (2) inizio dell'incidente; (3) momento della rilevazione/consapevolezza; (4)
+classificazione del soggetto; (5) tipologia di incidente (codici IS); (6) gravità iniziale; (7)
+descrizione preliminare; (8) impatto sui servizi; (9) azioni già intraprese; (10) impatto
+transfrontaliero, sospetto atto illecito o malevolo, contatto di emergenza. Le due caselle delicate
+(atto malevolo, impatto transfrontaliero) vanno compilate sui fatti e motivate: l'esempio avverte di non
+copiarle dal modello.
+
+\subsection{Notifica dell'incidente (72 ore)}
+Aggiorna il preallarme, con lo stesso riferimento: (11) descrizione dettagliata e vettore d'attacco,
+con la \emph{kill chain} ricostruita dalla cronologia; (12) natura e causa, incluse le carenze rispetto
+all'art.~32 GDPR e all'art.~21 NIS2; (13) indicatori di compromissione (hash, IP di comando e
+controllo, domini, chiavi di registro: dossier A.3); (14) gravità e impatto, pesando il servizio
+essenziale non interrotto contro il resto; (15) misure tecniche di contenimento, eradicazione e
+ripristino; (16) misure organizzative; (17) impatto transfrontaliero; (18) soggetti informati e quando;
+(19) impatto sui dati personali e rimando alla notifica separata al Garante. Il ripristino qui è solo
+quello necessario a chiudere l'incidente; la mitigazione di lungo periodo va nella relazione finale
+(lezione del 16/11).
+
+\subsection{Relazione finale (un mese dalla notifica)}
+Le quattro voci dell'art.~23(4)(d): descrizione dettagliata con gravità e impatto; tipo di minaccia o
+causa di fondo; misure di mitigazione applicate e in corso; impatto transfrontaliero, se c'è. Poi il
+\textbf{piano correttivo} (misure, responsabile, tempi) e le \textbf{lezioni apprese}. I dati a un mese
+sono nel dossier (A.4). Riferimento nazionale: art.~25 D.lgs.~138/2024.
+
+\subsection{Notifica al Garante (art.~33, modulo A--O)}
+Sezioni del modulo: A soggetto notificante; B tipo di notifica (preliminare o completa, poi
+integrativa); C titolare e C1 rappresentante nello SEE; D contatto (di solito il DPO); E altri soggetti
+coinvolti (responsabili ex art.~28); F.1--F.14 informazioni sulla violazione (quando, come se ne è
+avuta conoscenza, natura, causa, descrizione, sistemi e ubicazione, misure in essere, categorie e numero
+di interessati, categorie di dati); G conseguenze probabili; H misure adottate; I valutazione del
+rischio; L comunicazione agli interessati; M altre autorità; N transfrontaliero; O titolare fuori dallo
+SEE. Le slide indicano dove si sbaglia di più:
+\begin{itemize}
+  \item B coerente con I e L; E: decidere dal dossier se c'è un rapporto ex art.~28;
+  \item F.5--F.6 natura e causa decise sui fatti; F.7 descrizione in prosa, senza elenchi; F.8 sistemi e
+    ubicazione; F.9 misure presenti \emph{e} mancanti; F.12 categorie di dati, con una posizione
+    esplicita sulle categorie particolari;
+  \item G solo conseguenze supportate dai fatti; H rimedio e prevenzione tenuti distinti; I e L giudizio
+    di rischio e decisione sull'art.~34 \emph{motivati}, non presupposti; M dichiarare le altre
+    notifiche fatte (binario separato); N e O valutati sui fatti; chiudere con luogo, data (nella
+    cronologia del caso) e firmatario.
+\end{itemize}
+La comunicazione agli interessati non è richiesta come documento, ma una motivazione solida del perché
+farla o non farla può valere punti (lezione del 16/11).
+
+% ---------------------------------------------------------------------
+\section{Prima di consegnare: trappole e domande}
+
+\paragraph{Trappole (slide).} (1) Decidere la significatività solo sui numeri: il test ha più di un
+ramo. (2) Sbagliare l'orologio: deciderlo, motivarlo, applicarlo in modo coerente. (3) Fondere NIS2 e
+GDPR in un documento. (4) Affermare ciò che il dossier non supporta (categorie particolari, perdita di
+integrità\ldots). (5) Dimenticare una notifica o comunicazione che i fatti fanno scattare. (6) Lasciare
+segnaposto vuoti: ciò che non si sa va dichiarato. (7) Trattare la notifica come un'ammissione di
+responsabilità: non lo è (art.~23(1)).
+
+\paragraph{Domande di autovalutazione (da trattare nella nota di accompagnamento).} Dove è partito
+ciascun orologio, e perché? L'incidente è significativo, e su quale ramo? Che cosa cambia se
+l'esfiltrazione non fosse confermata? La notifica ex art.~33 contraddice il documento NIS2? Che cosa è
+rimasto come segnaposto? La compromissione di circa 30 giorni sposta qualche scadenza? La copertura
+mediatica fa scattare altro? Che cosa cambiano i \textbf{78.000 IBAN}?
+
+\begin{integrazione}[Spunti di metodo (dei redattori, da verificare sul dossier)]
+Non sono soluzioni: il dossier si vede solo il 20/11 e i fatti decisivi (orari, numeri, sistemi) sono
+lì. Sono le domande che il quadro normativo suggerisce di porsi.
+\begin{itemize}
+  \item \textbf{Significatività}: l'art.~23(3) ha due rami (grave perturbazione o perdite per il
+    soggetto; danni considerevoli ad altri). La distribuzione elettrica non interrotta non chiude la
+    questione: fatturazione, CRM e assistenza ferme per giorni e l'esfiltrazione di dati dei clienti
+    vanno pesate a parte.
+  \item \textbf{Tipologie ACN}: dai fatti già noti sono candidate l'IS-1 (dati esfiltrati verso
+    l'esterno), l'IS-3 (se i livelli di servizio attesi definiti dal soggetto sono stati superati) e
+    l'IS-4 (accesso non autorizzato, che conta perché il soggetto è essenziale). Va verificato tutto sul
+    dossier.
+  \item \textbf{Orologio}: i 30 giorni di permanenza non anticipano i termini, che decorrono
+    dall'\emph{evidenza}; il punto è fissare quando, tra domenica notte e lunedì mattina, il soggetto ha
+    avuto elementi oggettivi. L'orologio GDPR parte quando il titolare ha ragionevole certezza di una
+    violazione di dati personali, che può coincidere o no.
+  \item \textbf{GDPR}: clienti non tutti italiani (``un indizio'', secondo il docente) fanno pensare
+    all'impatto transfrontaliero (sezione N) e al meccanismo dello sportello unico; dati bancari come gli
+    IBAN pesano sul rischio per gli interessati e quindi sulla decisione ex art.~34; vanno trattati
+    secondo la metodologia ENISA di severità (Capitolo~\ref{cap:data-breach}).
+  \item \textbf{Altre notifiche}: la denuncia all'autorità giudiziaria e le autorità di settore (per
+    l'energia, ARERA) sono fuori dal nucleo dell'esercizio, ma vanno almeno dichiarate se i fatti le
+    fanno scattare (sezione M del modulo, campo 18 della notifica NIS2).
+\end{itemize}
+\end{integrazione}
+
+\begin{verifica}
+\begin{itemize}
+  \item Le slide chiedono tutti e sei i file nei 90 minuti, relazione finale compresa; il pre-flight
+    pack parla della relazione finale come compito \emph{da casa}. Il termine di consegna è ``da
+    confermare durante la sessione''.
+  \item Lo scenario è datato 16 novembre \textbf{2025} (Day~0): è la data fittizia del caso.
+  \item Il riferimento ``Capitolo~\ref{cap:data-breach}'' per la metodologia ENISA è un rimando dei
+    redattori: il laboratorio non la richiede esplicitamente.
+\end{itemize}
+\end{verifica}
+
+% ---------------------------------------------------------------------
+\section{Svolgimento}
+\dacompletare{Da scrivere dopo il laboratorio del 20/11/2026, con il dossier (Allegato~A), il
+playbook e l'eventuale debriefing del docente.}

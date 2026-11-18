@@ -66,7 +66,7 @@ CSLR_Polito_2026/
 
 ## Copertura attuale
 
-17 lezioni, dal 21/09 al 16/11/2026, tutte nel diario, inclusi i 4 laboratori.
+17 lezioni, dal 21/09 al 16/11/2026, tutte nel diario, inclusi i 4 laboratori. Il Lab 5 (20/11) ha già un capitolo di preparazione.
 
 | Data | Argomento |
 |---|---|
@@ -86,7 +86,7 @@ CSLR_Polito_2026/
 | 13/11 | NIS2 (I): calendario, cooperazione, ambito, soggetti essenziali e importanti, notifiche |
 | 16/11 | NIS2 (II): governance, misure, notifiche, vigilanza, sanzioni; caso Microsoft 365; presentazione del Lab 5 |
 
-Il capitolo NIS2 integra le due lezioni (13/11 e 16/11) e le slide NIS2 proiettate il 16/11, compreso il caso del disservizio Microsoft 365; il capitolo CSA è rivisto
+Il capitolo NIS2 integra le due lezioni (13/11 e 16/11) e le slide NIS2 ufficiali, compreso il caso del disservizio Microsoft 365 e la tassonomia ACN degli incidenti (IS-1…IS-4); il capitolo CSA è rivisto
 sulle slide ufficiali e include il caso dell'ospedale. DORA e AI Act non sono ancora stati trattati a lezione: i
 loro capitoli contengono per ora un inquadramento, quasi tutto in riquadri `integrazione`.
 

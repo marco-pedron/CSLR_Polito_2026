@@ -3,9 +3,9 @@
 
 \begin{nota}[Stato e fonti]
 \textbf{Stato: trattata a lezione} il 13/11 e il 16/11/2026 (online, Gianluca Gilardi:
-Capitoli~\ref{lez:2026-11-13} e~\ref{lez:2026-11-16}). Le slide NIS2 aggiornate (v3, con il caso
-Microsoft~365) non sono ancora in \emph{material}: le slide 17--40 sono state lette sui fotogrammi della
-registrazione del 16/11. Fonti usate: le lezioni del 13/11 e del 16/11, slide introduttive (\emph{01.~Introductory class}), glossario del
+Capitoli~\ref{lez:2026-11-13} e~\ref{lez:2026-11-16}). Slide ufficiali: \emph{08.~NIS2\_PoliTo\_2026-27\_v3}
+(40 slide, con il caso Microsoft~365); per il laboratorio~5 il \emph{pre-flight pack} del docente
+(tassonomia ACN degli incidenti, Capitolo~\ref{lab:05}). Fonti usate: le lezioni del 13/11 e del 16/11, slide introduttive (\emph{01.~Introductory class}), glossario del
 laboratorio~1, diario delle lezioni del 21/09, 05/10, 26/10, 02/11 e 09/11, tema d'esame precedente
 (Capitolo~\ref{cap:tema-precedente});
 come fonte secondaria gli \textbf{appunti di studenti dell'A.A.~2025/26}, sempre indicati come tali.
@@ -86,6 +86,31 @@ Comunicazione ACN + 18 mesi & \textbf{piena attuazione}: governance, gestione de
 \bottomrule
 \end{tabularx}
 \end{center}
+\paragraph{Le date ufficiali (slide NIS2, slide~4).}
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.6cm} X}
+\toprule
+\textbf{Data} & \textbf{Che cosa}\\
+\midrule
+27/12/2022 & pubblicazione in Gazzetta ufficiale; in vigore dal 16/01/2023\\
+17/10/2024 & termine di recepimento per gli Stati\\
+18/10/2024 & gli Stati applicano le misure nazionali; la NIS1 (Dir.~2016/1148) è abrogata\\
+17/01/2025 & i fornitori digitali elencati dalla direttiva trasmettono i loro dati alle autorità
+  (registro ENISA)\\
+17/04/2025 & gli Stati stabiliscono l'elenco dei soggetti essenziali e importanti\\
+17/10/2027 & primo riesame della direttiva da parte della Commissione, poi ogni 36 mesi\\
+Italia & D.lgs.~138/2024; le specifiche di base ACN danno \textbf{18 mesi} per le misure di sicurezza
+  di base e \textbf{9 mesi} per la notifica degli incidenti, \textbf{dalla comunicazione di inserimento
+  nell'elenco NIS}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Le slide confermano quindi il meccanismo dei 9 e 18 mesi detto a lezione; le date assolute che ne
+derivano in Italia (notifiche da gennaio 2026, misure entro ottobre 2026) dipendono dalla data della
+comunicazione ACN al singolo soggetto. Le specifiche di base sono fissate dalla \textbf{determinazione
+ACN n.~379907 del 19/12/2025} (in vigore dal 15/01/2026; pre-flight pack del laboratorio~5).
+
 Nei 18 mesi ci sono altre scadenze (valutazione della supply chain, comunicazione degli intervalli di
 indirizzi IP, elenco dei processi critici). Al 13/11/2026 la situazione è ``come il GDPR nel 2018'':
 nessuna decisione, nessun audit e nessuna sanzione delle autorità; si lavora sulle linee guida e sulle
@@ -192,12 +217,15 @@ essenziali e importanti e comunica loro l'inclusione.
     il dato corretto per la direttiva è 18 (11 + 7). La slide dei messaggi chiave del 16/11 riporta
     entrambi i numeri: ``18 settori critici'' e un ambito allargato ``da 8 a 25 settori'' (il 25
     conterebbe anche i sottosettori).
-  \item Allegati italiani del D.lgs.~138/2024; finestre di registrazione e calendario detti a lezione
-    il 13/11 (fine febbraio 2025, 17/04/2025, 9 e 18 mesi, 30/10/2026): da confermare sulle slide e sul
-    sito dell'ACN.
-  \item Registro: aggiornamento ``almeno ogni due anni'' e cambiamenti da comunicare l'anno successivo
-    (lezione del 13/11); dati richiesti: contatti e intervalli di indirizzi IP. Chi non è stabilito
-    nell'UE ma vi offre servizi nomina un \textbf{rappresentante} (art.~26), come nel GDPR.
+  \item Allegati italiani del D.lgs.~138/2024 e finestra di registrazione italiana (fine febbraio 2025)
+    e scadenza ``30/10/2026'': detti a lezione il 13/11, non nelle slide. Il 17/04/2025 e i 9 e 18 mesi
+    sono invece confermati dalle slide.
+  \item \textbf{Registro} (slide~13, confermato): l'elenco è aggiornato \textbf{almeno ogni due anni}; i
+    soggetti trasmettono almeno nome, indirizzo e contatti aggiornati (e-mail, \textbf{intervalli di
+    indirizzi IP}, telefono), settore e sottosettore, Stati in cui operano. I fornitori digitali
+    comunicano ogni modifica \textbf{entro tre mesi}. Chi non è stabilito nell'UE ma vi offre servizi
+    designa un \textbf{rappresentante} e ricade nella giurisdizione dello Stato in cui questo è stabilito.
+    ``I cambiamenti si comunicano l'anno successivo'' (13/11) non è nelle slide.
 \end{itemize}
 \end{verifica}
 
@@ -354,12 +382,39 @@ danni materiali o immateriali considerevoli. Il ``può causare'' è giuridicamen
 
 \paragraph{La soglia nella pratica (lezione del 16/11).} Secondo le linee guida ACN il soggetto
 definisce i propri \textbf{livelli di servizio attesi}: superarli è un incidente significativo
-(tipologia ACN \textbf{IS-3}). Esempio del docente: con un'indisponibilità massima fissata a 17 ore, un
+(tipologia ACN \textbf{IS-3}, vedi sotto). Esempio del docente: con un'indisponibilità massima fissata a 17 ore, un
 fermo più lungo è significativo. Va valutato anche l'effetto su chi dipende dai servizi del soggetto.
 \emph{Material / non-material} nella NIS2 significa \textbf{patrimoniale / non patrimoniale} (per
 esempio un danno alla salute dei pazienti), non ``rilevante / irrilevante'' come spesso nell'inglese
 giuridico. Per i fornitori di cloud e gli altri fornitori digitali le soglie sono fissate
 dall'art.~7 del Regolamento di esecuzione (UE) 2024/2690 (Sezione~\ref{sec:nis2-caso-microsoft}).
+
+\paragraph{La tassonomia ACN degli incidenti significativi di base.} Dal \emph{pre-flight pack} del
+laboratorio~5 (determinazione ACN n.~379907/2025, Allegati~3 e~4). È una base \textbf{minima}: un
+incidente significativo secondo l'art.~23(3) va notificato anche se non rientra in nessuna tipologia.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{l X c c}
+\toprule
+\textbf{Codice} & \textbf{Evidenza di\ldots} & \textbf{Importanti} & \textbf{Essenziali}\\
+\midrule
+IS-1 & perdita di \textbf{riservatezza} verso l'esterno di dati digitali & sì & sì\\
+IS-2 & perdita di \textbf{integrità}, con impatto verso l'esterno, di dati digitali & sì & sì\\
+IS-3 & violazione dei \textbf{livelli di servizio attesi} (SL) di servizi o attività & sì & sì\\
+IS-4 & \textbf{accesso non autorizzato} o abuso dei privilegi concessi & no & \textbf{sì}\\
+\bottomrule
+\end{tabularx}
+\end{center}
+Due conseguenze: l'IS-3 è autoreferenziale (i livelli di servizio attesi li fissa il soggetto nella
+misura \textbf{DE.CM-01} del Framework Nazionale; non sono gli SLA contrattuali, e senza SL documentati
+l'IS-3 non si può rilevare); l'IS-4 esiste solo per gli essenziali, quindi lo stesso attacco può essere
+da notificare per un soggetto essenziale e non per uno importante.
+
+\paragraph{Da quando corre l'orologio.} Secondo le linee guida ACN (\emph{Guida alla lettura} delle
+specifiche di base, §3.2, citata nel pre-flight pack) i termini non decorrono dall'ingresso
+dell'attaccante né dal momento in cui l'incidente avviene, ma da quando il soggetto ha
+l'\textbf{evidenza} dell'incidente: elementi oggettivi (una segnalazione interna o esterna, l'analisi
+degli eventi di monitoraggio) da cui risulta che un incidente si è verificato.
 
 \begin{esame}
 \begin{itemize}
@@ -472,8 +527,9 @@ allineamento tra registro degli incidenti e registro dei data breach.
 
 \begin{verifica}
 \begin{itemize}
-  \item ``Da gennaio 2026'' (slide): coerente con il calendario detto a lezione (9 mesi dalla
-    comunicazione ACN di aprile 2025). Confermare sulle slide NIS2.
+  \item ``Da gennaio 2026'' (slide introduttive): coerente con i 9 mesi dalla comunicazione di
+    inserimento nell'elenco confermati dalle slide NIS2; la data esatta dipende dalla comunicazione al
+    singolo soggetto.
   \item A voce il docente colloca la relazione finale a volte a un mese ``dalla consapevolezza'' o
     ``dall'inizio dell'incidente'' e cita gli IoC già nel preallarme; le slide del 16/11 e l'art.~23(4)
     indicano un mese dalla \emph{notifica} dell'incidente e gli IoC nella notifica a 72 ore. All'esame
@@ -516,12 +572,19 @@ triennale) che include la cooperazione pubblico-privato.
 \paragraph{Lezione del 16/11.} Le slide elencano i compiti dei \textbf{CSIRT nazionali}: monitoraggio
 di minacce, vulnerabilità e incidenti; preallarmi e allerte; risposta e assistenza; analisi forense e
 consapevolezza situazionale; su richiesta, \textbf{scansione proattiva} dei sistemi di un soggetto;
-partecipazione alla rete dei CSIRT. Il \textbf{Cooperation Group} è consultivo, non di esecuzione, e
+partecipazione alla rete dei CSIRT. La \textbf{rete dei CSIRT} comprende i CSIRT nazionali e il
+\textbf{CERT-UE} (istituzioni, organi e agenzie dell'Unione) e scambia informazioni anche sui
+quasi-incidenti. Il \textbf{Cooperation Group} è consultivo, non di esecuzione, e
 svolge anche le \textbf{valutazioni coordinate dei rischi delle catene di approvvigionamento critiche}.
 \textbf{EU-CyCLONe} riunisce le autorità di gestione delle crisi degli Stati (più la Commissione negli
 incidenti su larga scala) e sostiene le decisioni a livello politico. La Strategia Nazionale di
-Cybersicurezza 2022--2026 comprende 82 misure, soprattutto per la PA; sull'attuazione l'ACN ha un ruolo
-più politico che operativo. L'ACN è per la NIS2 ciò che il Garante è per la protezione dei dati.
+Cybersicurezza 2022--2026 ha tre obiettivi e due fattori abilitanti, tradotti dal Piano di implementazione
+in \textbf{82 misure} che coinvolgono tutta la PA e, di riflesso, imprese e cittadini; l'ACN ha un ruolo di
+promozione e coordinamento e ne monitora periodicamente l'attuazione (slide~19), un ruolo più politico
+che operativo. Le slide~15--16 elencano i contenuti della strategia (obiettivi, governance, asset e
+rischi, preparazione e risposta, cooperazione pubblico-privato) e le politiche richieste (supply chain,
+appalti pubblici, nucleo pubblico di Internet e cavi sottomarini, formazione e consapevolezza,
+ricerca). L'ACN è per la NIS2 ciò che il Garante è per la protezione dei dati.
 
 \paragraph{ENISA.} Per il ruolo di ENISA (mandato permanente dal Cybersecurity Act, cooperazione
 operativa, verso la centralizzazione delle notifiche) si veda il Capitolo~\ref{cap:csa} e la domanda
@@ -617,7 +680,8 @@ non dal solo fatto che l'incidente sia avvenuto.
 \paragraph{DORA: \emph{lex specialis}.} Il settore bancario e le infrastrutture dei mercati finanziari
 sono nell'Allegato~I della NIS2, ma per le entità finanziarie il \textbf{DORA} prevale dove le norme
 si sovrappongono (gestione del rischio ICT, notifica degli incidenti): la norma speciale prevale su
-quella generale (glossario del corso; Simulazione~2 nel Capitolo~\ref{cap:simulazioni}). Per il resto
+quella generale (glossario del corso; Simulazione~2 nel Capitolo~\ref{cap:simulazioni}); le slide NIS2
+citano il \textbf{considerando~16 del DORA}. Per il resto
 si veda la Sezione~\ref{sec:dora-lexspecialis}. Lezione del 13/11: il DORA è ``la NIS2 per le
 istituzioni finanziarie''; chi rientra in entrambe applica \textbf{solo il DORA}; le due norme si
 sovrappongono sulle misure, non sui settori. Viceversa, un ospedale non è soggetto al DORA perché
@@ -716,6 +780,6 @@ e da quando}'' (slide del 16/11).
 \end{itemize}
 \end{verifica}
 
-\dacompletare{Quando le slide NIS2 v3 saranno in \emph{material}, confermare le slide 1--16 (calendario,
-registrazione, settori) e chiudere i \emph{verifica} sul calendario e sulla sanzione tripla.
-Integrare il laboratorio~5 (EnergiaTech, 20/11) in un capitolo della Parte~III.}
+\dacompletare{Resta da verificare nel D.lgs.~138/2024 la sanzione triplicata per mancata registrazione
+(detta a voce il 13/11 e il 16/11, non nelle slide). Dopo il laboratorio~5 (20/11) integrare il
+Capitolo~\ref{lab:05} con lo svolgimento.}
